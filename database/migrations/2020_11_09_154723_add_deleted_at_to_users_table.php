@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class ModifyUsersTable extends Migration
+class AddDeletedAtToUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,10 +14,7 @@ class ModifyUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-          $table->string('role_name')->default('EMPLOYEE');
-          $table->dropColumn('email');
-          $table->dropColumn('email_verified_at');
-          $table->dropColumn('remember_token');
+            $table->softDeletes();
         });
     }
 
