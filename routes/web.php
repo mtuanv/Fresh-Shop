@@ -20,3 +20,10 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::middleware(['auth', 'checkAdmin'])->group(function(){
+  Route::prefix('admin')->group(function(){
+    Route::get('/dashboard', [App\Http\Controllers\UserController::class, 'index'])->name('dashboard');
+    Route::post('/update', [App\Http\Controllers\UserController::class, 'update'])->name('updateuser');
+  });
+});
