@@ -10,4 +10,7 @@ class Tag extends Model
 {
     use HasFactory;
     use softDeletes;
+    public function products(){
+      return $this->belongsToMany('App\Models\Product', 'product_tags');
+    }
 }

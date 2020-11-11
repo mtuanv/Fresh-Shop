@@ -27,5 +27,6 @@ Route::middleware(['auth', 'checkAdmin'])->group(function(){
     Route::post('/update', [App\Http\Controllers\UserController::class, 'update'])->name('updateuser');
     Route::get('/user_delete/{id}', [App\Http\Controllers\UserController::class, 'destroy'])->name('deleteuser');
     Route::resource('/tags', App\Http\Controllers\TagController::class);
+    Route::resource('/products', App\Http\Controllers\ProductController::class);
   });
 });

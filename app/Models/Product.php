@@ -10,4 +10,13 @@ class Product extends Model
 {
     use HasFactory;
     use softDeletes;
+    public function tags(){
+      return $this->belongsToMany('App\Models\Tag', 'product_tags');
+    }
+    public function images() {
+      return $this->hasMany('App\Models\Image');
+    }
+    public function orders(){
+      return $this->belongsToMany('App\Models\Order', 'product_orders');
+    }
 }

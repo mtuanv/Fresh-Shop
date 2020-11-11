@@ -18,7 +18,7 @@
               </div>
               <div class="col-12 col-md-9">
                   <input type="text" id="name" name="name" placeholder="Enter Tag Name..." class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" required autocomplete="name" autofocus>
-                  @error('tag')
+                  @error('name')
                       <span class="invalid-feedback" role="alert">
                           <strong>{{ $message }}</strong>
                       </span>

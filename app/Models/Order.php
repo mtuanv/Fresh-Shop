@@ -10,4 +10,7 @@ class Order extends Model
 {
     use HasFactory;
     use softDeletes;
+    public function products(){
+      return $this->belongsToMany('App\Models\Product', 'product_orders');
+    }
 }
