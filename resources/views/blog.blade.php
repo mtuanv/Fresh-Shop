@@ -5,7 +5,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <h2>Services</h2>
+                    <h2>TIN TỨC</h2>
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
                         <li class="breadcrumb-item active">Tin tức</li>

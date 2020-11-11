@@ -5,10 +5,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <h2>Cart</h2>
+                    <h2>GIỎ HÀNG</h2>
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="/">Shop</a></li>
-                        <li class="breadcrumb-item active">Cart</li>
+                        <li class="breadcrumb-item"><a href="{{route('menu')}}">Shop</a></li>
+                        <li class="breadcrumb-item active">Giỏ hàng</li>
                     </ul>
                 </div>
             </div>

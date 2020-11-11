@@ -106,10 +106,10 @@
             <div class="collapse navbar-collapse" id="navbar-menu">
                 <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
                     <li class="nav-item active"><a class="nav-link" href="/">Trang chủ</a></li>
-                    <li class="nav-item"><a class="nav-link" href="aboutus">Giới Thiệu</a></li>
-                    <li class="nav-item"><a class="nav-link" href="menu">SHOP</a></li>
-                    <li class="nav-item"><a class="nav-link" href="blog">Tin Tức</a></li>
-                    <li class="nav-item"><a class="nav-link" href="contactus">Liên hệ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{route('aboutus')}}">Giới Thiệu</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{route('menu')}}">SHOP</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{route('blog')}}">Tin Tức</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{route('contactus')}}">Liên hệ</a></li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
