@@ -102,7 +102,9 @@
                         <td>{{$user->name}}</td>
                         <td>{{$user->username}}</td>
                         <td>{{$user->role_name == 'ADMIN' ? 'Quản lý' : 'Nhân viên'}}</td>
-                        <td><a href="#update" class="btn btn-success">Sửa</a>
+                        <td>
+                          <a href="#update" class="btn btn-warning" style="float:left;margin-right: 5px">Sửa</a>
+                          <a href="{{route('deleteuser', $user->id)}}" class="btn btn-danger" onclick="return confirm('Sure?')">Xoá</a>
                         </td>
                     </tr>
 
@@ -123,7 +125,7 @@
       <div class="card-body card-block">
           <div class="row form-group">
               <div class="col col-md-3">
-                  <label for="hf-email" class=" form-control-label">Full Name</label>
+                  <label for="name" class=" form-control-label">Full Name</label>
               </div>
               <div class="col-12 col-md-9">
                   <input type="text" id="name" name="name" placeholder="Enter Full Name..." class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" required autocomplete="name" autofocus>

@@ -25,5 +25,7 @@ Route::middleware(['auth', 'checkAdmin'])->group(function(){
   Route::prefix('admin')->group(function(){
     Route::get('/dashboard', [App\Http\Controllers\UserController::class, 'index'])->name('dashboard');
     Route::post('/update', [App\Http\Controllers\UserController::class, 'update'])->name('updateuser');
+    Route::get('/user_delete/{id}', [App\Http\Controllers\UserController::class, 'destroy'])->name('deleteuser');
+    Route::resource('/tags', App\Http\Controllers\TagController::class);
   });
 });

@@ -3,20 +3,26 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User;
-use Illuminate\Support\Facades\Hash;
+use App\Models\Tag;
 
-class UserController extends Controller
+class TagController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $lsUser = User::all();
-        return view('admin.dashboard')->with(['lsUser' => $lsUser]);
+        $name = $request->name;
+        if($name == null){
+          $lsTag = Tag::paginate(5);
+        }elseif ($name != null) {
+          $lsTag = Tag::where('name', 'like', '%'.$name.'%')
+                      ->paginate(5);
+        }
+
+        return view('admin.tag.list')->with(['lsTag' => $lsTag, 'name' => $name]);
     }
 
     /**
@@ -26,7 +32,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+      return view('admin.tag.add');
     }
 
     /**
@@ -37,7 +43,16 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $request->validate([
+        'name' => 'required|unique:tags|max:255',
+      ]);
+
+      $tag = new Tag();
+      $tag->name = $request->name;
+      $tag->save();
+
+      $request->session()->flash('success', 'Thêm mới thành công');
+      return redirect('admin/tags');
     }
 
     /**
@@ -59,8 +74,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-      // $user = User::find($id);
-      // return view('admin.dashboard')->with('user', $user);
+      $tag = Tag::find($id);
+      return view('admin.tag.edit')->with('tag', $tag);
     }
 
     /**
@@ -70,18 +85,18 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
       $request->validate([
-          'name' => 'required|string|max:255',
-          'password' => 'required|string|min:8|confirmed',
+        'name' => 'required|unique:tags|max:255',
       ]);
-      $user = User::find($request->id);
-      $user->name = $request->name;
-      $user->password = Hash::make($request->password);
-      $user->save();
+
+      $tag = Tag::find($id);
+      $tag->name = $request->name;
+      $tag->save();
+
       $request->session()->flash('success', 'Cập nhật thành công');
-      return redirect('admin/dashboard');
+      return redirect('admin/tags');
     }
 
     /**
@@ -90,11 +105,12 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
-      $user = User::find($id);
-      $user->delete();
+      $tag = Tag::find($id);
+      $tag->delete();
 
-      return redirect('admin/dashboard');
+      $request->session()->flash('success', 'Xoá thành công');
+      return redirect('admin/tags');
     }
 }
