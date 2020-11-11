@@ -106,7 +106,9 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+      $product = Product::find($id);
+      $lsTag = Tag::all();
+      return view('admin.product.edit')->with(['lsTag' => $lsTag, 'product' => $product]);
     }
 
     /**
@@ -118,7 +120,51 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      $request->validate([
+        'name' => 'required|unique:products|max:255',
+        'price' => 'required',
+        'quantity' => 'required',
+        'description' => 'required',
+        'status' => 'required',
+        'tags' => 'required',
+        'images' => 'required'
+      ]);
+
+      $product = Product::find($id);
+      $product->name = $request->name;
+      $product->price = $request->price;
+      $product->quantity = $request->quantity;
+      $product->description = $request->description;
+      $product->status = $request->status;
+
+      $product->save();
+      //Luu Image
+      foreach ($request->images as $image) {
+        if($image != null){
+          $name = "";
+          $name = $image->getClientOriginalExtension();
+          $name = time().".".$name;
+
+          $image->move(public_path('upload'), $name);
+          $name = "upload/".$name;
+          $imagee = new Image();
+          $imagee->link = $name;
+          $imagee->product_id = $product->id;
+          $imagee->save();
+        }
+      }
+
+      //luu ProductControllerTag
+      foreach ($request->tags as $tagid) {
+        $productTag = new ProductTag();
+        $productTag->product_id = $product->id;
+        $productTag->tag_id = $tagid;
+        $productTag->save();
+      }
+
+
+      $request->session()->flash('success', 'Cập nhật thành công');
+      return redirect('admin/products');
     }
 
     /**

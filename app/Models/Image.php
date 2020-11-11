@@ -11,6 +11,6 @@ class Image extends Model
     use HasFactory;
     use softDeletes;
     public function products() {
-      return $this->belongsTo('App\Models\Product');
+      return $this->belongsTo('App\Models\Tag');
     }
 }

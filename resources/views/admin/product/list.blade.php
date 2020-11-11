@@ -90,7 +90,7 @@
                   </tr>
                   @endforeach
                   <tr>
-                    <td colspan="3">{{ $lsProduct->links("pagination::bootstrap-4") }}</td>
+                    <td colspan="8">{{ $lsProduct->links("pagination::bootstrap-4") }}</td>
                   </tr>
                 </tbody>
             </table>
