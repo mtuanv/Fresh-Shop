@@ -108,7 +108,8 @@ class ProductController extends Controller
     {
       $product = Product::find($id);
       $lsTag = Tag::all();
-      return view('admin.product.edit')->with(['lsTag' => $lsTag, 'product' => $product]);
+      $lsProductTag = ProductTag::all();
+      return view('admin.product.edit')->with(['lsTag' => $lsTag, 'product' => $product, 'lsProductTag' => $lsProductTag]);
     }
 
     /**
@@ -121,7 +122,7 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
       $request->validate([
-        'name' => 'required|unique:products|max:255',
+        'name' => 'required|max:255',
         'price' => 'required',
         'quantity' => 'required',
         'description' => 'required',
@@ -138,7 +139,9 @@ class ProductController extends Controller
       $product->status = $request->status;
 
       $product->save();
-      //Luu Image
+      //Xoa va Luu Image moi
+      $lsImage = Image::where('product_id', '=', $id);
+      $lsImage->delete();
       foreach ($request->images as $image) {
         if($image != null){
           $name = "";
@@ -154,7 +157,9 @@ class ProductController extends Controller
         }
       }
 
-      //luu ProductControllerTag
+      //Xoa va luu ProductTag moi
+      $lsProductTag = ProductTag::where('product_id', '=', $id);
+      $lsProductTag->delete();
       foreach ($request->tags as $tagid) {
         $productTag = new ProductTag();
         $productTag->product_id = $product->id;

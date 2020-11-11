@@ -24,7 +24,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-      $lsUser = User::all();
-      return view('admin.dashboard')->with(['lsUser' => $lsUser]);
+      return redirect('admin/dashboard');
     }
 }

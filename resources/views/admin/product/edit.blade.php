@@ -8,6 +8,7 @@
     <div class="card" id="newacc">
       <form method="POST" action="{{route('products.update', $product->id)}}" enctype="multipart/form-data">
         @csrf
+        @method('PUT')
       <div class="card-header">
           <h3><strong>Sửa thông tin sản phẩm</strong></h3>
       </div>
@@ -88,7 +89,7 @@
             <div class="col col-md-9">
                 <select name="tags[]" id="multiple-select" multiple="" class="form-control @error('tags') is-invalid @enderror">
                   @foreach($lsTag as $tag)
-                  <option value="{{$tag->id}}" >{{$tag->name}}</option>
+                  <option value="{{$tag->id}}" @foreach($lsProductTag as $pt)@if($tag->id == $pt->tag_id && $product->id == $pt->product_id) selected @endif @endforeach>{{$tag->name}}</option>
                   @endforeach
                 </select>
                 @error('tags')
@@ -104,6 +105,9 @@
             </div>
             <div class="col-12 col-md-9">
                 <input type="file" id="file-multiple-input" name="images[]" multiple class="form-control-file @error('images') is-invalid @enderror">
+                @foreach($product->images as $image)
+                 <img src="{{asset($image->link)}}" alt="" style="height: 100px">
+                @endforeach
                 @error('images')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
