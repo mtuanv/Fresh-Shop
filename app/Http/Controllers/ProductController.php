@@ -127,8 +127,12 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
-        //
+      $product = Product::find($id);
+      $product->delete();
+
+      $request->session()->flash('success', 'Xoá thành công');
+      return redirect('posts');
     }
 }
