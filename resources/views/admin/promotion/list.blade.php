@@ -54,7 +54,7 @@
                     @foreach($lsPromotion as $promotion)
                         <tr>
                             <td>{{$promotion->title}}</td>
-                            <td>{!! $promotion->cover !!}</td>
+                            <td><img src="{{asset($promotion->cover)}}"></td>
                             <td>
                                 {{ strip_tags(substr($promotion->content, 0, 50)) }}...
                             </td>
@@ -70,7 +70,7 @@
                             <td class="text-right">
                                 <a href="{{route('promotions.edit', $promotion->id)}}" class="btn btn-warning"
                                    style="margin-right:5px; float:left">Sửa</a>
-                                <form action="{{route('products.destroy', $promotion->id)}}" method="post">
+                                <form action="{{route('promotions.destroy', $promotion->id)}}" method="post">
                                     @csrf
                                     @method('Delete')
                                     <button type="submit" class="btn btn-danger" onclick="return confirm('Sure?')">

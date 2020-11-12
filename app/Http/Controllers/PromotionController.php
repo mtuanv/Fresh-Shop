@@ -102,8 +102,9 @@ class PromotionController extends Controller
      */
     public function edit($id)
     {
+        $lsTag = Tag::all();
         $promotion = Promotion::find($id);
-        return view('admin.promotion.edit')->with(['promotion' => $promotion]);
+        return view('admin.promotion.edit')->with(['promotion' => $promotion, 'lsTag' => $lsTag]);
     }
 
     /**
@@ -130,9 +131,7 @@ class PromotionController extends Controller
             $promotion->cover = $path;
         }
 
-//Xoa va luu PromotionTag moi
-        $lsPromotionTag = PromotionTag::where('promotion_id', '=', $id);
-        $lsPromotionTag->delete();
+//luu PromotionTag moi
         foreach ($request->tags as $tagid) {
             $promotionTag = new PromotionTag();
             $promotionTag->promotion_id = $promotion->id;
