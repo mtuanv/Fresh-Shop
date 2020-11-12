@@ -34,7 +34,5 @@ Route::middleware(['auth', 'checkAdmin'])->group(function () {
         Route::get('/user_delete/{id}', [\App\Http\Controllers\UserController::class, 'destroy'])->name('deleteuser');
         Route::resource('/tags', \App\Http\Controllers\TagController::class);
         Route::resource('/products', \App\Http\Controllers\ProductController::class);
-        Route::resource('/promotions', \App\Http\Controllers\PromotionController::class);
-
     });
 });
