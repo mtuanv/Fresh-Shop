@@ -7,6 +7,8 @@ use App\Models\Product;
 use App\Models\Tag;
 use App\Models\ProductTag;
 use App\Models\Image;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class ProductController extends Controller
 {
@@ -127,8 +129,7 @@ class ProductController extends Controller
         'quantity' => 'required',
         'description' => 'required',
         'status' => 'required',
-        'tags' => 'required',
-        'images' => 'required'
+        'tags' => 'required'
       ]);
 
       $product = Product::find($id);
@@ -137,13 +138,16 @@ class ProductController extends Controller
       $product->quantity = $request->quantity;
       $product->description = $request->description;
       $product->status = $request->status;
-
       $product->save();
-      //Xoa va Luu Image moi
-      $lsImage = Image::where('product_id', '=', $id);
-      $lsImage->delete();
-      foreach ($request->images as $image) {
-        if($image != null){
+      //Xoa va Luu Image moi neu co request
+      if($request->images != null){
+        $lsImage = Image::where('product_id', '=', $id)->get();
+        foreach ($lsImage as $old_img) {
+          Storage::delete($old_img->link);
+        }
+        $lstbImage = Image::where('product_id', '=', $id);
+        $lstbImage->delete();
+        foreach ($request->images as $image) {
           $name = "";
           $name = $image->getClientOriginalExtension();
           $name = time().".".$name;
@@ -184,6 +188,6 @@ class ProductController extends Controller
       $product->delete();
 
       $request->session()->flash('success', 'Xoá thành công');
-      return redirect('posts');
+      return redirect('admin/products');
     }
 }

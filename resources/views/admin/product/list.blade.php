@@ -81,7 +81,7 @@
                         <form action="{{route('products.destroy', $product->id)}}" method="post">
                           @csrf
                           @method('Delete')
-                          <button type="submit" class="btn btn-danger" onclick="return confirm('Sure?')">Delete</button>
+                          <button type="submit" class="btn btn-danger" onclick="return confirm('Sure?')">Xoá</button>
                         </form>
                       </td>
                       <td>
