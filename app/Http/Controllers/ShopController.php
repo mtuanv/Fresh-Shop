@@ -3,13 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Product;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class ShopController extends Controller
 {
     public function index()
     {
-        return view('welcome');
+        $lsProduct = Product::all();
+        $lsTag = Tag::all();
+        return view('welcome')->with(['lsTag' => $lsTag, 'lsProduct' => $lsProduct]);;
     }
 
     public function about()
