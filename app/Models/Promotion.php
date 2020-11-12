@@ -10,4 +10,9 @@ class Promotion extends Model
 {
     use HasFactory;
     use softDeletes;
+
+    public function tags()
+    {
+        return $this->belongsToMany('App\Models\Tag', 'promotion_tags');
+    }
 }
