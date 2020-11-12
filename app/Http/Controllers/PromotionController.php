@@ -53,6 +53,7 @@ class PromotionController extends Controller
         $promotion->title = $request->title;
         $promotion->cover = $request->cover;
         $promotion->content = $request->content;
+        $promotion->status = $request->status;
         $promotion->StartTime = $request->StartTime;
         $promotion->EndTime = $request->EndTime;
 
@@ -103,7 +104,8 @@ class PromotionController extends Controller
     public function edit($id)
     {
         $promotion = Promotion::find($id);
-        return view('admin.promotion.edit')->with(['promotion' => $promotion]);
+        $lsTag = Tag::all();
+        return view('admin.promotion.edit')->with(['promotion' => $promotion, 'lsTag' => $lsTag]);
     }
 
     /**
@@ -130,9 +132,7 @@ class PromotionController extends Controller
             $promotion->cover = $path;
         }
 
-//Xoa va luu PromotionTag moi
-        $lsPromotionTag = PromotionTag::where('promotion_id', '=', $id);
-        $lsPromotionTag->delete();
+//luu PromotionTag moi
         foreach ($request->tags as $tagid) {
             $promotionTag = new PromotionTag();
             $promotionTag->promotion_id = $promotion->id;

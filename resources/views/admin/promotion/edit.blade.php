@@ -6,10 +6,12 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card" id="newacc">
-                <form method="POST" action="{{route('promotions.update')}}" enctype="multipart/form-data">
+                <form method="POST" action="{{route('promotions.update', $promotion->id)}}"
+                      enctype="multipart/form-data">
                     @csrf
+                    @method('PUT')
                     <div class="card-header">
-                        <h3><strong>Thêm sự kiện mới</strong></h3>
+                        <h3><strong>Chỉnh sửa sự kiện</strong></h3>
                     </div>
                     <div class="card-body card-block">
                         <div class="row form-group">
@@ -19,7 +21,7 @@
                             <div class="col-12 col-md-9">
                                 <input type="text" id="title" name="title" placeholder="Enter Event Title..."
                                        class="form-control @error('title') is-invalid @enderror"
-                                       value="{{ old('title') }}" required autocomplete="title" autofocus>
+                                       value=" {{$promotion->title}}" required autocomplete="title" autofocus>
                                 @error('title')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong></span>
@@ -47,7 +49,7 @@
                             </div>
                             <div class="col-12 col-md-9">
                                 <textarea name="content" id="content" rows="9" placeholder="Enter Content...  "
-                                          class="form-control ckeditor @error('content') is-invalid @enderror"></textarea>
+                                          class="form-control ckeditor @error('content') is-invalid @enderror"> {{$promotion->content}}</textarea>
                                 @error('content')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong></span>
@@ -62,8 +64,8 @@
                                 <select name="status" id="status"
                                         class="form-control @error('status') is-invalid @enderror">
                                     <option value="0">Please select</option>
-                                    <option value="1">Public</option>
-                                    <option value="2">Draft</option>
+                                    <option value="1" {{$promotion->status == 1 ? 'selected' : ''}}>Public</option>
+                                    <option value="2" {{$promotion->status == 2 ? 'selected' : ''}}>Draft</option>
                                 </select>
                                 @error('status')
                                 <span class="invalid-feedback" role="alert">
@@ -74,15 +76,17 @@
 
                         <div class="form-group">
                             <label for="StartTime">Start Time:</label>
-                            <input type="datetime-local" class="form-control" id="StartTime" name="StartTime">
+                            <input type="datetime-local" class="form-control" id="StartTime" name="StartTime"
+                                   value="{{old('StartTime')}}">
                         </div>
 
                         <div class="form-group">
                             <label for="Endtime">End Time:</label>
-                            <input type="datetime-local" class="form-control" id="StartTime" name="EndTime">
+                            <input type="datetime-local" class="form-control" id="StartTime" name="EndTime"
+                                   value="{{old('EndTime')}}">
                         </div>
 
-                        <div class="row form-group">
+                        <div class=" row form-group">
                             <div class="col col-md-3">
                                 <label for="tag" class=" form-control-label">Chọn tag</label>
                             </div>
