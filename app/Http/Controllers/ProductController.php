@@ -23,60 +23,792 @@ class ProductController extends Controller
         $name = $request->name;
         $price = $request->price;
         $status = $request->status;
-        $tags = $request->lstag;
+        $tag = $request->tag;
         $sort = $request->sort;
         $lsRequest = [
           'name' => $name,
-          'email' => $price,
-          'subject' => $status,
-          'tags' => $tags,
+          'price' => $price,
+          'status' => $status,
+          'tag' => $tag,
           'sort' => $sort,
         ];
         $lsTag = Tag::all();
-        $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
-                            ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
-                            ->select('products.*')
-                            ->where('products.name', 'like', '%'.$name.'%')
-                            ->where('products.price', '=', $price)
-                            ->where('products.status', '=', $status)
-                            ->whereIn('tags.id', $tags)
-                            ->distinct()
-                            ->paginate(5);
+
         if($sort == "-" || $sort == null){
-          if($name == null && $price == null && ($status == null || $status == "-") && $tags == null){
+          if($name == null && $price == null && ($status == null || $status == "-") && ($tag == null || $tag == "-")){
             $lsProduct = Product::paginate(5);
-          }elseif ($name != null && $price != null && ($status != null && $status != "-") && $tags != null) {
-            // $lsProduct = Product::where('products.name', 'like', '%'.$name.'%')
-            //                     ->where('products.price', '=', $price)
-            //                     ->where('products.status', '=', $status)
-            //                     ->join('product_tags', 'products.id', '=', 'product_tags.product_id')
-            //                     ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
-            //                     ->whereIn('tags.id', $tags)
-            //                     ->paginate(5);
+          } elseif ($name != null && $price != null && ($status != null && $status != "-") && ($tag != null && $tag != "-")) {
+            $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
+                                ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
+                                ->select('products.*')
+                                ->where('products.name', 'like', '%'.$name.'%')
+                                ->where('products.price', '=', $price)
+                                ->where('products.status', '=', $status)
+                                ->where('tags.id', '=', $tag)
+                                ->distinct()
+                                ->paginate(5);
+          } elseif ($name != null && $price == null && ($status == null || $status == "-") && ($tag == null || $tag == "-")) {
+            $lsProduct = Product::where('products.name', 'like', '%'.$name.'%')
+                                ->paginate(5);
+          } elseif ($name == null && $price != null && ($status == null || $status == "-") && ($tag == null || $tag == "-")) {
+            $lsProduct = Product::where('products.price', '=', $price)
+                                ->paginate(5);
+          } elseif ($name == null && $price == null && ($status != null && $status != "-") && ($tag == null || $tag == "-")) {
+            $lsProduct = Product::where('products.status', '=', $status)
+                                ->paginate(5);
+          } elseif ($name == null && $price == null && ($status == null || $status == "-") && ($tag != null && $tag != "-")) {
+            $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
+                                ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
+                                ->select('products.*')
+                                ->where('tags.id', '=', $tag)
+                                ->distinct()
+                                ->paginate(5);
+          } elseif ($name != null && $price != null && ($status == null || $status == "-") && ($tag == null || $tag == "-")) {
+            $lsProduct = Product::where('products.name', 'like', '%'.$name.'%')
+                                ->where('products.price', '=', $price)
+                                ->paginate(5);
+          } elseif ($name == null && $price != null && ($status != null && $status != "-") && ($tag == null || $tag == "-")) {
+            $lsProduct = Product::where('products.price', '=', $price)
+                                ->where('products.status', '=', $status)
+                                ->paginate(5);
+          } elseif ($name == null && $price == null && ($status != null && $status != "-") && ($tag != null && $tag != "-")) {
+            $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
+                                ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
+                                ->select('products.*')
+                                ->where('products.status', '=', $status)
+                                ->where('tags.id', '=', $tag)
+                                ->distinct()
+                                ->paginate(5);
+          } elseif ($name != null && $price == null && ($status != null && $status != "-") && ($tag == null || $tag == "-")) {
+            $lsProduct = Product::where('products.name', 'like', '%'.$name.'%')
+                                ->where('products.status', '=', $status)
+                                ->paginate(5);
+          } elseif ($name == null && $price != null && ($status == null || $status == "-") && ($tag != null && $tag != "-")) {
+            $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
+                                ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
+                                ->select('products.*')
+                                ->where('products.price', '=', $price)
+                                ->where('tags.id', '=', $tag)
+                                ->distinct()
+                                ->paginate(5);
+          } elseif ($name != null && $price == null && ($status == null || $status == "-") && ($tag != null && $tag != "-")) {
+            $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
+                                ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
+                                ->select('products.*')
+                                ->where('products.name', 'like', '%'.$name.'%')
+                                ->where('tags.id', '=', $tag)
+                                ->distinct()
+                                ->paginate(5);
+          } elseif ($name != null && $price != null && ($status != null && $status != "-") && ($tag == null || $tag == "-")) {
+            $lsProduct = Product::where('products.name', 'like', '%'.$name.'%')
+                                ->where('products.price', '=', $price)
+                                ->where('products.status', '=', $status)
+                                ->paginate(5);
+          } elseif ($name == null && $price != null && ($status != null && $status != "-") && ($tag != null && $tag != "-")) {
+            $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
+                                ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
+                                ->select('products.*')
+                                ->where('products.price', '=', $price)
+                                ->where('products.status', '=', $status)
+                                ->where('tags.id', '=', $tag)
+                                ->distinct()
+                                ->paginate(5);
+          } elseif ($name != null && $price == null && ($status != null && $status != "-") && ($tag != null && $tag != "-")) {
+            $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
+                                ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
+                                ->select('products.*')
+                                ->where('products.name', 'like', '%'.$name.'%')
+                                ->where('products.status', '=', $status)
+                                ->where('tags.id', '=', $tag)
+                                ->distinct()
+                                ->paginate(5);
+          } elseif ($name != null && $price != null && ($status == null || $status == "-") && ($tag != null && $tag != "-")) {
+            $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
+                                ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
+                                ->select('products.*')
+                                ->where('products.name', 'like', '%'.$name.'%')
+                                ->where('products.price', '=', $price)
+                                ->where('tags.id', '=', $tag)
+                                ->distinct()
+                                ->paginate(5);
           }
         } elseif($sort == "0"){
-          if($name == null && $price == null && ($status == null || $status == "-") && $tags == null){
+          if($name == null && $price == null && ($status == null || $status == "-") && ($tag == null || $tag == "-")){
             $lsProduct = Product::orderBy('price')->paginate(5);
+          } elseif ($name != null && $price != null && ($status != null && $status != "-") && ($tag != null && $tag != "-")) {
+            $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
+                                ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
+                                ->select('products.*')
+                                ->where('products.name', 'like', '%'.$name.'%')
+                                ->where('products.price', '=', $price)
+                                ->where('products.status', '=', $status)
+                                ->where('tags.id', '=', $tag)
+                                ->distinct()
+                                ->orderBy('price')
+                                ->paginate(5);
+          } elseif ($name != null && $price == null && ($status == null || $status == "-") && ($tag == null || $tag == "-")) {
+            $lsProduct = Product::where('products.name', 'like', '%'.$name.'%')
+                                ->orderBy('price')
+                                ->paginate(5);
+          } elseif ($name == null && $price != null && ($status == null || $status == "-") && ($tag == null || $tag == "-")) {
+            $lsProduct = Product::where('products.price', '=', $price)
+                                ->orderBy('price')
+                                ->paginate(5);
+          } elseif ($name == null && $price == null && ($status != null && $status != "-") && ($tag == null || $tag == "-")) {
+            $lsProduct = Product::where('products.status', '=', $status)
+                                ->orderBy('price')
+                                ->paginate(5);
+          } elseif ($name == null && $price == null && ($status == null || $status == "-") && ($tag != null && $tag != "-")) {
+            $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
+                                ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
+                                ->select('products.*')
+                                ->where('tags.id', '=', $tag)
+                                ->distinct()
+                                ->orderBy('price')
+                                ->paginate(5);
+          } elseif ($name != null && $price != null && ($status == null || $status == "-") && ($tag == null || $tag == "-")) {
+            $lsProduct = Product::where('products.name', 'like', '%'.$name.'%')
+                                ->where('products.price', '=', $price)
+                                ->orderBy('price')
+                                ->paginate(5);
+          } elseif ($name == null && $price != null && ($status != null && $status != "-") && ($tag == null || $tag == "-")) {
+            $lsProduct = Product::where('products.price', '=', $price)
+                                ->where('products.status', '=', $status)
+                                ->orderBy('price')
+                                ->paginate(5);
+          } elseif ($name == null && $price == null && ($status != null && $status != "-") && ($tag != null && $tag != "-")) {
+            $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
+                                ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
+                                ->select('products.*')
+                                ->where('products.status', '=', $status)
+                                ->where('tags.id', '=', $tag)
+                                ->distinct()
+                                ->orderBy('price')
+                                ->paginate(5);
+          } elseif ($name != null && $price == null && ($status != null && $status != "-") && ($tag == null || $tag == "-")) {
+            $lsProduct = Product::where('products.name', 'like', '%'.$name.'%')
+                                ->where('products.status', '=', $status)
+                                ->orderBy('price')
+                                ->paginate(5);
+          } elseif ($name == null && $price != null && ($status == null || $status == "-") && ($tag != null && $tag != "-")) {
+            $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
+                                ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
+                                ->select('products.*')
+                                ->where('products.price', '=', $price)
+                                ->where('tags.id', '=', $tag)
+                                ->distinct()
+                                ->orderBy('price')
+                                ->paginate(5);
+          } elseif ($name != null && $price == null && ($status == null || $status == "-") && ($tag != null && $tag != "-")) {
+            $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
+                                ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
+                                ->select('products.*')
+                                ->where('products.name', 'like', '%'.$name.'%')
+                                ->where('tags.id', '=', $tag)
+                                ->distinct()
+                                ->orderBy('price')
+                                ->paginate(5);
+          } elseif ($name != null && $price != null && ($status != null && $status != "-") && ($tag == null || $tag == "-")) {
+            $lsProduct = Product::where('products.name', 'like', '%'.$name.'%')
+                                ->where('products.price', '=', $price)
+                                ->where('products.status', '=', $status)
+                                ->orderBy('price')
+                                ->paginate(5);
+          } elseif ($name == null && $price != null && ($status != null && $status != "-") && ($tag != null && $tag != "-")) {
+            $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
+                                ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
+                                ->select('products.*')
+                                ->where('products.price', '=', $price)
+                                ->where('products.status', '=', $status)
+                                ->where('tags.id', '=', $tag)
+                                ->distinct()
+                                ->orderBy('price')
+                                ->paginate(5);
+          } elseif ($name != null && $price == null && ($status != null && $status != "-") && ($tag != null && $tag != "-")) {
+            $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
+                                ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
+                                ->select('products.*')
+                                ->where('products.name', 'like', '%'.$name.'%')
+                                ->where('products.status', '=', $status)
+                                ->where('tags.id', '=', $tag)
+                                ->distinct()
+                                ->orderBy('price')
+                                ->paginate(5);
+          } elseif ($name != null && $price != null && ($status == null || $status == "-") && ($tag != null && $tag != "-")) {
+            $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
+                                ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
+                                ->select('products.*')
+                                ->where('products.name', 'like', '%'.$name.'%')
+                                ->where('products.price', '=', $price)
+                                ->where('tags.id', '=', $tag)
+                                ->distinct()
+                                ->orderBy('price')
+                                ->paginate(5);
           }
         } elseif ($sort == "1") {
-          if($name == null && $price == null && ($status == null || $status == "-") && $tags == null){
+          if($name == null && $price == null && ($status == null || $status == "-") && ($tag == null || $tag == "-")){
             $lsProduct = Product::orderBy('price', 'DESC')->paginate(5);
+          } elseif ($name != null && $price != null && ($status != null && $status != "-") && ($tag != null && $tag != "-")) {
+            $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
+                                ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
+                                ->select('products.*')
+                                ->where('products.name', 'like', '%'.$name.'%')
+                                ->where('products.price', '=', $price)
+                                ->where('products.status', '=', $status)
+                                ->where('tags.id', '=', $tag)
+                                ->distinct()
+                                ->orderBy('price', 'DESC')
+                                ->paginate(5);
+          } elseif ($name != null && $price == null && ($status == null || $status == "-") && ($tag == null || $tag == "-")) {
+            $lsProduct = Product::where('products.name', 'like', '%'.$name.'%')
+                                ->orderBy('price', 'DESC')
+                                ->paginate(5);
+          } elseif ($name == null && $price != null && ($status == null || $status == "-") && ($tag == null || $tag == "-")) {
+            $lsProduct = Product::where('products.price', '=', $price)
+                                ->orderBy('price', 'DESC')
+                                ->paginate(5);
+          } elseif ($name == null && $price == null && ($status != null && $status != "-") && ($tag == null || $tag == "-")) {
+            $lsProduct = Product::where('products.status', '=', $status)
+                                ->orderBy('price', 'DESC')
+                                ->paginate(5);
+          } elseif ($name == null && $price == null && ($status == null || $status == "-") && ($tag != null && $tag != "-")) {
+            $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
+                                ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
+                                ->select('products.*')
+                                ->where('tags.id', '=', $tag)
+                                ->distinct()
+                                ->orderBy('price', 'DESC')
+                                ->paginate(5);
+          } elseif ($name != null && $price != null && ($status == null || $status == "-") && ($tag == null || $tag == "-")) {
+            $lsProduct = Product::where('products.name', 'like', '%'.$name.'%')
+                                ->where('products.price', '=', $price)
+                                ->orderBy('price', 'DESC')
+                                ->paginate(5);
+          } elseif ($name == null && $price != null && ($status != null && $status != "-") && ($tag == null || $tag == "-")) {
+            $lsProduct = Product::where('products.price', '=', $price)
+                                ->where('products.status', '=', $status)
+                                ->orderBy('price', 'DESC')
+                                ->paginate(5);
+          } elseif ($name == null && $price == null && ($status != null && $status != "-") && ($tag != null && $tag != "-")) {
+            $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
+                                ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
+                                ->select('products.*')
+                                ->where('products.status', '=', $status)
+                                ->where('tags.id', '=', $tag)
+                                ->distinct()
+                                ->orderBy('price', 'DESC')
+                                ->paginate(5);
+          } elseif ($name != null && $price == null && ($status != null && $status != "-") && ($tag == null || $tag == "-")) {
+            $lsProduct = Product::where('products.name', 'like', '%'.$name.'%')
+                                ->where('products.status', '=', $status)
+                                ->orderBy('price', 'DESC')
+                                ->paginate(5);
+          } elseif ($name == null && $price != null && ($status == null || $status == "-") && ($tag != null && $tag != "-")) {
+            $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
+                                ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
+                                ->select('products.*')
+                                ->where('products.price', '=', $price)
+                                ->where('tags.id', '=', $tag)
+                                ->distinct()
+                                ->orderBy('price', 'DESC')
+                                ->paginate(5);
+          } elseif ($name != null && $price == null && ($status == null || $status == "-") && ($tag != null && $tag != "-")) {
+            $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
+                                ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
+                                ->select('products.*')
+                                ->where('products.name', 'like', '%'.$name.'%')
+                                ->where('tags.id', '=', $tag)
+                                ->distinct()
+                                ->orderBy('price', 'DESC')
+                                ->paginate(5);
+          } elseif ($name != null && $price != null && ($status != null && $status != "-") && ($tag == null || $tag == "-")) {
+            $lsProduct = Product::where('products.name', 'like', '%'.$name.'%')
+                                ->where('products.price', '=', $price)
+                                ->where('products.status', '=', $status)
+                                ->orderBy('price', 'DESC')
+                                ->paginate(5);
+          } elseif ($name == null && $price != null && ($status != null && $status != "-") && ($tag != null && $tag != "-")) {
+            $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
+                                ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
+                                ->select('products.*')
+                                ->where('products.price', '=', $price)
+                                ->where('products.status', '=', $status)
+                                ->where('tags.id', '=', $tag)
+                                ->distinct()
+                                ->orderBy('price', 'DESC')
+                                ->paginate(5);
+          } elseif ($name != null && $price == null && ($status != null && $status != "-") && ($tag != null && $tag != "-")) {
+            $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
+                                ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
+                                ->select('products.*')
+                                ->where('products.name', 'like', '%'.$name.'%')
+                                ->where('products.status', '=', $status)
+                                ->where('tags.id', '=', $tag)
+                                ->distinct()
+                                ->orderBy('price', 'DESC')
+                                ->paginate(5);
+          } elseif ($name != null && $price != null && ($status == null || $status == "-") && ($tag != null && $tag != "-")) {
+            $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
+                                ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
+                                ->select('products.*')
+                                ->where('products.name', 'like', '%'.$name.'%')
+                                ->where('products.price', '=', $price)
+                                ->where('tags.id', '=', $tag)
+                                ->distinct()
+                                ->orderBy('price', 'DESC')
+                                ->paginate(5);
           }
         } elseif ($sort == "2") {
-          if($name == null && $price == null && ($status == null || $status == "-") && $tags == null){
+          if($name == null && $price == null && ($status == null || $status == "-") && ($tag == null || $tag == "-")){
             $lsProduct = Product::orderBy('name')->paginate(5);
+          } elseif ($name != null && $price != null && ($status != null && $status != "-") && ($tag != null && $tag != "-")) {
+            $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
+                                ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
+                                ->select('products.*')
+                                ->where('products.name', 'like', '%'.$name.'%')
+                                ->where('products.price', '=', $price)
+                                ->where('products.status', '=', $status)
+                                ->where('tags.id', '=', $tag)
+                                ->distinct()
+                                ->orderBy('name')
+                                ->paginate(5);
+          } elseif ($name != null && $price == null && ($status == null || $status == "-") && ($tag == null || $tag == "-")) {
+            $lsProduct = Product::where('products.name', 'like', '%'.$name.'%')
+                                ->orderBy('name')
+                                ->paginate(5);
+          } elseif ($name == null && $price != null && ($status == null || $status == "-") && ($tag == null || $tag == "-")) {
+            $lsProduct = Product::where('products.price', '=', $price)
+                                ->orderBy('name')
+                                ->paginate(5);
+          } elseif ($name == null && $price == null && ($status != null && $status != "-") && ($tag == null || $tag == "-")) {
+            $lsProduct = Product::where('products.status', '=', $status)
+                                ->orderBy('name')
+                                ->paginate(5);
+          } elseif ($name == null && $price == null && ($status == null || $status == "-") && ($tag != null && $tag != "-")) {
+            $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
+                                ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
+                                ->select('products.*')
+                                ->where('tags.id', '=', $tag)
+                                ->distinct()
+                                ->orderBy('name')
+                                ->paginate(5);
+          } elseif ($name != null && $price != null && ($status == null || $status == "-") && ($tag == null || $tag == "-")) {
+            $lsProduct = Product::where('products.name', 'like', '%'.$name.'%')
+                                ->where('products.price', '=', $price)
+                                ->orderBy('name')
+                                ->paginate(5);
+          } elseif ($name == null && $price != null && ($status != null && $status != "-") && ($tag == null || $tag == "-")) {
+            $lsProduct = Product::where('products.price', '=', $price)
+                                ->where('products.status', '=', $status)
+                                ->orderBy('name')
+                                ->paginate(5);
+          } elseif ($name == null && $price == null && ($status != null && $status != "-") && ($tag != null && $tag != "-")) {
+            $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
+                                ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
+                                ->select('products.*')
+                                ->where('products.status', '=', $status)
+                                ->where('tags.id', '=', $tag)
+                                ->distinct()
+                                ->orderBy('name')
+                                ->paginate(5);
+          } elseif ($name != null && $price == null && ($status != null && $status != "-") && ($tag == null || $tag == "-")) {
+            $lsProduct = Product::where('products.name', 'like', '%'.$name.'%')
+                                ->where('products.status', '=', $status)
+                                ->orderBy('name')
+                                ->paginate(5);
+          } elseif ($name == null && $price != null && ($status == null || $status == "-") && ($tag != null && $tag != "-")) {
+            $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
+                                ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
+                                ->select('products.*')
+                                ->where('products.price', '=', $price)
+                                ->where('tags.id', '=', $tag)
+                                ->distinct()
+                                ->orderBy('name')
+                                ->paginate(5);
+          } elseif ($name != null && $price == null && ($status == null || $status == "-") && ($tag != null && $tag != "-")) {
+            $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
+                                ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
+                                ->select('products.*')
+                                ->where('products.name', 'like', '%'.$name.'%')
+                                ->where('tags.id', '=', $tag)
+                                ->distinct()
+                                ->orderBy('name')
+                                ->paginate(5);
+          } elseif ($name != null && $price != null && ($status != null && $status != "-") && ($tag == null || $tag == "-")) {
+            $lsProduct = Product::where('products.name', 'like', '%'.$name.'%')
+                                ->where('products.price', '=', $price)
+                                ->where('products.status', '=', $status)
+                                ->orderBy('name')
+                                ->paginate(5);
+          } elseif ($name == null && $price != null && ($status != null && $status != "-") && ($tag != null && $tag != "-")) {
+            $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
+                                ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
+                                ->select('products.*')
+                                ->where('products.price', '=', $price)
+                                ->where('products.status', '=', $status)
+                                ->where('tags.id', '=', $tag)
+                                ->distinct()
+                                ->orderBy('name')
+                                ->paginate(5);
+          } elseif ($name != null && $price == null && ($status != null && $status != "-") && ($tag != null && $tag != "-")) {
+            $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
+                                ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
+                                ->select('products.*')
+                                ->where('products.name', 'like', '%'.$name.'%')
+                                ->where('products.status', '=', $status)
+                                ->where('tags.id', '=', $tag)
+                                ->distinct()
+                                ->orderBy('name')
+                                ->paginate(5);
+          } elseif ($name != null && $price != null && ($status == null || $status == "-") && ($tag != null && $tag != "-")) {
+            $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
+                                ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
+                                ->select('products.*')
+                                ->where('products.name', 'like', '%'.$name.'%')
+                                ->where('products.price', '=', $price)
+                                ->where('tags.id', '=', $tag)
+                                ->distinct()
+                                ->orderBy('name')
+                                ->paginate(5);
           }
         } elseif ($sort == "3") {
-          if($name == null && $price == null && ($status == null || $status == "-") && $tags == null){
+          if($name == null && $price == null && ($status == null || $status == "-") && ($tag == null || $tag == "-")){
             $lsProduct = Product::orderBy('name', 'DESC')->paginate(5);
+          } elseif ($name != null && $price != null && ($status != null && $status != "-") && ($tag != null && $tag != "-")) {
+            $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
+                                ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
+                                ->select('products.*')
+                                ->where('products.name', 'like', '%'.$name.'%')
+                                ->where('products.price', '=', $price)
+                                ->where('products.status', '=', $status)
+                                ->where('tags.id', '=', $tag)
+                                ->distinct()
+                                ->orderBy('name', 'DESC')
+                                ->paginate(5);
+          } elseif ($name != null && $price == null && ($status == null || $status == "-") && ($tag == null || $tag == "-")) {
+            $lsProduct = Product::where('products.name', 'like', '%'.$name.'%')
+                                ->orderBy('name', 'DESC')
+                                ->paginate(5);
+          } elseif ($name == null && $price != null && ($status == null || $status == "-") && ($tag == null || $tag == "-")) {
+            $lsProduct = Product::where('products.price', '=', $price)
+                                ->orderBy('name', 'DESC')
+                                ->paginate(5);
+          } elseif ($name == null && $price == null && ($status != null && $status != "-") && ($tag == null || $tag == "-")) {
+            $lsProduct = Product::where('products.status', '=', $status)
+                                ->orderBy('name', 'DESC')
+                                ->paginate(5);
+          } elseif ($name == null && $price == null && ($status == null || $status == "-") && ($tag != null && $tag != "-")) {
+            $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
+                                ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
+                                ->select('products.*')
+                                ->where('tags.id', '=', $tag)
+                                ->distinct()
+                                ->orderBy('name', 'DESC')
+                                ->paginate(5);
+          } elseif ($name != null && $price != null && ($status == null || $status == "-") && ($tag == null || $tag == "-")) {
+            $lsProduct = Product::where('products.name', 'like', '%'.$name.'%')
+                                ->where('products.price', '=', $price)
+                                ->orderBy('name', 'DESC')
+                                ->paginate(5);
+          } elseif ($name == null && $price != null && ($status != null && $status != "-") && ($tag == null || $tag == "-")) {
+            $lsProduct = Product::where('products.price', '=', $price)
+                                ->where('products.status', '=', $status)
+                                ->orderBy('name', 'DESC')
+                                ->paginate(5);
+          } elseif ($name == null && $price == null && ($status != null && $status != "-") && ($tag != null && $tag != "-")) {
+            $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
+                                ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
+                                ->select('products.*')
+                                ->where('products.status', '=', $status)
+                                ->where('tags.id', '=', $tag)
+                                ->distinct()
+                                ->orderBy('name', 'DESC')
+                                ->paginate(5);
+          } elseif ($name != null && $price == null && ($status != null && $status != "-") && ($tag == null || $tag == "-")) {
+            $lsProduct = Product::where('products.name', 'like', '%'.$name.'%')
+                                ->where('products.status', '=', $status)
+                                ->orderBy('name', 'DESC')
+                                ->paginate(5);
+          } elseif ($name == null && $price != null && ($status == null || $status == "-") && ($tag != null && $tag != "-")) {
+            $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
+                                ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
+                                ->select('products.*')
+                                ->where('products.price', '=', $price)
+                                ->where('tags.id', '=', $tag)
+                                ->distinct()
+                                ->orderBy('name', 'DESC')
+                                ->paginate(5);
+          } elseif ($name != null && $price == null && ($status == null || $status == "-") && ($tag != null && $tag != "-")) {
+            $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
+                                ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
+                                ->select('products.*')
+                                ->where('products.name', 'like', '%'.$name.'%')
+                                ->where('tags.id', '=', $tag)
+                                ->distinct()
+                                ->orderBy('price', 'DESC')
+                                ->paginate(5);
+          } elseif ($name != null && $price != null && ($status != null && $status != "-") && ($tag == null || $tag == "-")) {
+            $lsProduct = Product::where('products.name', 'like', '%'.$name.'%')
+                                ->where('products.price', '=', $price)
+                                ->where('products.status', '=', $status)
+                                ->orderBy('name', 'DESC')
+                                ->paginate(5);
+          } elseif ($name == null && $price != null && ($status != null && $status != "-") && ($tag != null && $tag != "-")) {
+            $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
+                                ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
+                                ->select('products.*')
+                                ->where('products.price', '=', $price)
+                                ->where('products.status', '=', $status)
+                                ->where('tags.id', '=', $tag)
+                                ->distinct()
+                                ->orderBy('name', 'DESC')
+                                ->paginate(5);
+          } elseif ($name != null && $price == null && ($status != null && $status != "-") && ($tag != null && $tag != "-")) {
+            $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
+                                ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
+                                ->select('products.*')
+                                ->where('products.name', 'like', '%'.$name.'%')
+                                ->where('products.status', '=', $status)
+                                ->where('tags.id', '=', $tag)
+                                ->distinct()
+                                ->orderBy('name', 'DESC')
+                                ->paginate(5);
+          } elseif ($name != null && $price != null && ($status == null || $status == "-") && ($tag != null && $tag != "-")) {
+            $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
+                                ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
+                                ->select('products.*')
+                                ->where('products.name', 'like', '%'.$name.'%')
+                                ->where('products.price', '=', $price)
+                                ->where('tags.id', '=', $tag)
+                                ->distinct()
+                                ->orderBy('name', 'DESC')
+                                ->paginate(5);
           }
         } elseif ($sort == "4") {
-          if($name == null && $price == null && ($status == null || $status == "-") && $tags == null){
+          if($name == null && $price == null && ($status == null || $status == "-") && ($tag == null || $tag == "-")){
             $lsProduct = Product::orderBy('quantity')->paginate(5);
+          } elseif ($name != null && $price != null && ($status != null && $status != "-") && ($tag != null && $tag != "-")) {
+            $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
+                                ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
+                                ->select('products.*')
+                                ->where('products.name', 'like', '%'.$name.'%')
+                                ->where('products.price', '=', $price)
+                                ->where('products.status', '=', $status)
+                                ->where('tags.id', '=', $tag)
+                                ->distinct()
+                                ->orderBy('quantity')
+                                ->paginate(5);
+          } elseif ($name != null && $price == null && ($status == null || $status == "-") && ($tag == null || $tag == "-")) {
+            $lsProduct = Product::where('products.name', 'like', '%'.$name.'%')
+                                ->orderBy('quantity')
+                                ->paginate(5);
+          } elseif ($name == null && $price != null && ($status == null || $status == "-") && ($tag == null || $tag == "-")) {
+            $lsProduct = Product::where('products.price', '=', $price)
+                                ->orderBy('quantity')
+                                ->paginate(5);
+          } elseif ($name == null && $price == null && ($status != null && $status != "-") && ($tag == null || $tag == "-")) {
+            $lsProduct = Product::where('products.status', '=', $status)
+                                ->orderBy('quantity')
+                                ->paginate(5);
+          } elseif ($name == null && $price == null && ($status == null || $status == "-") && ($tag != null && $tag != "-")) {
+            $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
+                                ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
+                                ->select('products.*')
+                                ->where('tags.id', '=', $tag)
+                                ->distinct()
+                                ->orderBy('quantity')
+                                ->paginate(5);
+          } elseif ($name != null && $price != null && ($status == null || $status == "-") && ($tag == null || $tag == "-")) {
+            $lsProduct = Product::where('products.name', 'like', '%'.$name.'%')
+                                ->where('products.price', '=', $price)
+                                ->orderBy('quantity')
+                                ->paginate(5);
+          } elseif ($name == null && $price != null && ($status != null && $status != "-") && ($tag == null || $tag == "-")) {
+            $lsProduct = Product::where('products.price', '=', $price)
+                                ->where('products.status', '=', $status)
+                                ->orderBy('quantity')
+                                ->paginate(5);
+          } elseif ($name == null && $price == null && ($status != null && $status != "-") && ($tag != null && $tag != "-")) {
+            $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
+                                ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
+                                ->select('products.*')
+                                ->where('products.status', '=', $status)
+                                ->where('tags.id', '=', $tag)
+                                ->distinct()
+                                ->orderBy('quantity')
+                                ->paginate(5);
+          } elseif ($name != null && $price == null && ($status != null && $status != "-") && ($tag == null || $tag == "-")) {
+            $lsProduct = Product::where('products.name', 'like', '%'.$name.'%')
+                                ->where('products.status', '=', $status)
+                                ->orderBy('quantity')
+                                ->paginate(5);
+          } elseif ($name == null && $price != null && ($status == null || $status == "-") && ($tag != null && $tag != "-")) {
+            $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
+                                ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
+                                ->select('products.*')
+                                ->where('products.price', '=', $price)
+                                ->where('tags.id', '=', $tag)
+                                ->distinct()
+                                ->orderBy('quantity')
+                                ->paginate(5);
+          } elseif ($name != null && $price == null && ($status == null || $status == "-") && ($tag != null && $tag != "-")) {
+            $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
+                                ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
+                                ->select('products.*')
+                                ->where('products.name', 'like', '%'.$name.'%')
+                                ->where('tags.id', '=', $tag)
+                                ->distinct()
+                                ->orderBy('quantity')
+                                ->paginate(5);
+          } elseif ($name != null && $price != null && ($status != null && $status != "-") && ($tag == null || $tag == "-")) {
+            $lsProduct = Product::where('products.name', 'like', '%'.$name.'%')
+                                ->where('products.price', '=', $price)
+                                ->where('products.status', '=', $status)
+                                ->orderBy('quantity')
+                                ->paginate(5);
+          } elseif ($name == null && $price != null && ($status != null && $status != "-") && ($tag != null && $tag != "-")) {
+            $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
+                                ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
+                                ->select('products.*')
+                                ->where('products.price', '=', $price)
+                                ->where('products.status', '=', $status)
+                                ->where('tags.id', '=', $tag)
+                                ->distinct()
+                                ->orderBy('quantity')
+                                ->paginate(5);
+          } elseif ($name != null && $price == null && ($status != null && $status != "-") && ($tag != null && $tag != "-")) {
+            $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
+                                ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
+                                ->select('products.*')
+                                ->where('products.name', 'like', '%'.$name.'%')
+                                ->where('products.status', '=', $status)
+                                ->where('tags.id', '=', $tag)
+                                ->distinct()
+                                ->orderBy('quantity')
+                                ->paginate(5);
+          } elseif ($name != null && $price != null && ($status == null || $status == "-") && ($tag != null && $tag != "-")) {
+            $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
+                                ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
+                                ->select('products.*')
+                                ->where('products.name', 'like', '%'.$name.'%')
+                                ->where('products.price', '=', $price)
+                                ->where('tags.id', '=', $tag)
+                                ->distinct()
+                                ->orderBy('quantity')
+                                ->paginate(5);
           }
         } elseif ($sort == "5") {
-          if($name == null && $price == null && ($status == null || $status == "-") && $tags == null){
+          if($name == null && $price == null && ($status == null || $status == "-") && ($tag == null || $tag == "-")){
             $lsProduct = Product::orderBy('quantity', 'DESC')->paginate(5);
+          } elseif ($name != null && $price != null && ($status != null && $status != "-") && ($tag != null && $tag != "-")) {
+            $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
+                                ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
+                                ->select('products.*')
+                                ->where('products.name', 'like', '%'.$name.'%')
+                                ->where('products.price', '=', $price)
+                                ->where('products.status', '=', $status)
+                                ->where('tags.id', '=', $tag)
+                                ->distinct()
+                                ->orderBy('quantity', 'DESC')
+                                ->paginate(5);
+          } elseif ($name != null && $price == null && ($status == null || $status == "-") && ($tag == null || $tag == "-")) {
+            $lsProduct = Product::where('products.name', 'like', '%'.$name.'%')
+                                ->orderBy('quantity', 'DESC')
+                                ->paginate(5);
+          } elseif ($name == null && $price != null && ($status == null || $status == "-") && ($tag == null || $tag == "-")) {
+            $lsProduct = Product::where('products.price', '=', $price)
+                                ->orderBy('quantity', 'DESC')
+                                ->paginate(5);
+          } elseif ($name == null && $price == null && ($status != null && $status != "-") && ($tag == null || $tag == "-")) {
+            $lsProduct = Product::where('products.status', '=', $status)
+                                ->orderBy('quantity', 'DESC')
+                                ->paginate(5);
+          } elseif ($name == null && $price == null && ($status == null || $status == "-") && ($tag != null && $tag != "-")) {
+            $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
+                                ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
+                                ->select('products.*')
+                                ->where('tags.id', '=', $tag)
+                                ->distinct()
+                                ->orderBy('quantity', 'DESC')
+                                ->paginate(5);
+          } elseif ($name != null && $price != null && ($status == null || $status == "-") && ($tag == null || $tag == "-")) {
+            $lsProduct = Product::where('products.name', 'like', '%'.$name.'%')
+                                ->where('products.price', '=', $price)
+                                ->orderBy('quantity', 'DESC')
+                                ->paginate(5);
+          } elseif ($name == null && $price != null && ($status != null && $status != "-") && ($tag == null || $tag == "-")) {
+            $lsProduct = Product::where('products.price', '=', $price)
+                                ->where('products.status', '=', $status)
+                                ->orderBy('quantity', 'DESC')
+                                ->paginate(5);
+          } elseif ($name == null && $price == null && ($status != null && $status != "-") && ($tag != null && $tag != "-")) {
+            $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
+                                ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
+                                ->select('products.*')
+                                ->where('products.status', '=', $status)
+                                ->where('tags.id', '=', $tag)
+                                ->distinct()
+                                ->orderBy('quantity', 'DESC')
+                                ->paginate(5);
+          } elseif ($name != null && $price == null && ($status != null && $status != "-") && ($tag == null || $tag == "-")) {
+            $lsProduct = Product::where('products.name', 'like', '%'.$name.'%')
+                                ->where('products.status', '=', $status)
+                                ->orderBy('quantity', 'DESC')
+                                ->paginate(5);
+          } elseif ($name == null && $price != null && ($status == null || $status == "-") && ($tag != null && $tag != "-")) {
+            $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
+                                ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
+                                ->select('products.*')
+                                ->where('products.price', '=', $price)
+                                ->where('tags.id', '=', $tag)
+                                ->distinct()
+                                ->orderBy('quantity', 'DESC')
+                                ->paginate(5);
+          } elseif ($name != null && $price == null && ($status == null || $status == "-") && ($tag != null && $tag != "-")) {
+            $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
+                                ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
+                                ->select('products.*')
+                                ->where('products.name', 'like', '%'.$name.'%')
+                                ->where('tags.id', '=', $tag)
+                                ->distinct()
+                                ->orderBy('quantity', 'DESC')
+                                ->paginate(5);
+          } elseif ($name != null && $price != null && ($status != null && $status != "-") && ($tag == null || $tag == "-")) {
+            $lsProduct = Product::where('products.name', 'like', '%'.$name.'%')
+                                ->where('products.price', '=', $price)
+                                ->where('products.status', '=', $status)
+                                ->orderBy('quantity', 'DESC')
+                                ->paginate(5);
+          } elseif ($name == null && $price != null && ($status != null && $status != "-") && ($tag != null && $tag != "-")) {
+            $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
+                                ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
+                                ->select('products.*')
+                                ->where('products.price', '=', $price)
+                                ->where('products.status', '=', $status)
+                                ->where('tags.id', '=', $tag)
+                                ->distinct()
+                                ->orderBy('quantity', 'DESC')
+                                ->paginate(5);
+          } elseif ($name != null && $price == null && ($status != null && $status != "-") && ($tag != null && $tag != "-")) {
+            $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
+                                ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
+                                ->select('products.*')
+                                ->where('products.name', 'like', '%'.$name.'%')
+                                ->where('products.status', '=', $status)
+                                ->where('tags.id', '=', $tag)
+                                ->distinct()
+                                ->orderBy('quantity', 'DESC')
+                                ->paginate(5);
+          } elseif ($name != null && $price != null && ($status == null || $status == "-") && ($tag != null && $tag != "-")) {
+            $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
+                                ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
+                                ->select('products.*')
+                                ->where('products.name', 'like', '%'.$name.'%')
+                                ->where('products.price', '=', $price)
+                                ->where('tags.id', '=', $tag)
+                                ->distinct()
+                                ->orderBy('quantity', 'DESC')
+                                ->paginate(5);
           }
         }
 

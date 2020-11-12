@@ -23,30 +23,31 @@
       <div class="card">
         <div class="card-body">
           <h3>Tìm kiếm</h5>
-          <form action="{{route('products.index')}}" method="get">
+          <form action="{{route('products.index')}}" method="get" name="search">
             @csrf
             <div class="form-group">
               <label for="title"><b>Tên Sản Phẩm</b></label>
-              <input type="text" class="form-control" name="name" value="">
+              <input type="text" class="form-control" name="name" value="{{$lsRequest['name']}}">
             </div>
             <div class="form-group">
               <label for="title"><b>Giá Sản Phẩm</b></label>
-              <input type="text" class="form-control" name="price" value="">
+              <input type="text" class="form-control" name="price" value="{{$lsRequest['price']}}">
             </div>
             <div class="form-group">
-              <label for="lstag"><b>Tag</b></label>
-              <select name="lstag[]" class="form-control" multiple>
+              <label for="tag"><b>Tag</b></label>
+              <select name="tag" class="form-control">
+                <option value="-">Tất cả</option>
                 @foreach($lsTag as $tag)
-                <option value="{{$tag->id}}">{{$tag->name}}</option>
+                <option value="{{$tag->id}}" {{$lsRequest['tag'] == $tag->id ? 'selected' : ''}}>{{$tag->name}}</option>
                 @endforeach
               </select>
             </div>
             <div class="form-group">
               <label for="status"><b>Trạng thái</b></label>
               <select name="status" class="form-control">
-                <option value="-">Tất cả</option>                
-                <option value="1"  >Hết hàng</option>
-                <option value="2"  >Còn hàng</option>
+                <option value="-">Tất cả</option>
+                <option value="1" {{$lsRequest['status'] == '1' ? 'selected' : ''}}>Hết hàng</option>
+                <option value="2" {{$lsRequest['status'] == '2' ? 'selected' : ''}}>Còn hàng</option>
               </select>
             </div>
             <div class="form-group">
@@ -62,6 +63,7 @@
               </select>
             </div>
             <button type="submit" class="btn btn-info" style="color: #fff">Tìm</button>
+            <button type="button" class="btn btn-danger" onclick="rs()">Reset</button>
           </form>
         </div>
       </div>
@@ -131,4 +133,13 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    function rs(){
+      document.search.name.value = "";
+      document.search.price.value = "";
+      document.search.tag.selectedIndex = 0;
+      document.search.status.selectedIndex = 0;
+      document.search.sort.selectedIndex = 0;
+    }
+</script>
 @endsection
