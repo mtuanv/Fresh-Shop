@@ -27,18 +27,18 @@
             @csrf
             <div class="form-group">
               <label for="title"><b>Tên Sản Phẩm</b></label>
-              <input type="text" class="form-control" name="name" value="{{$lsRequest['name']}}">
+              <input type="text" class="form-control" name="name" value="{{$name}}">
             </div>
             <div class="form-group">
               <label for="title"><b>Giá Sản Phẩm</b></label>
-              <input type="text" class="form-control" name="price" value="{{$lsRequest['price']}}">
+              <input type="text" class="form-control" name="price" value="{{$price}}">
             </div>
             <div class="form-group">
               <label for="tag"><b>Tag</b></label>
               <select name="tag" class="form-control">
                 <option value="-">Tất cả</option>
-                @foreach($lsTag as $tag)
-                <option value="{{$tag->id}}" {{$lsRequest['tag'] == $tag->id ? 'selected' : ''}}>{{$tag->name}}</option>
+                @foreach($lsTag as $t)
+                <option value="{{$t->id}}" {{$tag == $t->id ? 'selected' : ''}}>{{$t->name}}</option>
                 @endforeach
               </select>
             </div>
@@ -46,20 +46,20 @@
               <label for="status"><b>Trạng thái</b></label>
               <select name="status" class="form-control">
                 <option value="-">Tất cả</option>
-                <option value="1" {{$lsRequest['status'] == '1' ? 'selected' : ''}}>Hết hàng</option>
-                <option value="2" {{$lsRequest['status'] == '2' ? 'selected' : ''}}>Còn hàng</option>
+                <option value="1" {{$status == '1' ? 'selected' : ''}}>Hết hàng</option>
+                <option value="2" {{$status == '2' ? 'selected' : ''}}>Còn hàng</option>
               </select>
             </div>
             <div class="form-group">
               <label for="sort"><b>Sắp xếp</b></label>
               <select name="sort" class="form-control">
                 <option value="-">Không</option>
-                <option value="0" {{$lsRequest['sort'] == '0' ? 'selected' : ''}}>Giá: Thấp đến Cao</option>
-                <option value="1" {{$lsRequest['sort'] == '1' ? 'selected' : ''}}>Giá: Cao đến Thấp</option>
-                <option value="2" {{$lsRequest['sort'] == '2' ? 'selected' : ''}}>Tên: A đến Z</option>
-                <option value="3" {{$lsRequest['sort'] == '3' ? 'selected' : ''}}>Tên: Z đến A</option>
-                <option value="4" {{$lsRequest['sort'] == '4' ? 'selected' : ''}}>Số lượng: Thấp đến Cao</option>
-                <option value="5" {{$lsRequest['sort'] == '5' ? 'selected' : ''}}>Số lượng: Cao đến Thấp</option>
+                <option value="0" {{$sort == '0' ? 'selected' : ''}}>Giá: Thấp đến Cao</option>
+                <option value="1" {{$sort == '1' ? 'selected' : ''}}>Giá: Cao đến Thấp</option>
+                <option value="2" {{$sort == '2' ? 'selected' : ''}}>Tên: A đến Z</option>
+                <option value="3" {{$sort == '3' ? 'selected' : ''}}>Tên: Z đến A</option>
+                <option value="4" {{$sort == '4' ? 'selected' : ''}}>Số lượng: Thấp đến Cao</option>
+                <option value="5" {{$sort == '5' ? 'selected' : ''}}>Số lượng: Cao đến Thấp</option>
               </select>
             </div>
             <button type="submit" class="btn btn-info" style="color: #fff">Tìm</button>
@@ -101,8 +101,8 @@
                         Hết hàng
                       @endif</td>
                       <td class="text-right">
-                        @foreach($product->tags as $tag)
-                          <span class="badge badge-primary">{{($tag->name)}}</span>
+                        @foreach($product->tags as $pt)
+                          <span class="badge badge-primary">{{($pt->name)}}</span>
                         @endforeach
                       </td>
                       <td class="text-right">
@@ -126,7 +126,7 @@
                   </tr>
                   @endforeach
                   <tr>
-                    <td colspan="8">{{ $lsProduct->appends(['lsRequest' => $lsRequest])->links("pagination::bootstrap-4") }}</td>
+                    <td colspan="8">{{ $lsProduct->appends(['name' => $name, 'price' => $price, 'status' => $status, 'tag' => $tag, 'sort' => $sort])->links("pagination::bootstrap-4") }}</td>
                   </tr>
                 </tbody>
             </table>

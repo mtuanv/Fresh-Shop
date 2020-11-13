@@ -25,13 +25,6 @@ class ProductController extends Controller
         $status = $request->status;
         $tag = $request->tag;
         $sort = $request->sort;
-        $lsRequest = [
-          'name' => $name,
-          'price' => $price,
-          'status' => $status,
-          'tag' => $tag,
-          'sort' => $sort,
-        ];
         $lsTag = Tag::all();
 
         if($sort == "-" || $sort == null){
@@ -811,8 +804,7 @@ class ProductController extends Controller
                                 ->paginate(5);
           }
         }
-
-        return view('admin.product.list')->with(['lsProduct' => $lsProduct, 'lsTag' => $lsTag, 'lsRequest' => $lsRequest]);
+        return view('admin.product.list')->with(['lsProduct' => $lsProduct, 'lsTag' => $lsTag, 'name' => $name, 'price' => $price, 'status' => $status, 'tag' => $tag, 'sort' => $sort]);
     }
 
     /**
