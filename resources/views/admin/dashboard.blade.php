@@ -103,7 +103,14 @@
                         <td>{{$user->username}}</td>
                         <td>{{$user->role_name == 'ADMIN' ? 'Quản lý' : 'Nhân viên'}}</td>
                         <td>
-                          <a href="#update" class="btn btn-warning" style="float:left;margin-right: 5px">Sửa</a>
+                          <form method="post" action="{{route('edituser')}}" name="getif">
+                            @csrf
+                            <input type="hidden" name="id" value="{{$user->id}}"/>
+                            <input type="hidden" name="name" value="{{$user->name}}"/>
+                            <input type="hidden" name="username" value="{{$user->username}}"/>
+                            <button type="submit" class="btn btn-warning" style="float:left;margin-right: 5px; color: white">Sửa</button>
+                          </form>
+                          <!-- <a href="#update" class="btn btn-warning" style="float:left;margin-right: 5px">Sửa</a> -->
                           <a href="{{route('deleteuser', $user->id)}}" class="btn btn-danger" onclick="return confirm('Sure?')">Xoá</a>
                         </td>
                     </tr>
@@ -192,15 +199,10 @@
       <div class="card-body card-block">
         <div class="row form-group">
             <div class="col col-md-3">
-                <label for="id" class=" form-control-label">ID</label>
+                <label for="name" class=" form-control-label">UserName</label>
             </div>
             <div class="col-12 col-md-9">
-                <input type="text" id="id" name="id" placeholder="Enter ID..." class="form-control @error('id') is-invalid @enderror" value="{{ old('id') }}" required autocomplete="id" autofocus>
-                @error('id')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
+                <input type="text" id="username" name="username" placeholder="Full Name..." class="form-control" value="{{ $eun }}" disabled autocomplete="username">
             </div>
         </div>
         <div class="row form-group">
@@ -208,7 +210,7 @@
                 <label for="name" class=" form-control-label">Full Name</label>
             </div>
             <div class="col-12 col-md-9">
-                <input type="text" id="name" name="name" placeholder="Enter Full Name..." class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" required autocomplete="name">
+                <input type="text" id="name" name="name" placeholder="Enter Full Name..." class="form-control @error('name') is-invalid @enderror" value="{{ $ename }}" required autocomplete="name">
                 @error('name')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -257,4 +259,5 @@
         </div>
     </div>
 </div>
+
 @endsection

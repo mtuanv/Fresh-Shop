@@ -63,7 +63,7 @@
               </select>
             </div>
             <button type="submit" class="btn btn-info" style="color: #fff">Tìm</button>
-            <button type="button" class="btn btn-danger" onclick="rs()">Reset</button>
+            <button type="button" class="btn btn-danger" onclick="rs()">Nhập lại</button>
           </form>
         </div>
       </div>
@@ -126,7 +126,7 @@
                   </tr>
                   @endforeach
                   <tr>
-                    <td colspan="8">{{ $lsProduct->links("pagination::bootstrap-4") }}</td>
+                    <td colspan="8">{{ $lsProduct->appends(['lsRequest' => $lsRequest])->links("pagination::bootstrap-4") }}</td>
                   </tr>
                 </tbody>
             </table>

@@ -15,8 +15,11 @@ class UserController extends Controller
      */
     public function index()
     {
+        $eid = "";
+        $ename = "";
+        $eun = "";
         $lsUser = User::all();
-        return view('admin.dashboard')->with(['lsUser' => $lsUser]);
+        return view('admin.dashboard')->with(['lsUser' => $lsUser, 'eid' => $eid, 'ename' => $ename, 'eun' => $eun]);
     }
 
     /**
@@ -57,10 +60,13 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request)
     {
-      // $user = User::find($id);
-      // return view('admin.dashboard')->with('user', $user);
+      $eid = $request->id;
+      $ename = $request->name;
+      $eun = $request->username;
+      $lsUser = User::all();
+      return view('admin.dashboard')->with(['lsUser' => $lsUser, 'eid' => $eid, 'ename' => $ename, 'eun' => $eun]);
     }
 
     /**
