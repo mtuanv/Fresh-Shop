@@ -13,4 +13,8 @@ class Tag extends Model
     public function products(){
       return $this->belongsToMany('App\Models\Product', 'product_tags');
     }
+    public function promotions()
+    {
+        return $this->belongsToMany('App\Models\Promotion', 'promotion_tags');
+    }
 }

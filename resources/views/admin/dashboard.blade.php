@@ -193,6 +193,7 @@
     <div class="card" id="update">
       <form action="{{ route('updateuser') }}" method="post">
         @csrf
+        <input type="hidden" name="id" value="{{ $eid }}">
       <div class="card-header">
           <strong>Sửa tài khoản</strong>
       </div>
@@ -202,7 +203,7 @@
                 <label for="name" class=" form-control-label">UserName</label>
             </div>
             <div class="col-12 col-md-9">
-                <input type="text" id="username" name="username" placeholder="Full Name..." class="form-control" value="{{ $eun }}" disabled autocomplete="username">
+                <input type="text" id="username" name="username" placeholder="User Name..." class="form-control" value="{{ $eun }}" disabled autocomplete="username">
             </div>
         </div>
         <div class="row form-group">
