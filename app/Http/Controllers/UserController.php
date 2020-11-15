@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -84,6 +85,18 @@ class UserController extends Controller
       ]);
       $user = User::find($request->id);
       $user->name = $request->name;
+      $path="";
+      if($request->avatar != null){
+          Storage::delete($user->avatar);
+          $name = $request->avatar->getClientOriginalExtension();
+          $name = time().".".$name;
+
+          $request->avatar->move(public_path('upload/avatar'), $name);
+          $path = "upload/avatar/".$name;
+      }
+      if($path != null){
+        $user->avatar = $path;
+      }
       $user->password = Hash::make($request->password);
       $user->save();
       $request->session()->flash('success', 'Cập nhật thành công');

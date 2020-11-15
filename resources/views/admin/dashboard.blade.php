@@ -76,9 +76,11 @@
     <div class="col-lg-12">
       <div class="overview-wrap">
         <h2 class="title-1 m-b-25">Danh sách nhân viên</h2>
+        @if(Auth::user()->role_name == 'ADMIN')
         <a class="au-btn au-btn-icon au-btn&#45;&#45;blue" href="#newacc">
             <i class="zmdi zmdi-plus"></i>Thêm tài khoản
         </a>
+        @endif
       </div>
     </div>
 </div>
@@ -90,9 +92,13 @@
                     <tr>
                         <th>ID</th>
                         <th>Tên</th>
+                        @if(Auth::user()->role_name == 'ADMIN')
                         <th>Username</th>
+                        @endif
                         <th>Chức danh</th>
+                        @if(Auth::user()->role_name == 'ADMIN')
                         <th>Quản lý</th>
+                        @endif
                     </tr>
                 </thead>
                 <tbody>
@@ -100,8 +106,11 @@
                     <tr>
                         <td>{{$user->id}}</td>
                         <td>{{$user->name}}</td>
+                        @if(Auth::user()->role_name == 'ADMIN')
                         <td>{{$user->username}}</td>
+                        @endif
                         <td>{{$user->role_name == 'ADMIN' ? 'Quản lý' : 'Nhân viên'}}</td>
+                        @if(Auth::user()->role_name == 'ADMIN')
                         <td>
                           <form method="post" action="{{route('edituser')}}" name="getif">
                             @csrf
@@ -113,6 +122,7 @@
                           <!-- <a href="#update" class="btn btn-warning" style="float:left;margin-right: 5px">Sửa</a> -->
                           <a href="{{route('deleteuser', $user->id)}}" class="btn btn-danger" onclick="return confirm('Sure?')">Xoá</a>
                         </td>
+                        @endif
                     </tr>
 
                     @endforeach
@@ -121,9 +131,10 @@
         </div>
     </div>
 </div>
+@if(Auth::user()->role_name == 'ADMIN')
 <div class="row">
   <div class="col-lg-6">
-    <div class="card" id="newacc">
+    <div class="card">
       <form method="POST" action="{{ route('register') }}">
         @csrf
       <div class="card-header">
@@ -135,7 +146,7 @@
                   <label for="name" class=" form-control-label">Full Name</label>
               </div>
               <div class="col-12 col-md-9">
-                  <input type="text" id="name" name="name" placeholder="Enter Full Name..." class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                  <input type="text" name="name" placeholder="Enter Full Name..." class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" required autocomplete="name" autofocus>
                   @error('name')
                       <span class="invalid-feedback" role="alert">
                           <strong>{{ $message }}</strong>
@@ -143,12 +154,20 @@
                   @enderror
               </div>
           </div>
+          <!-- <div class="row form-group">
+              <div class="col col-md-3">
+                  <label for="avatar" class=" form-control-label">Avatar</label>
+              </div>
+              <div class="col-12 col-md-9">
+                  <input type="file" name="avatar" class="form-control-file">
+              </div>
+          </div> -->
           <div class="row form-group">
               <div class="col col-md-3">
                   <label for="username" class=" form-control-label">User Name</label>
               </div>
               <div class="col-12 col-md-9">
-                  <input type="text" id="username" name="username" placeholder="Enter User Name..." class="form-control @error('username') is-invalid @enderror" value="{{ old('username') }}" required autocomplete="username">
+                  <input type="text" name="username" placeholder="Enter User Name..." class="form-control @error('username') is-invalid @enderror" value="{{ old('username') }}" required autocomplete="username">
                   @error('username')
                       <span class="invalid-feedback" role="alert">
                           <strong>{{ $message }}</strong>
@@ -161,7 +180,7 @@
                   <label for="password" class=" form-control-label">Password</label>
               </div>
               <div class="col-12 col-md-9">
-                  <input type="password" id="password" name="password" class="form-control @error('password') is-invalid @enderror" required autocomplete="new-password" required autocomplete="new-password">
+                  <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" required autocomplete="new-password" required autocomplete="new-password">
                   @error('password')
                       <span class="invalid-feedback" role="alert">
                           <strong>{{ $message }}</strong>
@@ -174,7 +193,7 @@
                   <label for="password-confirm" class=" form-control-label">Confirm Password</label>
               </div>
               <div class="col-12 col-md-9">
-                  <input type="password" id="password-confirm" name="password_confirmation" class="form-control" required autocomplete="new-password">
+                  <input type="password" name="password_confirmation" class="form-control" required autocomplete="new-password">
               </div>
           </div>
       </div>
@@ -190,8 +209,8 @@
     </div>
   </div>
   <div class="col-lg-6">
-    <div class="card" id="update">
-      <form action="{{ route('updateuser') }}" method="post">
+    <div class="card">
+      <form action="{{ route('updateuser') }}" method="post" enctype="multipart/form-data">
         @csrf
         <input type="hidden" name="id" value="{{ $eid }}">
       <div class="card-header">
@@ -200,18 +219,10 @@
       <div class="card-body card-block">
         <div class="row form-group">
             <div class="col col-md-3">
-                <label for="name" class=" form-control-label">UserName</label>
-            </div>
-            <div class="col-12 col-md-9">
-                <input type="text" id="username" name="username" placeholder="User Name..." class="form-control" value="{{ $eun }}" disabled autocomplete="username">
-            </div>
-        </div>
-        <div class="row form-group">
-            <div class="col col-md-3">
                 <label for="name" class=" form-control-label">Full Name</label>
             </div>
             <div class="col-12 col-md-9">
-                <input type="text" id="name" name="name" placeholder="Enter Full Name..." class="form-control @error('name') is-invalid @enderror" value="{{ $ename }}" required autocomplete="name">
+                <input type="text" name="name" placeholder="Enter Full Name..." class="form-control @error('name') is-invalid @enderror" value="{{ $ename }}" required autocomplete="name">
                 @error('name')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -221,10 +232,26 @@
         </div>
         <div class="row form-group">
             <div class="col col-md-3">
+                <label for="avatar" class=" form-control-label">New Avatar</label>
+            </div>
+            <div class="col-12 col-md-9">
+                <input type="file" name="avatar" class="form-control-file">
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col col-md-3">
+                <label for="name" class=" form-control-label">UserName</label>
+            </div>
+            <div class="col-12 col-md-9">
+                <input type="text" name="username" placeholder="User Name..." class="form-control" value="{{ $eun }}" disabled autocomplete="username">
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col col-md-3">
                 <label for="password" class=" form-control-label">Password</label>
             </div>
             <div class="col-12 col-md-9">
-                <input type="password" id="password" name="password" class="form-control @error('password') is-invalid @enderror" required autocomplete="new-password" required autocomplete="new-password">
+                <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" required autocomplete="new-password" required autocomplete="new-password">
                 @error('password')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -237,7 +264,7 @@
                 <label for="password-confirm" class=" form-control-label">Confirm Password</label>
             </div>
             <div class="col-12 col-md-9">
-                <input type="password" id="password-confirm" name="password_confirmation" class="form-control" required autocomplete="new-password">
+                <input type="password" name="password_confirmation" class="form-control" required autocomplete="new-password">
             </div>
         </div>
       </div>
@@ -253,6 +280,7 @@
     </div>
   </div>
 </div>
+@endif
 <div class="row">
     <div class="col-md-12">
         <div class="copyright">

@@ -91,29 +91,31 @@
                             </li>
                         </ul>
                     </li>
-                    @if(Auth::user()->role_name == 'ADMIN')
                         <li class="has-sub">
                             <a class="js-arrow" href="#">
                                 <i class="fas fa-desktop"></i>Quản lý trang web</a>
                             <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
+                              @if(Auth::user()->role_name == 'ADMIN')
                                 <li>
                                     <a href="{{ route('tags.index')}}">Tag</a>
                                 </li>
                                 <li>
                                     <a href="{{ route('products.index')}}">Sản phẩm</a>
                                 </li>
+                                @endif
                                 <li>
                                     <a href="">Đơn hàng</a>
                                 </li>
+                                @if(Auth::user()->role_name == 'ADMIN')
                                 <li>
                                     <a href="{{route('promotions.index')}}">Tin tức</a>
                                 </li>
                                 <li>
                                     <a href="tab.html">Khách hàng</a>
                                 </li>
+                                @endif
                             </ul>
                         </li>
-                    @endif
                 </ul>
             </div>
         </nav>
@@ -149,29 +151,31 @@
                             </li>
                         </ul>
                     </li>
-                    @if(Auth::user()->role_name == 'ADMIN')
                         <li class="has-sub">
                             <a class="js-arrow" href="#">
                                 <i class="fas fa-desktop"></i>Quản lý trang web</a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
+                              @if(Auth::user()->role_name == 'ADMIN')
                                 <li>
                                     <a href="{{ route('tags.index')}}">Tag</a>
                                 </li>
                                 <li>
                                     <a href="{{ route('products.index')}}">Sản phẩm</a>
                                 </li>
+                                @endif
                                 <li>
-                                    <a href="tab.html">Đơn hàng</a>
+                                    <a href="">Đơn hàng</a>
                                 </li>
+                                @if(Auth::user()->role_name == 'ADMIN')
                                 <li>
                                     <a href="{{route('promotions.index')}}">Tin tức</a>
                                 </li>
                                 <li>
                                     <a href="tab.html">Khách hàng</a>
                                 </li>
+                                @endif
                             </ul>
                         </li>
-                    @endif
                 </ul>
             </nav>
         </div>
@@ -190,10 +194,22 @@
                             <div class="header-button">
                                 <div class="account-wrap">
                                     <div class="account-item clearfix js-item-menu">
+                                      <div class="image">
+                                        <img src="{{asset(Auth::user()->avatar)}}" alt="{{ Auth::user()->name }} avatar">
+                                      </div>
                                         <div class="content">
                                             <a class="js-acc-btn" href="#">{{ Auth::user()->name }}</a>
                                         </div>
                                         <div class="account-dropdown js-dropdown">
+                                          <div class="info clearfix">
+                                            <div class="image">
+                                              <img src="{{asset(Auth::user()->avatar)}}" alt="{{ Auth::user()->name }} avatar">
+                                            </div>
+                                            <div class="content">
+                                              <h5 class="name">{{ Auth::user()->name }}</h5>
+                                              <span class="email">t1911e@fpt.edu.vn</span>
+                                              </div>
+                                          </div>
                                             <div class="account-dropdown__footer">
                                                 <a href="{{ route('logout') }}"
                                                    onclick="event.preventDefault();
