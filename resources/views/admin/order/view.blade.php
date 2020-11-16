@@ -12,19 +12,19 @@
       <div class="card-body card-block">
           <div class="row form-group">
               <div class="col col-md-3">
-                  <label for="name" class=" form-control-label">Tên khách hàng: </label>
+                  <label for="name" class="font-weight-bold form-control-label">Tên khách hàng: </label>
               </div>
               <div class="col-12 col-md-9">
                   {{$order->name}}
               </div>
               <div class="col col-md-3">
-                  <label for="phone" class=" form-control-label">Số điện thoại: </label>
+                  <label for="phone" class="font-weight-bold form-control-label">Số điện thoại: </label>
               </div>
               <div class="col-12 col-md-9">
                   {{$order->phone}}
               </div>
               <div class="col col-md-3">
-                  <label for="phone" class=" form-control-label">Địa chỉ: </label>
+                  <label for="phone" class="font-weight-bold form-control-label">Địa chỉ: </label>
               </div>
               <div class="col-12 col-md-9">
                   {{$order->address}}
@@ -76,9 +76,9 @@
           </div>
           <div class="row form-group">
               <div class="col col-md-10" style="text-align: right">
-                  <label for="name" class="form-control-label">Tổng tiền: </label>
+                  <label for="name" class="font-weight-bold form-control-label">Tổng tiền: </label>
               </div>
-              <div class="col-12 col-md-2">
+              <div class="col-12 col-md-2" style="text-align: right">
                   {{$order->total}} VNĐ
               </div>
           </div>
