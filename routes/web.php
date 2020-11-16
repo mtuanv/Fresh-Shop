@@ -37,5 +37,7 @@ Route::middleware(['auth', 'checkAdmin'])->group(function () {
         Route::resource('/products', \App\Http\Controllers\ProductController::class);
         Route::resource('/promotions', \App\Http\Controllers\PromotionController::class);
         Route::post('/promotion_status/{id}', [App\Http\Controllers\PromotionController::class, 'changeStatus'])->name('changestt');
+        Route::resource('/orders', \App\Http\Controllers\OrderController::class);
+        Route::post('/order_status/{id}', [App\Http\Controllers\OrderController::class, 'changeStatus'])->name('changesttorder');
     });
 });

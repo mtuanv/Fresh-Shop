@@ -106,7 +106,7 @@
                                 </li>
                                 @endif
                                 <li>
-                                    <a href="">Đơn hàng</a>
+                                    <a href="{{route('orders.index')}}">Đơn hàng</a>
                                 </li>
                                 @if(Auth::user()->role_name == 'ADMIN')
                                 <li>
@@ -166,7 +166,7 @@
                                 </li>
                                 @endif
                                 <li>
-                                    <a href="">Đơn hàng</a>
+                                    <a href="{{route('orders.index')}}">Đơn hàng</a>
                                 </li>
                                 @if(Auth::user()->role_name == 'ADMIN')
                                 <li>
