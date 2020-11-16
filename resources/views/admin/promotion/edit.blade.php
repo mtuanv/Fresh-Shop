@@ -5,9 +5,10 @@
 @section("content")
     <div class="row">
         <div class="col-lg-12">
-            <div class="card" id="newacc">
-                <form method="POST" action="{{route('promotions.update')}}" enctype="multipart/form-data">
+            <div class="card">
+                <form method="POST" action="{{route('promotions.update', $promotion->id)}}" enctype="multipart/form-data">
                     @csrf
+                    @method('PUT')
                     <div class="card-header">
                         <h3><strong>Chỉnh sửa kiện</strong></h3>
                     </div>
@@ -29,11 +30,12 @@
 
                         <div class="row form-group">
                             <div class="col col-md-3">
-                                <label for="file-multiple-input" class=" form-control-label">Chọn ảnh</label>
+                                <label for="cover" class=" form-control-label">Chọn ảnh mới</label>
                             </div>
                             <div class="col-12 col-md-9">
-                                <input type="file" id="file-multiple-input" name="cover" multiple
+                                <input type="file" id="cover" name="cover"
                                        class="form-control-file @error('cover') is-invalid @enderror">
+                                       <img src="{{asset($promotion->cover)}}" alt="" style="height: 100px">
                                 @error('cover')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong></span>
@@ -47,7 +49,7 @@
                             </div>
                             <div class="col-12 col-md-9">
                                 <textarea name="content" id="content" rows="9" placeholder="Enter Content...  "
-                                          class="form-control ckeditor @error('content') is-invalid @enderror"></textarea>
+                                          class="form-control ckeditor @error('content') is-invalid @enderror">{{$promotion->content}}</textarea>
                                 @error('content')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong></span>
@@ -61,9 +63,9 @@
                             <div class="col-12 col-md-9">
                                 <select name="status" id="status"
                                         class="form-control @error('status') is-invalid @enderror">
-                                    <option value="0">Please select</option>
+                                    <option value="-">Please select</option>
                                     <option value="1" {{$promotion->status == 1 ? 'selected' : ''}}>Public</option>
-                                    <option value="2" {{$promotion->status == 2 ? 'selected' : ''}}>Draft</option>
+                                    <option value="0" {{$promotion->status == 0 ? 'selected' : ''}}>Draft</option>
                                 </select>
                                 @error('status')
                                 <span class="invalid-feedback" role="alert">
@@ -72,14 +74,22 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="StartTime">Start Time:</label>
-                            <input type="datetime-local" class="form-control" id="StartTime" name="StartTime">
-                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label for="StartTime">Start Time</label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <input class="form-control" id="StartTime" name="StartTime" value="{{$promotion->StartTime}}">
+                            </div>
 
-                        <div class="form-group">
-                            <label for="Endtime">End Time:</label>
-                            <input type="datetime-local" class="form-control" id="StartTime" name="EndTime">
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label for="Endtime">End Time</label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <input class="form-control" id="EndTime" name="EndTime" value="{{$promotion->EndTime}}">
+                            </div>
                         </div>
 
                         <div class="row form-group">
@@ -90,7 +100,7 @@
                                 <select name="tags[]" id="multiple-select" multiple=""
                                         class="form-control @error('tags') is-invalid @enderror">
                                     @foreach($lsTag as $tag)
-                                        <option value="{{$tag->id}}">{{$tag->name}}</option>
+                                        <option value="{{$tag->id}}" @foreach($lsPromotionTag as $pt)@if($tag->id == $pt->tag_id && $promotion->id == $pt->promotion_id) selected @endif @endforeach>{{$tag->name}}</option>
                                     @endforeach
                                 </select>
                                 @error('tags')
@@ -117,5 +127,8 @@
             $('.ckeditor').ckeditor();
         });
     </script>
+    <script type="text/javascript">
+        $('#StartTime').datetimepicker();
+        $('#EndTime').datetimepicker();
+    </script>
 @endsection
-

@@ -802,6 +802,8 @@ class ProductController extends Controller
                                 ->distinct()
                                 ->orderBy('quantity', 'DESC')
                                 ->paginate(5);
+          } else {
+            $lsProduct = Product::paginate(5);
           }
         }
         return view('admin.product.list')->with(['lsProduct' => $lsProduct, 'lsTag' => $lsTag, 'name' => $name, 'price' => $price, 'status' => $status, 'tag' => $tag, 'sort' => $sort]);

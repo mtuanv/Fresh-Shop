@@ -36,6 +36,6 @@ Route::middleware(['auth', 'checkAdmin'])->group(function () {
         Route::resource('/tags', \App\Http\Controllers\TagController::class);
         Route::resource('/products', \App\Http\Controllers\ProductController::class);
         Route::resource('/promotions', \App\Http\Controllers\PromotionController::class);
-
+        Route::post('/promotion_status/{id}', [App\Http\Controllers\PromotionController::class, 'changeStatus'])->name('changestt');
     });
 });

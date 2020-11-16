@@ -29,10 +29,10 @@
 
                         <div class="row form-group">
                             <div class="col col-md-3">
-                                <label for="file-multiple-input" class=" form-control-label">Chọn ảnh</label>
+                                <label for="cover" class=" form-control-label">Chọn ảnh</label>
                             </div>
                             <div class="col-12 col-md-9">
-                                <input type="file" id="file-multiple-input" name="cover" multiple
+                                <input type="file" id="cover" name="cover"
                                        class="form-control-file @error('cover') is-invalid @enderror">
                                 @error('cover')
                                 <span class="invalid-feedback" role="alert">
@@ -61,9 +61,9 @@
                             <div class="col-12 col-md-9">
                                 <select name="status" id="status"
                                         class="form-control @error('status') is-invalid @enderror">
-                                    <option value="0">Please select</option>
+                                    <option value="-">Please select</option>
                                     <option value="1">Public</option>
-                                    <option value="2">Draft</option>
+                                    <option value="0">Draft</option>
                                 </select>
                                 @error('status')
                                 <span class="invalid-feedback" role="alert">
@@ -71,17 +71,23 @@
                                 @enderror
                             </div>
                         </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label for="StartTime">Start Time</label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <input class="form-control" id="StartTime" name="StartTime">
+                            </div>
 
-                        <div class="form-group">
-                            <label for="StartTime">Start Time:</label>
-                            <input type="datetime-local" class="form-control" id="StartTime" name="StartTime">
                         </div>
-
-                        <div class="form-group">
-                            <label for="Endtime">End Time:</label>
-                            <input type="datetime-local" class="form-control" id="StartTime" name="EndTime">
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label for="Endtime">End Time</label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <input class="form-control" id="EndTime" name="EndTime">
+                            </div>
                         </div>
-
                         <div class="row form-group">
                             <div class="col col-md-3">
                                 <label for="tag" class=" form-control-label">Chọn tag</label>
@@ -116,5 +122,9 @@
         $(document).ready(function () {
             $('.ckeditor').ckeditor();
         });
+    </script>
+    <script type="text/javascript">
+        $('#StartTime').datetimepicker({value:Date.now()});
+        $('#EndTime').datetimepicker({value:Date.now()});
     </script>
 @endsection

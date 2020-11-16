@@ -15,10 +15,60 @@ class PromotionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $lsPromotion = Promotion::paginate(5);
-        return view('admin.promotion.list')->with(['lsPromotion' => $lsPromotion]);
+        $title = $request->title;
+        $status = $request->status;
+        $tag = $request->tag;
+        $lsTag = Tag::all();
+        if($title ==  null && ($status == null || $status == "-") && ($tag == null || $tag == "-")){
+          $lsPromotion = Promotion::paginate(5);
+        } elseif ($title !=  null && ($status != null && $status != "-") && ($tag != null && $tag != "-")) {
+          $lsPromotion = Promotion::join('promotion_tags', 'promotions.id', '=', 'promotion_tags.promotion_id')
+                              ->join('tags', 'promotion_tags.tag_id', '=', 'tags.id')
+                              ->select('promotions.*')
+                              ->where('promotions.title', 'like', '%'.$title.'%')
+                              ->where('promotions.status', '=', $status)
+                              ->where('tags.id', '=', $tag)
+                              ->distinct()
+                              ->paginate(5);
+        } elseif ($title !=  null && ($status == null || $status == "-") && ($tag == null || $tag == "-")) {
+          $lsPromotion = Promotion::where('promotions.title', 'like', '%'.$title.'%')
+                              ->paginate(5);
+        } elseif ($title !=  null && ($status != null && $status != "-") && ($tag == null || $tag == "-")) {
+          $lsPromotion = Promotion::where('promotions.title', 'like', '%'.$title.'%')
+                              ->where('promotions.status', '=', $status)
+                              ->paginate(5);
+        } elseif ($title ==  null && ($status != null && $status != "-") && ($tag == null || $tag == "-")) {
+          $lsPromotion = Promotion::where('promotions.status', '=', $status)
+                              ->paginate(5);
+        } elseif ($title ==  null && ($status != null && $status != "-") && ($tag != null && $tag != "-")) {
+          $lsPromotion = Promotion::join('promotion_tags', 'promotions.id', '=', 'promotion_tags.promotion_id')
+                              ->join('tags', 'promotion_tags.tag_id', '=', 'tags.id')
+                              ->select('promotions.*')
+                              ->where('promotions.status', '=', $status)
+                              ->where('tags.id', '=', $tag)
+                              ->distinct()
+                              ->paginate(5);
+        } elseif ($title ==  null && ($status == null || $status == "-") && ($tag != null && $tag != "-")) {
+          $lsPromotion = Promotion::join('promotion_tags', 'promotions.id', '=', 'promotion_tags.promotion_id')
+                              ->join('tags', 'promotion_tags.tag_id', '=', 'tags.id')
+                              ->select('promotions.*')
+                              ->where('tags.id', '=', $tag)
+                              ->distinct()
+                              ->paginate(5);
+        } elseif ($title ==  null && ($status == null || $status == "-") && ($tag != null && $tag != "-")) {
+          $lsPromotion = Promotion::join('promotion_tags', 'promotions.id', '=', 'promotion_tags.promotion_id')
+                              ->join('tags', 'promotion_tags.tag_id', '=', 'tags.id')
+                              ->select('promotions.*')
+                              ->where('promotions.title', 'like', '%'.$title.'%')
+                              ->where('tags.id', '=', $tag)
+                              ->distinct()
+                              ->paginate(5);
+        } else {
+          $lsPromotion = Promotion::paginate(5);
+        }
+        return view('admin.promotion.list')->with(['lsPromotion' => $lsPromotion, 'lsTag' => $lsTag, 'title' => $title, 'status' => $status, 'tag' => $tag]);
     }
 
     /**
@@ -104,7 +154,8 @@ class PromotionController extends Controller
     {
         $lsTag = Tag::all();
         $promotion = Promotion::find($id);
-        return view('admin.promotion.edit')->with(['promotion' => $promotion, 'lsTag' => $lsTag]);
+        $lsPromotionTag = PromotionTag::all();
+        return view('admin.promotion.edit')->with(['promotion' => $promotion, 'lsTag' => $lsTag, 'lsPromotionTag' => $lsPromotionTag]);
     }
 
     /**
@@ -122,7 +173,7 @@ class PromotionController extends Controller
         $promotion->StartTime = $request->StartTime;
         $promotion->EndTime = $request->EndTime;
 
-        $path = " ";
+        $path = "";
         if ($request->cover != null) {
             $name = $request->cover->getClientOriginalExtension();
             $name = time() . "." . $name;
@@ -131,7 +182,8 @@ class PromotionController extends Controller
             $promotion->cover = $path;
         }
 
-//luu PromotionTag moi
+        $lsPromotionTag = PromotionTag::where('promotion_id', '=', $id);
+        $lsPromotionTag->delete();
         foreach ($request->tags as $tagid) {
             $promotionTag = new PromotionTag();
             $promotionTag->promotion_id = $promotion->id;
@@ -157,5 +209,14 @@ class PromotionController extends Controller
 
         $request->session()->flash('success', 'Xoá thành công');
         return redirect('admin/promotions');
+    }
+    public function changeStatus(Request $request, $id)
+    {
+      $promotion = Promotion::find($id);
+      $promotion->status = $request->status;
+      $promotion->save();
+      $request->session()->flash('success', 'Sửa trạng thái thành công');
+
+      return redirect("admin/promotions");
     }
 }
