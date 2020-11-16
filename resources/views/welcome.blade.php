@@ -71,7 +71,7 @@
                         <div class="button-group filter-button-group">
                             <button class="active" data-filter="*">All</button>
                             @foreach($lsTag as $tag)
-                                <button data-filter=".{{$tag->name}}">{{$tag->name}}</button>
+                                <button data-filter=".{{$tag->id}}">{{$tag->name}}</button>
                             @endforeach
                         </div>
                     </div>
@@ -81,10 +81,19 @@
 
             <div class="row special-list">
                 @foreach($lsProduct as $product)
-                    <div class="col-lg-3 col-md-6 special-grid {{$tag->name}}">
+                    @php
+                        $classname = "";
+                        foreach($product->tags as $t) {
+                            $classname .= $t->id." ";
+                        }
+                    @endphp
+
+                    <div class="col-lg-3 col-md-6 special-grid {{$classname}}">
                         <div class="products-single fix">
                             <div class="box-img-hover">
-                                <img src="{{asset($product->images)}}" class="img-fluid" alt="Image">
+                                @foreach($product->images as $image)
+                                    <img src="{{asset($image->link)}}" class="img-fluid" alt="Image">
+                                @endforeach
                                 <div class="mask-icon">
                                     <ul>
                                         <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i

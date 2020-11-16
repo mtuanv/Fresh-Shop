@@ -21,7 +21,7 @@ Route::get('/blog', [\App\Http\Controllers\ShopController::class, 'blog'])->name
 Route::get('/contactus', [\App\Http\Controllers\ShopController::class, 'contact'])->name('contactus');
 Route::get('/cart', [\App\Http\Controllers\ShopController::class, 'cart'])->name('cart');
 Route::get('/menu', [\App\Http\Controllers\ShopController::class, 'menu'])->name('menu');
-Route::get('/detail', [\App\Http\Controllers\ShopController::class, 'detail'])->name('detail');
+Route::get('/detail/{id}', [\App\Http\Controllers\ShopController::class, 'detail'])->name('detail');
 
 
 //back-end
