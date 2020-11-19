@@ -26,11 +26,15 @@
                             <div class="col-12 col-sm-8 text-center text-sm-left">
                                 <div class="toolbar-sorter-right">
                                     <span>Sắp xếp </span>
-                                    <select id="basic" class="selectpicker show-tick form-control"
-                                            data-placeholder="$ USD">
-                                        <option data-display="Select">Mặc định</option>
-                                        <option value="1">Giá cao → Giá thấp</option>
-                                        <option value="2">Giá thấp → Giá cao</option>
+                                    <select id="sort" class="selectpicker show-tick form-control" name="sort">
+                                        <option value="-">Mặc định</option>
+                                        <option value="1"> Giá cao →
+                                            Giá
+                                            thấp
+                                        </option>
+                                        <option value="2"> Giá thấp → Giá
+                                            cao
+                                        </option>
                                     </select>
                                 </div>
                             </div>
@@ -67,7 +71,7 @@
                                                                        data-placement="right"
                                                                        title="View"><i class="fas fa-eye"></i></a></li>
                                                             </ul>
-                                                            <a class="cart" href="#">Add to Cart</a>
+                                                            <a class="cart" href="#">Thêm vào giỏ</a>
                                                         </div>
                                                     </div>
                                                     <div class="why-text">
@@ -96,13 +100,6 @@
                                                                     <li><a href="#" data-toggle="tooltip"
                                                                            data-placement="right" title="View"><i
                                                                                 class="fas fa-eye"></i></a></li>
-                                                                    <li><a href="#" data-toggle="tooltip"
-                                                                           data-placement="right" title="Compare"><i
-                                                                                class="fas fa-sync-alt"></i></a></li>
-                                                                    <li><a href="#" data-toggle="tooltip"
-                                                                           data-placement="right"
-                                                                           title="Add to Wishlist"><i
-                                                                                class="far fa-heart"></i></a></li>
                                                                 </ul>
                                                             </div>
                                                         </div>
@@ -113,7 +110,7 @@
                                                         <h4>{{$product->name}}</h4>
                                                         <h5> {{$product->price}} VND</h5>
                                                         <p>{!! $product->description !!}</p>
-                                                        <a class="btn hvr-hover" href="#">Add to Cart</a>
+                                                        <a class="btn hvr-hover" href="#">Thêm vào giỏ</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -128,8 +125,9 @@
                 <div class="col-xl-3 col-lg-3 col-sm-12 col-xs-12 sidebar-shop-left">
                     <div class="product-categori">
                         <div class="search-product">
-                            <form action="#">
-                                <input class="form-control" placeholder="Search here..." type="text">
+                            <form action="{{route('menu')}}" method="get" name="search">
+                                @csrf
+                                <input class="form-control" placeholder="Search here..." type="text" name="name">
                                 <button type="submit"><i class="fa fa-search"></i></button>
                             </form>
                         </div>
@@ -139,10 +137,11 @@
                             </div>
                             <div class="list-group list-group-collapse list-group-sm list-group-tree"
                                  id="list-group-men" data-children=".sub-men">
+
                                 @foreach($lsTag as $tag)
                                     <a href="#" class="list-group-item list-group-item-action"
                                        data-filter=".{{$tag->id}}"> {{$tag->name}} <small
-                                            class="text-muted"> hash code </small></a>
+                                            class="text-muted">hashcode</small></a>
                                 @endforeach
 
                             </div>
@@ -158,6 +157,7 @@
                                            style="border:0; color:#fbb714; font-weight:bold;">
                                     <button class="btn hvr-hover" type="submit">Khoảng giá</button>
                                 </p>
+                                {{--sửa slider trong file custom.js --}}
                             </div>
                         </div>
                     </div>
@@ -166,5 +166,10 @@
         </div>
     </div>
     <!-- End Menu Page -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+        });
+    </script>
 @endsection
 

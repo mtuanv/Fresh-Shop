@@ -61,243 +61,123 @@
                     </div>
                 </div>
             </div>
-
-            <div class="row my-5">
-                <div class="card card-outline-secondary my-4">
-                    <div class="card-header">
-                        <h2>Product Reviews</h2>
+            <div class="row">
+                <div class="col-xl-7 col-lg-7 col-md-6">
+                    <div class="card card-outline-secondary my-4">
+                        <div class="card-header">
+                            <h2>Đánh giá</h2>
+                        </div>
+                        <div class="card-body">
+                            <div class="media mb-3">
+                                <div class="mr-2">
+                                    <img class="rounded-circle border p-1"
+                                         src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2264%22%20height%3D%2264%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_160c142c97c%20text%20%7B%20fill%3Argba(255%2C255%2C255%2C.75)%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A10pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_160c142c97c%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20fill%3D%22%23777%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%2213.5546875%22%20y%3D%2236.5%22%3E64x64%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E"
+                                         alt="Generic placeholder image">
+                                </div>
+                                <div class="media-body">
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam
+                                        inventore, similique necessitatibus neque non! Doloribus, modi sapiente
+                                        laboriosam
+                                        aperiam fugiat laborum. Sequi mollitia, necessitatibus quae sint natus.</p>
+                                    <small class="text-muted">Posted by Anonymous on 3/1/18</small>
+                                </div>
+                            </div>
+                            <hr>
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <div class="media mb-3">
-                            <div class="mr-2">
-                                <img class="rounded-circle border p-1"
-                                     src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2264%22%20height%3D%2264%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_160c142c97c%20text%20%7B%20fill%3Argba(255%2C255%2C255%2C.75)%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A10pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_160c142c97c%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20fill%3D%22%23777%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%2213.5546875%22%20y%3D%2236.5%22%3E64x64%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E"
-                                     alt="Generic placeholder image">
-                            </div>
-                            <div class="media-body">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam
-                                    inventore, similique necessitatibus neque non! Doloribus, modi sapiente laboriosam
-                                    aperiam fugiat laborum. Sequi mollitia, necessitatibus quae sint natus.</p>
-                                <small class="text-muted">Posted by Anonymous on 3/1/18</small>
-                            </div>
+                </div>
+                <div class="col-xl-5 col-lg-5 col-md-6">
+                    <div class="card card-outline-secondary my-4">
+                        <div class="card-header">
+                            <h2>Gửi đánh giá</h2>
                         </div>
-                        <hr>
-                        <div class="media mb-3">
-                            <div class="mr-2">
-                                <img class="rounded-circle border p-1"
-                                     src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2264%22%20height%3D%2264%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_160c142c97c%20text%20%7B%20fill%3Argba(255%2C255%2C255%2C.75)%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A10pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_160c142c97c%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20fill%3D%22%23777%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%2213.5546875%22%20y%3D%2236.5%22%3E64x64%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E"
-                                     alt="Generic placeholder image">
-                            </div>
-                            <div class="media-body">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam
-                                    inventore, similique necessitatibus neque non! Doloribus, modi sapiente laboriosam
-                                    aperiam fugiat laborum. Sequi mollitia, necessitatibus quae sint natus.</p>
-                                <small class="text-muted">Posted by Anonymous on 3/1/18</small>
-                            </div>
+                        <div class="card-body">
+                            <form id="contactForm">
+                                @csrf
+                                <input type="hidden" id="product_id" value="{{$product->id}}">
+                                <div class="row">
+                                    <div class="col-md-12" style="margin-bottom: 10px">
+                                        <div class="form-group">
+                                            <input class="form-control" id="fbname" name="fbname" type="text"
+                                                   placeholder="Tên*" required data-error="Vui lòng nhập tên">
+                                            <div class="help-block with-errors"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12" style="margin-bottom: 10px">
+                                        <div class="form-group">
+                                            <input class="form-control" id="fbemail" name="fbemail" type="text"
+                                                   placeholder="Email*" required data-error="Vui lòng nhập email">
+                                            <div class="help-block with-errors"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12" style="margin-bottom: 10px">
+                                        <div class="form-group">
+                                            <p>Đánh giá của bạn</p>
+                                            <div class="rating" id="fbrating">
+                                                <input type="radio" name="rating" value="5" id="5"><label
+                                                    for="5">☆</label>
+                                                <input type="radio" name="rating" value="4" id="4"><label
+                                                    for="4">☆</label>
+                                                <input type="radio" name="rating" value="3" id="3"><label
+                                                    for="3">☆</label>
+                                                <input type="radio" name="rating" value="2" id="2"><label
+                                                    for="2">☆</label>
+                                                <input type="radio" name="rating" value="1" id="1"><label
+                                                    for="1">☆</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12" style="margin-bottom: 10px">
+                                        <div class="form-group">
+                                            <textarea class="form-control" id="fbmessage"
+                                                      placeholder="Nhận xét của bạn*" rows="4"
+                                                      data-error="Vui lòng nhập nội dung" required></textarea>
+                                            <div class="help-block with-errors"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="submit-button text-center">
+                                            <button class="btn hvr-hover" id="send_feedback" type="button">Gửi đi
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
-                        <hr>
-                        <div class="media mb-3">
-                            <div class="mr-2">
-                                <img class="rounded-circle border p-1"
-                                     src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2264%22%20height%3D%2264%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_160c142c97c%20text%20%7B%20fill%3Argba(255%2C255%2C255%2C.75)%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A10pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_160c142c97c%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20fill%3D%22%23777%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%2213.5546875%22%20y%3D%2236.5%22%3E64x64%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E"
-                                     alt="Generic placeholder image">
-                            </div>
-                            <div class="media-body">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam
-                                    inventore, similique necessitatibus neque non! Doloribus, modi sapiente laboriosam
-                                    aperiam fugiat laborum. Sequi mollitia, necessitatibus quae sint natus.</p>
-                                <small class="text-muted">Posted by Anonymous on 3/1/18</small>
-                            </div>
-                        </div>
-                        <hr>
-                        <a href="#" class="btn hvr-hover">Leave a Review</a>
                     </div>
                 </div>
             </div>
 
+
             <div class="row my-5">
                 <div class="col-lg-12">
                     <div class="title-all text-center">
-                        <h1>Featured Products</h1>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet lacus enim.</p>
+                        <h1>Sản phẩm tương tự</h1>
                     </div>
                     <div class="featured-products-box owl-carousel owl-theme">
-                        <div class="item">
-                            <div class="products-single fix">
-                                <div class="box-img-hover">
-                                    <img src="{{asset('shop/images/img-pro-01.jpg')}}" class="img-fluid" alt="Image">
-                                    <div class="mask-icon">
-                                        <ul>
-                                            <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i
-                                                        class="fas fa-eye"></i></a></li>
-                                            <li><a href="#" data-toggle="tooltip" data-placement="right"
-                                                   title="Compare"><i class="fas fa-sync-alt"></i></a></li>
-                                            <li><a href="#" data-toggle="tooltip" data-placement="right"
-                                                   title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
-                                        </ul>
-                                        <a class="cart" href="#">Add to Cart</a>
+                        @foreach($lsProduct as $product)
+                            <div class="item">
+                                <div class="products-single fix">
+                                    <div class="box-img-hover">
+                                        @foreach($product->images as $image)
+                                            <img src="{{asset($image->link)}}" class="img-fluid" alt="Image">
+                                        @endforeach
+                                        <div class="mask-icon">
+                                            <ul>
+                                                <li><a href="#" data-toggle="tooltip" data-placement="right"
+                                                       title="View"><i
+                                                            class="fas fa-eye"></i></a></li>
+                                            </ul>
+                                            <a class="cart" href="#">Thêm vào giỏ</a>
+                                        </div>
+                                    </div>
+                                    <div class="why-text">
+                                        <h4>{{$product->name}}</h4>
+                                        <h5> {{$product->price}} VND</h5>
                                     </div>
                                 </div>
-                                <div class="why-text">
-                                    <h4>Lorem ipsum dolor sit amet</h4>
-                                    <h5> $9.79</h5>
-                                </div>
                             </div>
-                        </div>
-                        <div class="item">
-                            <div class="products-single fix">
-                                <div class="box-img-hover">
-                                    <img src="{{asset('shop/images/img-pro-02.jpg')}}" class="img-fluid" alt="Image">
-                                    <div class="mask-icon">
-                                        <ul>
-                                            <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i
-                                                        class="fas fa-eye"></i></a></li>
-                                            <li><a href="#" data-toggle="tooltip" data-placement="right"
-                                                   title="Compare"><i class="fas fa-sync-alt"></i></a></li>
-                                            <li><a href="#" data-toggle="tooltip" data-placement="right"
-                                                   title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
-                                        </ul>
-                                        <a class="cart" href="#">Add to Cart</a>
-                                    </div>
-                                </div>
-                                <div class="why-text">
-                                    <h4>Lorem ipsum dolor sit amet</h4>
-                                    <h5> $9.79</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="products-single fix">
-                                <div class="box-img-hover">
-                                    <img src="{{asset('shop/images/img-pro-03.jpg')}}" class="img-fluid" alt="Image">
-                                    <div class="mask-icon">
-                                        <ul>
-                                            <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i
-                                                        class="fas fa-eye"></i></a></li>
-                                            <li><a href="#" data-toggle="tooltip" data-placement="right"
-                                                   title="Compare"><i class="fas fa-sync-alt"></i></a></li>
-                                            <li><a href="#" data-toggle="tooltip" data-placement="right"
-                                                   title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
-                                        </ul>
-                                        <a class="cart" href="#">Add to Cart</a>
-                                    </div>
-                                </div>
-                                <div class="why-text">
-                                    <h4>Lorem ipsum dolor sit amet</h4>
-                                    <h5> $9.79</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="products-single fix">
-                                <div class="box-img-hover">
-                                    <img src="{{asset('shop/images/img-pro-04.jpg')}}" class="img-fluid" alt="Image">
-                                    <div class="mask-icon">
-                                        <ul>
-                                            <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i
-                                                        class="fas fa-eye"></i></a></li>
-                                            <li><a href="#" data-toggle="tooltip" data-placement="right"
-                                                   title="Compare"><i class="fas fa-sync-alt"></i></a></li>
-                                            <li><a href="#" data-toggle="tooltip" data-placement="right"
-                                                   title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
-                                        </ul>
-                                        <a class="cart" href="#">Add to Cart</a>
-                                    </div>
-                                </div>
-                                <div class="why-text">
-                                    <h4>Lorem ipsum dolor sit amet</h4>
-                                    <h5> $9.79</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="products-single fix">
-                                <div class="box-img-hover">
-                                    <img src="{{asset('shop/images/img-pro-01.jpg')}}" class="img-fluid" alt="Image">
-                                    <div class="mask-icon">
-                                        <ul>
-                                            <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i
-                                                        class="fas fa-eye"></i></a></li>
-                                            <li><a href="#" data-toggle="tooltip" data-placement="right"
-                                                   title="Compare"><i class="fas fa-sync-alt"></i></a></li>
-                                            <li><a href="#" data-toggle="tooltip" data-placement="right"
-                                                   title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
-                                        </ul>
-                                        <a class="cart" href="#">Add to Cart</a>
-                                    </div>
-                                </div>
-                                <div class="why-text">
-                                    <h4>Lorem ipsum dolor sit amet</h4>
-                                    <h5> $9.79</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="products-single fix">
-                                <div class="box-img-hover">
-                                    <img src="{{asset('shop/images/img-pro-02.jpg')}}" class="img-fluid" alt="Image">
-                                    <div class="mask-icon">
-                                        <ul>
-                                            <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i
-                                                        class="fas fa-eye"></i></a></li>
-                                            <li><a href="#" data-toggle="tooltip" data-placement="right"
-                                                   title="Compare"><i class="fas fa-sync-alt"></i></a></li>
-                                            <li><a href="#" data-toggle="tooltip" data-placement="right"
-                                                   title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
-                                        </ul>
-                                        <a class="cart" href="#">Add to Cart</a>
-                                    </div>
-                                </div>
-                                <div class="why-text">
-                                    <h4>Lorem ipsum dolor sit amet</h4>
-                                    <h5> $9.79</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="products-single fix">
-                                <div class="box-img-hover">
-                                    <img src="{{asset('shop/images/img-pro-03.jpg')}}" class="img-fluid" alt="Image">
-                                    <div class="mask-icon">
-                                        <ul>
-                                            <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i
-                                                        class="fas fa-eye"></i></a></li>
-                                            <li><a href="#" data-toggle="tooltip" data-placement="right"
-                                                   title="Compare"><i class="fas fa-sync-alt"></i></a></li>
-                                            <li><a href="#" data-toggle="tooltip" data-placement="right"
-                                                   title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
-                                        </ul>
-                                        <a class="cart" href="#">Add to Cart</a>
-                                    </div>
-                                </div>
-                                <div class="why-text">
-                                    <h4>Lorem ipsum dolor sit amet</h4>
-                                    <h5> $9.79</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="products-single fix">
-                                <div class="box-img-hover">
-                                    <img src="{{asset('shop/images/img-pro-04.jpg')}}" class="img-fluid" alt="Image">
-                                    <div class="mask-icon">
-                                        <ul>
-                                            <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i
-                                                        class="fas fa-eye"></i></a></li>
-                                            <li><a href="#" data-toggle="tooltip" data-placement="right"
-                                                   title="Compare"><i class="fas fa-sync-alt"></i></a></li>
-                                            <li><a href="#" data-toggle="tooltip" data-placement="right"
-                                                   title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
-                                        </ul>
-                                        <a class="cart" href="#">Add to Cart</a>
-                                    </div>
-                                </div>
-                                <div class="why-text">
-                                    <h4>Lorem ipsum dolor sit amet</h4>
-                                    <h5> $9.79</h5>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -306,4 +186,30 @@
     </div>
     <!-- End Detail -->
 
+    {{--Send Email--}}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#send_feedback").click(function () {
+                var data = {
+                    "name": $("#fbname").val(),
+                    "_token": "{{ csrf_token() }}",
+                    "rating": $("#fbrating").val(),
+                    "phone": $("#fbemail").val(),
+                    "content": $("#fbmessage").val(),
+                    "product_id": $("#product_id").val()
+                };
+                $.ajax({
+                    type: "GET",
+                    url: "../api/feedback",
+                    data: data,
+                    success: function (response) {
+                        alert("Gửi đánh giá thành công ! Cảm ơn sự quan tâm của quý khách");
+                    },
+                    error: function (r) {
+                        alert("Gửi đánh giá thất bại...Mời điền lại mẫu đánh giá");
+                    }
+                });
+            });
+        });
+    </script>
 @endsection

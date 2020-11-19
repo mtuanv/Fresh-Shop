@@ -69,9 +69,9 @@
                 <div class="col-lg-12">
                     <div class="special-menu text-center">
                         <div class="button-group filter-button-group">
-                            <button class="active" data-filter="*">All</button>
+                            <button class="active" data-filter="*" style="margin-top: 3px">All</button>
                             @foreach($lsTag as $tag)
-                                <button data-filter=".{{$tag->id}}">{{$tag->name}}</button>
+                                <button data-filter=".{{$tag->id}}" style="margin-top: 3px">{{$tag->name}}</button>
                             @endforeach
                         </div>
                     </div>
@@ -82,13 +82,13 @@
             <div class="row special-list">
                 @foreach($lsProduct as $product)
                     @php
-                        $classname = "";
+                        $tagname = "";
                         foreach($product->tags as $t) {
-                            $classname .= $t->id." ";
+                            $tagname .= $t->id." ";
                         }
                     @endphp
 
-                    <div class="col-lg-3 col-md-6 special-grid {{$classname}}">
+                    <div class="col-lg-3 col-md-6 special-grid {{$tagname}}">
                         <div class="products-single fix">
                             <div class="box-img-hover">
                                 @foreach($product->images as $image)
@@ -96,14 +96,11 @@
                                 @endforeach
                                 <div class="mask-icon">
                                     <ul>
-                                        <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i
+                                        <li><a href="detail/{{$product->id}}" data-toggle="tooltip"
+                                               data-placement="right" title="View"><i
                                                     class="fas fa-eye"></i></a></li>
-                                        <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i
-                                                    class="fas fa-sync-alt"></i></a></li>
-                                        <li><a href="#" data-toggle="tooltip" data-placement="right"
-                                               title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
                                     </ul>
-                                    <a class="cart" href="#">Add to Cart</a>
+                                    <a class="cart" href="#">Thêm vào giỏ</a>
                                 </div>
                             </div>
                         </div>
@@ -114,51 +111,6 @@
         </div>
     </div>
     <!-- End Gallery  -->
-
-    {{--    <!-- Start Categories  -->--}}
-    {{--    <div class="categories-shop">--}}
-    {{--        <div class="container">--}}
-    {{--            <div class="row">--}}
-    {{--                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">--}}
-    {{--                    <div class="shop-cat-box">--}}
-    {{--                        <img class="img-fluid" src="{{asset('shop/images/categories_img_01.jpg')}}" alt=""/>--}}
-    {{--                        <a class="btn hvr-hover" href="#">Lorem ipsum dolor</a>--}}
-    {{--                    </div>--}}
-    {{--                </div>--}}
-    {{--                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">--}}
-    {{--                    <div class="shop-cat-box">--}}
-    {{--                        <img class="img-fluid" src="{{asset('shop/images/categories_img_02.jpg')}}" alt=""/>--}}
-    {{--                        <a class="btn hvr-hover" href="#">Lorem ipsum dolor</a>--}}
-    {{--                    </div>--}}
-    {{--                </div>--}}
-    {{--                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">--}}
-    {{--                    <div class="shop-cat-box">--}}
-    {{--                        <img class="img-fluid" src="{{asset('shop/images/categories_img_03.jpg')}}" alt=""/>--}}
-    {{--                        <a class="btn hvr-hover" href="#">Lorem ipsum dolor</a>--}}
-    {{--                    </div>--}}
-    {{--                </div>--}}
-    {{--            </div>--}}
-    {{--        </div>--}}
-    {{--    </div>--}}
-    {{--    <!-- End Categories -->--}}
-
-    {{--    <div class="box-add-products">--}}
-    {{--        <div class="container">--}}
-    {{--            <div class="row">--}}
-    {{--                <div class="col-lg-6 col-md-6 col-sm-12">--}}
-    {{--                    <div class="offer-box-products">--}}
-    {{--                        <img class="img-fluid" src="{{asset('shop/images/add-img-01.jpg')}}" alt=""/>--}}
-    {{--                    </div>--}}
-    {{--                </div>--}}
-    {{--                <div class="col-lg-6 col-md-6 col-sm-12">--}}
-    {{--                    <div class="offer-box-products">--}}
-    {{--                        <img class="img-fluid" src="{{asset('shop/images/add-img-02.jpg')}}" alt=""/>--}}
-    {{--                    </div>--}}
-    {{--                </div>--}}
-    {{--            </div>--}}
-    {{--        </div>--}}
-    {{--    </div>--}}
-
 
     <!-- Start Blog  -->
     <div class="latest-blog">
@@ -382,86 +334,18 @@
     {{--Start Instagram Feed--}}
     <div class="instagram-box">
         <div class="main-instagram owl-carousel owl-theme">
-            <div class="item">
-                <div class="ins-inner-box">
-                    <img src="{{asset('shop/images/instagram-img-01.jpg')}}" alt=""/>
-                    <div class="hov-in">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                    </div>
+            @foreach($lsProduct as $product)
+                <div class="item">
+                    @foreach($product->images as $image)
+                        <div class="ins-inner-box">
+                            <img src="{{asset($image->link)}}" class="img-fluid" alt="Image">
+                            <div class="hov-in">
+                                <a href="detail/{{$product->id}}"><i class="fab fa-instagram"></i></a>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
-            </div>
-            <div class="item">
-                <div class="ins-inner-box">
-                    <img src="{{asset('shop/images/instagram-img-02.jpg')}}" alt=""/>
-                    <div class="hov-in">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <div class="ins-inner-box">
-                    <img src="{{asset('shop/images/instagram-img-03.jpg')}}" alt=""/>
-                    <div class="hov-in">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <div class="ins-inner-box">
-                    <img src="{{asset('shop/images/instagram-img-04.jpg')}}" alt=""/>
-                    <div class="hov-in">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <div class="ins-inner-box">
-                    <img src="{{asset('shop/images/instagram-img-05.jpg')}}" alt=""/>
-                    <div class="hov-in">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <div class="ins-inner-box">
-                    <img src="{{asset('shop/images/instagram-img-06.jpg')}}" alt=""/>
-                    <div class="hov-in">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <div class="ins-inner-box">
-                    <img src="{{asset('shop/images/instagram-img-07.jpg')}}" alt=""/>
-                    <div class="hov-in">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <div class="ins-inner-box">
-                    <img src="{{asset('shop/images/instagram-img-08.jpg')}}" alt=""/>
-                    <div class="hov-in">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <div class="ins-inner-box">
-                    <img src="{{asset('shop/images/instagram-img-09.jpg')}}" alt=""/>
-                    <div class="hov-in">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <div class="ins-inner-box">
-                    <img src="{{asset('shop/images/instagram-img-05.jpg')}}" alt=""/>
-                    <div class="hov-in">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
     {{--End Instagram Feed--}}

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Feedback;
 use App\Models\Product;
 use App\Models\Tag;
 use App\Models\User;
@@ -14,7 +15,7 @@ class ShopController extends Controller
     {
         $lsProduct = Product::all();
         $lsTag = Tag::all();
-        return view('welcome')->with(['lsTag' => $lsTag, 'lsProduct' => $lsProduct]);;
+        return view('welcome')->with(['lsTag' => $lsTag, 'lsProduct' => $lsProduct]);
     }
 
     public function about()
@@ -39,17 +40,45 @@ class ShopController extends Controller
         return view('cart');
     }
 
-    public function menu()
+    public function menu(Request $request)
     {
-        $lsProduct = Product::paginate(9);
-        $lsPr = Product::paginate(3);
-        $lsTag = Tag::all();
-        return view('menu')->with(['lsProduct' => $lsProduct, 'lsPr' => $lsPr, 'lsTag' => $lsTag]);
+        $name = $request->name;
+        if ($name != null) {
+            $lsProduct = Product::where('products.name', 'like', '%' . $name . '%')->paginate(9);
+            $lsPr = Product::where('products.name', 'like', '%' . $name . '%')->paginate(3);
+            $lsTag = Tag::all();
+        } else {
+            $lsProduct = Product::paginate(9);
+            $lsPr = Product::paginate(3);
+            $lsTag = Tag::all();
+        }
+        return view('menu')->with(['lsProduct' => $lsProduct, 'lsPr' => $lsPr, 'lsTag' => $lsTag, 'name' => $name]);
     }
 
     public function detail($id)
     {
         $product = Product::find($id);
-        return view('detail')->with(['product' => $product]);
+        $lsProduct = Product::all();
+        $lsTag = Tag::all();
+        return view('detail')->with(['product' => $product, 'lsProduct' => $lsProduct, 'lsTag' => $lsTag]);
+    }
+
+    public function feedback(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|max:255|min:5',
+            'phone' => 'required',
+            'content' => 'required'
+        ]);
+        $feedback = new Feedback();
+        $feedback->name = $request->name;
+        $feedback->rating = $request->rating;
+        $feedback->phone = $request->phone;
+        $feedback->content = $request->content;
+        $feedback->product_id = $request->product_id;
+        $feedback->save();
+
+        return response()->json(['msg' => 'Success']);
+
     }
 }

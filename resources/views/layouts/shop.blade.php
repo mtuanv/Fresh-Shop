@@ -32,6 +32,8 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    {{--Jquery--}}
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 
 </head>
 
@@ -214,7 +216,8 @@
                 <div class="col-lg-4 col-md-12 col-sm-12">
                     <div class="footer-top-box">
                         <h3>MẠNG XÃ HỘI</h3>
-                        <p>Theo dõi chúng tôi trên các nền tảng mạng xã hội <br> để nhận được thông tin ưu đãi sớm nhất.</p>
+                        <p>Theo dõi chúng tôi trên các nền tảng mạng xã hội <br> để nhận được thông tin ưu đãi sớm nhất.
+                        </p>
                         <ul>
                             <li><a href="#"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
                             <li><a href="#"><i class="fab fa-instagram" aria-hidden="true"></i></a></li>
