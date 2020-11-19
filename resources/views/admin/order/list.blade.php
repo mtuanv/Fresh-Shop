@@ -69,13 +69,13 @@
                           <form action="{{route('changesttorder', $order->id)}}" method="post"  style="float:left; margin-right: 5px">
                             @csrf
                             <input type="hidden" name="status" value="2">
-                            <button type="submit" class="btn btn-danger">Huỷ</button>
+                            <button type="submit" class="btn btn-danger">Huỷ đơn</button>
                           </form>
                           @elseif($order->status == 1)
                           <form action="{{route('changesttorder', $order->id)}}" method="post" style="float:left; margin-right: 5px">
                             @csrf
                             <input type="hidden" name="status" value="2">
-                            <button type="submit" class="btn btn-danger">Huỷ</button>
+                            <button type="submit" class="btn btn-danger">Huỷ đơn</button>
                           </form>
                           @else
                           <form action="{{route('changesttorder', $order->id)}}" method="post" style="float:left; margin-right: 5px">
