@@ -37,11 +37,7 @@
                         voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit
                         laboriosam, nisi ut aliquid ex ea commodi consequatur?
                         Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae
-                        consequatur.</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                        laboris nisi ut aliquip ex ea commodo consequat.</p>
-                    <a class="btn hvr-hover" href="#">Read More</a>
+                        consequatur."</p>
                 </div>
             </div>
             <div class="row my-5">
@@ -67,37 +63,50 @@
                     </div>
                 </div>
             </div>
-            <div class="row my-4">
+            <div class="row my-4 text-center">
                 <div class="col-12">
                     <h2 class="noo-sh-title">Meet Our Team</h2>
                 </div>
-                @foreach($lsUser as $user)
-                    <div class="col-sm-6 col-lg-3">
-                        <div class="hover-team">
-                            <div class="our-team"><img src="{{$user->avatar}}" alt=""/>
-                                <div class="team-content">
-                                    <h3 class="title">{{$user->name}}</h3> <span
-                                        class="post">{{$user->role_name}}</span></div>
-                                <ul class="social">
-                                    <li>
-                                        <a href="#" class="fab fa-facebook"></a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="fab fa-twitter"></a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="fab fa-google-plus"></a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="fab fa-youtube"></a>
-                                    </li>
-                                </ul>
-                                <div class="icon"><i class="fa fa-plus" aria-hidden="true"></i></div>
-                            </div>
-                            <hr class="my-0">
-                        </div>
-                    </div>
-                @endforeach
+
+                  @foreach($lsUser as $user)
+                  @if($user->role_name == 'ADMIN')
+                      <div class="col-sm-6 col-lg-2">
+                          <div class="hover-team">
+                              <div class="our-team"><img src="{{$user->avatar}}"/>
+                                  <div class="team-content">
+                                      <h3 class="title">{{$user->name}}</h3> <span
+                                          class="post">Quản lý</span></div>
+                                  <ul class="social">
+                                      <li>
+                                          <a href="#" class="fab fa-facebook"></a>
+                                      </li>
+                                  </ul>
+                                  <div class="icon"><i class="fa fa-plus" aria-hidden="true"></i></div>
+                              </div>
+                              <hr class="my-0">
+                          </div>
+                      </div>
+                      @endif
+                  @if($user->role_name == 'EMPLOYEE')
+                      <div class="col-sm-6 col-lg-2">
+                          <div class="hover-team">
+                              <div class="our-team"><img src="{{$user->avatar}}"/>
+                                  <div class="team-content">
+                                      <h3 class="title">{{$user->name}}</h3> <span
+                                          class="post">Nhân viên</span></div>
+                                  <ul class="social">
+                                      <li>
+                                          <a href="#" class="fab fa-facebook"></a>
+                                      </li>
+                                  </ul>
+                                  <div class="icon"><i class="fa fa-plus" aria-hidden="true"></i></div>
+                              </div>
+                              <hr class="my-0">
+                          </div>
+                      </div>
+                      @endif
+                  @endforeach
+
             </div>
         </div>
     </div>
