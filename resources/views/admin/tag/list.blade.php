@@ -52,7 +52,7 @@
                       <td>{{$tag->id}}</td>
                       <td>{{$tag->name}}</td>
                       <td>
-                        <a href="{{route('tags.edit', $tag->id)}}" class="btn btn-warning" style="float:left;margin-right: 5px">Sửa</a>
+                        <a href="{{route('tags.edit', $tag->id)}}" class="btn btn-warning" style="color:white; float:left;margin-right: 5px">Sửa</a>
                         <form action="{{route('tags.destroy', $tag->id)}}" method="post">
                           @csrf
                           @method('Delete')
