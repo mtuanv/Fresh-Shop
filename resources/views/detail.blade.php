@@ -31,7 +31,7 @@
                         <h5>
                             {{$product->price}} VND
                         </h5>
-                        <p class="available-stock"><span> More than 20 available / <a href="#">8 sold </a></span>
+                        <p class="available-stock"><span> Có sẵn hơn {{$product->quantity}} sản phẩm</span>
                         <p>
                         <h4>Mô tả:</h4>
                         <p>{!! $product->description !!}</p>
@@ -113,7 +113,7 @@
                                     <div class="col-md-12" style="margin-bottom: 10px">
                                         <div class="form-group">
                                             <p>Đánh giá của bạn</p>
-                                            <div class="rating" id="fbrating">
+                                            <div class="rating">
                                                 <input type="radio" name="rating" value="5" id="5"><label
                                                     for="5">☆</label>
                                                 <input type="radio" name="rating" value="4" id="4"><label
@@ -189,6 +189,7 @@
     {{--Send Email--}}
     <script type="text/javascript">
         $(document).ready(function () {
+
             $("#send_feedback").click(function () {
                 var data = {
                     "name": $("#fbname").val(),
@@ -206,7 +207,7 @@
                         alert("Gửi đánh giá thành công ! Cảm ơn sự quan tâm của quý khách");
                     },
                     error: function (r) {
-                        alert("Gửi đánh giá thất bại...Mời điền lại mẫu đánh giá");
+                        alert("Gửi đánh giá thất bại . . . Mời điền lại mẫu đánh giá");
                     }
                 });
             });
