@@ -22,6 +22,7 @@ Route::get('/contactus', [\App\Http\Controllers\ShopController::class, 'contact'
 Route::get('/cart', [\App\Http\Controllers\ShopController::class, 'cart'])->name('cart');
 Route::get('/menu', [\App\Http\Controllers\ShopController::class, 'menu'])->name('menu');
 Route::get('/detail/{id}', [\App\Http\Controllers\ShopController::class, 'detail'])->name('detail');
+Route::get('/searchHeader', [\App\Http\Controllers\ShopController::class, 'searchHeader'])->name('searchHeader');
 
 
 //back-end

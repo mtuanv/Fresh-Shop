@@ -119,6 +119,7 @@
             <!-- Start Atribute Navigation -->
             <div class="attr-nav">
                 <ul>
+
                     <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>
                     <li class="side-menu">
                         <a href="#">
@@ -172,10 +173,16 @@
 <!-- Start Top Search -->
 <div class="top-search">
     <div class="container">
-        <div class="input-group">
-            <span class="input-group-addon"><i class="fa fa-search"></i></span>
-            <input type="text" class="form-control" placeholder="Search">
-            <span class="input-group-addon close-search"><i class="fa fa-times"></i></span>
+        <div class="input-group ">
+            <form action="{{route('searchHeader')}}" method="get" name="search" class="input-group">
+                @csrf
+                <input type="text" class="form-control" placeholder="Search here..." name="search">
+                <button type="submit"
+                        style="background: black; color: white; border: none; cursor: pointer; margin-right: 30px">
+                    <i class="fa fa-search"></i>
+                </button>
+                <span class="input-group-addon close-search"><i class="fa fa-times"></i></span>
+            </form>
         </div>
     </div>
 </div>
@@ -204,13 +211,10 @@
                 <div class="col-lg-4 col-md-12 col-sm-12">
                     <div class="footer-top-box">
                         <h3>LIÊN HỆ HỢP TÁC</h3>
-                        <form class="newsletter-box">
-                            <div class="form-group">
-                                <input class="" type="email" name="Email" placeholder="Địa chỉ email*"/>
-                                <i class="fa fa-envelope"></i>
-                            </div>
-                            <button class="btn hvr-hover" type="submit">GỬI</button>
-                        </form>
+                        <p>Sẵn sàng phục vụ các bạn gần xa <br>cùng với việc hợp tác sâu rộng!</p>
+                        <a href="{{route('contactus')}}" class="newsletter-box">
+                            <button class="btn hvr-hover" type="submit">Đi tới liên hệ</button>
+                        </a>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-12 col-sm-12">

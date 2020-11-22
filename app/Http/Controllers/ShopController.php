@@ -81,4 +81,22 @@ class ShopController extends Controller
         return response()->json(['msg' => 'Success']);
 
     }
+
+    public function searchHeader(Request $request)
+    {
+        $search = $request->search;
+        $count = 0;
+        if ($search == null) {
+            $lsProduct = Product::all();
+        } elseif ($search != null) {
+            $lsProduct = Product::where('products.name', 'like', '%' . $search . '%');
+            $count = $lsProduct->count();
+            if ($count == 0) {
+                $lsProduct = null;
+            } else {
+                $lsProduct = Product::where('products.name', 'like', '%' . $search . '%')->paginate(9);
+            }
+        }
+        return view('search')->with(['lsProduct' => $lsProduct, 'search' => $search]);
+    }
 }

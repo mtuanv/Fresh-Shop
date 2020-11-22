@@ -72,15 +72,15 @@
                         <h2>CHI TIẾT LIÊN LẠC</h2>
                         <ul>
                             <li>
-                                <p><i class="fas fa-map-marker-alt"></i>ĐỊa chỉ: Tòa Nhà Detech <br>
+                                <p><i class="fas fa-map-marker-alt"></i>Địa chỉ: Tòa Nhà Detech <br>
                                     Số 8 Tôn Thất Thuyết, Dịch Vọng Hậu, <br>Cầu Giấy, Hà Nội</p>
                             </li>
                             <li>
-                                <p><i class="fas fa-phone-square"></i>Phone: <a href="tel:+84962257510">+84
+                                <p><i class="fas fa-phone-square"></i>Điện thoại: <a href="tel:+84962257510">+84
                                         962257510</a></p>
                             </li>
                             <li>
-                                <p><i class="fas fa-envelope"></i>Email: <a href="mailto:manchestervn1996@gmail.com">freshshop@gmail.com</a>
+                                <p><i class="fas fa-envelope"></i>Gmail: <a href="mailto:manchestervn1996@gmail.com">freshshop@gmail.com</a>
                                 </p>
                             </li>
                         </ul>

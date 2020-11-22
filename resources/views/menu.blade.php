@@ -75,14 +75,15 @@
                                                         </div>
                                                     </div>
                                                     <div class="why-text">
-                                                        <h4>{{$product->name}}</h4>
+                                                        <h4><a href="detail/{{$product->id}}"
+                                                               style="color: black">{{$product->name}}</a></h4>
                                                         <h5> {{$product->price}} VND</h5>
                                                     </div>
                                                 </div>
                                             </div>
                                         @endforeach
+                                        {{$lsProduct->links("pagination::bootstrap-4")}}
                                     </div>
-                                    {{$lsProduct->links("pagination::bootstrap-4")}}
                                 </div>
                                 <div role="tabpanel" class="tab-pane fade" id="list-view">
                                     @foreach($lsPr as $product)
@@ -97,7 +98,8 @@
                                                             @endforeach
                                                             <div class="mask-icon">
                                                                 <ul>
-                                                                    <li><a href="#" data-toggle="tooltip"
+                                                                    <li><a href="detail/{{$product->id}}"
+                                                                           data-toggle="tooltip"
                                                                            data-placement="right" title="View"><i
                                                                                 class="fas fa-eye"></i></a></li>
                                                                 </ul>
@@ -107,7 +109,9 @@
                                                 </div>
                                                 <div class="col-sm-6 col-md-6 col-lg-8 col-xl-8">
                                                     <div class="why-text full-width">
-                                                        <h4>{{$product->name}}</h4>
+                                                        <h4><a href="detail/{{$product->id}}"
+                                                               style="color: black">{{$product->name}}</a>
+                                                        </h4>
                                                         <h5> {{$product->price}} VND</h5>
                                                         <p>{!! $product->description !!}</p>
                                                         <a class="btn hvr-hover" href="#">Thêm vào giỏ</a>
