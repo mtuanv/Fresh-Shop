@@ -844,6 +844,7 @@ class ProductController extends Controller
       $product->quantity = $request->quantity;
       $product->description = $request->description;
       $product->status = $request->status;
+      $product->discount = $request->discount;
 
       $product->save();
       //Luu Image
@@ -924,6 +925,7 @@ class ProductController extends Controller
       $product->quantity = $request->quantity;
       $product->description = $request->description;
       $product->status = $request->status;
+      $product->discount = $request->discount;
       $product->save();
       //Xoa va Luu Image moi neu co request
       if($request->images != null){

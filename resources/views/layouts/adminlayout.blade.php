@@ -112,9 +112,6 @@
                                 <li>
                                     <a href="{{route('promotions.index')}}">Tin tức</a>
                                 </li>
-                                <li>
-                                    <a href="tab.html">Khách hàng</a>
-                                </li>
                                 @endif
                             </ul>
                         </li>
@@ -171,9 +168,6 @@
                                 @if(Auth::user()->role_name == 'ADMIN')
                                 <li>
                                     <a href="{{route('promotions.index')}}">Tin tức</a>
-                                </li>
-                                <li>
-                                    <a href="tab.html">Khách hàng</a>
                                 </li>
                                 @endif
                             </ul>

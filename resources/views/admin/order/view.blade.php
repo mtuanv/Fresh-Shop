@@ -40,11 +40,14 @@
                                   <th>Tên sản phẩm</th>
                                   <th>Số lượng</th>
                                   <th>Đơn giá</th>
+                                  <th>Giảm giá</th>
+                                  <th>Thành tiền</th>
                               </tr>
                           </thead>
                           <tbody>
                               @php
                                 $stt = 1;
+                                $total = 0;
                               @endphp
                               @foreach($order->order_products as $op)
                               <tr>
@@ -62,7 +65,23 @@
                                     {{$op->quantity}}
                                   </td>
                                   <td>
-                                    {{$op->price}}
+                                    @foreach($order->products as $p)
+                                      @if($p->id == $op->product_id)
+                                        {{$p->price}}
+                                        @php
+                                        $total += $p->price
+                                        @endphp
+                                      @endif
+                                    @endforeach
+                                  </td>
+                                  <td>
+                                    @foreach($order->products as $p)
+                                      @if($p->id == $op->product_id)
+                                        {{$p->discount}} %
+                                      @endif
+                                    @endforeach
+                                  </td>
+                                  <td>{{$op->price}}
                                   </td>
                                   @php
                                     $stt++
@@ -77,6 +96,22 @@
           <div class="row form-group">
               <div class="col col-md-10" style="text-align: right">
                   <label for="name" class="font-weight-bold form-control-label">Tổng tiền: </label>
+              </div>
+              <div class="col-12 col-md-2" style="text-align: right">
+                  {{$total}} VNĐ
+              </div>
+          </div>
+          <div class="row form-group">
+              <div class="col col-md-10" style="text-align: right">
+                  <label for="name" class="font-weight-bold form-control-label">Giảm giá: </label>
+              </div>
+              <div class="col-12 col-md-2" style="text-align: right">
+                  {{$total - $order->total}} VNĐ
+              </div>
+          </div>
+          <div class="row form-group">
+              <div class="col col-md-10" style="text-align: right">
+                  <label for="name" class="font-weight-bold form-control-label">Tổng thanh toán: </label>
               </div>
               <div class="col-12 col-md-2" style="text-align: right">
                   {{$order->total}} VNĐ

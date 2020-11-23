@@ -111,6 +111,32 @@
                 @enderror
             </div>
         </div>
+        <div class="row form-group">
+            <div class="col col-md-3">
+                <label for="discount" class=" form-control-label">Giảm giá</label>
+            </div>
+            <div class="col-12 col-md-9">
+                <select name="discount" id="discount" class="form-control @error('discount') is-invalid @enderror">
+                    <option value="0">Please select</option>
+                    <option value="0">0%</option>
+                    <option value="5">5%</option>
+                    <option value="10">10%</option>
+                    <option value="15">15%</option>
+                    <option value="20">20%</option>
+                    <option value="25">25%</option>
+                    <option value="30">30%</option>
+                    <option value="35">35%</option>
+                    <option value="40">40%</option>
+                    <option value="45">45%</option>
+                    <option value="50">50%</option>
+                </select>
+                @error('discount')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+        </div>
       </div>
       <div class="card-footer">
           <button type="submit" class="btn btn-primary btn-sm">
