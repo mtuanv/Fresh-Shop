@@ -6,7 +6,7 @@
 <div class="row">
     <div class="col-md-12">
         <div class="overview-wrap">
-            <h2 class="title-1">Thống kê</h2>
+            <h2 class="title-1">Thống kê tháng</h2>
         </div>
     </div>
 </div>
@@ -19,23 +19,8 @@
                         <i class="zmdi zmdi-account-o"></i>
                     </div>
                     <div class="text">
-                        <h2>10368</h2>
-                        <span>members online</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-6 col-lg-3">
-        <div class="overview-item overview-item--c2">
-            <div class="overview__inner">
-                <div class="overview-box clearfix">
-                    <div class="icon">
-                        <i class="zmdi zmdi-shopping-cart"></i>
-                    </div>
-                    <div class="text">
-                        <h2>388,688</h2>
-                        <span>items solid</span>
+                        <h2>{{$order}}</h2>
+                        <span>đơn hàng được đặt</span>
                     </div>
                 </div>
             </div>
@@ -49,8 +34,8 @@
                         <i class="zmdi zmdi-calendar-note"></i>
                     </div>
                     <div class="text">
-                        <h2>1,086</h2>
-                        <span>members online</span>
+                        <h2>{{$corder}}</h2>
+                        <span>đơn được xác nhận</span>
                     </div>
                 </div>
             </div>
@@ -64,13 +49,28 @@
                         <i class="zmdi zmdi-money"></i>
                     </div>
                     <div class="text">
-                        <h2>$1,060,386</h2>
-                        <span>total earnings</span>
+                        <h2>{{$money}} VNĐ</h2>
+                        <span>tổng thu nhập</span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+      <div class="col-sm-6 col-lg-3">
+          <div class="overview-item overview-item--c2">
+              <div class="overview__inner">
+                  <div class="overview-box clearfix">
+                      <div class="icon">
+                          <i class="zmdi zmdi-shopping-cart"></i>
+                      </div>
+                      <div class="text">
+                          <h2>{{$sumsale}}</h2>
+                          <span>sản phẩm được bán</span>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
 </div>
 <div class="row">
     <div class="col-lg-12">

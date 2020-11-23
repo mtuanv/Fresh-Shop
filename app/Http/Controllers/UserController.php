@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use App\Models\ProductOrder;
+use App\Models\Order;
 
 class UserController extends Controller
 {
@@ -16,11 +18,25 @@ class UserController extends Controller
      */
     public function index()
     {
+        $date = getdate();
+        $order = Order::whereMonth('created_at', $date['mon'])
+                      ->select('id')
+                      ->count('id');
+        $sumsale = ProductOrder::whereMonth('created_at', $date['mon'])
+                               ->select('quantity')
+                               ->sum('quantity');
+        $corder = Order::whereMonth('created_at', $date['mon'])
+                      ->where('status', '=', 1)
+                      ->select('id')
+                      ->count('id');
+        $money = Order::whereMonth('created_at', $date['mon'])
+                      ->select('total')
+                      ->sum('total');
         $eid = "";
         $ename = "";
         $eun = "";
         $lsUser = User::all();
-        return view('admin.dashboard')->with(['lsUser' => $lsUser, 'eid' => $eid, 'ename' => $ename, 'eun' => $eun]);
+        return view('admin.dashboard')->with(['lsUser' => $lsUser, 'eid' => $eid, 'ename' => $ename, 'eun' => $eun, 'money' => $money, 'corder' => $corder, 'sumsale' => $sumsale, 'order' => $order]);
     }
 
     /**
