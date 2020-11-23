@@ -29,6 +29,12 @@
               <div class="col-12 col-md-9">
                   {{$order->address}}
               </div>
+              <div class="col col-md-3">
+                  <label for="phone" class="font-weight-bold form-control-label">Địa chỉ: </label>
+              </div>
+              <div class="col-12 col-md-9">
+                  {{$order->note}}
+              </div>
           </div>
           <div class="row">
               <div class="col-lg-12">
