@@ -69,7 +69,7 @@
                                       @if($p->id == $op->product_id)
                                         {{$p->price}}
                                         @php
-                                        $total += $p->price
+                                        $total += $p->price * $op->quantity
                                         @endphp
                                       @endif
                                     @endforeach
