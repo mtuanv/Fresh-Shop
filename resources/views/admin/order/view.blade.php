@@ -30,7 +30,7 @@
                   {{$order->address}}
               </div>
               <div class="col col-md-3">
-                  <label for="phone" class="font-weight-bold form-control-label">Địa chỉ: </label>
+                  <label for="phone" class="font-weight-bold form-control-label">Ghi chú: </label>
               </div>
               <div class="col-12 col-md-9">
                   {{$order->note}}
