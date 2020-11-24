@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Http\Request;
+use function GuzzleHttp\Promise\all;
 
 class ShopController extends Controller
 {
@@ -59,21 +60,22 @@ class ShopController extends Controller
     {
         $product = Product::find($id);
         $lsProduct = Product::all();
+        $lsFb = Feedback::where('feedback.product_id', '=', $id)->orderBy('created_at', 'desc')->paginate(5);
         $lsTag = Tag::all();
-        return view('detail')->with(['product' => $product, 'lsProduct' => $lsProduct, 'lsTag' => $lsTag]);
+        return view('detail')->with(['product' => $product, 'lsProduct' => $lsProduct, 'lsTag' => $lsTag, 'lsFb' => $lsFb]);
     }
 
     public function feedback(Request $request)
     {
         $request->validate([
-            'name' => 'required|max:255|min:5',
-            'phone' => 'required',
+            'name' => 'required',
+            'contact' => 'required',
             'content' => 'required'
         ]);
         $feedback = new Feedback();
         $feedback->name = $request->name;
         $feedback->rating = $request->rating;
-        $feedback->phone = $request->phone;
+        $feedback->contact = $request->contact;
         $feedback->content = $request->content;
         $feedback->product_id = $request->product_id;
         $feedback->save();

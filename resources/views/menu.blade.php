@@ -143,9 +143,9 @@
                                  id="list-group-men" data-children=".sub-men">
 
                                 @foreach($lsTag as $tag)
-                                    <a href="#" class="list-group-item list-group-item-action"
+                                    <a href="" class="list-group-item list-group-item-action"
                                        data-filter=".{{$tag->id}}"> {{$tag->name}} <small
-                                            class="text-muted">hashcode</small></a>
+                                            class="text-muted">({{$tag->products()->count()}})</small></a>
                                 @endforeach
 
                             </div>
@@ -159,7 +159,7 @@
                                 <p>
                                     <input type="text" id="amount" readonly
                                            style="border:0; color:#fbb714; font-weight:bold;">
-                                    <button class="btn hvr-hover" type="submit">Khoảng giá</button>
+                                    <button class="btn hvr-hover" type="submit">Lọc</button>
                                 </p>
                                 {{--sửa slider trong file custom.js --}}
                             </div>

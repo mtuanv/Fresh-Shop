@@ -62,30 +62,42 @@
                 </div>
             </div>
             <div class="row">
+                {{--                show rate--}}
                 <div class="col-xl-7 col-lg-7 col-md-6">
                     <div class="card card-outline-secondary my-4">
                         <div class="card-header">
                             <h2>Đánh giá</h2>
                         </div>
                         <div class="card-body">
-                            <div class="media mb-3">
-                                <div class="mr-2">
-                                    <img class="rounded-circle border p-1"
-                                         src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2264%22%20height%3D%2264%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_160c142c97c%20text%20%7B%20fill%3Argba(255%2C255%2C255%2C.75)%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A10pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_160c142c97c%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20fill%3D%22%23777%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%2213.5546875%22%20y%3D%2236.5%22%3E64x64%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E"
-                                         alt="Generic placeholder image">
-                                </div>
-                                <div class="media-body">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam
-                                        inventore, similique necessitatibus neque non! Doloribus, modi sapiente
-                                        laboriosam
-                                        aperiam fugiat laborum. Sequi mollitia, necessitatibus quae sint natus.</p>
-                                    <small class="text-muted">Posted by Anonymous on 3/1/18</small>
-                                </div>
-                            </div>
-                            <hr>
+                            @if($lsFb->count()==0)
+                                <p>Chưa có đánh giá nào</p>
+                                <p style="font-size: 25px; color: #b0b435">Hãy Là Người Đầu Tiên Nhận Xét
+                                    “{{$product->name}}”</p>
+                                <p>Email (số điện thoại) của bạn sẽ không được hiển thị công khai.
+                                    Các trường bắt buộc đánh dấu *</p>
+                            @else
+                                @foreach($lsFb as $fb)
+                                    <div class="media mb-3">
+                                        <div class="mr-2">
+                                            <img class="rounded-circle border p-1"
+                                                 src="{{asset('shop/images/ava.jpg')}}"
+                                                 alt="Generic placeholder image" style="max-height: 64px">
+                                        </div>
+                                        <div class="media-body">
+                                            <p>{{$fb->content}}</p>
+                                            <small class="text-muted">Posted by {{$fb->name}}
+                                                on {{date('d/m/Y', strtotime($fb->created_at))}}</small>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                @endforeach
+                            @endif
                         </div>
+                        {{$lsFb->links("pagination::bootstrap-4")}}
                     </div>
                 </div>
+                {{--                end show rate--}}
+                {{--                send rate--}}
                 <div class="col-xl-5 col-lg-5 col-md-6">
                     <div class="card card-outline-secondary my-4">
                         <div class="card-header">
@@ -105,8 +117,9 @@
                                     </div>
                                     <div class="col-md-12" style="margin-bottom: 10px">
                                         <div class="form-group">
-                                            <input class="form-control" id="fbemail" name="fbemail" type="text"
-                                                   placeholder="Email*" required data-error="Vui lòng nhập email">
+                                            <input class="form-control" id="fbcontact" name="fbcontact" type="text"
+                                                   placeholder="Email hoặc số điện thoại*" required
+                                                   data-error="Vui lòng nhập email hoặc số điện thoại">
                                             <div class="help-block with-errors"></div>
                                         </div>
                                     </div>
@@ -114,15 +127,15 @@
                                         <div class="form-group">
                                             <p>Đánh giá của bạn</p>
                                             <div class="rating">
-                                                <input type="radio" name="rating" value="5" id="5"><label
+                                                <input type="radio" class="star" name="rating" value="5" id="5"><label
                                                     for="5">☆</label>
-                                                <input type="radio" name="rating" value="4" id="4"><label
+                                                <input type="radio" class="star" name="rating" value="4" id="4"><label
                                                     for="4">☆</label>
-                                                <input type="radio" name="rating" value="3" id="3"><label
+                                                <input type="radio" class="star" name="rating" value="3" id="3"><label
                                                     for="3">☆</label>
-                                                <input type="radio" name="rating" value="2" id="2"><label
+                                                <input type="radio" class="star" name="rating" value="2" id="2"><label
                                                     for="2">☆</label>
-                                                <input type="radio" name="rating" value="1" id="1"><label
+                                                <input type="radio" class="star" name="rating" value="1" id="1"><label
                                                     for="1">☆</label>
                                             </div>
                                         </div>
@@ -146,6 +159,7 @@
                         </div>
                     </div>
                 </div>
+                {{--                end send rate--}}
             </div>
 
 
@@ -155,28 +169,30 @@
                         <h1>Sản phẩm tương tự</h1>
                     </div>
                     <div class="featured-products-box owl-carousel owl-theme">
-                        @foreach($lsProduct as $product)
-                            <div class="item">
-                                <div class="products-single fix">
-                                    <div class="box-img-hover">
-                                        @foreach($product->images as $image)
-                                            <img src="{{asset($image->link)}}" class="img-fluid" alt="Image">
-                                        @endforeach
-                                        <div class="mask-icon">
-                                            <ul>
-                                                <li><a href="#" data-toggle="tooltip" data-placement="right"
-                                                       title="View"><i
-                                                            class="fas fa-eye"></i></a></li>
-                                            </ul>
-                                            <a class="cart" href="#">Thêm vào giỏ</a>
+                        @foreach($product->tags as $tag)
+                            @foreach($tag->products()->orderBy('created_at', 'desc')->take(5)->get() as $product)
+                                <div class="item">
+                                    <div class="products-single fix">
+                                        <div class="box-img-hover">
+                                            @foreach($product->images as $image)
+                                                <img src="{{asset($image->link)}}" class="img-fluid" alt="Image">
+                                            @endforeach
+                                            <div class="mask-icon">
+                                                <ul>
+                                                    <li><a href="#" data-toggle="tooltip" data-placement="right"
+                                                           title="View"><i
+                                                                class="fas fa-eye"></i></a></li>
+                                                </ul>
+                                                <a class="cart" href="#">Thêm vào giỏ</a>
+                                            </div>
+                                        </div>
+                                        <div class="why-text">
+                                            <h4>{{$product->name}}</h4>
+                                            <h5> {{$product->price}} VND</h5>
                                         </div>
                                     </div>
-                                    <div class="why-text">
-                                        <h4>{{$product->name}}</h4>
-                                        <h5> {{$product->price}} VND</h5>
-                                    </div>
                                 </div>
-                            </div>
+                            @endforeach
                         @endforeach
                     </div>
                 </div>
@@ -189,13 +205,12 @@
     {{--Send Email--}}
     <script type="text/javascript">
         $(document).ready(function () {
-
             $("#send_feedback").click(function () {
                 var data = {
                     "name": $("#fbname").val(),
                     "_token": "{{ csrf_token() }}",
-                    "rating": $("#fbrating").val(),
-                    "phone": $("#fbemail").val(),
+                    "rating": $('input[name="rating"]:checked').val(),
+                    "contact": $("#fbcontact").val(),
                     "content": $("#fbmessage").val(),
                     "product_id": $("#product_id").val()
                 };

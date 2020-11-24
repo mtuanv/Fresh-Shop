@@ -25,4 +25,9 @@ class Product extends Model
     {
         return $this->belongsToMany('App\Models\Order', 'product_orders');
     }
+
+    public function feedbacks()
+    {
+        return $this->hasMany('App\Models\Feedback');
+    }
 }
