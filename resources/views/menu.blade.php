@@ -152,9 +152,9 @@
                             </div>
                             <div class="list-group list-group-collapse list-group-sm list-group-tree"
                                  id="list-group-men" data-children=".sub-men">
-                                {{--                                <a href="" class="active list-group-item list-group-item-action"--}}
-                                {{--                                   data-filter="*">Tất cả<small--}}
-                                {{--                                        class="text-muted">({{$product->count()}})</small></a>--}}
+                                <a href="" class="active list-group-item list-group-item-action"
+                                   data-filter="*">Tất cả <small
+                                        class="text-muted"> ({{$product->count()}})</small></a>
                                 @foreach($lsTag as $tag)
                                     <a href="" class="list-group-item list-group-item-action"
                                        data-filter=".{{$tag->id}}"> {{$tag->name}} <small
@@ -186,7 +186,6 @@
         /* ..............................................
        Slider Range
        ................................................. */
-
         $(function () {
             $("#slider-range").slider({
                 range: true,
