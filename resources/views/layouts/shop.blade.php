@@ -46,8 +46,8 @@
                 <div class="our-link">
                     <ul>
                         <li><a href="#">Mở Cửa : 8 am - 10 pm</a></li>
-                        <li><a href="#"><i class="fas fa-headset"></i> Hotline : +84 962257510</a></li>
-                        <li><a href="#"><i class="fas fa-location-arrow "></i> Tòa Nhà Detech - Số 8 Tôn Thất Thuyết,
+                        <li><a href="tel:+84 962257510"><i class="fas fa-headset" ></i> Hotline : +84 962257510</a></li>
+                        <li><a href="https://goo.gl/maps/MWuTcUDBLL2CNo429"><i class="fas fa-location-arrow "></i> Tòa Nhà Detech - Số 8 Tôn Thất Thuyết,
                                 Dịch Vọng Hậu, Cầu Giấy, Hà Nội</a></li>
                     </ul>
                 </div>
