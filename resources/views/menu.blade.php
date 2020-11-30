@@ -168,12 +168,18 @@
                             </div>
                             <div class="price-box-slider">
                                 <div id="slider-range"></div>
-                                <p>
+                                <form action="{{route('slideFilter')}}" method="get" name="search">
+                                    @csrf
                                     <input type="text" id="amount" readonly
-                                           style="border:0; color:#fbb714; font-weight:bold;">
-                                    <button class="btn hvr-hover" type="submit">Lọc</button>
-                                </p>
-                                {{--sửa slider trong file custom.js --}}
+                                           style="border:0; color:#fbb714; font-weight:bold; margin-top: 25px; width: 70%">
+                                    <input type="hidden" id="minPrice" name="minPrice">
+                                    <input type="hidden" id="maxPrice" name="maxPrice">
+                                    <button style="float: right; color: white;margin-top: 15px" class="btn hvr-hover"
+                                            type="submit"
+                                            onclick="filter()">
+                                        Lọc
+                                    </button>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -183,6 +189,8 @@
     </div>
     <!-- End Menu Page -->
     <script type="text/javascript">
+
+
         /* ..............................................
        Slider Range
        ................................................. */
@@ -190,8 +198,8 @@
             $("#slider-range").slider({
                 range: true,
                 min: 0,
-                max: 4000,
-                values: [1000, 3000],
+                max: 300000,
+                values: [50000, 250000],
                 slide: function (event, ui) {
                     $("#amount").val(ui.values[0] + " VND" + " - " + ui.values[1] + " VND");
                 }
@@ -199,6 +207,10 @@
             $("#amount").val($("#slider-range").slider("values", 0) + " VND" + " - " + $("#slider-range").slider("values", 1) + " VND");
         });
 
+        function filter() {
+            $("#minPrice").val($("#slider-range").slider("values", 0));
+            $("#maxPrice").val($("#slider-range").slider("values", 1));
+        }
     </script>
 @endsection
 

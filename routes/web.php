@@ -18,11 +18,13 @@ Auth::routes();
 Route::get('/', [\App\Http\Controllers\ShopController::class, 'index'])->name('index');
 Route::get('/aboutus', [\App\Http\Controllers\ShopController::class, 'about'])->name('aboutus');
 Route::get('/blog', [\App\Http\Controllers\ShopController::class, 'blog'])->name('blog');
+Route::get('/blogDetail/{id}', [\App\Http\Controllers\ShopController::class, 'blogDetail'])->name('blogDetail');
 Route::get('/contactus', [\App\Http\Controllers\ShopController::class, 'contact'])->name('contactus');
 Route::get('/cart', [\App\Http\Controllers\ShopController::class, 'cart'])->name('cart');
 Route::get('/menu', [\App\Http\Controllers\ShopController::class, 'menu'])->name('menu');
 Route::get('/detail/{id}', [\App\Http\Controllers\ShopController::class, 'detail'])->name('detail');
 Route::get('/searchHeader', [\App\Http\Controllers\ShopController::class, 'searchHeader'])->name('searchHeader');
+Route::get('/slideFilter', [\App\Http\Controllers\ShopController::class, 'slideFilter'])->name('slideFilter');
 
 
 //back-end

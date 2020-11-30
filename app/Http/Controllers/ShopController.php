@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Feedback;
 use App\Models\Product;
+use App\Models\Promotion;
 use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -28,7 +29,15 @@ class ShopController extends Controller
 
     public function blog()
     {
-        return view('blog');
+        $lsBlog = Promotion::all();
+        return view('blog')->with(['lsBlog' => $lsBlog]);
+    }
+
+    public function blogDetail($id)
+    {
+        $blog = Promotion::find($id);
+        $lsTag = Tag::all();
+        return view('blogDetail')->with(['blog' => $blog, 'lsTag' => $lsTag]);
     }
 
     public function contact()
@@ -73,6 +82,18 @@ class ShopController extends Controller
             $lsTag = Tag::all();
         }
         return view('menu')->with(['lsProduct' => $lsProduct, 'lsPr' => $lsPr, 'lsTag' => $lsTag, 'name' => $name, 'lsProductLH' => $lsProductLH, 'lsProductHL' => $lsProductHL, 'lsPrLH' => $lsPrLH, 'lsPrHL' => $lsPrHL]);
+    }
+
+    public function slideFilter(Request $request)
+    {
+        $name = $request->name;
+        $min = $request->minPrice;
+        $max = $request->maxPrice;
+        $lsProduct = Product::where('products.price', '>', $min, 'and', 'products.price', '<', $max)->paginate(9);
+        $lsPr = Product::where('products.price', '>', $min, 'and', 'products.price', '<', $max)->paginate(3);
+        $lsTag = Tag::all();
+
+        return view('menu')->with(['lsProduct' => $lsProduct, 'lsPr' => $lsPr, 'name' => $name, 'lsTag' => $lsTag]);
     }
 
     public function detail($id)
