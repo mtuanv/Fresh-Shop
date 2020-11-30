@@ -23,8 +23,30 @@
           <form action="" method="get">
             @csrf
             <div class="form-group">
-              <label for="title"><b>Tên Khách Hàng</b></label>
-              <input type="text" class="form-control" name="name">
+              <label for="madh"><b>Mã đơn</b></label>
+              <input type="text" class="form-control" name="ma" value="DH0000{{$ma}}">
+            </div>
+            <div class="form-group">
+              <label for="title"><b>Tên khách hàng</b></label>
+              <input type="text" class="form-control" name="name" value="{{$name}}">
+            </div>
+            <div class="form-group">
+              <label for="from"><b>Từ ngày</b></label>
+              <input type="text" class="form-control" name="from" id="from" value="{{$from}}">
+            </div>
+            <div class="form-group">
+              <label for="to"><b>Đến ngày</b></label>
+              <input type="text" class="form-control" name="to" id="to" value="{{$to}}">
+            </div>
+            <div class="form-group">
+              <label for="status"><b>Trạng thái</b></label>
+              <select name="status" class="form-control">
+                <option value="">Tất cả</option>
+                <option value="0" {{$status == '0' ? 'selected' : ''}}>Đang chờ</option>
+                <option value="1" {{$status == '1' ? 'selected' : ''}}>Đã xác nhận</option>
+                <option value="2" {{$status == '2' ? 'selected' : ''}}>Đã huỷ</option>
+                <option value="10" {{$status == '10' ? 'selected' : ''}}>Hoàn thành</option>
+              </select>
             </div>
             <button type="submit" class="btn btn-info" style="color: #fff">Tìm</button>
           </form>
@@ -38,64 +60,92 @@
             <table class="table table-borderless table-striped table-earning">
                 <thead>
                     <tr>
-                        <th>ID</th>
+                        <th>Mã ĐH</th>
                         <th>Tên khách hàng</th>
+                        <th>Thời gian</th>
                         <th>Trạng thái</th>
+
                         <th>Quản lý</th>
-                        <th>Thành tiền</th>
+                        <th>Chi tiết</th>
                     </tr>
                 </thead>
                 <tbody>
                   @foreach($lsOrder as $order)
+
                   <tr>
-                      <td>{{$order->id}}</td>
+
+                      <td>DH0000{{$order->id}}</td>
                       <td>{{$order->name}}</td>
+                      <td>{{$order->created_at}}</td>
                       <td>
-                        @if($order->status == 0)
-                        Chưa xác nhận
-                        @elseif($order->status == 1)
+                        @if($order->status == 1)
                         Đã xác nhận
-                        @else
+                        @elseif($order->status == 10)
+                        Hoàn thành
+                        @elseif($order->status == 2)
                         Đã huỷ
+                        @else
+                        Đang chờ
                         @endif
                       </td>
+
                       <td class="text-right">
-                          @if($order->status == 0)
-                          <form action="{{route('changesttorder', $order->id)}}" method="post" style="float:left; margin-right: 5px">
-                            @csrf
-                            <input type="hidden" name="status" value="1">
-                            <button type="submit" class="btn btn-success">Xác nhận</button>
-                          </form>
-                          <form action="{{route('changesttorder', $order->id)}}" method="post"  style="float:left; margin-right: 5px">
-                            @csrf
-                            <input type="hidden" name="status" value="2">
-                            <button type="submit" class="btn btn-danger">Huỷ đơn</button>
-                          </form>
-                          @elseif($order->status == 1)
-                          <form action="{{route('changesttorder', $order->id)}}" method="post" style="float:left; margin-right: 5px">
-                            @csrf
-                            <input type="hidden" name="status" value="2">
-                            <button type="submit" class="btn btn-danger">Huỷ đơn</button>
-                          </form>
+                        @if($order->status == 1)
+                        <form action="{{route('changesttorder', $order->id)}}" method="post"  style="float:left; margin-right: 5px">
+                          @csrf
+                          <input type="hidden" name="status" value="2">
+                          <button type="submit" class="btn btn-danger" title="Huỷ đơn"><i class="fas fa-times-circle"></i></button>
+                        </form>
+                        <form action="{{route('changesttorder', $order->id)}}" method="post">
+                          @csrf
+                          <input type="hidden" name="status" value="10">
+                          <button type="submit" class="btn btn-success" title="Hoàn thành đơn hàng"><i class="fas fa-clipboard-check"></i></button>
+                        </form>
+                        @elseif($order->status == 2)
+                        <form action="{{route('changesttorder', $order->id)}}" method="post" style="float:left; margin-right: 5px">
+                          @csrf
+                          <input type="hidden" name="status" value="1">
+                          <button type="submit" class="btn btn-primary" title="Xác nhận"><i class="fas fa-check-circle"></i></button>
+                        </form>
+                        <form action="{{route('changesttorder', $order->id)}}" method="post">
+                          @csrf
+                          <input type="hidden" name="status" value="10">
+                          <button type="submit" class="btn btn-success" title="Hoàn thành đơn hàng"><i class="fas fa-clipboard-check"></i></button>
+                        </form>
+                          @elseif($order->status == 10)
                           @else
                           <form action="{{route('changesttorder', $order->id)}}" method="post" style="float:left; margin-right: 5px">
                             @csrf
                             <input type="hidden" name="status" value="1">
-                            <button type="submit" class="btn btn-success">Xác nhận</button>
+                            <button type="submit" class="btn btn-primary" title="Xác nhận"><i class="fas fa-check-circle"></i></button>
+                          </form>
+                          <form action="{{route('changesttorder', $order->id)}}" method="post"  style="float:left; margin-right: 5px">
+                            @csrf
+                            <input type="hidden" name="status" value="2">
+                            <button type="submit" class="btn btn-danger" title="Huỷ đơn"><i class="fas fa-times-circle"></i></button>
+                          </form>
+                          <form action="{{route('changesttorder', $order->id)}}" method="post"   style="float:left; margin-right: 5px">
+                            @csrf
+                            <input type="hidden" name="status" value="10">
+                            <button type="submit" class="btn btn-success" title="Hoàn thành đơn hàng"><i class="fas fa-clipboard-check"></i></button>
                           </form>
                           @endif
-                          <a href="{{route('orders.show', $order->id)}}" class="btn btn-primary" style="float:left; margin-right: 5px">Chi tiết</a>
-                          <span style="clear:both"></span>
+                          <span style="clear:left"></span>
                       </td>
-                      <td>{{$order->total}}</td>
+                      <td><a href="{{route('orders.show', $order->id)}}" class="btn btn-info">Xem</a></td>
                   </tr>
+
                   @endforeach
                   <tr>
-                    <td colspan="5">{{ $lsOrder->links("pagination::bootstrap-4") }}</td>
+                    <td colspan="6">{{ $lsOrder->appends(['ma' => $ma, 'name' => $name, 'from' => $from, 'to' => $to, 'status' => $status])->links("pagination::bootstrap-4") }}</td>
                   </tr>
                 </tbody>
             </table>
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    $('#from').datetimepicker();
+    $('#to').datetimepicker();
+</script>
 @endsection

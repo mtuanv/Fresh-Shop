@@ -35,7 +35,7 @@
                     </div>
                     <div class="text">
                         <h2>{{$corder}}</h2>
-                        <span>đơn được xác nhận</span>
+                        <span>đơn hàng thành công</span>
                     </div>
                 </div>
             </div>
@@ -50,7 +50,7 @@
                     </div>
                     <div class="text">
                         <h2>{{$money}} VNĐ</h2>
-                        <span>tổng thu nhập</span>
+                        <span>tổng doanh số tháng</span>
                     </div>
                 </div>
             </div>

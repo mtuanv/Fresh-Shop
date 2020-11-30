@@ -22,7 +22,9 @@ class UserController extends Controller
         $order = Order::whereMonth('created_at', $date['mon'])
                       ->select('id')
                       ->count('id');
-        $sumsale = ProductOrder::whereMonth('created_at', $date['mon'])
+        $sumsale = ProductOrder::whereMonth('orders.created_at', $date['mon'])
+                               ->join('orders', 'orders.id', '=', 'product_orders.order_id')
+                               ->where('status', '=', 1)
                                ->select('quantity')
                                ->sum('quantity');
         $corder = Order::whereMonth('created_at', $date['mon'])
@@ -30,6 +32,7 @@ class UserController extends Controller
                       ->select('id')
                       ->count('id');
         $money = Order::whereMonth('created_at', $date['mon'])
+                      ->where('status', '=', 1)
                       ->select('total')
                       ->sum('total');
         $eid = "";
