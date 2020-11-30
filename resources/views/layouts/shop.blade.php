@@ -46,8 +46,9 @@
                 <div class="our-link">
                     <ul>
                         <li><a href="#">Mở Cửa : 8 am - 10 pm</a></li>
-                        <li><a href="tel:+84 962257510"><i class="fas fa-headset" ></i> Hotline : +84 962257510</a></li>
-                        <li><a href="https://goo.gl/maps/MWuTcUDBLL2CNo429"><i class="fas fa-location-arrow "></i> Tòa Nhà Detech - Số 8 Tôn Thất Thuyết,
+                        <li><a href="tel:+84 962257510"><i class="fas fa-headset"></i> Hotline : +84 962257510</a></li>
+                        <li><a href="https://goo.gl/maps/MWuTcUDBLL2CNo429"><i class="fas fa-location-arrow "></i> Tòa
+                                Nhà Detech - Số 8 Tôn Thất Thuyết,
                                 Dịch Vọng Hậu, Cầu Giấy, Hà Nội</a></li>
                     </ul>
                 </div>
@@ -158,7 +159,7 @@
                         <p>1x - <span class="price">$40.00</span></p>
                     </li>
                     <li class="total">
-                        <a href="cart" class="btn btn-default hvr-hover btn-cart">VIEW CART</a>
+                        <a href="cart" class="btn btn-default hvr-hover btn-cart">GIỎ HÀNG</a>
                         <span class="float-right"><strong>Total</strong>: $180.00</span>
                     </li>
                 </ul>
@@ -176,7 +177,7 @@
         <div class="input-group ">
             <form action="{{route('searchHeader')}}" method="get" name="search" class="input-group">
                 @csrf
-                <input type="text" class="form-control" placeholder="Search here..." name="search">
+                <input type="text" class="form-control" placeholder="Tìm kiếm..." name="search">
                 <button type="submit"
                         style="background: black; color: white; border: none; cursor: pointer; margin-right: 30px">
                     <i class="fa fa-search"></i>
