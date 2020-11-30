@@ -84,6 +84,13 @@
                                 </p>
                             </li>
                         </ul>
+
+                    </div>
+                    <div id="map" style="width:100%;height:100%;">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1862.048715515155!2d105.78073315817622!3d21.028787200075428!2m3
+                        !1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x313454b32ecb92db%3A0x3964e6238a3bd088!2zOCBUw7RuIFRo4bqldCBUaHV54bq_dCwgTeG7uSDE
+                        kMOsbmgsIEPhuqd1IEdp4bqleSwgSMOgIE7hu5lpLCBWaeG7h3QgTmFt!5e0!3m2!1svi!2s!4v1606718651317!5m2!1svi!2s"
+                                width="100%" height="50%" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
                     </div>
                 </div>
             </div>
