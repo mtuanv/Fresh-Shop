@@ -125,30 +125,37 @@
           </div>
       </div>
       <div class="card-footer">
-        @if($order->status == 0)
-        <form action="{{route('changesttorder', $order->id)}}" method="post"  style="float:right; margin-left: 5px">
+        <a href="{{route('orders.show', $order->id)}}" class="btn btn-info" style="float:right;">Chi tiết</a>
+        @if($order->status == 1)
+        <form action="{{route('changesttorder', $order->id)}}" method="post"  style="float:right; margin-right: 5px">
+          @csrf
+          <input type="hidden" name="status" value="10">
+          <button type="submit" class="btn btn-success">Hoàn thành</button>
+        </form>
+        <form action="{{route('changesttorder', $order->id)}}" method="post" style="float:right; margin-right: 5px">
           @csrf
           <input type="hidden" name="status" value="2">
           <button type="submit" class="btn btn-danger">Huỷ đơn</button>
         </form>
-        <form action="{{route('changesttorder', $order->id)}}" method="post" style="float:right; margin-left: 5px">
-          @csrf
-          <input type="hidden" name="status" value="1">
-          <button type="submit" class="btn btn-success">Xác nhận</button>
-        </form>
-        @elseif($order->status == 1)
-        <form action="{{route('changesttorder', $order->id)}}" method="post" style="float:right; margin-left: 5px">
-          @csrf
-          <input type="hidden" name="status" value="2">
-          <button type="submit" class="btn btn-danger">Huỷ đơn</button>
-        </form>
-        @else
-        <form action="{{route('changesttorder', $order->id)}}" method="post" style="float:right; margin-left: 5px">
-          @csrf
-          <input type="hidden" name="status" value="1">
-          <button type="submit" class="btn btn-success">Xác nhận</button>
-        </form>
-        @endif
+          @else
+          <form action="{{route('changesttorder', $order->id)}}" method="post"  style="float:right; margin-right: 5px">
+            @csrf
+            <input type="hidden" name="status" value="10">
+            <button type="submit" class="btn btn-success">Hoàn thành</button>
+          </form>
+          <form action="{{route('changesttorder', $order->id)}}" method="post"  style="float:right; margin-right: 5px">
+            @csrf
+            <input type="hidden" name="status" value="2">
+            <button type="submit" class="btn btn-danger">Huỷ đơn</button>
+          </form>
+          <form action="{{route('changesttorder', $order->id)}}" method="post" style="float:right; margin-right: 5px">
+            @csrf
+            <input type="hidden" name="status" value="1">
+            <button type="submit" class="btn btn-primary">Xác nhận</button>
+          </form>
+
+
+          @endif
           <span style="clear:both"></span>
       </div>
       </form>
