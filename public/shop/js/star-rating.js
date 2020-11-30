@@ -267,14 +267,14 @@
             $el.val(v);
             return $el.removeClass('rating-loading');
         },
-        _initCaptionTitle: function() {
+        _initCaptionTitle: function () {
             var self = this, caption;
             if (self.showCaptionAsTitle) {
                 caption = self.fetchCaption(self.$element.val());
                 self.$rating.attr('title', $(caption).text());
             }
         },
-        _trigChange: function(params) {
+        _trigChange: function (params) {
             var self = this;
             self._initCaptionTitle();
             self.$element.trigger('change').trigger('rating:change', params);
@@ -472,7 +472,7 @@
             }
             cssVal = typeof vCss === "function" ? vCss(val, width) : vCss[val];
             capVal = typeof vCap === "function" ? vCap(val, width) : vCap[val];
-          
+
             cap = $h.isEmpty(capVal) ? self.defaultCaption.replace(/\{rating}/g, val) : capVal;
             css = $h.isEmpty(cssVal) ? self.clearCaptionClass : cssVal;
             caption = (val === self.clearValue) ? self.clearCaption : cap;

@@ -25,28 +25,23 @@
                         <div class="product-item-filter row">
                             <div class="col-12 col-sm-8 text-center text-sm-left">
                                 <div class="toolbar-sorter-right">
-                                    <span>Sắp xếp </span>
+                                    <span>Sắp xếp</span>
                                     <select id="sort" class="selectpicker show-tick form-control" name="sort">
-                                        <option value="-">Mặc định</option>
-                                        <option value="1"> Giá cao →
-                                            Giá
-                                            thấp
-                                        </option>
-                                        <option value="2"> Giá thấp → Giá
-                                            cao
-                                        </option>
+                                        <option data-display="Select">Mặc định</option>
+                                        <option value="1">Giá thấp → Giá cao</option>
+                                        <option value="2">Giá cao → Giá thấp</option>
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-12 col-sm-4 text-center text-sm-right">
+                            <div class="col-12 col-sm-2 text-center text-sm-right">
                                 <ul class="nav nav-tabs ml-auto">
                                     <li>
-                                        <a class="nav-link active" href="#grid-view" data-toggle="tab"> <i
-                                                class="fa fa-th"></i> </a>
+                                        <a class="nav-link active" href="#grid-view" data-toggle="tab"><i
+                                                class="fa fa-th"></i></a>
                                     </li>
                                     <li>
-                                        <a class="nav-link" href="#list-view" data-toggle="tab"> <i
-                                                class="fa fa-list-ul"></i> </a>
+                                        <a class="nav-link" href="#list-view" data-toggle="tab"><i
+                                                class="fa fa-list-ul"></i></a>
                                     </li>
                                 </ul>
                             </div>
@@ -56,39 +51,8 @@
                             <div class="tab-content">
                                 <div role="tabpanel" class="tab-pane fade show active" id="grid-view">
                                     <div class="row">
-                                        @foreach($lsProduct as $product)
-                                            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
-                                                <div class="products-single fix">
-                                                    <div class="box-img-hover">
-                                                        @foreach($product->images as $image)
-                                                            <img src="{{asset($image->link)}}" class="img-fluid"
-                                                                 alt="Image">
-                                                        @endforeach
-                                                        <div class="mask-icon">
-                                                            <ul>
-                                                                <li><a href="detail/{{$product->id}}"
-                                                                       data-toggle="tooltip"
-                                                                       data-placement="right"
-                                                                       title="View"><i class="fas fa-eye"></i></a></li>
-                                                            </ul>
-                                                            <a class="cart" href="#">Thêm vào giỏ</a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="why-text">
-                                                        <h4><a href="detail/{{$product->id}}"
-                                                               style="color: black">{{$product->name}}</a></h4>
-                                                        <h5> {{$product->price}} VND</h5>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        @endforeach
-                                        {{$lsProduct->links("pagination::bootstrap-4")}}
-                                    </div>
-                                </div>
-                                <div role="tabpanel" class="tab-pane fade" id="list-view">
-                                    @foreach($lsPr as $product)
-                                        <div class="list-view-box">
-                                            <div class="row">
+                                        @if($lsProduct!=null)
+                                            @foreach($lsProduct as $product)
                                                 <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
                                                     <div class="products-single fix">
                                                         <div class="box-img-hover">
@@ -98,29 +62,74 @@
                                                             @endforeach
                                                             <div class="mask-icon">
                                                                 <ul>
-                                                                    <li><a href="detail/{{$product->id}}"
+                                                                    <li><a href="{{route('detail', $product->id)}}"
                                                                            data-toggle="tooltip"
-                                                                           data-placement="right" title="View"><i
-                                                                                class="fas fa-eye"></i></a></li>
+                                                                           data-placement="right"
+                                                                           title="Xem"><i class="fas fa-eye"></i></a>
+                                                                    </li>
                                                                 </ul>
+                                                                <a class="cart" href="#">Thêm vào giỏ</a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="why-text">
+                                                            <h4><a href="{{route('detail', $product->id)}}"
+                                                                   style="color: black">{{$product->name}}</a></h4>
+                                                            <h5> {{$product->price}} VND</h5>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                            <div
+                                                style="margin: auto">{{$lsProduct->links("pagination::bootstrap-4")}}</div>
+                                        @elseif($lsProduct==null)
+                                            <p>Không có sản phẩm nào trong danh mục này. Vui lòng nhập từ khóa khác.
+                                        @endif
+                                    </div>
+                                </div>
+                                <div role="tabpanel" class="tab-pane fade" id="list-view">
+                                    <div class="row">
+                                        @if($lsProduct!=null)
+                                            @foreach($lsPr as $product)
+                                                <div class="list-view-box">
+                                                    <div class="row" style="margin-left: 0; margin-right: 0">
+                                                        <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
+                                                            <div class="products-single fix">
+                                                                <div class="box-img-hover">
+                                                                    @foreach($product->images as $image)
+                                                                        <img src="{{asset($image->link)}}"
+                                                                             class="img-fluid"
+                                                                             alt="Image">
+                                                                    @endforeach
+                                                                    <div class="mask-icon">
+                                                                        <ul>
+                                                                            <li>
+                                                                                <a href="{{route('detail', $product->id)}}"
+                                                                                   data-toggle="tooltip"
+                                                                                   data-placement="right" title="Xem"><i
+                                                                                        class="fas fa-eye"></i></a></li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6 col-md-6 col-lg-8 col-xl-8">
+                                                            <div class="why-text full-width">
+                                                                <h4><a href="{{route('detail', $product->id)}}"
+                                                                       style="color: black">{{$product->name}}</a>
+                                                                </h4>
+                                                                <h5> {{$product->price}} VND</h5>
+                                                                <p>{!! $product->description !!}</p>
+                                                                <a class="btn hvr-hover" href="#">Thêm vào giỏ</a>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-6 col-md-6 col-lg-8 col-xl-8">
-                                                    <div class="why-text full-width">
-                                                        <h4><a href="detail/{{$product->id}}"
-                                                               style="color: black">{{$product->name}}</a>
-                                                        </h4>
-                                                        <h5> {{$product->price}} VND</h5>
-                                                        <p>{!! $product->description !!}</p>
-                                                        <a class="btn hvr-hover" href="#">Thêm vào giỏ</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                    {{$lsPr->links("pagination::bootstrap-4")}}
+                                            @endforeach
+                                            <div style="margin: auto">{{$lsPr->links("pagination::bootstrap-4")}}</div>
+                                        @elseif($lsProduct==null)
+                                            <p>Không có sản phẩm nào trong danh mục này. Vui lòng nhập từ khóa khác.
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -131,7 +140,9 @@
                         <div class="search-product">
                             <form action="{{route('menu')}}" method="get" name="search">
                                 @csrf
-                                <input class="form-control" placeholder="Search here..." type="text" name="name">
+                                <input class="form-control" placeholder="Tìm kiếm..." type="text"
+                                       name="name"
+                                       value="{{$name}}">
                                 <button type="submit"><i class="fa fa-search"></i></button>
                             </form>
                         </div>
@@ -141,13 +152,14 @@
                             </div>
                             <div class="list-group list-group-collapse list-group-sm list-group-tree"
                                  id="list-group-men" data-children=".sub-men">
-
+                                <a href="" class="active list-group-item list-group-item-action"
+                                   data-filter="*">Tất cả <small
+                                        class="text-muted"> ({{$product->count()}})</small></a>
                                 @foreach($lsTag as $tag)
                                     <a href="" class="list-group-item list-group-item-action"
                                        data-filter=".{{$tag->id}}"> {{$tag->name}} <small
-                                            class="text-muted">({{$tag->products()->count()}})</small></a>
+                                            class="text-muted"> ({{$tag->products()->count()}})</small></a>
                                 @endforeach
-
                             </div>
                         </div>
                         <div class="filter-price-left">
@@ -171,9 +183,22 @@
     </div>
     <!-- End Menu Page -->
     <script type="text/javascript">
-        $(document).ready(function () {
-
+        /* ..............................................
+       Slider Range
+       ................................................. */
+        $(function () {
+            $("#slider-range").slider({
+                range: true,
+                min: 0,
+                max: 4000,
+                values: [1000, 3000],
+                slide: function (event, ui) {
+                    $("#amount").val(ui.values[0] + " VND" + " - " + ui.values[1] + " VND");
+                }
+            });
+            $("#amount").val($("#slider-range").slider("values", 0) + " VND" + " - " + $("#slider-range").slider("values", 1) + " VND");
         });
+
     </script>
 @endsection
 

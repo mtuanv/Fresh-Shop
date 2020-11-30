@@ -44,16 +44,35 @@ class ShopController extends Controller
     public function menu(Request $request)
     {
         $name = $request->name;
+        $count = 0;
         if ($name != null) {
-            $lsProduct = Product::where('products.name', 'like', '%' . $name . '%')->paginate(9);
-            $lsPr = Product::where('products.name', 'like', '%' . $name . '%')->paginate(3);
-            $lsTag = Tag::all();
+            $lsProduct = Product::where('products.name', 'like', '%' . $name . '%');
+            $count = $lsProduct->count();
+            if ($count == 0) {
+                $lsProduct = null;
+            } else {
+                $lsProduct = Product::where('products.name', 'like', '%' . $name . '%')->paginate(9);
+                $lsProductLH = Product::where('products.name', 'like', '%' . $name . '%')->orderBy('price')->paginate(9);
+                $lsProductHL = Product::where('products.name', 'like', '%' . $name . '%')->orderBy('price', 'DESC')->paginate(9);
+
+                $lsPr = Product::where('products.name', 'like', '%' . $name . '%')->paginate(3);
+                $lsPrLH = Product::where('products.name', 'like', '%' . $name . '%')->orderBy('price')->paginate(3);
+                $lsPrHL = Product::where('products.name', 'like', '%' . $name . '%')->orderBy('price', 'DESC')->paginate(3);
+
+                $lsTag = Tag::all();
+            }
         } else {
             $lsProduct = Product::paginate(9);
+            $lsProductLH = Product::orderBy('price')->paginate(9);
+            $lsProductHL = Product::orderBy('price', 'DESC')->paginate(9);
+
             $lsPr = Product::paginate(3);
+            $lsPrLH = Product::orderBy('price')->paginate(3);
+            $lsPrHL = Product::orderBy('price', 'DESC')->paginate(3);
+
             $lsTag = Tag::all();
         }
-        return view('menu')->with(['lsProduct' => $lsProduct, 'lsPr' => $lsPr, 'lsTag' => $lsTag, 'name' => $name]);
+        return view('menu')->with(['lsProduct' => $lsProduct, 'lsPr' => $lsPr, 'lsTag' => $lsTag, 'name' => $name, 'lsProductLH' => $lsProductLH, 'lsProductHL' => $lsProductHL, 'lsPrLH' => $lsPrLH, 'lsPrHL' => $lsPrHL]);
     }
 
     public function detail($id)

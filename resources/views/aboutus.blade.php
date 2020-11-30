@@ -63,51 +63,36 @@
                     </div>
                 </div>
             </div>
-            <div class="row my-4 text-center">
+
+            <div class="row my-4">
                 <div class="col-12">
                     <h2 class="noo-sh-title">Meet Our Team</h2>
                 </div>
-
                 @foreach($lsUser as $user)
-                    @if($user->role_name == 'ADMIN')
-                        <div class="col-sm-6 col-lg-2">
-                            <div class="hover-team">
-                                <div class="our-team"><img src="{{$user->avatar}}"/>
-                                    <div class="team-content">
-                                        <h3 class="title">{{$user->name}}</h3> <span
-                                            class="post">Quản lý</span></div>
-                                    <ul class="social">
-                                        <li>
-                                            <a href="#" class="fab fa-facebook"></a>
-                                        </li>
-                                    </ul>
-                                    <div class="icon"><i class="fa fa-plus" aria-hidden="true"></i></div>
+                    <div class="col-sm-6 col-lg-2">
+                        <div class="hover-team">
+                            <div class="our-team"><img src="{{$user->avatar}}" class="img-fluid" alt="Image">
+                                <div class="team-content">
+                                    <h3 class="title">{{$user->name}}</h3>
+                                    @if($user->role_name == 'ADMIN')
+                                        <span class="post">Quản lý</span>
+                                    @else
+                                        <span class="post">Nhân viên</span>
+                                    @endif
                                 </div>
-                                <hr class="my-0">
+                                <ul class="social">
+                                    <li>
+                                        <a href="#" class="fab fa-facebook"></a>
+                                    </li>
+                                </ul>
+                                <div class="icon"><i class="fa fa-plus" aria-hidden="true"></i></div>
                             </div>
+                            <hr class="my-0">
                         </div>
-                    @endif
-                    @if($user->role_name == 'EMPLOYEE')
-                        <div class="col-sm-6 col-lg-2">
-                            <div class="hover-team">
-                                <div class="our-team"><img src="{{$user->avatar}}"/>
-                                    <div class="team-content">
-                                        <h3 class="title">{{$user->name}}</h3> <span
-                                            class="post">Nhân viên</span></div>
-                                    <ul class="social">
-                                        <li>
-                                            <a href="#" class="fab fa-facebook"></a>
-                                        </li>
-                                    </ul>
-                                    <div class="icon"><i class="fa fa-plus" aria-hidden="true"></i></div>
-                                </div>
-                                <hr class="my-0">
-                            </div>
-                        </div>
-                    @endif
+                    </div>
                 @endforeach
-
             </div>
+
         </div>
     </div>
     <!-- End About Page -->

@@ -7,7 +7,7 @@
                 <div class="col-lg-12">
                     <h2>{{$product->name}}</h2>
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="menu">Shop</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('menu')}}">Shop</a></li>
                         <li class="breadcrumb-item active">Chi tiết</li>
                     </ul>
                 </div>
@@ -70,11 +70,11 @@
                         </div>
                         <div class="card-body">
                             @if($lsFb->count()==0)
-                                <p>Chưa có đánh giá nào</p>
-                                <p style="font-size: 25px; color: #b0b435">Hãy Là Người Đầu Tiên Nhận Xét
+                                <p style="font-size: 20px">Chưa có đánh giá nào</p>
+                                <p style="font-size: 20px; color: #b0b435">Hãy Là Người Đầu Tiên Nhận Xét
                                     “{{$product->name}}”</p>
                                 <p>Email (số điện thoại) của bạn sẽ không được hiển thị công khai.
-                                    Các trường bắt buộc đánh dấu *</p>
+                                    Các trường bắt buộc được đánh dấu *</p>
                             @else
                                 @foreach($lsFb as $fb)
                                     <div class="media mb-3">
@@ -93,7 +93,9 @@
                                 @endforeach
                             @endif
                         </div>
-                        {{$lsFb->links("pagination::bootstrap-4")}}
+                        <div
+                            style="margin: auto; margin-top: -1.25rem; margin-bottom: 1.25rem">{{$lsFb->links("pagination::bootstrap-4")}}</div>
+
                     </div>
                 </div>
                 {{--                end show rate--}}
@@ -179,7 +181,8 @@
                                             @endforeach
                                             <div class="mask-icon">
                                                 <ul>
-                                                    <li><a href="#" data-toggle="tooltip" data-placement="right"
+                                                    <li><a href="{{route('detail', $product->id)}}"
+                                                           data-toggle="tooltip" data-placement="right"
                                                            title="View"><i
                                                                 class="fas fa-eye"></i></a></li>
                                                 </ul>

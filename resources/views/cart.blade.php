@@ -25,12 +25,12 @@
                         <table class="table">
                             <thead>
                             <tr>
-                                <th>Images</th>
-                                <th>Product Name</th>
-                                <th>Price</th>
-                                <th>Quantity</th>
-                                <th>Total</th>
-                                <th>Remove</th>
+                                <th>Ảnh</th>
+                                <th>Tên sản phẩm</th>
+                                <th>Giá</th>
+                                <th>Số lượng</th>
+                                <th>Tổng tiền</th>
+                                <th>Xóa</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -119,17 +119,17 @@
                 <div class="col-lg-6 col-sm-6">
                     <div class="coupon-box">
                         <div class="input-group input-group-sm">
-                            <input class="form-control" placeholder="Enter your coupon code" aria-label="Coupon code"
+                            <input class="form-control" placeholder="Nhập mã giảm giá" aria-label="Coupon code"
                                    type="text">
                             <div class="input-group-append">
-                                <button class="btn btn-theme" type="button">Apply Coupon</button>
+                                <button class="btn btn-theme" type="button">Áp dụng mã</button>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-6 col-sm-6">
                     <div class="update-box">
-                        <input value="Update Cart" type="submit">
+                        <input value="Cập nhật giỏ hàng" type="submit">
                     </div>
                 </div>
             </div>

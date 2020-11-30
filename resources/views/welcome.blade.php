@@ -96,7 +96,7 @@
                                 @endforeach
                                 <div class="mask-icon">
                                     <ul>
-                                        <li><a href="detail/{{$product->id}}" data-toggle="tooltip"
+                                        <li><a href="{{route('detail', $product->id)}}" data-toggle="tooltip"
                                                data-placement="right" title="View"><i
                                                     class="fas fa-eye"></i></a></li>
                                     </ul>
@@ -340,7 +340,7 @@
                         <div class="ins-inner-box">
                             <img src="{{asset($image->link)}}" class="img-fluid" alt="Image">
                             <div class="hov-in">
-                                <a href="detail/{{$product->id}}"><i class="fab fa-instagram"></i></a>
+                                <a href="{{route('detail', $product->id)}}"><i class="fab fa-instagram"></i></a>
                             </div>
                         </div>
                     @endforeach

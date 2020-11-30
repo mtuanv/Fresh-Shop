@@ -37,7 +37,8 @@
                     </div>
                     <div class="row">
                         @if($search==null)
-                            <p> Bạn chưa nhập từ khóa tìm kiếm</p>
+                            <p> Bạn chưa nhập từ khóa tìm kiếm. Vui lòng nhập từ khóa tìm kiếm hoặc quay lại <a
+                                    href="{{route('menu')}}">SHOP</a> để xem tất cả sản phẩm</p>
                         @elseif($lsProduct!=null)
                             @foreach($lsProduct as $product)
                                 <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
@@ -49,7 +50,7 @@
                                             @endforeach
                                             <div class="mask-icon">
                                                 <ul>
-                                                    <li><a href="detail/{{$product->id}}"
+                                                    <li><a href="{{route('detail', $product->id)}}"
                                                            data-toggle="tooltip"
                                                            data-placement="right"
                                                            title="View"><i class="fas fa-eye"></i></a></li>
@@ -66,7 +67,8 @@
                             @endforeach
                             {{$lsProduct->links("pagination::bootstrap-4")}}
                         @elseif($lsProduct==null)
-                            <p>Không có sản phẩm nào trong danh mục này.</p>
+                            <p>Không có sản phẩm nào trong danh mục này. Vui lòng nhập từ khóa khác hoặc quay lại <a
+                                    href="{{route('menu')}}">SHOP</a> để xem tất cả sản phẩm</p>
                         @endif
                     </div>
 
