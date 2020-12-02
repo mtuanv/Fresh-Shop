@@ -68,7 +68,7 @@
                                                                            title="Xem"><i class="fas fa-eye"></i></a>
                                                                     </li>
                                                                 </ul>
-                                                                <a class="cart" href="#">Thêm vào giỏ</a>
+                                                                <a class="cart" onclick="AddCart({{$product->id}})" href="javascript:">Thêm vào giỏ</a>
                                                             </div>
                                                         </div>
                                                         <div class="why-text">
@@ -188,6 +188,7 @@
         </div>
     </div>
     <!-- End Menu Page -->
+
     <script type="text/javascript">
 
 
@@ -212,5 +213,30 @@
             $("#maxPrice").val($("#slider-range").slider("values", 1));
         }
     </script>
-@endsection
 
+  <!---Them gio hang --->
+    <script>
+         function AddCart(id){
+               // console.log(id);
+               $.ajax({
+                   url: 'Add-Cart/' +id,
+                   type: 'GET',
+               }).done(function(response) {
+                     $("#cart-item-change").empty();
+                     $("#cart-item-change").html(response);
+                     alertify.success('Thêm giỏ hàng thành công');
+               });
+         }
+         $("#cart-item-change").on("click", ".close-cart i" , function(){
+             console.log($(this).data("id"));
+             $.ajax({
+                 url: 'Delete-Item-Cart/' +$(this).data("id"),
+                 type: 'GET',
+             }).done(function(response) {
+                   $("#cart-item-change").empty();
+                   $("#cart-item-change").html(response);                 
+             });
+         });
+
+  </script>
+@endsection

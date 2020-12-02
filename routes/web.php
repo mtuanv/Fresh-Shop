@@ -29,6 +29,8 @@ Route::get('/slideFilter', [\App\Http\Controllers\ShopController::class, 'slideF
 
 //back-end
 Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/Add-Cart/{id}', [\App\Http\Controllers\CartController::class, 'AddCart'])->name('AddnewCart');
+Route::get('/Delete-Item-Cart/{id}', [\App\Http\Controllers\CartController::class, 'DeleteItemCart'])->name('DeleteItem');
 
 Route::middleware(['auth', 'checkAdmin'])->group(function () {
     Route::prefix('admin')->group(function () {
