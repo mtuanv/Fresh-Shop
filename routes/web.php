@@ -26,11 +26,13 @@ Route::get('/detail/{id}', [\App\Http\Controllers\ShopController::class, 'detail
 Route::get('/searchHeader', [\App\Http\Controllers\ShopController::class, 'searchHeader'])->name('searchHeader');
 Route::get('/slideFilter', [\App\Http\Controllers\ShopController::class, 'slideFilter'])->name('slideFilter');
 
+//Route cua gio hang
+Route::get('/Add-Cart/{id}', [\App\Http\Controllers\CartController::class, 'AddCart'])->name('AddnewCart');
+Route::get('/Delete-Item-Cart/{id}', [\App\Http\Controllers\CartController::class, 'DeleteItemCart'])->name('Delete');
+Route::get('/List-Carts', [\App\Http\Controllers\CartController::class, 'ViewListCart'])->name('ShowCart');
 
 //back-end
 Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/Add-Cart/{id}', [\App\Http\Controllers\CartController::class, 'AddCart'])->name('AddnewCart');
-Route::get('/Delete-Item-Cart/{id}', [\App\Http\Controllers\CartController::class, 'DeleteItemCart'])->name('DeleteItem');
 
 Route::middleware(['auth', 'checkAdmin'])->group(function () {
     Route::prefix('admin')->group(function () {

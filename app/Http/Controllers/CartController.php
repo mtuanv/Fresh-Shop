@@ -19,7 +19,7 @@ class CartController extends Controller
 
           $req->session()->put('Cart', $newCart);
       }
-      return view('cartitems', compact('newCart'));
+      return view('cartitems');
     }
 
     public function DeleteItemCart(Request $req ,$id) {
@@ -32,6 +32,10 @@ class CartController extends Controller
           }else {
             $req->session()->forget('Cart');
           }
-          return view('cartitems', compact('newCart'));        
+          return view('cartitems');
+    }
+
+    public function ViewListCart(){
+      return view('cart');
     }
 }
