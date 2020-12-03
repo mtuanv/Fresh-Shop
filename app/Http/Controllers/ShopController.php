@@ -75,18 +75,28 @@ class ShopController extends Controller
             if ($count == 0) {
                 $lsProduct = null;
             } else {
-                $lsProduct = Product::where('products.name', 'like', '%' . $name . '%')->get();
-                $lsProductLH = Product::where('products.name', 'like', '%' . $name . '%')->orderBy('price')->get();
-                $lsProductHL = Product::where('products.name', 'like', '%' . $name . '%')->orderBy('price', 'DESC')->get();
+                $lsProduct = Product::where('products.name', 'like', '%' . $name . '%')->paginate(9);
+                $lsProductLH = Product::where('products.name', 'like', '%' . $name . '%')->orderBy('price')->paginate(9);
+                $lsProductHL = Product::where('products.name', 'like', '%' . $name . '%')->orderBy('price', 'DESC')->paginate(9);
+
+                $lsPr = Product::where('products.name', 'like', '%' . $name . '%')->paginate(3);
+                $lsPrLH = Product::where('products.name', 'like', '%' . $name . '%')->orderBy('price')->paginate(3);
+                $lsPrHL = Product::where('products.name', 'like', '%' . $name . '%')->orderBy('price', 'DESC')->paginate(3);
+
                 $lsTag = Tag::all();
             }
         } else {
-            $lsProduct = Product::all();
-            $lsProductLH = Product::orderBy('price')->get();
-            $lsProductHL = Product::orderBy('price', 'DESC')->get();
+            $lsProduct = Product::paginate(9);
+            $lsProductLH = Product::orderBy('price')->paginate(9);
+            $lsProductHL = Product::orderBy('price', 'DESC')->paginate(9);
+
+            $lsPr = Product::paginate(3);
+            $lsPrLH = Product::orderBy('price')->paginate(3);
+            $lsPrHL = Product::orderBy('price', 'DESC')->paginate(3);
+
             $lsTag = Tag::all();
         }
-        return view('menu')->with(['lsProduct' => $lsProduct, 'lsTag' => $lsTag, 'name' => $name, 'lsProductLH' => $lsProductLH, 'lsProductHL' => $lsProductHL]);
+        return view('menu')->with(['lsProduct' => $lsProduct, 'lsPr' => $lsPr, 'lsTag' => $lsTag, 'name' => $name, 'lsProductLH' => $lsProductLH, 'lsProductHL' => $lsProductHL, 'lsPrLH' => $lsPrLH, 'lsPrHL' => $lsPrHL]);
     }
 
     public function slideFilter(Request $request)

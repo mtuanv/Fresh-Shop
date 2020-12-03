@@ -33,53 +33,104 @@
                                     </select>
                                 </div>
                             </div>
+                            <div class="col-12 col-sm-2 text-center text-sm-right">
+                                <ul class="nav nav-tabs ml-auto">
+                                    <li>
+                                        <a class="nav-link active" href="#grid-view" data-toggle="tab"><i
+                                                class="fa fa-th"></i></a>
+                                    </li>
+                                    <li>
+                                        <a class="nav-link" href="#list-view" data-toggle="tab"><i
+                                                class="fa fa-list-ul"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
 
                         <div class="product-categorie-box">
-                            <div class="row category-list">
-                                @if($lsProduct!=null)
-                                    @foreach($lsProduct as $product)@php
-                                        $tagname = "";
-                                        foreach($product->tags as $t) {
-                                            $tagname .= $t->id." ";
-                                        }
-                                    @endphp
-                                    <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4 category-grid {{$tagname}}">
-                                        <div class="products-single fix">
-                                            <div class="box-img-hover">
-                                                @foreach($product->images as $image)
-                                                    <img src="{{asset($image->link)}}" class="img-fluid"
-                                                         alt="Image">
-                                                @endforeach
-                                                <div class="mask-icon">
-                                                    <ul>
-                                                        <li><a href="{{route('detail', $product->id)}}"
-                                                               data-toggle="tooltip"
-                                                               data-placement="right"
-                                                               title="Xem"><i class="fas fa-eye"></i></a>
-                                                        </li>
-                                                    </ul>
-                                                    <a class="cart" onclick="AddCart({{$product->id}})"
-                                                       href="javascript:">Thêm vào giỏ</a>
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane fade show active" id="grid-view">
+                                    <div class="row">
+                                        @if($lsProduct!=null)
+                                            @foreach($lsProduct as $product)
+                                                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
+                                                    <div class="products-single fix">
+                                                        <div class="box-img-hover">
+                                                            @foreach($product->images as $image)
+                                                                <img src="{{asset($image->link)}}" class="img-fluid"
+                                                                     alt="Image">
+                                                            @endforeach
+                                                            <div class="mask-icon">
+                                                                <ul>
+                                                                    <li><a href="{{route('detail', $product->id)}}"
+                                                                           data-toggle="tooltip"
+                                                                           data-placement="right"
+                                                                           title="Xem"><i class="fas fa-eye"></i></a>
+                                                                    </li>
+                                                                </ul>
+                                                                <a class="cart" onclick="AddCart({{$product->id}})" href="javascript:">Thêm vào giỏ</a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="why-text">
+                                                            <h4><a href="{{route('detail', $product->id)}}"
+                                                                   style="color: black">{{$product->name}}</a></h4>
+                                                            <h5> {{$product->price}} VND</h5>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="why-text">
-                                                <h4><a href="{{route('detail', $product->id)}}"
-                                                       style="color: black">{{$product->name}}</a></h4>
-                                                <h5> {{$product->price}} VND</h5>
-                                            </div>
-                                        </div>
+                                            @endforeach
+                                            <div
+                                                style="margin: auto">{{$lsProduct->links("pagination::bootstrap-4")}}</div>
+                                        @elseif($lsProduct==null)
+                                            <p>Không có sản phẩm nào trong danh mục này. Vui lòng nhập từ khóa khác.
+                                        @endif
                                     </div>
-                                    @endforeach
-                                @elseif($lsProduct==null)
-                                    <p>Không có sản phẩm nào trong danh mục này. Vui lòng nhập từ khóa khác.
-                                @endif
-                            </div>
-                            <div class="row">
-                                {{--                                <div style="margin: auto">{{$lsProduct->links("pagination::bootstrap-4")}}</div>--}}
-                                @if($lsProduct!=null)
-
-                                @endif
+                                </div>
+                                <div role="tabpanel" class="tab-pane fade" id="list-view">
+                                    <div class="row">
+                                        @if($lsProduct!=null)
+                                            @foreach($lsPr as $product)
+                                                <div class="list-view-box">
+                                                    <div class="row" style="margin-left: 0; margin-right: 0">
+                                                        <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
+                                                            <div class="products-single fix">
+                                                                <div class="box-img-hover">
+                                                                    @foreach($product->images as $image)
+                                                                        <img src="{{asset($image->link)}}"
+                                                                             class="img-fluid"
+                                                                             alt="Image">
+                                                                    @endforeach
+                                                                    <div class="mask-icon">
+                                                                        <ul>
+                                                                            <li>
+                                                                                <a href="{{route('detail', $product->id)}}"
+                                                                                   data-toggle="tooltip"
+                                                                                   data-placement="right" title="Xem"><i
+                                                                                        class="fas fa-eye"></i></a></li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6 col-md-6 col-lg-8 col-xl-8">
+                                                            <div class="why-text full-width">
+                                                                <h4><a href="{{route('detail', $product->id)}}"
+                                                                       style="color: black">{{$product->name}}</a>
+                                                                </h4>
+                                                                <h5> {{$product->price}} VND</h5>
+                                                                <p>{!! $product->description !!}</p>
+                                                                <a class="btn hvr-hover" href="#">Thêm vào giỏ</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                            <div style="margin: auto">{{$lsPr->links("pagination::bootstrap-4")}}</div>
+                                        @elseif($lsProduct==null)
+                                            <p>Không có sản phẩm nào trong danh mục này. Vui lòng nhập từ khóa khác.
+                                        @endif
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -99,14 +150,15 @@
                             <div class="title-left">
                                 <h3>Danh Mục</h3>
                             </div>
-                            <div class="category-menu list-group list-group-collapse list-group-sm list-group-tree">
-                                <button href="" class="active list-group-item list-group-item-action"
-                                        data-filter="*">Tất cả <small
-                                        class="text-muted"> ({{$product->count()}})</small></button>
+                            <div class="list-group list-group-collapse list-group-sm list-group-tree"
+                                 id="list-group-men" data-children=".sub-men">
+                                <a href="" class="active list-group-item list-group-item-action"
+                                   data-filter="*">Tất cả <small
+                                        class="text-muted"> ({{$product->count()}})</small></a>
                                 @foreach($lsTag as $tag)
-                                    <button class="list-group-item list-group-item-action"
-                                            data-tag_id=".{{$tag->id}}"> {{$tag->name}} <small
-                                            class="text-muted"> ({{$tag->products()->count()}})</small></button>
+                                    <a href="" class="list-group-item list-group-item-action"
+                                       data-filter=".{{$tag->id}}"> {{$tag->name}} <small
+                                            class="text-muted"> ({{$tag->products()->count()}})</small></a>
                                 @endforeach
                             </div>
                         </div>
@@ -138,30 +190,11 @@
     <!-- End Menu Page -->
 
     <script type="text/javascript">
-        /* ..............................................
-    Sort By Category
-    ................................................. */
-        $('.pagination a').unbind('click').on('click', function (e) {
-            e.preventDefault();
-            var page = $(this).attr('href').split('page=')[1];
-            getPosts(page);
-        });
 
-        function getPosts(page) {
-            $.ajax({
-                type: "GET",
-                url: '?page=' + page
-            })
-                .success(function (data) {
-                    $('body').html(data);
-                });
-        }
-    </script>
 
-    <script type="text/javascript">
         /* ..............................................
-    Slider Range
-    ................................................. */
+       Slider Range
+       ................................................. */
         $(function () {
             $("#slider-range").slider({
                 range: true,
@@ -181,32 +214,31 @@
         }
     </script>
 
-    <!---Them gio hang --->
+  <!---Them gio hang --->
     <script>
-        function AddCart(id) {
-            $.ajax({
-                url: 'Add-Cart/' + id,
-                type: 'GET',
-            }).done(function (response) {
-                RenderCart(response);
-                alertify.success('Thêm giỏ hàng thành công');
-            });
-        }
+         function AddCart(id){
+               $.ajax({
+                   url: 'Add-Cart/' +id,
+                   type: 'GET',
+               }).done(function(response) {
+                     RenderCart(response);
+                     alertify.success('Thêm giỏ hàng thành công');
+               });
+         }
+         $("#cart-item-change").on("click", ".close-cart i" , function(){
+             $.ajax({
+                 url: 'Delete-Item-Cart/' +$(this).data("id"),
+                 type: 'GET',
+             }).done(function(response) {
+                   RenderCart(response);
+             });
+         });
 
-        $("#cart-item-change").on("click", ".close-cart i", function () {
-            $.ajax({
-                url: 'Delete-Item-Cart/' + $(this).data("id"),
-                type: 'GET',
-            }).done(function (response) {
-                RenderCart(response);
-            });
-        });
+         function RenderCart(response){
+           $("#cart-item-change").empty();
+           $("#cart-item-change").html(response);
+           $("#total-quantity-show").text($("#total-quantity-cart").val());
+         }
 
-        function RenderCart(response) {
-            $("#cart-item-change").empty();
-            $("#cart-item-change").html(response);
-            $("#total-quantity-show").text($("#total-quantity-cart").val());
-        }
-
-    </script>
+  </script>
 @endsection

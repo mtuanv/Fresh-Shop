@@ -78,6 +78,7 @@
                 </div>
             </div>
 
+
             <div class="row special-list">
                 @foreach($lsProduct as $product)
                     @php
@@ -86,6 +87,7 @@
                             $tagname .= $t->id." ";
                         }
                     @endphp
+
                     <div class="col-lg-3 col-md-6 special-grid {{$tagname}}">
                         <div class="products-single fix">
                             <div class="box-img-hover">
@@ -93,7 +95,6 @@
                                     <img src="{{asset($image->link)}}" class="img-fluid" alt="Image">
                                 @endforeach
                                 <div class="mask-icon">
-                                    <p style="text-align: center; font-size: 35px; color: white; text-transform: uppercase">{{$product->name}}</p>
                                     <ul>
                                         <li><a href="{{route('detail', $product->id)}}" data-toggle="tooltip"
                                                data-placement="right" title="View"><i
