@@ -35,6 +35,18 @@
     {{--Jquery--}}
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 
+    <!-- JavaScript -->
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+    <!-- Default theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+    <!-- Semantic UI theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css"/>
+    <!-- Bootstrap theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css"/>
+
 </head>
 
 <body>
@@ -136,11 +148,11 @@
         </div>
         <!-- Start Mini Cart Menu -->
         {{--Hash code giỏ hàng, lấy thông tin sản phẩm khách hàng chọn bằng ajax rồi thêm vào đây--}}
-        <div class="side">
+        <div class="side" id ="cart-item-change">
             <a href="#" class="close-side"><i class="fa fa-times"></i></a>
             <li class="cart-box">
                 <ul class="cart-list">
-                    <li>
+                    <!-- <li>
                         <a href="#" class="photo"><img src="{{asset('shop/images/img-pro-01.jpg')}}" class="cart-thumb"
                                                        alt=""/></a>
                         <h6><a href="#">Delica omtantur </a></h6>
@@ -157,14 +169,14 @@
                                                        alt=""/></a>
                         <h6><a href="#">Agam facilisis</a></h6>
                         <p>1x - <span class="price">$40.00</span></p>
-                    </li>
+                    </li> -->
                     <li class="total">
                         <a href="cart" class="btn btn-default hvr-hover btn-cart">GIỎ HÀNG</a>
-                        <span class="float-right"><strong>Total</strong>: $180.00</span>
+                        <!-- <span class="float-right"><strong>Total</strong>: $180.00</span> -->
                     </li>
                 </ul>
             </li>
-        </div>
+      </div>
         <!-- End Mini Cart Menu -->
     </nav>
     <!-- End Navigation -->
