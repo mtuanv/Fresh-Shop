@@ -153,10 +153,11 @@
         </div>
         <!-- Start Mini Cart Menu -->
         {{--Hash code giỏ hàng, lấy thông tin sản phẩm khách hàng chọn bằng ajax rồi thêm vào đây--}}
-        <div class="side" id ="cart-item-change">
-          @if(Session::has("Cart") != null)
+        <div class="side" >
           <a href="#" class="close-side"><i class="fa fa-times"></i></a>
-          <li class="cart-box">
+
+          <li class="cart-box" id ="cart-item-change">
+          @if(Session::has("Cart") != null)
           <ul class="cart-list">
             @foreach(Session::get('Cart')->products as $item)
           <li>
@@ -167,12 +168,12 @@
           @endforeach
           <li class="total">
               <a href="cart" class="btn btn-default hvr-hover btn-cart">GIỎ HÀNG</a>
-              <span class="float-right"><strong>Tổng</strong>:{{number_format(Session::get('Cart')->totalPrice)}} đ</span>
-              <!-- <input hidden id="total-quantity-cart" type="number" value="{{Session::get('Cart')->totalQuantity}}"> -->
+              <span class="float-right"><strong>Tổng</strong>:{{number_format(Session::get('Cart')->totalPrice)}} đ</span>              
           </li>
           </ul>
-          </li>
           @endif
+          </li>
+
        </div>
         <!-- End Mini Cart Menu -->
     </nav>

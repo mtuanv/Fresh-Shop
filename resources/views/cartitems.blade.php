@@ -1,6 +1,4 @@
 @if(Session::has("Cart") != null)
-<a href="#" class="close-side"><i class="fa fa-times"></i></a>
-<li class="cart-box">
 <ul class="cart-list">
   @foreach(Session::get('Cart')->products as $item)
 <li>
@@ -15,5 +13,4 @@
     <input hidden id="total-quantity-cart" type="number" value="{{Session::get('Cart')->totalQuantity}}">
 </li>
 </ul>
-</li>
 @endif
