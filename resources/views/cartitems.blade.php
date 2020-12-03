@@ -1,5 +1,5 @@
 @if(Session::has("Cart") != null)
-<a style="cursor:pointer" class="close-side"><i class="fa fa-times"></i></a>
+<a href="#" class="close-side"><i class="fa fa-times"></i></a>
 <li class="cart-box">
 <ul class="cart-list">
   @foreach(Session::get('Cart')->products as $item)
