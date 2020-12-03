@@ -10,6 +10,7 @@ use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Http\Request;
 use function GuzzleHttp\Promise\all;
+use Illuminate\Support\Facades\DB;
 
 class ShopController extends Controller
 {
@@ -27,10 +28,24 @@ class ShopController extends Controller
 
     }
 
-    public function blog()
+    public function blog(Request $request)
     {
-        $lsBlog = Promotion::all();
-        return view('blog')->with(['lsBlog' => $lsBlog]);
+        $name = $request->name;
+        $count = 0;
+        if ($name != null) {
+            $lsBlog = Promotion::where('promotions.name', 'like', '%' . $name . '%');
+            $count = $lsBlog->count();
+            if ($count == 0) {
+                $lsBlog = null;
+            } else {
+                $lsBlog = Promotion::where('promotions.name', 'like', '%' . $name . '%')->paginate(3);
+                $lsTag = Tag::all();
+            }
+        } else {
+            $lsBlog = Promotion::paginate(3);
+            $lsTag = Tag::all();
+        }
+        return view('blog')->with(['lsBlog' => $lsBlog, 'lsTag' => $lsTag, 'name' => $name]);
     }
 
     public function blogDetail($id)
@@ -89,8 +104,9 @@ class ShopController extends Controller
         $name = $request->name;
         $min = $request->minPrice;
         $max = $request->maxPrice;
-        $lsProduct = Product::where('products.price', '>', $min, 'and', 'products.price', '<', $max)->paginate(9);
-        $lsPr = Product::where('products.price', '>', $min, 'and', 'products.price', '<', $max)->paginate(3);
+
+        $lsProduct = Product::whereBetween('products.price', [$min, $max])->paginate(9);
+        $lsPr = Product::whereBetween('products.price', [$min, $max])->paginate(9);
         $lsTag = Tag::all();
 
         return view('menu')->with(['lsProduct' => $lsProduct, 'lsPr' => $lsPr, 'name' => $name, 'lsTag' => $lsTag]);
