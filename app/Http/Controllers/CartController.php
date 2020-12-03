@@ -38,4 +38,18 @@ class CartController extends Controller
     public function ViewListCart(){
       return view('cart');
     }
+
+    public function DeleteItemListCart(Request $req ,$id) {
+          $oldCart = Session('Cart') ? Session('Cart') : null;
+          $newCart = new Cart($oldCart);
+          $newCart->DeleteItemCart($id);
+
+          if(Count($newCart->products) > 0 ){
+            $req->session()->put('Cart', $newCart);
+          }else {
+            $req->session()->forget('Cart');
+          }
+          return view('list-cart');
+    }
+
 }

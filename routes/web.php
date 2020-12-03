@@ -28,8 +28,9 @@ Route::get('/slideFilter', [\App\Http\Controllers\ShopController::class, 'slideF
 
 //Route cua gio hang
 Route::get('/Add-Cart/{id}', [\App\Http\Controllers\CartController::class, 'AddCart'])->name('AddnewCart');
-Route::get('/Delete-Item-Cart/{id}', [\App\Http\Controllers\CartController::class, 'DeleteItemCart'])->name('Delete');
+Route::get('/Delete-Item-Cart/{id}', [\App\Http\Controllers\CartController::class, 'DeleteItemCart'])->name('DeleteItem');
 Route::get('/List-Carts', [\App\Http\Controllers\CartController::class, 'ViewListCart'])->name('ShowCart');
+Route::get('/Delete-Item-List-Cart/{id}', [\App\Http\Controllers\CartController::class, 'DeleteItemListCart'])->name('DeleteList');
 
 //back-end
 Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');

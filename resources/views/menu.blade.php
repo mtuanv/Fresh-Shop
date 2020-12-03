@@ -186,6 +186,5 @@
             $("#cart-item-change").html(response);
             $("#total-quantity-show").text($("#total-quantity-cart").val());
         }
-
     </script>
 @endsection

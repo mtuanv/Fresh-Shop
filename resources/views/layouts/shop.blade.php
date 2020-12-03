@@ -167,8 +167,8 @@
           </li>
           @endforeach
           <li class="total">
-              <a href="cart" class="btn btn-default hvr-hover btn-cart">GIỎ HÀNG</a>
-              <span class="float-right"><strong>Tổng</strong>:{{number_format(Session::get('Cart')->totalPrice)}} đ</span>              
+              <a href="{{url('/List-Carts')}}" class="btn btn-default hvr-hover btn-cart">GIỎ HÀNG</a>
+              <span class="float-right"><strong>Tổng</strong>:{{number_format(Session::get('Cart')->totalPrice)}} đ</span>
           </li>
           </ul>
           @endif
