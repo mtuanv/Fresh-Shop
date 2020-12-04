@@ -24,15 +24,15 @@ class UserController extends Controller
                       ->count('id');
         $sumsale = ProductOrder::whereMonth('orders.created_at', $date['mon'])
                                ->join('orders', 'orders.id', '=', 'product_orders.order_id')
-                               ->where('status', '=', 1)
+                               ->where('status', '=', 10)
                                ->select('quantity')
                                ->sum('quantity');
         $corder = Order::whereMonth('created_at', $date['mon'])
-                      ->where('status', '=', 1)
+                      ->where('status', '=', 10)
                       ->select('id')
                       ->count('id');
         $money = Order::whereMonth('created_at', $date['mon'])
-                      ->where('status', '=', 1)
+                      ->where('status', '=', 10)
                       ->select('total')
                       ->sum('total');
         $eid = "";
@@ -85,10 +85,26 @@ class UserController extends Controller
       $eid = $request->id;
       $ename = $request->name;
       $eun = $request->username;
+      $date = getdate();
+      $order = Order::whereMonth('created_at', $date['mon'])
+                    ->select('id')
+                    ->count('id');
+      $sumsale = ProductOrder::whereMonth('orders.created_at', $date['mon'])
+                             ->join('orders', 'orders.id', '=', 'product_orders.order_id')
+                             ->where('status', '=', 10)
+                             ->select('quantity')
+                             ->sum('quantity');
+      $corder = Order::whereMonth('created_at', $date['mon'])
+                    ->where('status', '=', 10)
+                    ->select('id')
+                    ->count('id');
+      $money = Order::whereMonth('created_at', $date['mon'])
+                    ->where('status', '=', 10)
+                    ->select('total')
+                    ->sum('total');
       $lsUser = User::all();
-      return view('admin.dashboard')->with(['lsUser' => $lsUser, 'eid' => $eid, 'ename' => $ename, 'eun' => $eun]);
+      return view('admin.dashboard')->with(['lsUser' => $lsUser, 'eid' => $eid, 'ename' => $ename, 'eun' => $eun, 'money' => $money, 'corder' => $corder, 'sumsale' => $sumsale, 'order' => $order]);
     }
-
     /**
      * Update the specified resource in storage.
      *

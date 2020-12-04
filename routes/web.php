@@ -40,5 +40,7 @@ Route::middleware(['auth', 'checkAdmin'])->group(function () {
         Route::post('/promotion_status/{id}', [App\Http\Controllers\PromotionController::class, 'changeStatus'])->name('changestt');
         Route::resource('/orders', \App\Http\Controllers\OrderController::class);
         Route::post('/order_status/{id}', [App\Http\Controllers\OrderController::class, 'changeStatus'])->name('changesttorder');
+        Route::get('/dayreport', [\App\Http\Controllers\ReportController::class, 'day'])->name('dayreport');
+        Route::get('/monthreport', [\App\Http\Controllers\ReportController::class, 'month'])->name('monthreport');
     });
 });

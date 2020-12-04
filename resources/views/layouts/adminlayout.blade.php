@@ -51,7 +51,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/jquery.datetimepicker.min.css') }}"/>
     <!-- Styles -->
 <!-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
 <body class="animsition">
@@ -61,7 +61,7 @@
         <div class="header-mobile__bar">
             <div class="container-fluid">
                 <div class="header-mobile-inner">
-                    <a class="logo" href="index.html">
+                    <a class="logo" href="{{route('dashboard')}}">
                         <img src="{{ asset('admin/images/icon/logo.png') }}" alt="CoolAdmin"/>
                     </a>
                     <button class="hamburger hamburger--slider" type="button">
@@ -80,19 +80,16 @@
                             <i class="fas fa-tachometer-alt"></i>Dashboard</a>
                     </li>
                     <li class="has-sub">
-                        <a class="js-arrow" href="#">
+                        <a class="js-arrow" href="{{ route('dayreport') }}">
                             <i class="fas fa-copy"></i>Báo cáo</a>
-                        <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
-                            <li>
-                                <a href="login.html">Ngày</a>
-                            </li>
-                            <li>
-                                <a href="register.html">Tuần</a>
-                            </li>
-                            <li>
-                                <a href="forget-pass.html">Tháng</a>
-                            </li>
-                        </ul>
+                            <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
+                                <li>
+                                    <a href="{{ route('dayreport')}}">Ngày</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('monthreport')}}">Tháng</a>
+                                </li>
+                            </ul>
                     </li>
                         <li class="has-sub">
                             <a class="js-arrow" href="#">
@@ -125,7 +122,7 @@
     <!-- MENU SIDEBAR-->
     <aside class="menu-sidebar d-none d-lg-block">
         <div class="logo">
-            <a href="#">
+            <a href="{{route('dashboard')}}">
                 <img src="{{ asset('admin/images/icon/logo.png') }}" alt="Cool Admin"/>
             </a>
         </div>
@@ -139,17 +136,14 @@
                     <li class="has-sub">
                         <a class="js-arrow" href="#">
                             <i class="fas fa-copy"></i>Báo cáo</a>
-                        <ul class="list-unstyled navbar__sub-list js-sub-list">
-                            <li>
-                                <a href="login.html">Ngày</a>
-                            </li>
-                            <li>
-                                <a href="register.html">Tuần</a>
-                            </li>
-                            <li>
-                                <a href="forget-pass.html">Tháng</a>
-                            </li>
-                        </ul>
+                            <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                <li>
+                                    <a href="{{ route('dayreport')}}">Ngày</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('monthreport')}}">Tháng</a>
+                                </li>
+                            </ul>
                     </li>
                         <li class="has-sub">
                             <a class="js-arrow" href="#">
@@ -246,7 +240,7 @@
 <!-- Jquery JS-->
 <script src="{{ asset('admin/vendor/jquery-3.2.1.min.js') }}"></script>
 <!-- Bootstrap JS-->
-<script src="{{ asset('admin/vendor/bootstrap-4.1/popper.min.js') }}vendor/bootstrap-4.1/popper.min.js"></script>
+<script src="{{ asset('admin/vendor/bootstrap-4.1/popper.min.js') }}"></script>
 <script src="{{ asset('admin/vendor/bootstrap-4.1/bootstrap.min.js') }}"></script>
 <!-- Vendor JS       -->
 <script src="{{ asset('admin/vendor/slick/slick.min.js') }}">

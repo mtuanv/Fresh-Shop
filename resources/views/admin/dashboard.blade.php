@@ -3,6 +3,8 @@
   Dashboard
 @endsection
 @section("content")
+<div class="back" onclick="closse1()">
+</div>
 <div class="row">
     <div class="col-md-12">
         <div class="overview-wrap">
@@ -35,7 +37,7 @@
                     </div>
                     <div class="text">
                         <h2>{{$corder}}</h2>
-                        <span>đơn hàng thành công</span>
+                        <span>đơn hàng hoàn thành</span>
                     </div>
                 </div>
             </div>
@@ -77,7 +79,7 @@
       <div class="overview-wrap">
         <h2 class="title-1 m-b-25">Danh sách nhân viên</h2>
         @if(Auth::user()->role_name == 'ADMIN')
-        <a class="au-btn au-btn-icon au-btn&#45;&#45;blue" href="#newacc">
+        <a class="au-btn au-btn-icon au-btn&#45;&#45;blue" onclick="popup1()" style="color:white">
             <i class="zmdi zmdi-plus"></i>Thêm tài khoản
         </a>
         @endif
@@ -112,15 +114,15 @@
                         <td>{{$user->role_name == 'ADMIN' ? 'Quản lý' : 'Nhân viên'}}</td>
                         @if(Auth::user()->role_name == 'ADMIN')
                         <td>
-                          <form method="post" action="{{route('edituser')}}" name="getif">
+                          <form method="post" action="{{route('edituser').'#test'}}" name="getif">
                             @csrf
                             <input type="hidden" name="id" value="{{$user->id}}"/>
                             <input type="hidden" name="name" value="{{$user->name}}"/>
                             <input type="hidden" name="username" value="{{$user->username}}"/>
-                            <button type="submit" class="btn btn-warning" style="float:left;margin-right: 5px; color: white">Sửa</button>
+                            <button type="submit" class="btn btn-warning" style="float:left;margin-right: 5px; color: white" title="Sửa tài khoản"><i class="fas fa-wrench"></i></button>
                           </form>
                           <!-- <a href="#update" class="btn btn-warning" style="float:left;margin-right: 5px">Sửa</a> -->
-                          <a href="{{route('deleteuser', $user->id)}}" class="btn btn-danger" onclick="return confirm('Sure?')">Xoá</a>
+                          <a href="{{route('deleteuser', $user->id)}}"  title="Xoá tài khoản" class="btn btn-danger" onclick="return confirm('Sure?')"><i class="fas fa-times-circle"></i></a>
                         </td>
                         @endif
                     </tr>
@@ -132,13 +134,67 @@
     </div>
 </div>
 @if(Auth::user()->role_name == 'ADMIN')
-<div class="row">
-  <div class="col-lg-6">
+
+<!-- <div class="row"> -->
+<style type="text/css">
+.popup1{
+  position: fixed;
+  top: 30%;
+  right:24%;
+  display: none;
+  z-index: 5;
+  width: 50%;
+}
+.back{
+    background-color: #000000;
+    opacity: 0.8;
+    position: fixed;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    z-index: 4;
+}
+.show{
+    display: block;
+}
+.close_popup1{
+  float: right;
+  color: black;
+}
+.close_popup1:hover{
+  color: red;
+}
+.blurdt{
+  display: none;
+}
+</style>
+<script type="text/javascript">
+function popup1() {
+      var x = document.getElementsByClassName('popup1');
+      x[0].classList.add('show');
+      var y = document.getElementsByClassName('back');
+      y[0].classList.add('show');
+      var z = document.getElementsByClassName('header-desktop');
+      z[0].classList.add('blurdt');
+  }
+  function closse1() {
+      var x = document.getElementsByClassName('popup1');
+      x[0].classList.remove('show');
+      var y = document.getElementsByClassName('back');
+      y[0].classList.remove('show');
+      var z = document.getElementsByClassName('header-desktop');
+      z[0].classList.remove('blurdt');
+  }
+</script>
+<div class="popup1">
     <div class="card">
       <form method="POST" action="{{ route('register') }}">
         @csrf
       <div class="card-header">
           <strong>Tạo tài khoản mới</strong>
+          <a href="javascript:void(1);" class="close_popup1" onclick="closse1()"><i class="fas fa-times-circle fa-2x"></i></a>
       </div>
       <div class="card-body card-block">
           <div class="row form-group">
@@ -154,14 +210,6 @@
                   @enderror
               </div>
           </div>
-          <!-- <div class="row form-group">
-              <div class="col col-md-3">
-                  <label for="avatar" class=" form-control-label">Avatar</label>
-              </div>
-              <div class="col-12 col-md-9">
-                  <input type="file" name="avatar" class="form-control-file">
-              </div>
-          </div> -->
           <div class="row form-group">
               <div class="col col-md-3">
                   <label for="username" class=" form-control-label">User Name</label>
@@ -206,10 +254,12 @@
           </button>
       </div>
       </form>
-    </div>
   </div>
-  <div class="col-lg-6">
-    <div class="card">
+</div>
+@if(strpos(url()->current(), '/admin/dashboard/user_edit'))
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card" id="test">
       <form action="{{ route('updateuser') }}" method="post" enctype="multipart/form-data">
         @csrf
         <input type="hidden" name="id" value="{{ $eid }}">
@@ -281,10 +331,12 @@
   </div>
 </div>
 @endif
+<!-- </div> -->
+@endif
 <div class="row">
     <div class="col-md-12">
         <div class="copyright">
-            <p>Copyright © 2020 .</p>
+            <p>Copyright © 2020 FreshShop</p>
         </div>
     </div>
 </div>

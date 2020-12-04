@@ -137,6 +137,18 @@
           <input type="hidden" name="status" value="2">
           <button type="submit" class="btn btn-danger">Huỷ đơn</button>
         </form>
+        @elseif($order->status == 2)
+        <form action="{{route('changesttorder', $order->id)}}" method="post" style="float:right; margin-right: 5px">
+          @csrf
+          <input type="hidden" name="status" value="10">
+          <button type="submit" class="btn btn-success" title="Hoàn thành đơn hàng">Hoàn thành</button>
+        </form>
+        <form action="{{route('changesttorder', $order->id)}}" method="post" style="float:right; margin-right: 5px">
+          @csrf
+          <input type="hidden" name="status" value="1">
+          <button type="submit" class="btn btn-primary" title="Xác nhận">Xác nhận</button>
+        </form>
+        @elseif($order->status == 10)
           @else
           <form action="{{route('changesttorder', $order->id)}}" method="post"  style="float:right; margin-right: 5px">
             @csrf

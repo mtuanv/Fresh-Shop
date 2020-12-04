@@ -20,11 +20,11 @@
       <div class="card">
         <div class="card-body">
           <h3>Tìm kiếm</h5>
-          <form action="" method="get">
+          <form action="{{route('orders.index')}}" method="get">
             @csrf
             <div class="form-group">
               <label for="madh"><b>Mã đơn</b></label>
-              <input type="text" class="form-control" name="ma" value="DH0000{{$ma}}">
+              <input type="text" class="form-control" name="ma" value="{{$ma}}">
             </div>
             <div class="form-group">
               <label for="title"><b>Tên khách hàng</b></label>
