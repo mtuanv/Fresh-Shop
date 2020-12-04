@@ -35,6 +35,18 @@
     {{--Jquery--}}
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 
+    <!-- JavaScript -->
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+    <!-- Default theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+    <!-- Semantic UI theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css"/>
+    <!-- Bootstrap theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css"/>
+
 </head>
 
 <body>
@@ -126,7 +138,12 @@
                         <a href="#">
                             <i class="fa fa-shopping-bag"></i>
                             {{--dùng js lấy thông tin số lượng sản phẩm khách hàng đã thêm vào giỏ hàng--}}
-                            <span class="badge">3</span>
+
+                            @if(Session::has("Cart") != null)
+                            <span id="total-quantity-show" class="badge">{{Session::get("Cart")->totalQuantity}}</span>
+                            @else
+                            <span id="total-quantity-show" class="badge"></span>
+                            @endif
                             <p>Giỏ hàng</p>
                         </a>
                     </li>
@@ -136,35 +153,28 @@
         </div>
         <!-- Start Mini Cart Menu -->
         {{--Hash code giỏ hàng, lấy thông tin sản phẩm khách hàng chọn bằng ajax rồi thêm vào đây--}}
-        <div class="side">
-            <a href="#" class="close-side"><i class="fa fa-times"></i></a>
-            <li class="cart-box">
-                <ul class="cart-list">
-                    <li>
-                        <a href="#" class="photo"><img src="{{asset('shop/images/img-pro-01.jpg')}}" class="cart-thumb"
-                                                       alt=""/></a>
-                        <h6><a href="#">Delica omtantur </a></h6>
-                        <p>1x - <span class="price">$80.00</span></p>
-                    </li>
-                    <li>
-                        <a href="#" class="photo"><img src="{{asset('shop/images/img-pro-02.jpg')}}" class="cart-thumb"
-                                                       alt=""/></a>
-                        <h6><a href="#">Omnes ocurreret</a></h6>
-                        <p>1x - <span class="price">$60.00</span></p>
-                    </li>
-                    <li>
-                        <a href="#" class="photo"><img src="{{asset('shop/images/img-pro-03.jpg')}}" class="cart-thumb"
-                                                       alt=""/></a>
-                        <h6><a href="#">Agam facilisis</a></h6>
-                        <p>1x - <span class="price">$40.00</span></p>
-                    </li>
-                    <li class="total">
-                        <a href="cart" class="btn btn-default hvr-hover btn-cart">GIỎ HÀNG</a>
-                        <span class="float-right"><strong>Total</strong>: $180.00</span>
-                    </li>
-                </ul>
-            </li>
-        </div>
+        <div class="side" >
+          <a href="#" class="close-side"><i class="fa fa-times"></i></a>
+
+          <li class="cart-box" id ="cart-item-change">
+          @if(Session::has("Cart") != null)
+          <ul class="cart-list">
+            @foreach(Session::get('Cart')->products as $item)
+          <li>
+              <h6>{{$item['productInfo']->name}}</h6>
+              <a class="close-cart" style="float:right; cursor:pointer"><i class="fas fa-times" data-id="{{$item['productInfo']->id}}"></i></a>
+              <p>x {{$item['quantity']}} - <span class="price">{{number_format($item['productInfo']->price)}}đ</span></p>
+          </li>
+          @endforeach
+          <li class="total">
+              <a href="{{url('/List-Carts')}}" class="btn btn-default hvr-hover btn-cart">GIỎ HÀNG</a>
+              <span class="float-right"><strong>Tổng</strong>:{{number_format(Session::get('Cart')->totalPrice)}} đ</span>
+          </li>
+          </ul>
+          @endif
+          </li>
+
+       </div>
         <!-- End Mini Cart Menu -->
     </nav>
     <!-- End Navigation -->

@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Feedback;
 use App\Models\Product;
+use App\Models\Promotion;
 use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Http\Request;
 use function GuzzleHttp\Promise\all;
+use Illuminate\Support\Facades\DB;
 
 class ShopController extends Controller
 {
@@ -26,9 +28,31 @@ class ShopController extends Controller
 
     }
 
-    public function blog()
+    public function blog(Request $request)
     {
-        return view('blog');
+        $name = $request->name;
+        $count = 0;
+        if ($name != null) {
+            $lsBlog = Promotion::where('promotions.name', 'like', '%' . $name . '%');
+            $count = $lsBlog->count();
+            if ($count == 0) {
+                $lsBlog = null;
+            } else {
+                $lsBlog = Promotion::where('promotions.name', 'like', '%' . $name . '%')->paginate(3);
+                $lsTag = Tag::all();
+            }
+        } else {
+            $lsBlog = Promotion::paginate(3);
+            $lsTag = Tag::all();
+        }
+        return view('blog')->with(['lsBlog' => $lsBlog, 'lsTag' => $lsTag, 'name' => $name]);
+    }
+
+    public function blogDetail($id)
+    {
+        $blog = Promotion::find($id);
+        $lsTag = Tag::all();
+        return view('blogDetail')->with(['blog' => $blog, 'lsTag' => $lsTag]);
     }
 
     public function contact()
@@ -51,28 +75,31 @@ class ShopController extends Controller
             if ($count == 0) {
                 $lsProduct = null;
             } else {
-                $lsProduct = Product::where('products.name', 'like', '%' . $name . '%')->paginate(9);
-                $lsProductLH = Product::where('products.name', 'like', '%' . $name . '%')->orderBy('price')->paginate(9);
-                $lsProductHL = Product::where('products.name', 'like', '%' . $name . '%')->orderBy('price', 'DESC')->paginate(9);
-
-                $lsPr = Product::where('products.name', 'like', '%' . $name . '%')->paginate(3);
-                $lsPrLH = Product::where('products.name', 'like', '%' . $name . '%')->orderBy('price')->paginate(3);
-                $lsPrHL = Product::where('products.name', 'like', '%' . $name . '%')->orderBy('price', 'DESC')->paginate(3);
-
+                $lsProduct = Product::where('products.name', 'like', '%' . $name . '%')->get();
+                $lsProductLH = Product::where('products.name', 'like', '%' . $name . '%')->orderBy('price')->get();
+                $lsProductHL = Product::where('products.name', 'like', '%' . $name . '%')->orderBy('price', 'DESC')->get();
                 $lsTag = Tag::all();
             }
         } else {
-            $lsProduct = Product::paginate(9);
-            $lsProductLH = Product::orderBy('price')->paginate(9);
-            $lsProductHL = Product::orderBy('price', 'DESC')->paginate(9);
-
-            $lsPr = Product::paginate(3);
-            $lsPrLH = Product::orderBy('price')->paginate(3);
-            $lsPrHL = Product::orderBy('price', 'DESC')->paginate(3);
-
+            $lsProduct = Product::all();
+            $lsProductLH = Product::orderBy('price')->get();
+            $lsProductHL = Product::orderBy('price', 'DESC')->get();
             $lsTag = Tag::all();
         }
-        return view('menu')->with(['lsProduct' => $lsProduct, 'lsPr' => $lsPr, 'lsTag' => $lsTag, 'name' => $name, 'lsProductLH' => $lsProductLH, 'lsProductHL' => $lsProductHL, 'lsPrLH' => $lsPrLH, 'lsPrHL' => $lsPrHL]);
+        return view('menu')->with(['lsProduct' => $lsProduct, 'lsTag' => $lsTag, 'name' => $name, 'lsProductLH' => $lsProductLH, 'lsProductHL' => $lsProductHL]);
+    }
+
+    public function slideFilter(Request $request)
+    {
+        $name = $request->name;
+        $min = $request->minPrice;
+        $max = $request->maxPrice;
+
+        $lsProduct = Product::whereBetween('products.price', [$min, $max])->paginate(9);
+        $lsPr = Product::whereBetween('products.price', [$min, $max])->paginate(9);
+        $lsTag = Tag::all();
+
+        return view('menu')->with(['lsProduct' => $lsProduct, 'lsPr' => $lsPr, 'name' => $name, 'lsTag' => $lsTag]);
     }
 
     public function detail($id)
