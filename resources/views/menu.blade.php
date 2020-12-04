@@ -77,9 +77,6 @@
                             </div>
                             <div class="row">
                                 {{--                                <div style="margin: auto">{{$lsProduct->links("pagination::bootstrap-4")}}</div>--}}
-                                @if($lsProduct!=null)
-
-                                @endif
                             </div>
                         </div>
                     </div>
@@ -161,7 +158,7 @@
     </script>
 
     <!---Them gio hang --->
-    <script>
+    <script type="text/javascript">
         function AddCart(id) {
             $.ajax({
                 url: 'Add-Cart/' + id,

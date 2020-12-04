@@ -65,6 +65,11 @@ class ShopController extends Controller
         return view('cart');
     }
 
+    public function checkout()
+    {
+        return view('chechout');
+    }
+
     public function menu(Request $request)
     {
         $name = $request->name;

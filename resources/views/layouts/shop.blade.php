@@ -140,9 +140,10 @@
                             {{--dùng js lấy thông tin số lượng sản phẩm khách hàng đã thêm vào giỏ hàng--}}
 
                             @if(Session::has("Cart") != null)
-                            <span id="total-quantity-show" class="badge">{{Session::get("Cart")->totalQuantity}}</span>
+                                <span id="total-quantity-show"
+                                      class="badge">{{Session::get("Cart")->totalQuantity}}</span>
                             @else
-                            <span id="total-quantity-show" class="badge"></span>
+                                <span id="total-quantity-show" class="badge"></span>
                             @endif
                             <p>Giỏ hàng</p>
                         </a>
@@ -153,28 +154,28 @@
         </div>
         <!-- Start Mini Cart Menu -->
         {{--Hash code giỏ hàng, lấy thông tin sản phẩm khách hàng chọn bằng ajax rồi thêm vào đây--}}
-        <div class="side" >
-          <a href="#" class="close-side"><i class="fa fa-times"></i></a>
-
-          <li class="cart-box" id ="cart-item-change">
-          @if(Session::has("Cart") != null)
-          <ul class="cart-list">
-            @foreach(Session::get('Cart')->products as $item)
-          <li>
-              <h6>{{$item['productInfo']->name}}</h6>
-              <a class="close-cart" style="float:right; cursor:pointer"><i class="fas fa-times" data-id="{{$item['productInfo']->id}}"></i></a>
-              <p>x {{$item['quantity']}} - <span class="price">{{number_format($item['productInfo']->price)}}đ</span></p>
-          </li>
-          @endforeach
-          <li class="total">
-              <a href="{{url('/List-Carts')}}" class="btn btn-default hvr-hover btn-cart">GIỎ HÀNG</a>
-              <span class="float-right"><strong>Tổng</strong>:{{number_format(Session::get('Cart')->totalPrice)}} đ</span>
-          </li>
-          </ul>
-          @endif
-          </li>
-
-       </div>
+        <div class="side">
+            <a href="#" class="close-side"><i class="fa fa-times"></i></a>
+            <li class="cart-box" id="cart-item-change">
+                @if(Session::has("Cart") != null)
+                    <ul class="cart-list">
+                        @foreach(Session::get('Cart')->products as $item)
+                            <li>
+                                <h6>{{$item['productInfo']->name}}</h6>
+                                <a class="close-cart" style="float:right; cursor:pointer"><i class="fas fa-times"
+                                                                                             data-id="{{$item['productInfo']->id}}"></i></a>
+                                <p>x {{$item['quantity']}} - <span class="price">{{number_format($item['productInfo']->price)}}đ</span>
+                                </p>
+                            </li>
+                        @endforeach
+                        <li class="total">
+                            <a href="{{route('cart')}}" class="btn btn-default hvr-hover btn-cart">GIỎ HÀNG</a>
+                            <span class="float-right"><strong>Tổng</strong>:{{number_format(Session::get('Cart')->totalPrice)}} đ</span>
+                        </li>
+                    </ul>
+                @endif
+            </li>
+        </div>
         <!-- End Mini Cart Menu -->
     </nav>
     <!-- End Navigation -->

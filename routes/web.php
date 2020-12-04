@@ -20,7 +20,7 @@ Route::get('/aboutus', [\App\Http\Controllers\ShopController::class, 'about'])->
 Route::get('/blog', [\App\Http\Controllers\ShopController::class, 'blog'])->name('blog');
 Route::get('/blogDetail/{id}', [\App\Http\Controllers\ShopController::class, 'blogDetail'])->name('blogDetail');
 Route::get('/contactus', [\App\Http\Controllers\ShopController::class, 'contact'])->name('contactus');
-Route::get('/cart', [\App\Http\Controllers\ShopController::class, 'cart'])->name('cart');
+Route::get('/checkout', [\App\Http\Controllers\ShopController::class, 'checkout'])->name('checkout');
 Route::get('/menu', [\App\Http\Controllers\ShopController::class, 'menu'])->name('menu');
 Route::get('/detail/{id}', [\App\Http\Controllers\ShopController::class, 'detail'])->name('detail');
 Route::get('/searchHeader', [\App\Http\Controllers\ShopController::class, 'searchHeader'])->name('searchHeader');
@@ -29,7 +29,7 @@ Route::get('/slideFilter', [\App\Http\Controllers\ShopController::class, 'slideF
 //Route cua gio hang
 Route::get('/Add-Cart/{id}', [\App\Http\Controllers\CartController::class, 'AddCart'])->name('AddnewCart');
 Route::get('/Delete-Item-Cart/{id}', [\App\Http\Controllers\CartController::class, 'DeleteItemCart'])->name('DeleteItem');
-Route::get('/List-Carts', [\App\Http\Controllers\CartController::class, 'ViewListCart'])->name('ShowCart');
+Route::get('/cart', [\App\Http\Controllers\CartController::class, 'ViewListCart'])->name('cart');
 Route::get('/Delete-Item-List-Cart/{id}', [\App\Http\Controllers\CartController::class, 'DeleteItemListCart'])->name('DeleteList');
 
 //back-end

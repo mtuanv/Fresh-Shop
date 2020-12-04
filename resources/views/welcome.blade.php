@@ -99,7 +99,8 @@
                                                data-placement="right" title="View"><i
                                                     class="fas fa-eye"></i></a></li>
                                     </ul>
-                                    <a class="cart" href="#">Thêm vào giỏ</a>
+                                    <a class="cart" onclick="AddCart({{$product->id}})"
+                                       href="javascript:">Thêm vào giỏ</a>
                                 </div>
                             </div>
                         </div>
