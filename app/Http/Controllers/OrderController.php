@@ -22,6 +22,7 @@ class OrderController extends Controller
         if($ma != null){
           $ma = str_replace('DH0000','',$ma);
         }
+
         $name = $request->name;
         $from = $request->from;
         $to = $request->to;
@@ -35,10 +36,12 @@ class OrderController extends Controller
                           ->whereBetween('created_at', [$from, $to])
                           ->where('status', '=', $status)
                           ->paginate(10);
+          $ma = 'DH0000'.$ma;
         } elseif ($ma != null && $name == null && $from == null && $to == null && $status == null) {
           $lsOrder = Order::orderBy('created_at', 'DESC')
                           ->where('id', '=', $ma)
                           ->paginate(10);
+          $ma = 'DH0000'.$ma;
         } elseif ($ma == null && $name != null && $from == null && $to == null && $status == null) {
           $lsOrder = Order::orderBy('created_at', 'DESC')
                           ->where('name', 'like', '%'.$name.'%')
@@ -60,21 +63,25 @@ class OrderController extends Controller
                           ->where('id', '=', $ma)
                           ->where('name', 'like', '%'.$name.'%')
                           ->paginate(10);
+          $ma = 'DH0000'.$ma;
         } elseif ($ma != null && $name == null && $from != null && $to == null && $status == null) {
           $lsOrder = Order::orderBy('created_at', 'DESC')
                           ->where('id', '=', $ma)
                           ->where('created_at', '>', $from)
                           ->paginate(10);
+          $ma = 'DH0000'.$ma;
         } elseif ($ma != null && $name == null && $from == null && $to != null && $status == null) {
           $lsOrder = Order::orderBy('created_at', 'DESC')
                           ->where('id', '=', $ma)
                           ->where('created_at', '<', $to)
                           ->paginate(10);
+          $ma = 'DH0000'.$ma;
         } elseif ($ma != null && $name == null && $from == null && $to == null && $status != null) {
           $lsOrder = Order::orderBy('created_at', 'DESC')
                           ->where('id', '=', $ma)
                           ->where('status', '=', $status)
                           ->paginate(10);
+          $ma = 'DH0000'.$ma;
         } elseif ($ma == null && $name != null && $from != null && $to == null && $status == null) {
           $lsOrder = Order::orderBy('created_at', 'DESC')
                           ->where('name', 'like', '%'.$name.'%')
@@ -110,35 +117,41 @@ class OrderController extends Controller
                           ->where('name', 'like', '%'.$name.'%')
                           ->where('created_at', '>', $from)
                           ->paginate(10);
+          $ma = 'DH0000'.$ma;
         } elseif ($ma != null && $name == null && $from != null && $to != null && $status == null) {
           $lsOrder = Order::orderBy('created_at', 'DESC')
                           ->where('id', '=', $ma)
                           ->whereBetween('created_at', [$from, $to])
                           ->paginate(10);
+          $ma = 'DH0000'.$ma;
         } elseif ($ma != null && $name == null && $from == null && $to != null && $status != null) {
           $lsOrder = Order::orderBy('created_at', 'DESC')
                           ->where('id', '=', $ma)
                           ->where('created_at', '<', $to)
                           ->where('status', '=', $status)
                           ->paginate(10);
+          $ma = 'DH0000'.$ma;
         } elseif ($ma != null && $name != null && $from == null && $to != null && $status == null) {
           $lsOrder = Order::orderBy('created_at', 'DESC')
                           ->where('id', '=', $ma)
                           ->where('name', 'like', '%'.$name.'%')
                           ->where('created_at', '<', $to)
                           ->paginate(10);
+          $ma = 'DH0000'.$ma;
         } elseif ($ma != null && $name != null && $from == null && $to == null && $status != null) {
           $lsOrder = Order::orderBy('created_at', 'DESC')
                           ->where('id', '=', $ma)
                           ->where('name', 'like', '%'.$name.'%')
                           ->where('status', '=', $status)
                           ->paginate(10);
+          $ma = 'DH0000'.$ma;
         } elseif ($ma != null && $name == null && $from != null && $to == null && $status != null) {
           $lsOrder = Order::orderBy('created_at', 'DESC')
                           ->where('id', '=', $ma)
                           ->where('created_at', '>', $from)
                           ->where('status', '=', $status)
                           ->paginate(10);
+          $ma = 'DH0000'.$ma;
         } elseif ($ma == null && $name != null && $from != null && $to != null && $status == null) {
           $lsOrder = Order::orderBy('created_at', 'DESC')
                           ->where('name', 'like', '%'.$name.'%')
@@ -181,8 +194,10 @@ class OrderController extends Controller
           $lsOrder = Order::orderBy('created_at', 'DESC')
                           ->where('id', '=', $ma)
                           ->paginate(10);
+          $ma = 'DH0000'.$ma;
         } else{
           $lsOrder = Order::orderBy('id', 'DESC')->paginate(10);
+          $ma = 'DH0000'.$ma;
         }
 
         return view('admin.order.list')->with(['lsOrder' => $lsOrder, 'ma' => $ma, 'name' => $name, 'from' => $from, 'to' => $to, 'status' => $status]);
