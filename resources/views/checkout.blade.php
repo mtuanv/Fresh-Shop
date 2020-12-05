@@ -67,7 +67,7 @@
                                 @foreach(Session::get('Cart')->products as $item)
                                 <div class="rounded p-2 bg-light">
                                     <div class="media mb-2 border-bottom">
-                                        <div class="media-body"><a href="detail.html">{{$item['productInfo']->name}}</a>
+                                        <div class="media-body"><a href="{{route('detail', $item['productInfo']->id)}}">{{$item['productInfo']->name}}</a>
                                             <div class="small text-muted">Giá: {{number_format($item['productInfo']->price)}}đ <span class="mx-2">|</span> số lượng:
                                                 {{$item['quantity']}} <span class="mx-2">|</span> Tổng: {{number_format($item['productInfo']->price*$item['quantity'])}}đ
                                             </div>
