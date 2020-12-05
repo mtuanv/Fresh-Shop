@@ -79,6 +79,7 @@
     /* ..............................................
        Filter Category
        ................................................. */
+
     var menuContainer = $('.container');
     menuContainer.imagesLoaded(function () {
         var portfolio = $('.category-menu');
@@ -91,6 +92,25 @@
         });
         var $grid = $('.category-list').isotope({
             itemSelector: '.category-grid'
+        });
+    });
+
+    /* ..............................................
+      Filter Blog
+      ................................................. */
+
+    var blogContainer = $('.container');
+    blogContainer.imagesLoaded(function () {
+        var portfolio = $('.blog-menu');
+        portfolio.on('click', 'button', function () {
+            $(this).addClass('active').siblings().removeClass('active');
+            var filterValue = $(this).attr('data-tag_id');
+            $grid.isotope({
+                filter: filterValue
+            });
+        });
+        var $grid = $('.blog-list').isotope({
+            itemSelector: '.blog-grid'
         });
     });
 

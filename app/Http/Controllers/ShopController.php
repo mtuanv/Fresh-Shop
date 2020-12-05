@@ -18,7 +18,8 @@ class ShopController extends Controller
     {
         $lsProduct = Product::all();
         $lsTag = Tag::all();
-        return view('welcome')->with(['lsTag' => $lsTag, 'lsProduct' => $lsProduct]);
+        $lsBlog = Promotion::all();
+        return view('welcome')->with(['lsTag' => $lsTag, 'lsProduct' => $lsProduct, 'lsBlog' => $lsBlog]);
     }
 
     public function about()
@@ -43,7 +44,7 @@ class ShopController extends Controller
             }
         } else {
             $lsBlog = Promotion::paginate(3);
-            $lsTag = Tag::all();
+            $lsTag = Tag::whereIn('tags.id', [8, 9])->get();
         }
         return view('blog')->with(['lsBlog' => $lsBlog, 'lsTag' => $lsTag, 'name' => $name]);
     }
