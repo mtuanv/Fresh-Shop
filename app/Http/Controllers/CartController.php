@@ -46,6 +46,7 @@ class CartController extends Controller
 
     public function DeleteItemListCart(Request $req, $id)
     {
+        $lsBlog = Promotion::all();
         $oldCart = Session('Cart') ? Session('Cart') : null;
         $newCart = new Cart($oldCart);
         $newCart->DeleteItemCart($id);
@@ -55,7 +56,7 @@ class CartController extends Controller
         } else {
             $req->session()->forget('Cart');
         }
-        return view('cart');
+        return view('list-cart')->with(['lsBlog' => $lsBlog]);
     }
 
 }

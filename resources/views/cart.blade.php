@@ -63,6 +63,7 @@
                         </table>
                     </div>
                     <div class="row my-5">
+                      @if(Session::has("Cart") != null)
                         <div class="col-lg-6 col-sm-6">
                             <div class="coupon-box">
                                 <div class="input-group input-group-sm">
@@ -117,8 +118,8 @@
                         </div>
                         <div class="col-12 d-flex shopping-box"><a href="checkout.html"
                                                                    class="ml-auto btn hvr-hover">Checkout</a></div>
+                        @endif
                     </div>
-
                 </div>
             </div>
         </div>
