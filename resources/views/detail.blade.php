@@ -232,4 +232,22 @@
             });
         });
     </script>
+
+    <script type="text/javascript">
+        function AddCart(id) {
+            $.ajax({
+                url: 'Add-Cart/' + id,
+                type: 'GET',
+            }).done(function (response) {
+                RenderCart(response);
+                alertify.success('Thêm giỏ hàng thành công');
+            });
+        }
+
+        function RenderCart(response) {
+            $("#cart-item-change").empty();
+            $("#cart-item-change").html(response);
+            $("#total-quantity-show").text($("#total-quantity-cart").val());
+        }
+    </script>
 @endsection

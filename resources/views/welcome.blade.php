@@ -361,15 +361,6 @@
             });
         }
 
-        $("#cart-item-change").on("click", ".close-cart i", function () {
-            $.ajax({
-                url: 'Delete-Item-Cart/' + $(this).data("id"),
-                type: 'GET',
-            }).done(function (response) {
-                RenderCart(response);
-            });
-        });
-
         function RenderCart(response) {
             $("#cart-item-change").empty();
             $("#cart-item-change").html(response);
