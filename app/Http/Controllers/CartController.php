@@ -59,4 +59,8 @@ class CartController extends Controller
         return view('list-cart')->with(['lsBlog' => $lsBlog]);
     }
 
+    public function CheckOut(){
+      $lsBlog = Promotion::all();
+      return view('checkout')->with(['lsBlog' => $lsBlog]);
+    }
 }

@@ -31,6 +31,8 @@ Route::get('/Add-Cart/{id}', [\App\Http\Controllers\CartController::class, 'AddC
 Route::get('/Delete-Item-Cart/{id}', [\App\Http\Controllers\CartController::class, 'DeleteItemCart'])->name('DeleteItem');
 Route::get('/cart', [\App\Http\Controllers\CartController::class, 'ViewListCart'])->name('cart');
 Route::get('/Delete-Item-List-Cart/{id}', [\App\Http\Controllers\CartController::class, 'DeleteItemListCart'])->name('DeleteList');
+Route::get('/Check-out', [\App\Http\Controllers\CartController::class, 'CheckOut'])->name('Checkout');
+
 
 //back-end
 Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');

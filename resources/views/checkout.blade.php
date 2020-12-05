@@ -63,15 +63,18 @@
                                 <div class="title-left">
                                     <h3>Giỏ hàng</h3>
                                 </div>
+                                @if(Session::has("Cart") != null)
+                                @foreach(Session::get('Cart')->products as $item)
                                 <div class="rounded p-2 bg-light">
                                     <div class="media mb-2 border-bottom">
-                                        <div class="media-body"><a href="detail.html"> Lorem ipsum dolor sit amet</a>
-                                            <div class="small text-muted">Price: $80.00 <span class="mx-2">|</span> Qty:
-                                                1 <span class="mx-2">|</span> Subtotal: $80.00
+                                        <div class="media-body"><a href="detail.html">{{$item['productInfo']->name}}</a>
+                                            <div class="small text-muted">Giá: {{number_format($item['productInfo']->price)}}đ <span class="mx-2">|</span> số lượng:
+                                                {{$item['quantity']}} <span class="mx-2">|</span> Tổng: {{number_format($item['productInfo']->price*$item['quantity'])}}đ
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                @endforeach
                             </div>
                         </div>
                         <div class="col-md-12 col-lg-12">
@@ -80,26 +83,22 @@
                                     <h3>Đơn hàng</h3>
                                 </div>
                                 <div class="d-flex">
-                                    <div class="font-weight-bold">Sản phẩm</div>
-                                    <div class="ml-auto font-weight-bold">Total</div>
-                                </div>
-                                <hr class="my-1">
-                                <div class="d-flex">
-                                    <h4>Tạm tính</h4>
-                                    <div class="ml-auto font-weight-bold"> $ 440</div>
+                                    <h4>Tổng tiền</h4>
+                                    <div class="ml-auto font-weight-bold">{{number_format(Session::get('Cart')->totalPrice)}}đ</div>
                                 </div>
                                 <div class="d-flex">
-                                    <h4>Giảm giá</h4>
-                                    <div class="ml-auto font-weight-bold"> $ 40</div>
+                                    <h4>Khuyến mãi</h4>
+                                    <div class="ml-auto font-weight-bold"> 0</div>
                                 </div>
                                 <hr>
                                 <div class="d-flex gr-total">
                                     <h5>Thành tiền</h5>
-                                    <div class="ml-auto h5"> $ 388</div>
+                                    <div class="ml-auto h5">{{number_format(Session::get('Cart')->totalPrice)}}đ</div>
                                 </div>
                                 <hr>
                             </div>
                         </div>
+                        @endif
                         <div class="col-12 d-flex shopping-box"><a href="checkout.html" class="ml-auto btn hvr-hover">Đặt
                                 hàng</a></div>
                     </div>
