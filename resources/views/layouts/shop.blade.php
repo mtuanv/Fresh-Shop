@@ -116,7 +116,7 @@
 
                     <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>
                     <li class="side-menu">
-                        <a href="#">
+                        <a href="javascript:">
                             <i class="fa fa-shopping-bag"></i>
                             {{--dùng js lấy thông tin số lượng sản phẩm khách hàng đã thêm vào giỏ hàng--}}
 

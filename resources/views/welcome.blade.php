@@ -349,4 +349,31 @@
         </div>
     </div>
     {{--End Instagram Feed--}}
+
+    <script type="text/javascript">
+        function AddCart(id) {
+            $.ajax({
+                url: 'Add-Cart/' + id,
+                type: 'GET',
+            }).done(function (response) {
+                RenderCart(response);
+                alertify.success('Thêm giỏ hàng thành công');
+            });
+        }
+
+        $("#cart-item-change").on("click", ".close-cart i", function () {
+            $.ajax({
+                url: 'Delete-Item-Cart/' + $(this).data("id"),
+                type: 'GET',
+            }).done(function (response) {
+                RenderCart(response);
+            });
+        });
+
+        function RenderCart(response) {
+            $("#cart-item-change").empty();
+            $("#cart-item-change").html(response);
+            $("#total-quantity-show").text($("#total-quantity-cart").val());
+        }
+    </script>
 @endsection
