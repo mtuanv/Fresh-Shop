@@ -71,7 +71,7 @@
                         <ul class="offer-box">
                             @foreach($lsBlog as $blog)
                                 <li>
-                                    <i class="fab fa-opencart"></i> {{$blog->title}}
+                                    <i class="fab fa-opencart"></i>{{$blog->title}}
                                 </li>
                             @endforeach
                         </ul>

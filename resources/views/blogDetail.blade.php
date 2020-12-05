@@ -86,50 +86,32 @@
                         </div>
                         <div class="col-xl-3 col-lg-3 col-sm-12 col-xs-12">
                             <!-- Search Widget -->
-                            <div class="card my-4">
-                                <h5 class="card-header">Search</h5>
-                                <div class="card-body">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="Search for...">
-                                        <span class="input-group-append"><button class="btn btn-secondary"
-                                                                                 type="button">Go!</button></span>
-                                    </div>
-                                </div>
+                            <div class="search-product">
+                                <form action="{{route('blog')}}" method="get" name="search">
+                                    @csrf
+                                    <input class="form-control" placeholder="Tìm kiếm..." type="text"
+                                           name="name"
+                                           value="{{$name}}">
+                                    <button type="submit"><i class="fa fa-search"></i></button>
+                                </form>
                             </div>
 
                             <!-- Categories Widget -->
-                            <div class="card my-4">
-                                <h5 class="card-header">Categories</h5>
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <ul class="list-unstyled mb-0">
-                                                <li>
-                                                    <a href="#">Web Design</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">HTML</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">Freebies</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <ul class="list-unstyled mb-0">
-                                                <li>
-                                                    <a href="#">JavaScript</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">CSS</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">Tutorials</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
+                            <div class="filter-sidebar-left">
+                                <div class="title-left">
+                                    <h3>Danh Mục</h3>
                                 </div>
+{{--                                <div class="blog-menu list-group list-group-collapse list-group-sm list-group-tree"--}}
+                                {{--                                     id="list-group-men" data-children=".sub-men">--}}
+                                {{--                                    <a href="" class="active list-group-item list-group-item-action"--}}
+                                {{--                                       data-filter="*">Tất cả <small--}}
+                                {{--                                            class="text-muted"> ({{$promotion->count()}})</small></a>--}}
+                                {{--                                    @foreach($lsTag as $tag)--}}
+                                {{--                                        <a href="" class="list-group-item list-group-item-action"--}}
+                                {{--                                           data-tag_id=".{{$tag->id}}"> {{$tag->name}} <small--}}
+                                {{--                                                class="text-muted"> ({{$tag->promotions()->count()}})</small></a>--}}
+                                {{--                                    @endforeach--}}
+                                {{--                                </div>--}}
                             </div>
                         </div>
                     </div>

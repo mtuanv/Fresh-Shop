@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Promotion;
 use Illuminate\Http\Request;
 use DB;
 use App\Cart;
@@ -39,7 +40,8 @@ class CartController extends Controller
 
     public function ViewListCart()
     {
-        return view('cart');
+        $lsBlog = Promotion::all();
+        return view('cart')->with(['lsBlog' => $lsBlog]);
     }
 
     public function DeleteItemListCart(Request $req, $id)
