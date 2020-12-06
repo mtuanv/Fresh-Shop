@@ -63,4 +63,15 @@ class CartController extends Controller
       $lsBlog = Promotion::all();
       return view('checkout')->with(['lsBlog' => $lsBlog]);
     }
+
+    public function SaveAllCart(Request $req){
+        foreach ($req->data as $item) {
+           $oldCart = Session('Cart') ? Session('Cart') : null;
+           $newCart = new Cart($oldCart);
+           $newCart->UpdateCart($item['key'], $item['value']);
+           $req->session()->put('Cart', $newCart);
+        }
+    }
+
+
 }
