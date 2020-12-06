@@ -73,7 +73,7 @@
                                   <td>
                                     @foreach($order->products as $p)
                                       @if($p->id == $op->product_id)
-                                        {{$p->price}}
+                                        {{number_format($p->price)}}
                                         @php
                                         $total += $p->price * $op->quantity
                                         @endphp
@@ -87,7 +87,7 @@
                                       @endif
                                     @endforeach
                                   </td>
-                                  <td>{{$op->price}}
+                                  <td>{{number_format($op->price)}}
                                   </td>
                                   @php
                                     $stt++
@@ -104,7 +104,7 @@
                   <label for="name" class="font-weight-bold form-control-label">Tổng tiền: </label>
               </div>
               <div class="col-12 col-md-2" style="text-align: right">
-                  {{$total}} VNĐ
+                  {{number_format($total)}} VNĐ
               </div>
           </div>
           <div class="row form-group">
@@ -112,7 +112,7 @@
                   <label for="name" class="font-weight-bold form-control-label">Giảm giá: </label>
               </div>
               <div class="col-12 col-md-2" style="text-align: right">
-                  {{$total - $order->total}} VNĐ
+                  {{number_format($total - $order->total)}} VNĐ
               </div>
           </div>
           <div class="row form-group">
@@ -120,7 +120,7 @@
                   <label for="name" class="font-weight-bold form-control-label">Tổng thanh toán: </label>
               </div>
               <div class="col-12 col-md-2" style="text-align: right">
-                  {{$order->total}} VNĐ
+                  {{number_format($order->total)}} VNĐ
               </div>
           </div>
       </div>

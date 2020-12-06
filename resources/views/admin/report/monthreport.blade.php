@@ -33,7 +33,7 @@
         <table class="table table-striped table-bordered" width="100%">
           <thead class="thead-light">
             <tr>
-              <th rowspan="2" class="align-middle text-center">Ngày</th>
+              <th rowspan="2" class="align-middle text-center">Tháng</th>
               <th colspan="3" class="text-center">Doanh thu</th>
             </tr>
             <tr>
@@ -43,7 +43,14 @@
             </tr>
           </thead>
           <tbody>
-
+            @foreach($lsReport as $rp)
+            <tr class="text-center">
+              <td>{{$rp->created_at->format('m/Y')}}</td>
+              <td>{{number_format($rp->stotal)}}</td>
+              <td>{{number_format($rp->sprice)}}</td>
+              <td>{{number_format(- $rp->stotal + $rp->sprice)}}</td>
+            </tr>
+            @endforeach
           </tbody>
         </table>
       </div>

@@ -26,14 +26,19 @@
                             <thead>
                             <tr>
                                 <th>Tên sản phẩm</th>
-                                <th>Giá</th>
+                                <th>Đơn giá</th>
                                 <th>Số lượng</th>
-                                <th>Tổng tiền</th>
+                                <th>Giảm giá</th>
+                                <th>Thành tiền</th>
                                 <th>Xóa</th>
                             </tr>
                             </thead>
                             <tbody>
                             @if(Session::has("Cart") != null)
+                                @php
+                                  $totaldiscount = 0;
+                                  $grandtotal = 0;
+                                @endphp
                                 @foreach(Session::get('Cart')->products as $item)
                                     <tr>
                                         <td class="name-pr">
@@ -47,8 +52,19 @@
                                         <td class="quantity-box"><input type="number" size="4"
                                                                         value="{{$item['quantity']}}" min="0" step="1"
                                                                         class="c-input-text qty text"></td>
+                                        <td class="discount-pr">
+                                            <p>@if($item['productInfo']->discount != null)
+                                              {{$item['productInfo']->discount}}%
+                                              @endif
+                                              </p>
+                                        </td>
                                         <td class="total-pr">
-                                            <p>{{number_format($item['price'])}}đ</p>
+                                          @php
+                                            $totaldiscount += $item['price'] * $item['productInfo']->discount / 100;
+                                            $iprice =  $item['price'] - $item['price'] * $item['productInfo']->discount / 100;
+                                            $grandtotal += $iprice;
+                                          @endphp
+                                            <p>{{number_format($iprice)}}đ</p>
                                         </td>
                                         <td class="remove-pr">
                                             <a style="cursor:pointer"
@@ -95,12 +111,12 @@
                                 </div>
                                 <div class="d-flex">
                                     <h4>Khuyến mãi</h4>
-                                    <div class="ml-auto font-weight-bold">0</div>
+                                    <div class="ml-auto font-weight-bold">{{number_format($totaldiscount)}}đ</div>
                                 </div>
                                 <hr class="my-1">
                                 <div class="d-flex gr-total">
                                     <h5>Thành tiền</h5>
-                                    <div class="ml-auto h5">{{number_format(Session::get('Cart')->totalPrice)}}đ</div>
+                                    <div class="ml-auto h5">{{number_format($grandtotal)}}đ</div>
                                 </div>
                                 <hr>
                             </div>

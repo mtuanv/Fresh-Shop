@@ -30,7 +30,10 @@
               <th colspan="3" class="text-center">Doanh thu</th>
             </tr>
             <tr>
-              <th class="text-center">Tổng</th>
+              <th class="text-center">
+                Tổng
+                <button class="btn"><i class="fas fa-less-than-equal"></i></button>
+              </th>
               <th class="text-center">Tiền hàng</th>
               <th class="text-center">Khuyến mãi</th>
             </tr>
@@ -38,7 +41,7 @@
           <tbody>
             @foreach($lsReport as $rp)
             <tr class="text-center">
-              <td>{{$rp->created_at->format('d/m/Y')}}</td>
+              <td>{{date('d/m/Y', strtotime($rp->date))}}</td>
               <td>{{number_format($rp->stotal)}}</td>
               <td>{{number_format($rp->sprice)}}</td>
               <td>{{number_format(- $rp->stotal + $rp->sprice)}}</td>
