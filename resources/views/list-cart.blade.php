@@ -27,7 +27,7 @@
                         <p>{{number_format($item['productInfo']->price)}}đ</p>
                     </td>
                     <td class="quantity-box"><input type="number" size="4"
-                                        data-id="{{$item['productInfo']->id}}" value="{{$item['quantity']}}" min="0" step="1"
+                                        data-id="{{$item['productInfo']->id}}" value="{{$item['quantity']}}" min="1" max="{{$item['productInfo']->quantity}}" step="1"
                                                     class="c-input-text qty text"></td>
                     <td class="discount-pr">
                         <p>@if($item['productInfo']->discount != null)
