@@ -33,6 +33,7 @@ Route::get('/cart', [\App\Http\Controllers\CartController::class, 'ViewListCart'
 Route::post('/Save-All', [\App\Http\Controllers\CartController::class, 'SaveAllCart'])->name('saveCart');
 Route::get('/Delete-Item-List-Cart/{id}', [\App\Http\Controllers\CartController::class, 'DeleteItemListCart'])->name('DeleteList');
 Route::get('/Check-out', [\App\Http\Controllers\CartController::class, 'CheckOut'])->name('Checkout');
+Route::post('/order_save', [\App\Http\Controllers\OrderController::class, 'store'])->name('saveorder');
 
 
 //back-end

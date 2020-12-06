@@ -115,7 +115,7 @@
                         {!! substr($product->description, 0, 50) !!}...
                       </td>
                       <td class="text-right">
-                        <a href="{{route('products.edit', $product->id)}}" class="btn btn-warning" style="margin-right:5px; float:left; color: white ">Sửa</a>
+                        <a href="{{route('products.edit', $product->id)}}" class="btn btn-warning" style="margin-right:5px; float:left; color: white " target="_blank">Sửa</a>
                         <form action="{{route('products.destroy', $product->id)}}" method="post">
                           @csrf
                           @method('Delete')

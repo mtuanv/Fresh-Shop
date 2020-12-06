@@ -783,6 +783,7 @@ ul.cart-list p .price {
     transition-duration: 0.3s;
     border-radius: 0;
     box-shadow: none;
+    color:white;
 }
 
 .hvr-hover::after {

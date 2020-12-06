@@ -19,6 +19,11 @@
     <!-- Start Menu Page  -->
     <div class="shop-box-inner">
         <div class="container">
+          @if(session('success'))
+            <div class="alert alert-success">
+              {{session('success')}}
+            </div>
+          @endif
             <div class="row">
                 <div class="col-xl-9 col-lg-9 col-sm-12 col-xs-12 shop-content-right">
                     <div class="right-product-box">
@@ -66,7 +71,7 @@
                                             <div class="why-text">
                                                 <h4><a href="{{route('detail', $product->id)}}"
                                                        style="color: black">{{$product->name}}</a></h4>
-                                                <h5> {{$product->price}} VND</h5>
+                                                <h5> {{number_format($product->price)}} VNĐ</h5>
                                             </div>
                                         </div>
                                     </div>

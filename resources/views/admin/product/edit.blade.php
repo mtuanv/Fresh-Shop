@@ -123,16 +123,16 @@
                 <select name="discount" id="discount" class="form-control @error('discount') is-invalid @enderror">
                     <option value="0">Please select</option>
                     <option value="0">0%</option>
-                    <option value="5">5%</option>
-                    <option value="10">10%</option>
-                    <option value="15">15%</option>
-                    <option value="20">20%</option>
-                    <option value="25">25%</option>
-                    <option value="30">30%</option>
-                    <option value="35">35%</option>
-                    <option value="40">40%</option>
-                    <option value="45">45%</option>
-                    <option value="50">50%</option>
+                    <option value="5" {{$product->discount == 5 ? 'selected' : ''}}>5%</option>
+                    <option value="10" {{$product->discount == 10 ? 'selected' : ''}}>10%</option>
+                    <option value="15" {{$product->discount == 15 ? 'selected' : ''}}>15%</option>
+                    <option value="20" {{$product->discount == 20 ? 'selected' : ''}}>20%</option>
+                    <option value="25" {{$product->discount == 25 ? 'selected' : ''}}>25%</option>
+                    <option value="30" {{$product->discount == 30 ? 'selected' : ''}}>30%</option>
+                    <option value="35" {{$product->discount == 35 ? 'selected' : ''}}>35%</option>
+                    <option value="40" {{$product->discount == 40 ? 'selected' : ''}}>40%</option>
+                    <option value="45" {{$product->discount == 45 ? 'selected' : ''}}>45%</option>
+                    <option value="50" {{$product->discount == 50 ? 'selected' : ''}}>50%</option>
                 </select>
                 @error('discount')
                     <span class="invalid-feedback" role="alert">

@@ -51,7 +51,7 @@
                         <i class="zmdi zmdi-money"></i>
                     </div>
                     <div class="text">
-                        <h2>{{$money}} VNĐ</h2>
+                        <h2>{{number_format($money)}} <span style="font-size:10px;color:white">VNĐ</span>  </h2>
                         <span>tổng doanh số tháng</span>
                     </div>
                 </div>

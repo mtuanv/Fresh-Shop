@@ -18,7 +18,7 @@
           Đến ngày &nbsp;
           <input id="EndTime" name="EndTime" style="width: 150px">&nbsp;&nbsp;
           <button type="submit" class="btn btn-primary" style="border-radius:0">Lấy dữ liệu</button>&nbsp;
-          <button type="submit" class="btn btn-info" style="border-radius:0"><img src="{{ asset('admin/images/icon/excel.png') }}" width="20"/> &nbsp;Xuất Excel</button>
+          <button type="button" class="btn btn-info" style="border-radius:0"><img src="{{ asset('admin/images/icon/excel.png') }}" width="20"/> &nbsp;Xuất Excel</button>
         </form>
     </div>
     <div class="card-body">
@@ -32,21 +32,55 @@
             <tr>
               <th class="text-center">
                 Tổng
-                <button class="btn"><i class="fas fa-less-than-equal"></i></button>
+                <form action="{{route('dayreport')}}" method="get">
+                  @csrf
+                  <input type="hidden" name="sort" value="1">
+                  <button class="btn btn-secondary" type="submit" style="border-radius: 0;float:right;margin-left:5px" title="Từ thấp đến cao"><i class="fas fa-less-than-equal"></i></button>
+                </form>
+                <form action="{{route('dayreport')}}" method="get">
+                  @csrf
+                  <input type="hidden" name="sort" value="2">
+                  <button class="btn btn-secondary" type="submit" style="border-radius: 0;float:right;margin-left:5px" title="Từ cao đến thấp"><i class="fas fa-greater-than-equal"></i></button>
+                </form>
               </th>
-              <th class="text-center">Tiền hàng</th>
-              <th class="text-center">Khuyến mãi</th>
+              <th class="text-center">
+                Tiền hàng
+                <form action="{{route('dayreport')}}" method="get">
+                  @csrf
+                  <input type="hidden" name="sort" value="3">
+                  <button class="btn btn-secondary" type="submit" style="border-radius: 0;float:right;margin-left:5px" title="Từ thấp đến cao"><i class="fas fa-less-than-equal"></i></button>
+                </form>
+                <form action="{{route('dayreport')}}" method="get">
+                  @csrf
+                  <input type="hidden" name="sort" value="4">
+                  <button class="btn btn-secondary" type="submit" style="border-radius: 0;float:right;margin-left:5px" title="Từ cao đến thấp"><i class="fas fa-greater-than-equal"></i></button>
+                </form>
+              </th>
+              <th class="text-center">
+                Khuyến mãi
+                <form action="{{route('dayreport')}}" method="get">
+                  @csrf
+                  <input type="hidden" name="sort" value="5">
+                  <button class="btn btn-secondary" type="submit" style="border-radius: 0;float:right;margin-left:5px" title="Từ thấp đến cao"><i class="fas fa-less-than-equal"></i></button>
+                </form>
+                <form action="{{route('dayreport')}}" method="get">
+                  @csrf
+                  <input type="hidden" name="sort" value="6">
+                  <button class="btn btn-secondary" type="submit" style="border-radius: 0;float:right;margin-left:5px" title="Từ cao đến thấp"><i class="fas fa-greater-than-equal"></i></button>
+                </form>
+              </th>
             </tr>
           </thead>
           <tbody>
-            @foreach($lsReport as $rp)
+            @for($i = 0; $i < count($datetotal); $i++)
             <tr class="text-center">
-              <td>{{date('d/m/Y', strtotime($rp->date))}}</td>
-              <td>{{number_format($rp->stotal)}}</td>
-              <td>{{number_format($rp->sprice)}}</td>
-              <td>{{number_format(- $rp->stotal + $rp->sprice)}}</td>
+              <td>{{date('d/m/Y', strtotime($datetotal[$i]->date))}}</td>
+              <td>{{number_format($datetotal[$i]->stotal)}}</td>
+              <td>{{number_format($price[$i]->sprice)}}</td>
+              <td>{{number_format($discount[$i])}}</td>
             </tr>
-            @endforeach
+            @endfor
+
           </tbody>
         </table>
       </div>

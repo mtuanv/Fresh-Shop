@@ -54,7 +54,7 @@
       </div>
     </div>
 </div>
-<div class="row">
+<div class="row" id="success">
     <div class="col-lg-12">
         <div class="table-responsive table--no-card m-b-40">
             <table class="table table-borderless table-striped table-earning">
@@ -76,7 +76,7 @@
 
                       <td>DH0000{{$order->id}}</td>
                       <td>{{$order->name}}</td>
-                      <td>{{$order->created_at}}</td>
+                      <td>{{$order->created_at->format('d/m/Y H:m:i')}}</td>
                       <td>
                         @if($order->status == 1)
                         Đã xác nhận
@@ -89,7 +89,7 @@
                         @endif
                       </td>
 
-                      <td class="text-right">
+                      <td style="padding: 12px 0">
                         @if($order->status == 1)
                         <form action="{{route('changesttorder', $order->id)}}" method="post"  style="float:left; margin-right: 5px">
                           @csrf
@@ -102,16 +102,7 @@
                           <button type="submit" class="btn btn-success" title="Hoàn thành đơn hàng"><i class="fas fa-clipboard-check"></i></button>
                         </form>
                         @elseif($order->status == 2)
-                        <form action="{{route('changesttorder', $order->id)}}" method="post" style="float:left; margin-right: 5px">
-                          @csrf
-                          <input type="hidden" name="status" value="1">
-                          <button type="submit" class="btn btn-primary" title="Xác nhận"><i class="fas fa-check-circle"></i></button>
-                        </form>
-                        <form action="{{route('changesttorder', $order->id)}}" method="post">
-                          @csrf
-                          <input type="hidden" name="status" value="10">
-                          <button type="submit" class="btn btn-success" title="Hoàn thành đơn hàng"><i class="fas fa-clipboard-check"></i></button>
-                        </form>
+
                           @elseif($order->status == 10)
                           @else
                           <form action="{{route('changesttorder', $order->id)}}" method="post" style="float:left; margin-right: 5px">
@@ -124,12 +115,8 @@
                             <input type="hidden" name="status" value="2">
                             <button type="submit" class="btn btn-danger" title="Huỷ đơn"><i class="fas fa-times-circle"></i></button>
                           </form>
-                          <form action="{{route('changesttorder', $order->id)}}" method="post"   style="float:left; margin-right: 5px">
-                            @csrf
-                            <input type="hidden" name="status" value="10">
-                            <button type="submit" class="btn btn-success" title="Hoàn thành đơn hàng"><i class="fas fa-clipboard-check"></i></button>
-                          </form>
                           @endif
+                          <p  style="float:left; margin-right: 5px"> </p>
                           <span style="clear:left"></span>
                       </td>
                       <td><a href="{{route('orders.show', $order->id)}}" class="btn btn-info">Xem</a></td>
