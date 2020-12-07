@@ -39,14 +39,16 @@
                             <li>
                                 <div class="form-group quantity-box">
                                     <label class="control-label">Số lượng</label>
-                                    <input class="form-control" value="1" min="1" max="{{$product->quantity}}" type="number">
+                                    <input class="form-control"  value="1" min="1" max="{{$product->quantity}}"
+                                           type="number">
                                 </div>
                             </li>
                         </ul>
 
                         <div class="price-box-bar">
                             <div class="cart-and-bay-btn">
-                                <a class="btn hvr-hover" data-fancybox-close="" href="#">Thêm vào giỏ</a>
+                                <a class="btn hvr-hover" data-fancybox-close="" onclick="AddCart({{$product->id}})"
+                                   href="javascript:">Thêm vào giỏ</a>
                             </div>
                         </div>
 
