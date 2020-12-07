@@ -70,7 +70,7 @@
                                             </div>
                                             <div class="why-text">
                                                 <h4><a href="{{route('detail', $product->id)}}"
-                                                       style="color: black">{{$product->name}}</a></h4>
+                                                       style="color: black" title="{{$product->name}}">{{$product->name}}</a></h4>
                                                 <h5> {{number_format($product->price)}} VNĐ</h5>
                                             </div>
                                         </div>
