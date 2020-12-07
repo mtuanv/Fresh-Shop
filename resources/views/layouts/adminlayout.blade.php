@@ -77,7 +77,7 @@
         <nav class="navbar-mobile">
             <div class="container-fluid">
                 <ul class="navbar-mobile__list list-unstyled">
-                    <li class="has-sub">
+                    <li class="has-sub" id="dbmb">
                         <a class="js-arrow" href="{{route('dashboard')}}">
                             <i class="fas fa-tachometer-alt"></i>Dashboard</a>
                     </li>
@@ -85,10 +85,10 @@
                         <a class="js-arrow" href="{{ route('dayreport') }}">
                             <i class="fas fa-copy"></i>Báo cáo</a>
                             <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
-                                <li>
+                                <li  id="drpmb">
                                     <a href="{{ route('dayreport')}}">Ngày</a>
                                 </li>
-                                <li>
+                                <li  id="mrpmb">
                                     <a href="{{ route('monthreport')}}">Tháng</a>
                                 </li>
                             </ul>
@@ -98,18 +98,18 @@
                                 <i class="fas fa-desktop"></i>Quản lý trang web</a>
                             <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
                               @if(Auth::user()->role_name == 'ADMIN')
-                                <li>
+                                <li id="qltmb">
                                     <a href="{{ route('tags.index')}}">Tag</a>
                                 </li>
-                                <li>
+                                <li id="qlspmb">
                                     <a href="{{ route('products.index')}}">Sản phẩm</a>
                                 </li>
                                 @endif
-                                <li>
+                                <li id="qldhmb">
                                     <a href="{{route('orders.index')}}">Đơn hàng</a>
                                 </li>
                                 @if(Auth::user()->role_name == 'ADMIN')
-                                <li>
+                                <li id="qlttmb">
                                     <a href="{{route('promotions.index')}}">Tin tức</a>
                                 </li>
                                 @endif
@@ -131,39 +131,39 @@
         <div class="menu-sidebar__content js-scrollbar1">
             <nav class="navbar-sidebar">
                 <ul class="list-unstyled navbar__list">
-                    <li class="active has-sub">
+                    <li class="has-sub" id="dashboard">
                         <a class="js-arrow" href="{{ route('dashboard')}}">
                             <i class="fas fa-tachometer-alt"></i>Dashboard</a>
                     </li>
                     <li class="has-sub">
-                        <a class="js-arrow" href="#">
+                        <a class="js-arrow" href="#" id="report">
                             <i class="fas fa-copy"></i>Báo cáo</a>
-                            <ul class="list-unstyled navbar__sub-list js-sub-list">
-                                <li>
+                            <ul class="list-unstyled navbar__sub-list js-sub-list" id="rp">
+                                <li id="dayrp">
                                     <a href="{{ route('dayreport')}}">Ngày</a>
                                 </li>
-                                <li>
+                                <li id="monthrp">
                                     <a href="{{ route('monthreport')}}">Tháng</a>
                                 </li>
                             </ul>
                     </li>
                         <li class="has-sub">
-                            <a class="js-arrow" href="#">
+                            <a class="js-arrow" href="#" id="manager">
                                 <i class="fas fa-desktop"></i>Quản lý trang web</a>
-                            <ul class="list-unstyled navbar__sub-list js-sub-list">
+                            <ul class="list-unstyled navbar__sub-list js-sub-list" id="mng">
                               @if(Auth::user()->role_name == 'ADMIN')
-                                <li>
+                                <li id="qltag">
                                     <a href="{{ route('tags.index')}}">Tag</a>
                                 </li>
-                                <li>
+                                <li id="qlsp">
                                     <a href="{{ route('products.index')}}">Sản phẩm</a>
                                 </li>
                                 @endif
-                                <li>
+                                <li id="qldh">
                                     <a href="{{route('orders.index')}}">Đơn hàng</a>
                                 </li>
                                 @if(Auth::user()->role_name == 'ADMIN')
-                                <li>
+                                <li id="qltt">
                                     <a href="{{route('promotions.index')}}">Tin tức</a>
                                 </li>
                                 @endif
@@ -262,7 +262,36 @@
 
 <!-- Main JS-->
 <script src="{{ asset('admin/js/main.js') }}"></script>
-
+<script type="text/javascript">
+  if(window.location.href.includes('/admin/dashboard')){
+      var dashboard = document.getElementById("dashboard");
+      dashboard.classList.add("active");
+  } else if (window.location.href.includes('/admin/dayreport')) {
+    document.getElementById("rp").style.display = "block";
+    var dayrp = document.getElementById("dayrp");
+    dayrp.classList.add("active");
+  } else if (window.location.href.includes('/admin/monthreport')) {
+    document.getElementById("rp").style.display = "block";
+    var monthrp = document.getElementById("monthrp");
+    monthrp.classList.add("active");
+  } else if (window.location.href.includes('/admin/tags')) {
+    document.getElementById("mng").style.display = "block";
+    var qltag = document.getElementById("qltag");
+    qltag.classList.add("active");
+  } else if (window.location.href.includes('/admin/products')) {
+    document.getElementById("mng").style.display = "block";
+    var qlsp = document.getElementById("qlsp");
+    qlsp.classList.add("active");
+  } else if (window.location.href.includes('/admin/orders')) {
+    document.getElementById("mng").style.display = "block";
+    var qldh = document.getElementById("qldh");
+    qldh.classList.add("active");
+  } else if (window.location.href.includes('/admin/promotions')) {
+    document.getElementById("mng").style.display = "block";
+    var qltt = document.getElementById("qltt");
+    qltt.classList.add("active");
+  }
+</script>
 </body>
 
 </html>
