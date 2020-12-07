@@ -122,7 +122,10 @@
                             <button type="submit" class="btn btn-warning" style="float:left;margin-right: 5px; color: white" title="Sửa tài khoản"><i class="fas fa-wrench"></i></button>
                           </form>
                           <!-- <a href="#update" class="btn btn-warning" style="float:left;margin-right: 5px">Sửa</a> -->
+                          @if($user->role_name == 'ADMIN')
+                          @else
                           <a href="{{route('deleteuser', $user->id)}}"  title="Xoá tài khoản" class="btn btn-danger" onclick="return confirm('Sure?')"><i class="fas fa-times-circle"></i></a>
+                          @endif
                         </td>
                         @endif
                     </tr>

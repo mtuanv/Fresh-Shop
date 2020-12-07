@@ -38,55 +38,93 @@
             </tr>
             <tr>
               <th class="text-center">
-                Tổng thu
-                <form action="{{route('dayreport')}}" method="get">
-                  @csrf
-                  <input type="hidden" name="StartTime" value="{{$stime}}">
-                  <input type="hidden" name="EndTime" value="{{$etime}}">
-                  <input type="hidden" name="sort" value="1">
-                  <button class="btn btn-secondary" type="submit" style="border-radius: 0;float:right;margin-left:5px" title="Từ thấp đến cao"><i class="fas fa-less-than-equal"></i></button>
-                </form>
+                @if($sort !=1 && $sort != 2)
                 <form action="{{route('dayreport')}}" method="get">
                   @csrf
                   <input type="hidden" name="StartTime" value="{{$stime}}">
                   <input type="hidden" name="EndTime" value="{{$etime}}">
                   <input type="hidden" name="sort" value="2">
-                  <button class="btn btn-secondary" type="submit" style="border-radius: 0;float:right;margin-left:5px" title="Từ cao đến thấp"><i class="fas fa-greater-than-equal"></i></button>
+                  <button class="btn" type="submit" title="Từ thấp đến cao"><b>Tổng thu</b></button>
                 </form>
-              </th>
-              <th class="text-center">
-                Tiền hàng
+                @endif
+                @if($sort == 1)
                 <form action="{{route('dayreport')}}" method="get">
                   @csrf
                   <input type="hidden" name="StartTime" value="{{$stime}}">
                   <input type="hidden" name="EndTime" value="{{$etime}}">
-                  <input type="hidden" name="sort" value="3">
-                  <button class="btn btn-secondary" type="submit" style="border-radius: 0;float:right;margin-left:5px" title="Từ thấp đến cao"><i class="fas fa-less-than-equal"></i></button>
+                  <input type="hidden" name="sort" value="2">
+                  <button class="btn" type="submit" title="Từ thấp đến cao"><b>Tổng thu</b> <i class="fas fa-caret-up"></i></button>
                 </form>
+                @endif
+                @if($sort == 2)
+                <form action="{{route('dayreport')}}" method="get">
+                  @csrf
+                  <input type="hidden" name="StartTime" value="{{$stime}}">
+                  <input type="hidden" name="EndTime" value="{{$etime}}">
+                  <input type="hidden" name="sort" value="1">
+                  <button class="btn" type="submit" title="Từ cao đến thấp"><b>Tổng thu</b> <i class="fas fa-caret-down"></i></button>
+                </form>
+                @endif
+              </th>
+              <th class="text-center">
+                @if($sort !=3 && $sort != 4)
                 <form action="{{route('dayreport')}}" method="get">
                   @csrf
                   <input type="hidden" name="StartTime" value="{{$stime}}">
                   <input type="hidden" name="EndTime" value="{{$etime}}">
                   <input type="hidden" name="sort" value="4">
-                  <button class="btn btn-secondary" type="submit" style="border-radius: 0;float:right;margin-left:5px" title="Từ cao đến thấp"><i class="fas fa-greater-than-equal"></i></button>
+                  <button class="btn" type="submit" title="Từ thấp đến cao"><b>Tiền hàng</b></button>
                 </form>
-              </th>
-              <th class="text-center">
-                Khuyến mãi
+                @endif
+                @if($sort == 3)
                 <form action="{{route('dayreport')}}" method="get">
                   @csrf
                   <input type="hidden" name="StartTime" value="{{$stime}}">
                   <input type="hidden" name="EndTime" value="{{$etime}}">
-                  <input type="hidden" name="sort" value="5">
-                  <button class="btn btn-secondary" type="submit" style="border-radius: 0;float:right;margin-left:5px" title="Từ thấp đến cao"><i class="fas fa-less-than-equal"></i></button>
+                  <input type="hidden" name="sort" value="4">
+                  <button class="btn" type="submit" title="Từ thấp đến cao"><b>Tiền hàng</b> <i class="fas fa-caret-up"></i></button>
                 </form>
+                @endif
+                @if($sort == 4)
+
+                <form action="{{route('dayreport')}}" method="get">
+                  @csrf
+                  <input type="hidden" name="StartTime" value="{{$stime}}">
+                  <input type="hidden" name="EndTime" value="{{$etime}}">
+                  <input type="hidden" name="sort" value="3">
+                  <button class="btn" type="submit" title="Từ cao đến thấp"><b>Tiền hàng</b> <i class="fas fa-caret-down"></i></button>
+                </form>
+                @endif
+              </th>
+              <th class="text-center">
+                @if($sort !=5 && $sort != 6)
                 <form action="{{route('dayreport')}}" method="get">
                   @csrf
                   <input type="hidden" name="StartTime" value="{{$stime}}">
                   <input type="hidden" name="EndTime" value="{{$etime}}">
                   <input type="hidden" name="sort" value="6">
-                  <button class="btn btn-secondary" type="submit" style="border-radius: 0;float:right;margin-left:5px" title="Từ cao đến thấp"><i class="fas fa-greater-than-equal"></i></button>
+                  <button class="btn" type="submit" title="Từ thấp đến cao"><b>Khuyến mãi</b></button>
                 </form>
+                @endif
+                @if($sort == 5)
+
+                <form action="{{route('dayreport')}}" method="get">
+                  @csrf
+                  <input type="hidden" name="StartTime" value="{{$stime}}">
+                  <input type="hidden" name="EndTime" value="{{$etime}}">
+                  <input type="hidden" name="sort" value="6">
+                  <button class="btn" type="submit" title="Từ thấp đến cao"><b>Khuyến mãi</b> <i class="fas fa-caret-up"></i></button>
+                </form>
+                @endif
+                @if($sort == 6)
+                <form action="{{route('dayreport')}}" method="get">
+                  @csrf
+                  <input type="hidden" name="StartTime" value="{{$stime}}">
+                  <input type="hidden" name="EndTime" value="{{$etime}}">
+                  <input type="hidden" name="sort" value="5">
+                  <button class="btn" type="submit" title="Từ cao đến thấp"><b>Khuyến mãi</b> <i class="fas fa-caret-down"></i></button>
+                </form>
+                @endif
               </th>
             </tr>
           </thead>

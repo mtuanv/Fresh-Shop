@@ -396,7 +396,7 @@ class ReportController extends Controller
         }
       }
 
-      return view('admin.report.dayreport')->with(['lsReport' => $lsReport, 'stime' => $stime, 'etime' => $etime]);
+      return view('admin.report.dayreport')->with(['sort' => $sort, 'lsReport' => $lsReport, 'stime' => $stime, 'etime' => $etime]);
     }
     public function month(Request $request){
       $stime = $request->StartTime;
@@ -776,7 +776,7 @@ class ReportController extends Controller
         }
       }
 
-      return view('admin.report.monthreport')->with(['lsReport' => $lsReport, 'stime' => $stime, 'etime' => $etime]);
+      return view('admin.report.monthreport')->with(['sort' => $sort, 'lsReport' => $lsReport, 'stime' => $stime, 'etime' => $etime]);
     }
     public function exportday(Request $request){
       return (new ReportsExport)->from($request->fromt)->to($request->tot)->download('report_day.xlsx');
