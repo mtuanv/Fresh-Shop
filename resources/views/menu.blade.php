@@ -19,11 +19,11 @@
     <!-- Start Menu Page  -->
     <div class="shop-box-inner">
         <div class="container">
-          @if(session('success'))
-            <div class="alert alert-success">
-              {{session('success')}}
-            </div>
-          @endif
+            @if(session('success'))
+                <div class="alert alert-success">
+                    {{session('success')}}
+                </div>
+            @endif
             <div class="row">
                 <div class="col-xl-9 col-lg-9 col-sm-12 col-xs-12 shop-content-right">
                     <div class="right-product-box">
@@ -35,6 +35,29 @@
                                         <option data-display="Select">Mặc định</option>
                                         <option value="1">Giá thấp → Giá cao</option>
                                         <option value="2">Giá cao → Giá thấp</option>
+{{--                                        <form action="{{route('dayreport')}}" method="get">--}}
+                                        {{--                                            --}}
+                                        {{--                                            @csrf--}}
+                                        {{--                                            <input type="hidden" name="StartTime" value="{{$stime}}">--}}
+                                        {{--                                            <input type="hidden" name="EndTime" value="{{$etime}}">--}}
+                                        {{--                                            <input type="hidden" name="sort" value="1">--}}
+                                        {{--                                            <button class="btn btn-secondary" type="submit"--}}
+                                        {{--                                                    style="border-radius: 0;float:right;margin-left:5px"--}}
+                                        {{--                                                    title="Từ thấp đến cao">--}}
+                                        {{--                                                --}}
+                                        {{--                                            </button>--}}
+                                        {{--                                        </form>--}}
+                                        {{--                                        <form action="{{route('dayreport')}}" method="get">--}}
+                                        {{--                                            @csrf--}}
+                                        {{--                                            <input type="hidden" name="StartTime" value="{{$stime}}">--}}
+                                        {{--                                            <input type="hidden" name="EndTime" value="{{$etime}}">--}}
+                                        {{--                                            <input type="hidden" name="sort" value="2">--}}
+                                        {{--                                            <button class="btn btn-secondary" type="submit"--}}
+                                        {{--                                                    style="border-radius: 0;float:right;margin-left:5px"--}}
+                                        {{--                                                    title="Từ cao đến thấp">--}}
+                                        {{--                                                --}}
+                                        {{--                                            </button>--}}
+                                        {{--                                        </form>--}}
                                     </select>
                                 </div>
                             </div>

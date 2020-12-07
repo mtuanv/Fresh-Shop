@@ -84,17 +84,17 @@ class ShopController extends Controller
                 $lsProduct = null;
             } else {
                 $lsProduct = Product::where('products.name', 'like', '%' . $name . '%')->get();
-                $lsProductLH = Product::where('products.name', 'like', '%' . $name . '%')->orderBy('price')->get();
-                $lsProductHL = Product::where('products.name', 'like', '%' . $name . '%')->orderBy('price', 'DESC')->get();
+//                $lsProductLH = Product::where('products.name', 'like', '%' . $name . '%')->orderBy('price')->get();
+//                $lsProductHL = Product::where('products.name', 'like', '%' . $name . '%')->orderBy('price', 'DESC')->get();
                 $lsTag = Tag::all();
             }
         } else {
             $lsProduct = Product::all();
-            $lsProductLH = Product::orderBy('price')->get();
-            $lsProductHL = Product::orderBy('price', 'DESC')->get();
+//            $lsProductLH = Product::orderBy('price')->get();
+//            $lsProductHL = Product::orderBy('price', 'DESC')->get();
             $lsTag = Tag::all();
         }
-        return view('menu')->with(['lsProduct' => $lsProduct, 'lsTag' => $lsTag, 'name' => $name, 'lsProductLH' => $lsProductLH, 'lsProductHL' => $lsProductHL, 'lsBlog' => $lsBlog]);
+        return view('menu')->with(['lsProduct' => $lsProduct, 'lsTag' => $lsTag, 'name' => $name, 'lsBlog' => $lsBlog]);
     }
 
     public function slideFilter(Request $request)
@@ -104,11 +104,10 @@ class ShopController extends Controller
         $max = $request->maxPrice;
         $lsBlog = Promotion::all();
 
-        $lsProduct = Product::whereBetween('products.price', [$min, $max])->paginate(9);
-        $lsPr = Product::whereBetween('products.price', [$min, $max])->paginate(9);
+        $lsProduct = Product::whereBetween('products.price', [$min, $max])->get();
         $lsTag = Tag::all();
 
-        return view('menu')->with(['lsProduct' => $lsProduct, 'lsBlog' => $lsBlog, 'lsPr' => $lsPr, 'name' => $name, 'lsTag' => $lsTag]);
+        return view('menu')->with(['lsProduct' => $lsProduct, 'lsBlog' => $lsBlog, 'name' => $name, 'lsTag' => $lsTag]);
     }
 
     public function detail($id)
