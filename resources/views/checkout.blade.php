@@ -98,7 +98,7 @@
                                     </div>
                                 </div>
                                 <input type="hidden" name="productid[{{$stt}}]" value="{{$item['productInfo']->id}}">
-                                <input type="hidden" name="productprice[{{$stt}}]" value="{{$iprice}}">
+                                <input type="hidden" name="productprice[{{$stt}}]" value="{{$item['productInfo']->price}}">
                                 <input type="hidden" name="productqtt[{{$stt}}]" value="{{$item['quantity']}}">
                                 @endforeach
 
