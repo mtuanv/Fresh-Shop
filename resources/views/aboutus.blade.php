@@ -82,7 +82,7 @@
                                 </div>
                                 <ul class="social">
                                     <li>
-                                        <a href="#" class="fab fa-facebook"></a>
+                                        <a href="{{$user->fb}}" class="fab fa-facebook" target="_blank"></a>
                                     </li>
                                 </ul>
                                 <div class="icon"><i class="fa fa-plus" aria-hidden="true"></i></div>
