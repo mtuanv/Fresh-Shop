@@ -13,14 +13,18 @@
   <div class="col-lg-12">
   <div class="card">
     <div class="card-header">
-        <form action="{{route('monthreport')}}" method="get">
+        <form action="{{route('monthreport')}}" method="get" style="float: left; margin-right: 5px">
           Từ tháng &nbsp;
           <input name="StartTime" value="{{$stime}}" id="stime" style="width: 150px">
           Đến tháng &nbsp;
           <input  name="EndTime" value="{{$etime}}" id="etime" style="width: 150px">&nbsp;&nbsp;
           <button type="submit" class="btn btn-primary" style="border-radius:0">Lấy dữ liệu</button>&nbsp;
-          <button type="submit" class="btn btn-info" style="border-radius:0"><img src="{{ asset('admin/images/icon/excel.png') }}" width="20"/> &nbsp;Xuất Excel</button>
         </form>
+        <form action="{{route('exportmonth')}}" method="get">
+          @csrf
+          <input type="hidden" name="fromt" value="{{$stime}}">
+          <input type="hidden" name="tot" value="{{$etime}}">
+          <button type="submit" class="btn btn-info" style="border-radius:0"><img src="{{ asset('admin/images/icon/excel.png') }}" width="20"/> &nbsp;Xuất Excel</button>
     </div>
 
     <div class="card-body">

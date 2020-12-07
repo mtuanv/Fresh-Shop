@@ -9,7 +9,9 @@ use App\Models\Order;
 use App\Models\Product;
 use App\Models\ProductOrder;
 use Carbon\Carbon;
-
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\ReportsExport;
+use App\Exports\ReportsExport2;
 
 class ReportController extends Controller
 {
@@ -775,5 +777,11 @@ class ReportController extends Controller
       }
 
       return view('admin.report.monthreport')->with(['lsReport' => $lsReport, 'stime' => $stime, 'etime' => $etime]);
+    }
+    public function exportday(Request $request){
+      return (new ReportsExport)->from($request->fromt)->to($request->tot)->download('report_day.xlsx');
+    }
+    public function exportmonth(Request $request){
+      return (new ReportsExport2)->from($request->fromt)->to($request->tot)->download('report_month.xlsx');
     }
 }

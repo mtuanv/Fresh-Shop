@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\ReportsExport;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,5 +55,7 @@ Route::middleware(['auth', 'checkAdmin'])->group(function () {
         Route::post('/order_status/{id}', [App\Http\Controllers\OrderController::class, 'changeStatus'])->name('changesttorder');
         Route::get('/dayreport', [\App\Http\Controllers\ReportController::class, 'day'])->name('dayreport');
         Route::get('/monthreport', [\App\Http\Controllers\ReportController::class, 'month'])->name('monthreport');
+        Route::get('/dayexport', [\App\Http\Controllers\ReportController::class, 'exportday'])->name('exportday');
+        Route::get('/monthexport', [\App\Http\Controllers\ReportController::class, 'exportmonth'])->name('exportmonth');
     });
 });
