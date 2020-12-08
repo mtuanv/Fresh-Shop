@@ -26,6 +26,7 @@ Route::get('/menu', [\App\Http\Controllers\ShopController::class, 'menu'])->name
 Route::get('/detail/{id}', [\App\Http\Controllers\ShopController::class, 'detail'])->name('detail');
 Route::get('/searchHeader', [\App\Http\Controllers\ShopController::class, 'searchHeader'])->name('searchHeader');
 Route::get('/slideFilter', [\App\Http\Controllers\ShopController::class, 'slideFilter'])->name('slideFilter');
+Route::get('/sortPrice', [\App\Http\Controllers\ShopController::class, 'sortPrice'])->name('sortPrice');
 
 //Route cua gio hang
 Route::get('/Add-Cart/{id}', [\App\Http\Controllers\CartController::class, 'AddCart'])->name('AddnewCart');

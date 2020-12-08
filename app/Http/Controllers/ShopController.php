@@ -75,8 +75,10 @@ class ShopController extends Controller
     public function menu(Request $request)
     {
         $name = $request->name;
+        $sort = $request->sort;
         $lsBlog = Promotion::all();
         $count = 0;
+        $lsTag = Tag::all();
         if ($name != null) {
             $lsProduct = Product::where('products.name', 'like', '%' . $name . '%');
             $count = $lsProduct->count();
@@ -84,22 +86,33 @@ class ShopController extends Controller
                 $lsProduct = null;
             } else {
                 $lsProduct = Product::where('products.name', 'like', '%' . $name . '%')->get();
-//                $lsProductLH = Product::where('products.name', 'like', '%' . $name . '%')->orderBy('price')->get();
-//                $lsProductHL = Product::where('products.name', 'like', '%' . $name . '%')->orderBy('price', 'DESC')->get();
-                $lsTag = Tag::all();
             }
         } else {
             $lsProduct = Product::all();
-//            $lsProductLH = Product::orderBy('price')->get();
-//            $lsProductHL = Product::orderBy('price', 'DESC')->get();
-            $lsTag = Tag::all();
         }
-        return view('menu')->with(['lsProduct' => $lsProduct, 'lsTag' => $lsTag, 'name' => $name, 'lsBlog' => $lsBlog]);
+        return view('menu')->with(['lsProduct' => $lsProduct, 'sort' => $sort, 'lsTag' => $lsTag, 'name' => $name, 'lsBlog' => $lsBlog]);
+    }
+
+    public function sortPrice(Request $request)
+    {
+        $sort = $request->sort;
+        $name = $request->name;
+        $lsTag = Tag::all();
+        $lsBlog = Promotion::all();
+        if ($sort != 1 && $sort != 2) {
+            $lsProduct = Product::all();
+        } elseif ($sort == 1) {
+            $lsProduct = Product::orderBy('price', 'DESC')->get();
+        } elseif ($sort == 2) {
+            $lsProduct = Product::orderBy('price')->get();
+        }
+        return view('menu')->with(['lsProduct' => $lsProduct, 'lsTag' => $lsTag, 'lsBlog' => $lsBlog, 'name' => $name, 'sort' => $sort]);
     }
 
     public function slideFilter(Request $request)
     {
         $name = $request->name;
+        $sort = $request->sort;
         $min = $request->minPrice;
         $max = $request->maxPrice;
         $lsBlog = Promotion::all();
@@ -107,7 +120,7 @@ class ShopController extends Controller
         $lsProduct = Product::whereBetween('products.price', [$min, $max])->get();
         $lsTag = Tag::all();
 
-        return view('menu')->with(['lsProduct' => $lsProduct, 'lsBlog' => $lsBlog, 'name' => $name, 'lsTag' => $lsTag]);
+        return view('menu')->with(['lsProduct' => $lsProduct, 'lsBlog' => $lsBlog, 'sort' => $sort, 'name' => $name, 'lsTag' => $lsTag]);
     }
 
     public function detail($id)

@@ -39,7 +39,7 @@
                             <li>
                                 <div class="form-group quantity-box">
                                     <label class="control-label">Số lượng</label>
-                                    <input class="form-control"  value="1" min="1" max="{{$product->quantity}}"
+                                    <input class="form-control" value="1" min="1" max="{{$product->quantity}}"
                                            type="number">
                                 </div>
                             </li>

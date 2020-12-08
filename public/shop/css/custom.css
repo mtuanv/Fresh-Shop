@@ -37,4 +37,15 @@
     opacity: 0.4
 }
 
+.menu-sort-btn {
+    background-color: black;
+    color: white;
+    font-weight: 300;
+    border-radius: 0 !important;
+}
+
+.menu-sort-btn:hover {
+    background-color: #b0b435;
+    border-radius: none;
+}
 

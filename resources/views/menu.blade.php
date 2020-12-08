@@ -31,34 +31,33 @@
                             <div class="col-12 col-sm-8 text-center text-sm-left">
                                 <div class="toolbar-sorter-right">
                                     <span>Sắp xếp</span>
-                                    <select id="sort" class="selectpicker show-tick form-control" name="sort">
-                                        <option data-display="Select">Mặc định</option>
-                                        <option value="1">Giá thấp → Giá cao</option>
-                                        <option value="2">Giá cao → Giá thấp</option>
-{{--                                        <form action="{{route('dayreport')}}" method="get">--}}
-                                        {{--                                            --}}
-                                        {{--                                            @csrf--}}
-                                        {{--                                            <input type="hidden" name="StartTime" value="{{$stime}}">--}}
-                                        {{--                                            <input type="hidden" name="EndTime" value="{{$etime}}">--}}
-                                        {{--                                            <input type="hidden" name="sort" value="1">--}}
-                                        {{--                                            <button class="btn btn-secondary" type="submit"--}}
-                                        {{--                                                    style="border-radius: 0;float:right;margin-left:5px"--}}
-                                        {{--                                                    title="Từ thấp đến cao">--}}
-                                        {{--                                                --}}
-                                        {{--                                            </button>--}}
-                                        {{--                                        </form>--}}
-                                        {{--                                        <form action="{{route('dayreport')}}" method="get">--}}
-                                        {{--                                            @csrf--}}
-                                        {{--                                            <input type="hidden" name="StartTime" value="{{$stime}}">--}}
-                                        {{--                                            <input type="hidden" name="EndTime" value="{{$etime}}">--}}
-                                        {{--                                            <input type="hidden" name="sort" value="2">--}}
-                                        {{--                                            <button class="btn btn-secondary" type="submit"--}}
-                                        {{--                                                    style="border-radius: 0;float:right;margin-left:5px"--}}
-                                        {{--                                                    title="Từ cao đến thấp">--}}
-                                        {{--                                                --}}
-                                        {{--                                            </button>--}}
-                                        {{--                                        </form>--}}
-                                    </select>
+                                    @if($sort !=1 && $sort != 2)
+                                        <form action="{{route('sortPrice')}}" method="get">
+                                            @csrf
+                                            <input type="hidden" name="sort" value="1">
+                                            <button class="btn menu-sort-btn" type="submit"
+                                                    title="Từ thấp đến cao"><b>Mặc định</b>
+                                            </button>
+                                        </form>
+                                    @endif
+                                    @if($sort == 1)
+                                        <form action="{{route('sortPrice')}}" method="get">
+                                            @csrf
+                                            <input type="hidden" name="sort" value="2">
+                                            <button class="btn menu-sort-btn" type="submit"
+                                                    title="Từ thấp đến cao"><b>Giá cao → Giá
+                                                    thấp</b></button>
+                                        </form>
+                                    @endif
+                                    @if($sort == 2)
+                                        <form action="{{route('sortPrice')}}" method="get">
+                                            @csrf
+                                            <input type="hidden" name="sort" value="3">
+                                            <button class="btn menu-sort-btn" type="submit"
+                                                    title="Từ cao đến thấp"><b>Giá thấp → Giá
+                                                    cao</b></button>
+                                        </form>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -93,7 +92,8 @@
                                             </div>
                                             <div class="why-text">
                                                 <h4><a href="{{route('detail', $product->id)}}"
-                                                       style="color: black" title="{{$product->name}}">{{$product->name}}</a></h4>
+                                                       style="color: black; line-height: 1.8rem; height: 1.8rem; overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 1"
+                                                       title="{{$product->name}}">{{$product->name}}</a></h4>
                                                 <h5> {{number_format($product->price)}} VNĐ</h5>
                                             </div>
                                         </div>
@@ -124,15 +124,22 @@
                             <div class="title-left">
                                 <h3>Danh Mục</h3>
                             </div>
-                            <div class="category-menu list-group list-group-collapse list-group-sm list-group-tree">
-                                <button href="" class="active list-group-item list-group-item-action"
-                                        data-filter="*">Tất cả <small
-                                        class="text-muted"> ({{$product->count()}})</small></button>
-                                @foreach($lsTag as $tag)
-                                    <button class="list-group-item list-group-item-action"
-                                            data-tag_id=".{{$tag->id}}"> {{$tag->name}} <small
-                                            class="text-muted"> ({{$tag->products()->count()}})</small></button>
-                                @endforeach
+                            <div class="category-menu">
+                                {{--                                <button href="" class="active"--}}
+                                {{--                                        data-filter="*">Tất cả <small--}}
+                                {{--                                        class="text-muted"> ({{$product->count()}})</small></button>--}}
+                                {{--                                @foreach($lsTag as $tag)--}}
+                                {{--                                    <button class=""--}}
+                                {{--                                            data-tag_id=".{{$tag->id}}"> {{$tag->name}} <small--}}
+                                {{--                                            class="text-muted"> ({{$tag->products()->count()}})</small></button>--}}
+                                {{--                                @endforeach--}}
+                                <form action="{{route('menu')}}" method="get">
+                                    @foreach($lsTag as $tag)
+                                        <input type="radio" class="tagname" name="tag-category" value="{{$tag->id}}"
+                                               id="{{$tag->id}}"><label
+                                            for="{{$tag->id}}">{{$tag->name}}</label>
+                                    @endforeach
+                                </form>
                             </div>
                         </div>
                         <div class="filter-price-left">
