@@ -29,7 +29,7 @@ class ProductController extends Controller
 
         if($sort == "-" || $sort == null){
           if($name == null && $price == null && ($status == null || $status == "-") && ($tag == null || $tag == "-")){
-            $lsProduct = Product::paginate(5);
+            $lsProduct = Product::paginate(10);
           } elseif ($name != null && $price != null && ($status != null && $status != "-") && ($tag != null && $tag != "-")) {
             $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
                                 ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
@@ -39,31 +39,31 @@ class ProductController extends Controller
                                 ->where('products.status', '=', $status)
                                 ->where('tags.id', '=', $tag)
                                 ->distinct()
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name != null && $price == null && ($status == null || $status == "-") && ($tag == null || $tag == "-")) {
             $lsProduct = Product::where('products.name', 'like', '%'.$name.'%')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name == null && $price != null && ($status == null || $status == "-") && ($tag == null || $tag == "-")) {
             $lsProduct = Product::where('products.price', '=', $price)
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name == null && $price == null && ($status != null && $status != "-") && ($tag == null || $tag == "-")) {
             $lsProduct = Product::where('products.status', '=', $status)
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name == null && $price == null && ($status == null || $status == "-") && ($tag != null && $tag != "-")) {
             $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
                                 ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
                                 ->select('products.*')
                                 ->where('tags.id', '=', $tag)
                                 ->distinct()
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name != null && $price != null && ($status == null || $status == "-") && ($tag == null || $tag == "-")) {
             $lsProduct = Product::where('products.name', 'like', '%'.$name.'%')
                                 ->where('products.price', '=', $price)
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name == null && $price != null && ($status != null && $status != "-") && ($tag == null || $tag == "-")) {
             $lsProduct = Product::where('products.price', '=', $price)
                                 ->where('products.status', '=', $status)
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name == null && $price == null && ($status != null && $status != "-") && ($tag != null && $tag != "-")) {
             $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
                                 ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
@@ -71,11 +71,11 @@ class ProductController extends Controller
                                 ->where('products.status', '=', $status)
                                 ->where('tags.id', '=', $tag)
                                 ->distinct()
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name != null && $price == null && ($status != null && $status != "-") && ($tag == null || $tag == "-")) {
             $lsProduct = Product::where('products.name', 'like', '%'.$name.'%')
                                 ->where('products.status', '=', $status)
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name == null && $price != null && ($status == null || $status == "-") && ($tag != null && $tag != "-")) {
             $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
                                 ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
@@ -83,7 +83,7 @@ class ProductController extends Controller
                                 ->where('products.price', '=', $price)
                                 ->where('tags.id', '=', $tag)
                                 ->distinct()
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name != null && $price == null && ($status == null || $status == "-") && ($tag != null && $tag != "-")) {
             $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
                                 ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
@@ -91,12 +91,12 @@ class ProductController extends Controller
                                 ->where('products.name', 'like', '%'.$name.'%')
                                 ->where('tags.id', '=', $tag)
                                 ->distinct()
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name != null && $price != null && ($status != null && $status != "-") && ($tag == null || $tag == "-")) {
             $lsProduct = Product::where('products.name', 'like', '%'.$name.'%')
                                 ->where('products.price', '=', $price)
                                 ->where('products.status', '=', $status)
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name == null && $price != null && ($status != null && $status != "-") && ($tag != null && $tag != "-")) {
             $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
                                 ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
@@ -105,7 +105,7 @@ class ProductController extends Controller
                                 ->where('products.status', '=', $status)
                                 ->where('tags.id', '=', $tag)
                                 ->distinct()
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name != null && $price == null && ($status != null && $status != "-") && ($tag != null && $tag != "-")) {
             $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
                                 ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
@@ -114,7 +114,7 @@ class ProductController extends Controller
                                 ->where('products.status', '=', $status)
                                 ->where('tags.id', '=', $tag)
                                 ->distinct()
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name != null && $price != null && ($status == null || $status == "-") && ($tag != null && $tag != "-")) {
             $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
                                 ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
@@ -123,7 +123,7 @@ class ProductController extends Controller
                                 ->where('products.price', '=', $price)
                                 ->where('tags.id', '=', $tag)
                                 ->distinct()
-                                ->paginate(5);
+                                ->paginate(10);
           }
         } elseif($sort == "0"){
           if($name == null && $price == null && ($status == null || $status == "-") && ($tag == null || $tag == "-")){
@@ -138,19 +138,19 @@ class ProductController extends Controller
                                 ->where('tags.id', '=', $tag)
                                 ->distinct()
                                 ->orderBy('price')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name != null && $price == null && ($status == null || $status == "-") && ($tag == null || $tag == "-")) {
             $lsProduct = Product::where('products.name', 'like', '%'.$name.'%')
                                 ->orderBy('price')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name == null && $price != null && ($status == null || $status == "-") && ($tag == null || $tag == "-")) {
             $lsProduct = Product::where('products.price', '=', $price)
                                 ->orderBy('price')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name == null && $price == null && ($status != null && $status != "-") && ($tag == null || $tag == "-")) {
             $lsProduct = Product::where('products.status', '=', $status)
                                 ->orderBy('price')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name == null && $price == null && ($status == null || $status == "-") && ($tag != null && $tag != "-")) {
             $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
                                 ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
@@ -158,17 +158,17 @@ class ProductController extends Controller
                                 ->where('tags.id', '=', $tag)
                                 ->distinct()
                                 ->orderBy('price')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name != null && $price != null && ($status == null || $status == "-") && ($tag == null || $tag == "-")) {
             $lsProduct = Product::where('products.name', 'like', '%'.$name.'%')
                                 ->where('products.price', '=', $price)
                                 ->orderBy('price')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name == null && $price != null && ($status != null && $status != "-") && ($tag == null || $tag == "-")) {
             $lsProduct = Product::where('products.price', '=', $price)
                                 ->where('products.status', '=', $status)
                                 ->orderBy('price')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name == null && $price == null && ($status != null && $status != "-") && ($tag != null && $tag != "-")) {
             $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
                                 ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
@@ -177,12 +177,12 @@ class ProductController extends Controller
                                 ->where('tags.id', '=', $tag)
                                 ->distinct()
                                 ->orderBy('price')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name != null && $price == null && ($status != null && $status != "-") && ($tag == null || $tag == "-")) {
             $lsProduct = Product::where('products.name', 'like', '%'.$name.'%')
                                 ->where('products.status', '=', $status)
                                 ->orderBy('price')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name == null && $price != null && ($status == null || $status == "-") && ($tag != null && $tag != "-")) {
             $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
                                 ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
@@ -191,7 +191,7 @@ class ProductController extends Controller
                                 ->where('tags.id', '=', $tag)
                                 ->distinct()
                                 ->orderBy('price')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name != null && $price == null && ($status == null || $status == "-") && ($tag != null && $tag != "-")) {
             $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
                                 ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
@@ -200,13 +200,13 @@ class ProductController extends Controller
                                 ->where('tags.id', '=', $tag)
                                 ->distinct()
                                 ->orderBy('price')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name != null && $price != null && ($status != null && $status != "-") && ($tag == null || $tag == "-")) {
             $lsProduct = Product::where('products.name', 'like', '%'.$name.'%')
                                 ->where('products.price', '=', $price)
                                 ->where('products.status', '=', $status)
                                 ->orderBy('price')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name == null && $price != null && ($status != null && $status != "-") && ($tag != null && $tag != "-")) {
             $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
                                 ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
@@ -216,7 +216,7 @@ class ProductController extends Controller
                                 ->where('tags.id', '=', $tag)
                                 ->distinct()
                                 ->orderBy('price')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name != null && $price == null && ($status != null && $status != "-") && ($tag != null && $tag != "-")) {
             $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
                                 ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
@@ -226,7 +226,7 @@ class ProductController extends Controller
                                 ->where('tags.id', '=', $tag)
                                 ->distinct()
                                 ->orderBy('price')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name != null && $price != null && ($status == null || $status == "-") && ($tag != null && $tag != "-")) {
             $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
                                 ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
@@ -236,7 +236,7 @@ class ProductController extends Controller
                                 ->where('tags.id', '=', $tag)
                                 ->distinct()
                                 ->orderBy('price')
-                                ->paginate(5);
+                                ->paginate(10);
           }
         } elseif ($sort == "1") {
           if($name == null && $price == null && ($status == null || $status == "-") && ($tag == null || $tag == "-")){
@@ -251,19 +251,19 @@ class ProductController extends Controller
                                 ->where('tags.id', '=', $tag)
                                 ->distinct()
                                 ->orderBy('price', 'DESC')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name != null && $price == null && ($status == null || $status == "-") && ($tag == null || $tag == "-")) {
             $lsProduct = Product::where('products.name', 'like', '%'.$name.'%')
                                 ->orderBy('price', 'DESC')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name == null && $price != null && ($status == null || $status == "-") && ($tag == null || $tag == "-")) {
             $lsProduct = Product::where('products.price', '=', $price)
                                 ->orderBy('price', 'DESC')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name == null && $price == null && ($status != null && $status != "-") && ($tag == null || $tag == "-")) {
             $lsProduct = Product::where('products.status', '=', $status)
                                 ->orderBy('price', 'DESC')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name == null && $price == null && ($status == null || $status == "-") && ($tag != null && $tag != "-")) {
             $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
                                 ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
@@ -271,17 +271,17 @@ class ProductController extends Controller
                                 ->where('tags.id', '=', $tag)
                                 ->distinct()
                                 ->orderBy('price', 'DESC')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name != null && $price != null && ($status == null || $status == "-") && ($tag == null || $tag == "-")) {
             $lsProduct = Product::where('products.name', 'like', '%'.$name.'%')
                                 ->where('products.price', '=', $price)
                                 ->orderBy('price', 'DESC')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name == null && $price != null && ($status != null && $status != "-") && ($tag == null || $tag == "-")) {
             $lsProduct = Product::where('products.price', '=', $price)
                                 ->where('products.status', '=', $status)
                                 ->orderBy('price', 'DESC')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name == null && $price == null && ($status != null && $status != "-") && ($tag != null && $tag != "-")) {
             $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
                                 ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
@@ -290,12 +290,12 @@ class ProductController extends Controller
                                 ->where('tags.id', '=', $tag)
                                 ->distinct()
                                 ->orderBy('price', 'DESC')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name != null && $price == null && ($status != null && $status != "-") && ($tag == null || $tag == "-")) {
             $lsProduct = Product::where('products.name', 'like', '%'.$name.'%')
                                 ->where('products.status', '=', $status)
                                 ->orderBy('price', 'DESC')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name == null && $price != null && ($status == null || $status == "-") && ($tag != null && $tag != "-")) {
             $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
                                 ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
@@ -304,7 +304,7 @@ class ProductController extends Controller
                                 ->where('tags.id', '=', $tag)
                                 ->distinct()
                                 ->orderBy('price', 'DESC')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name != null && $price == null && ($status == null || $status == "-") && ($tag != null && $tag != "-")) {
             $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
                                 ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
@@ -313,13 +313,13 @@ class ProductController extends Controller
                                 ->where('tags.id', '=', $tag)
                                 ->distinct()
                                 ->orderBy('price', 'DESC')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name != null && $price != null && ($status != null && $status != "-") && ($tag == null || $tag == "-")) {
             $lsProduct = Product::where('products.name', 'like', '%'.$name.'%')
                                 ->where('products.price', '=', $price)
                                 ->where('products.status', '=', $status)
                                 ->orderBy('price', 'DESC')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name == null && $price != null && ($status != null && $status != "-") && ($tag != null && $tag != "-")) {
             $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
                                 ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
@@ -329,7 +329,7 @@ class ProductController extends Controller
                                 ->where('tags.id', '=', $tag)
                                 ->distinct()
                                 ->orderBy('price', 'DESC')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name != null && $price == null && ($status != null && $status != "-") && ($tag != null && $tag != "-")) {
             $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
                                 ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
@@ -339,7 +339,7 @@ class ProductController extends Controller
                                 ->where('tags.id', '=', $tag)
                                 ->distinct()
                                 ->orderBy('price', 'DESC')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name != null && $price != null && ($status == null || $status == "-") && ($tag != null && $tag != "-")) {
             $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
                                 ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
@@ -349,7 +349,7 @@ class ProductController extends Controller
                                 ->where('tags.id', '=', $tag)
                                 ->distinct()
                                 ->orderBy('price', 'DESC')
-                                ->paginate(5);
+                                ->paginate(10);
           }
         } elseif ($sort == "2") {
           if($name == null && $price == null && ($status == null || $status == "-") && ($tag == null || $tag == "-")){
@@ -364,19 +364,19 @@ class ProductController extends Controller
                                 ->where('tags.id', '=', $tag)
                                 ->distinct()
                                 ->orderBy('name')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name != null && $price == null && ($status == null || $status == "-") && ($tag == null || $tag == "-")) {
             $lsProduct = Product::where('products.name', 'like', '%'.$name.'%')
                                 ->orderBy('name')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name == null && $price != null && ($status == null || $status == "-") && ($tag == null || $tag == "-")) {
             $lsProduct = Product::where('products.price', '=', $price)
                                 ->orderBy('name')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name == null && $price == null && ($status != null && $status != "-") && ($tag == null || $tag == "-")) {
             $lsProduct = Product::where('products.status', '=', $status)
                                 ->orderBy('name')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name == null && $price == null && ($status == null || $status == "-") && ($tag != null && $tag != "-")) {
             $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
                                 ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
@@ -384,17 +384,17 @@ class ProductController extends Controller
                                 ->where('tags.id', '=', $tag)
                                 ->distinct()
                                 ->orderBy('name')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name != null && $price != null && ($status == null || $status == "-") && ($tag == null || $tag == "-")) {
             $lsProduct = Product::where('products.name', 'like', '%'.$name.'%')
                                 ->where('products.price', '=', $price)
                                 ->orderBy('name')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name == null && $price != null && ($status != null && $status != "-") && ($tag == null || $tag == "-")) {
             $lsProduct = Product::where('products.price', '=', $price)
                                 ->where('products.status', '=', $status)
                                 ->orderBy('name')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name == null && $price == null && ($status != null && $status != "-") && ($tag != null && $tag != "-")) {
             $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
                                 ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
@@ -403,12 +403,12 @@ class ProductController extends Controller
                                 ->where('tags.id', '=', $tag)
                                 ->distinct()
                                 ->orderBy('name')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name != null && $price == null && ($status != null && $status != "-") && ($tag == null || $tag == "-")) {
             $lsProduct = Product::where('products.name', 'like', '%'.$name.'%')
                                 ->where('products.status', '=', $status)
                                 ->orderBy('name')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name == null && $price != null && ($status == null || $status == "-") && ($tag != null && $tag != "-")) {
             $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
                                 ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
@@ -417,7 +417,7 @@ class ProductController extends Controller
                                 ->where('tags.id', '=', $tag)
                                 ->distinct()
                                 ->orderBy('name')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name != null && $price == null && ($status == null || $status == "-") && ($tag != null && $tag != "-")) {
             $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
                                 ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
@@ -426,13 +426,13 @@ class ProductController extends Controller
                                 ->where('tags.id', '=', $tag)
                                 ->distinct()
                                 ->orderBy('name')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name != null && $price != null && ($status != null && $status != "-") && ($tag == null || $tag == "-")) {
             $lsProduct = Product::where('products.name', 'like', '%'.$name.'%')
                                 ->where('products.price', '=', $price)
                                 ->where('products.status', '=', $status)
                                 ->orderBy('name')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name == null && $price != null && ($status != null && $status != "-") && ($tag != null && $tag != "-")) {
             $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
                                 ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
@@ -442,7 +442,7 @@ class ProductController extends Controller
                                 ->where('tags.id', '=', $tag)
                                 ->distinct()
                                 ->orderBy('name')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name != null && $price == null && ($status != null && $status != "-") && ($tag != null && $tag != "-")) {
             $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
                                 ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
@@ -452,7 +452,7 @@ class ProductController extends Controller
                                 ->where('tags.id', '=', $tag)
                                 ->distinct()
                                 ->orderBy('name')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name != null && $price != null && ($status == null || $status == "-") && ($tag != null && $tag != "-")) {
             $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
                                 ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
@@ -462,7 +462,7 @@ class ProductController extends Controller
                                 ->where('tags.id', '=', $tag)
                                 ->distinct()
                                 ->orderBy('name')
-                                ->paginate(5);
+                                ->paginate(10);
           }
         } elseif ($sort == "3") {
           if($name == null && $price == null && ($status == null || $status == "-") && ($tag == null || $tag == "-")){
@@ -477,19 +477,19 @@ class ProductController extends Controller
                                 ->where('tags.id', '=', $tag)
                                 ->distinct()
                                 ->orderBy('name', 'DESC')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name != null && $price == null && ($status == null || $status == "-") && ($tag == null || $tag == "-")) {
             $lsProduct = Product::where('products.name', 'like', '%'.$name.'%')
                                 ->orderBy('name', 'DESC')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name == null && $price != null && ($status == null || $status == "-") && ($tag == null || $tag == "-")) {
             $lsProduct = Product::where('products.price', '=', $price)
                                 ->orderBy('name', 'DESC')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name == null && $price == null && ($status != null && $status != "-") && ($tag == null || $tag == "-")) {
             $lsProduct = Product::where('products.status', '=', $status)
                                 ->orderBy('name', 'DESC')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name == null && $price == null && ($status == null || $status == "-") && ($tag != null && $tag != "-")) {
             $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
                                 ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
@@ -497,17 +497,17 @@ class ProductController extends Controller
                                 ->where('tags.id', '=', $tag)
                                 ->distinct()
                                 ->orderBy('name', 'DESC')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name != null && $price != null && ($status == null || $status == "-") && ($tag == null || $tag == "-")) {
             $lsProduct = Product::where('products.name', 'like', '%'.$name.'%')
                                 ->where('products.price', '=', $price)
                                 ->orderBy('name', 'DESC')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name == null && $price != null && ($status != null && $status != "-") && ($tag == null || $tag == "-")) {
             $lsProduct = Product::where('products.price', '=', $price)
                                 ->where('products.status', '=', $status)
                                 ->orderBy('name', 'DESC')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name == null && $price == null && ($status != null && $status != "-") && ($tag != null && $tag != "-")) {
             $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
                                 ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
@@ -516,12 +516,12 @@ class ProductController extends Controller
                                 ->where('tags.id', '=', $tag)
                                 ->distinct()
                                 ->orderBy('name', 'DESC')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name != null && $price == null && ($status != null && $status != "-") && ($tag == null || $tag == "-")) {
             $lsProduct = Product::where('products.name', 'like', '%'.$name.'%')
                                 ->where('products.status', '=', $status)
                                 ->orderBy('name', 'DESC')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name == null && $price != null && ($status == null || $status == "-") && ($tag != null && $tag != "-")) {
             $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
                                 ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
@@ -530,7 +530,7 @@ class ProductController extends Controller
                                 ->where('tags.id', '=', $tag)
                                 ->distinct()
                                 ->orderBy('name', 'DESC')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name != null && $price == null && ($status == null || $status == "-") && ($tag != null && $tag != "-")) {
             $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
                                 ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
@@ -539,13 +539,13 @@ class ProductController extends Controller
                                 ->where('tags.id', '=', $tag)
                                 ->distinct()
                                 ->orderBy('price', 'DESC')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name != null && $price != null && ($status != null && $status != "-") && ($tag == null || $tag == "-")) {
             $lsProduct = Product::where('products.name', 'like', '%'.$name.'%')
                                 ->where('products.price', '=', $price)
                                 ->where('products.status', '=', $status)
                                 ->orderBy('name', 'DESC')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name == null && $price != null && ($status != null && $status != "-") && ($tag != null && $tag != "-")) {
             $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
                                 ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
@@ -555,7 +555,7 @@ class ProductController extends Controller
                                 ->where('tags.id', '=', $tag)
                                 ->distinct()
                                 ->orderBy('name', 'DESC')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name != null && $price == null && ($status != null && $status != "-") && ($tag != null && $tag != "-")) {
             $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
                                 ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
@@ -575,7 +575,7 @@ class ProductController extends Controller
                                 ->where('tags.id', '=', $tag)
                                 ->distinct()
                                 ->orderBy('name', 'DESC')
-                                ->paginate(5);
+                                ->paginate(10);
           }
         } elseif ($sort == "4") {
           if($name == null && $price == null && ($status == null || $status == "-") && ($tag == null || $tag == "-")){
@@ -590,19 +590,19 @@ class ProductController extends Controller
                                 ->where('tags.id', '=', $tag)
                                 ->distinct()
                                 ->orderBy('quantity')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name != null && $price == null && ($status == null || $status == "-") && ($tag == null || $tag == "-")) {
             $lsProduct = Product::where('products.name', 'like', '%'.$name.'%')
                                 ->orderBy('quantity')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name == null && $price != null && ($status == null || $status == "-") && ($tag == null || $tag == "-")) {
             $lsProduct = Product::where('products.price', '=', $price)
                                 ->orderBy('quantity')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name == null && $price == null && ($status != null && $status != "-") && ($tag == null || $tag == "-")) {
             $lsProduct = Product::where('products.status', '=', $status)
                                 ->orderBy('quantity')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name == null && $price == null && ($status == null || $status == "-") && ($tag != null && $tag != "-")) {
             $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
                                 ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
@@ -610,17 +610,17 @@ class ProductController extends Controller
                                 ->where('tags.id', '=', $tag)
                                 ->distinct()
                                 ->orderBy('quantity')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name != null && $price != null && ($status == null || $status == "-") && ($tag == null || $tag == "-")) {
             $lsProduct = Product::where('products.name', 'like', '%'.$name.'%')
                                 ->where('products.price', '=', $price)
                                 ->orderBy('quantity')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name == null && $price != null && ($status != null && $status != "-") && ($tag == null || $tag == "-")) {
             $lsProduct = Product::where('products.price', '=', $price)
                                 ->where('products.status', '=', $status)
                                 ->orderBy('quantity')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name == null && $price == null && ($status != null && $status != "-") && ($tag != null && $tag != "-")) {
             $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
                                 ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
@@ -629,12 +629,12 @@ class ProductController extends Controller
                                 ->where('tags.id', '=', $tag)
                                 ->distinct()
                                 ->orderBy('quantity')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name != null && $price == null && ($status != null && $status != "-") && ($tag == null || $tag == "-")) {
             $lsProduct = Product::where('products.name', 'like', '%'.$name.'%')
                                 ->where('products.status', '=', $status)
                                 ->orderBy('quantity')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name == null && $price != null && ($status == null || $status == "-") && ($tag != null && $tag != "-")) {
             $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
                                 ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
@@ -643,7 +643,7 @@ class ProductController extends Controller
                                 ->where('tags.id', '=', $tag)
                                 ->distinct()
                                 ->orderBy('quantity')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name != null && $price == null && ($status == null || $status == "-") && ($tag != null && $tag != "-")) {
             $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
                                 ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
@@ -652,13 +652,13 @@ class ProductController extends Controller
                                 ->where('tags.id', '=', $tag)
                                 ->distinct()
                                 ->orderBy('quantity')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name != null && $price != null && ($status != null && $status != "-") && ($tag == null || $tag == "-")) {
             $lsProduct = Product::where('products.name', 'like', '%'.$name.'%')
                                 ->where('products.price', '=', $price)
                                 ->where('products.status', '=', $status)
                                 ->orderBy('quantity')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name == null && $price != null && ($status != null && $status != "-") && ($tag != null && $tag != "-")) {
             $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
                                 ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
@@ -668,7 +668,7 @@ class ProductController extends Controller
                                 ->where('tags.id', '=', $tag)
                                 ->distinct()
                                 ->orderBy('quantity')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name != null && $price == null && ($status != null && $status != "-") && ($tag != null && $tag != "-")) {
             $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
                                 ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
@@ -678,7 +678,7 @@ class ProductController extends Controller
                                 ->where('tags.id', '=', $tag)
                                 ->distinct()
                                 ->orderBy('quantity')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name != null && $price != null && ($status == null || $status == "-") && ($tag != null && $tag != "-")) {
             $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
                                 ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
@@ -688,7 +688,7 @@ class ProductController extends Controller
                                 ->where('tags.id', '=', $tag)
                                 ->distinct()
                                 ->orderBy('quantity')
-                                ->paginate(5);
+                                ->paginate(10);
           }
         } elseif ($sort == "5") {
           if($name == null && $price == null && ($status == null || $status == "-") && ($tag == null || $tag == "-")){
@@ -703,15 +703,15 @@ class ProductController extends Controller
                                 ->where('tags.id', '=', $tag)
                                 ->distinct()
                                 ->orderBy('quantity', 'DESC')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name != null && $price == null && ($status == null || $status == "-") && ($tag == null || $tag == "-")) {
             $lsProduct = Product::where('products.name', 'like', '%'.$name.'%')
                                 ->orderBy('quantity', 'DESC')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name == null && $price != null && ($status == null || $status == "-") && ($tag == null || $tag == "-")) {
             $lsProduct = Product::where('products.price', '=', $price)
                                 ->orderBy('quantity', 'DESC')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name == null && $price == null && ($status != null && $status != "-") && ($tag == null || $tag == "-")) {
             $lsProduct = Product::where('products.status', '=', $status)
                                 ->orderBy('quantity', 'DESC')
@@ -723,17 +723,17 @@ class ProductController extends Controller
                                 ->where('tags.id', '=', $tag)
                                 ->distinct()
                                 ->orderBy('quantity', 'DESC')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name != null && $price != null && ($status == null || $status == "-") && ($tag == null || $tag == "-")) {
             $lsProduct = Product::where('products.name', 'like', '%'.$name.'%')
                                 ->where('products.price', '=', $price)
                                 ->orderBy('quantity', 'DESC')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name == null && $price != null && ($status != null && $status != "-") && ($tag == null || $tag == "-")) {
             $lsProduct = Product::where('products.price', '=', $price)
                                 ->where('products.status', '=', $status)
                                 ->orderBy('quantity', 'DESC')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name == null && $price == null && ($status != null && $status != "-") && ($tag != null && $tag != "-")) {
             $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
                                 ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
@@ -742,12 +742,12 @@ class ProductController extends Controller
                                 ->where('tags.id', '=', $tag)
                                 ->distinct()
                                 ->orderBy('quantity', 'DESC')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name != null && $price == null && ($status != null && $status != "-") && ($tag == null || $tag == "-")) {
             $lsProduct = Product::where('products.name', 'like', '%'.$name.'%')
                                 ->where('products.status', '=', $status)
                                 ->orderBy('quantity', 'DESC')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name == null && $price != null && ($status == null || $status == "-") && ($tag != null && $tag != "-")) {
             $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
                                 ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
@@ -756,7 +756,7 @@ class ProductController extends Controller
                                 ->where('tags.id', '=', $tag)
                                 ->distinct()
                                 ->orderBy('quantity', 'DESC')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name != null && $price == null && ($status == null || $status == "-") && ($tag != null && $tag != "-")) {
             $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
                                 ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
@@ -765,13 +765,13 @@ class ProductController extends Controller
                                 ->where('tags.id', '=', $tag)
                                 ->distinct()
                                 ->orderBy('quantity', 'DESC')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name != null && $price != null && ($status != null && $status != "-") && ($tag == null || $tag == "-")) {
             $lsProduct = Product::where('products.name', 'like', '%'.$name.'%')
                                 ->where('products.price', '=', $price)
                                 ->where('products.status', '=', $status)
                                 ->orderBy('quantity', 'DESC')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name == null && $price != null && ($status != null && $status != "-") && ($tag != null && $tag != "-")) {
             $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
                                 ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
@@ -781,7 +781,7 @@ class ProductController extends Controller
                                 ->where('tags.id', '=', $tag)
                                 ->distinct()
                                 ->orderBy('quantity', 'DESC')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name != null && $price == null && ($status != null && $status != "-") && ($tag != null && $tag != "-")) {
             $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
                                 ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
@@ -791,7 +791,7 @@ class ProductController extends Controller
                                 ->where('tags.id', '=', $tag)
                                 ->distinct()
                                 ->orderBy('quantity', 'DESC')
-                                ->paginate(5);
+                                ->paginate(10);
           } elseif ($name != null && $price != null && ($status == null || $status == "-") && ($tag != null && $tag != "-")) {
             $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
                                 ->join('tags', 'product_tags.tag_id', '=', 'tags.id')
@@ -801,9 +801,9 @@ class ProductController extends Controller
                                 ->where('tags.id', '=', $tag)
                                 ->distinct()
                                 ->orderBy('quantity', 'DESC')
-                                ->paginate(5);
+                                ->paginate(10);
           } else {
-            $lsProduct = Product::paginate(5);
+            $lsProduct = Product::paginate(10);
           }
         }
         return view('admin.product.list')->with(['lsProduct' => $lsProduct, 'lsTag' => $lsTag, 'name' => $name, 'price' => $price, 'status' => $status, 'tag' => $tag, 'sort' => $sort]);

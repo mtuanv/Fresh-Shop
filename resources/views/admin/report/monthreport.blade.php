@@ -33,39 +33,38 @@
         <table class="table table-striped table-bordered" width="100%">
           <thead class="thead-light">
             <tr>
-              <th rowspan="2" class="align-middle text-center">Tháng</th>
-              <th colspan="3" class="text-center">Doanh thu</th>
-            </tr>
-            <tr>
-              <th class="text-center">
-                @if($sort !=1 && $sort != 2)
+              <th rowspan="2" class="align-middle text-center">
+                @if($sort !=7 && $sort != 8)
                 <form action="{{route('monthreport')}}" method="get">
                   @csrf
                   <input type="hidden" name="StartTime" value="{{$stime}}">
                   <input type="hidden" name="EndTime" value="{{$etime}}">
-                  <input type="hidden" name="sort" value="2">
-                  <button class="btn" type="submit" title="Từ thấp đến cao"><b>Tổng thu</b></button>
+                  <input type="hidden" name="sort" value="8">
+                  <button class="btn" type="submit" title="Từ thấp đến cao"><b>Tháng</b></button>
                 </form>
                 @endif
-                @if($sort == 1)
+                @if($sort == 7)
                 <form action="{{route('monthreport')}}" method="get">
                   @csrf
                   <input type="hidden" name="StartTime" value="{{$stime}}">
                   <input type="hidden" name="EndTime" value="{{$etime}}">
-                  <input type="hidden" name="sort" value="2">
-                  <button class="btn" type="submit" title="Từ thấp đến cao"><b>Tổng thu</b> <i class="fas fa-caret-up"></i></button>
+                  <input type="hidden" name="sort" value="8">
+                  <button class="btn" type="submit" title="Từ thấp đến cao"><b>Tháng</b> <i class="fas fa-caret-up"></i></button>
                 </form>
                 @endif
-                @if($sort == 2)
+                @if($sort == 8)
                 <form action="{{route('monthreport')}}" method="get">
                   @csrf
                   <input type="hidden" name="StartTime" value="{{$stime}}">
                   <input type="hidden" name="EndTime" value="{{$etime}}">
-                  <input type="hidden" name="sort" value="1">
-                  <button class="btn" type="submit" title="Từ cao đến thấp"><b>Tổng thu</b> <i class="fas fa-caret-down"></i></button>
+                  <input type="hidden" name="sort" value="7">
+                  <button class="btn" type="submit" title="Từ cao đến thấp"><b>Tháng</b> <i class="fas fa-caret-down"></i></button>
                 </form>
                 @endif
               </th>
+              <th colspan="3" class="text-center">Doanh thu</th>
+            </tr>
+            <tr>
               <th class="text-center">
                 @if($sort !=3 && $sort != 4)
                 <form action="{{route('monthreport')}}" method="get">
@@ -126,6 +125,35 @@
                 </form>
                 @endif
               </th>
+              <th class="text-center">
+                @if($sort !=1 && $sort != 2)
+                <form action="{{route('monthreport')}}" method="get">
+                  @csrf
+                  <input type="hidden" name="StartTime" value="{{$stime}}">
+                  <input type="hidden" name="EndTime" value="{{$etime}}">
+                  <input type="hidden" name="sort" value="2">
+                  <button class="btn" type="submit" title="Từ thấp đến cao"><b>Tổng thu</b></button>
+                </form>
+                @endif
+                @if($sort == 1)
+                <form action="{{route('monthreport')}}" method="get">
+                  @csrf
+                  <input type="hidden" name="StartTime" value="{{$stime}}">
+                  <input type="hidden" name="EndTime" value="{{$etime}}">
+                  <input type="hidden" name="sort" value="2">
+                  <button class="btn" type="submit" title="Từ thấp đến cao"><b>Tổng thu</b> <i class="fas fa-caret-up"></i></button>
+                </form>
+                @endif
+                @if($sort == 2)
+                <form action="{{route('monthreport')}}" method="get">
+                  @csrf
+                  <input type="hidden" name="StartTime" value="{{$stime}}">
+                  <input type="hidden" name="EndTime" value="{{$etime}}">
+                  <input type="hidden" name="sort" value="1">
+                  <button class="btn" type="submit" title="Từ cao đến thấp"><b>Tổng thu</b> <i class="fas fa-caret-down"></i></button>
+                </form>
+                @endif
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -137,9 +165,9 @@
             @foreach($lsReport as $report)
             <tr class="text-center">
               <td>{{$report->month}}/{{$report->year}}</td>
-              <td>{{number_format($report->stotal)}}</td>
               <td>{{number_format($report->sprice)}}</td>
               <td>{{number_format(- $report->stotal + $report->sprice)}}</td>
+              <td>{{number_format($report->stotal)}}</td>
             </tr>
             @php
               $sumtotal += $report->stotal;
@@ -149,9 +177,9 @@
             @endforeach
             <tr class="text-center">
               <td> <b>Tổng : </b> </td>
-              <td> <b>{{number_format($sumtotal)}}</b> </td>
               <td> <b>{{number_format($sumprice)}}</b> </td>
               <td> <b>{{number_format($sumdc)}}</b> </td>
+              <td> <b>{{number_format($sumtotal)}}</b> </td>
             </tr>
           </tbody>
         </table>

@@ -5,6 +5,11 @@
 @section("content")
 <div class="back" onclick="closse1()">
 </div>
+@if(session('success'))
+  <div class="alert alert-success">
+    {{session('success')}}
+  </div>
+@endif
 <div class="row">
     <div class="col-md-12">
         <div class="overview-wrap">
@@ -92,39 +97,54 @@
             <table class="table table-borderless table-striped table-earning">
                 <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>Tên</th>
+                        <th class="text-center">ID</th>
+                        <th class="text-center">Tên</th>
                         @if(Auth::user()->role_name == 'ADMIN')
-                        <th>Username</th>
+                        <th class="text-center">Username</th>
                         @endif
-                        <th>Chức danh</th>
+                        <th class="text-center">Chức danh</th>
                         @if(Auth::user()->role_name == 'ADMIN')
-                        <th>Quản lý</th>
+                        <th class="text-center">Xoá</th>
                         @endif
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($lsUser as $user)
                     <tr>
-                        <td>{{$user->id}}</td>
-                        <td>{{$user->name}}</td>
+                        <td class="text-center">{{$user->id}}</td>
+                        <td class="text-center">{{$user->name}}</td>
                         @if(Auth::user()->role_name == 'ADMIN')
-                        <td>{{$user->username}}</td>
+                        <td class="text-center">{{$user->username}}</td>
                         @endif
-                        <td>{{$user->role_name == 'ADMIN' ? 'Quản lý' : 'Nhân viên'}}</td>
+                        <td class="text-center">{{$user->role_name == 'ADMIN' ? 'Quản lý' : 'Nhân viên'}}</td>
                         @if(Auth::user()->role_name == 'ADMIN')
-                        <td>
-                          <form method="post" action="{{route('edituser').'#test'}}" name="getif">
-                            @csrf
-                            <input type="hidden" name="id" value="{{$user->id}}"/>
-                            <input type="hidden" name="name" value="{{$user->name}}"/>
-                            <input type="hidden" name="username" value="{{$user->username}}"/>
-                            <button type="submit" class="btn btn-warning" style="float:left;margin-right: 5px; color: white" title="Sửa tài khoản"><i class="fas fa-wrench"></i></button>
-                          </form>
-                          <!-- <a href="#update" class="btn btn-warning" style="float:left;margin-right: 5px">Sửa</a> -->
+                        <td class="text-center">
+                          <div style="display:inline-block">
+                            <form method="post" action="{{route('editpw').'#changepw'}}"  class="form-inline">
+                              @csrf
+                              <input type="hidden" name="id" value="{{$user->id}}"/>
+                              <input type="hidden" name="name" value="{{$user->name}}"/>
+                              <input type="hidden" name="username" value="{{$user->username}}"/>
+                              <button type="submit" class="btn btn-info mb-2" style="color: white" title="Đổi mật khẩu"><i class="fas fa-key"></i></button>
+                            </form>
+                          </div>
+                          <div style="display:inline-block">
+                            <form method="post" action="{{route('edituser').'#edit'}}"  class="form-inline">
+                              @csrf
+                              <input type="hidden" name="id" value="{{$user->id}}"/>
+                              <input type="hidden" name="name" value="{{$user->name}}"/>
+                              <input type="hidden" name="username" value="{{$user->username}}"/>
+                              <button type="submit" class="btn btn-warning mb-2" style="color: white" title="Sửa tài khoản"><i class="fas fa-toolbox"></i></button>
+                            </form>
+                          </div>
                           @if($user->role_name == 'ADMIN')
                           @else
-                          <a href="{{route('deleteuser', $user->id)}}"  title="Xoá tài khoản" class="btn btn-danger" onclick="return confirm('Sure?')"><i class="fas fa-times-circle"></i></a>
+                          <div style="display:inline-block">
+                            <form method="get" action="{{route('deleteuser', $user->id)}}"  class="form-inline">
+                              @csrf
+                              <button type="button" title="Xoá tài khoản" class="btn btn-danger" data-click="swal-danger"><i class="fas fa-times-circle"></i></button>
+                            </form>
+                          </div>
                           @endif
                         </td>
                         @endif
@@ -136,9 +156,6 @@
         </div>
     </div>
 </div>
-@if(Auth::user()->role_name == 'ADMIN')
-
-<!-- <div class="row"> -->
 <style type="text/css">
 .popup1{
   position: fixed;
@@ -173,6 +190,53 @@
   display: none;
 }
 </style>
+      <!-- Swal.fire(form.submit()) -->
+<script type="text/javascript">
+$(document).ready(function() {
+    $('[data-click="swal-danger"]').click(function(e) {
+                e.preventDefault();
+                var form = $(this).parents('form');
+                const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                  confirmButton: 'btn btn-success',
+                  cancelButton: 'btn btn-danger mr-3'
+                },
+                buttonsStyling: false
+                })
+
+              swalWithBootstrapButtons.fire({
+                title: 'Xoá tài khoản',
+                text: "Bạn có chắc chắn muốn xoá?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Có',
+                cancelButtonText: 'Không',
+                reverseButtons: true
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  swal.fire(form.submit())
+                  swalWithBootstrapButtons.fire(
+                    'Xoá thành công!',
+                    'Tài khoản đã bị xoá',
+                    'success'
+                  )
+                } else if (
+                  result.dismiss === Swal.DismissReason.cancel
+                ) {
+                  swalWithBootstrapButtons.fire(
+                    'Huỷ thành công!',
+                    'Tài khoản còn nguyên vẹn',
+                    'error'
+                  )
+                }
+})
+
+      });
+});
+</script>
+@if(Auth::user()->role_name == 'ADMIN')
+
+
 <script type="text/javascript">
 function popup1() {
       var x = document.getElementsByClassName('popup1');
@@ -262,7 +326,7 @@ function popup1() {
 @if(strpos(url()->current(), '/admin/dashboard/user_edit'))
 <div class="row">
   <div class="col-lg-12">
-    <div class="card" id="test">
+    <div class="card" id="edit">
       <form action="{{ route('updateuser') }}" method="post" enctype="multipart/form-data">
         @csrf
         <input type="hidden" name="id" value="{{ $eid }}">
@@ -297,6 +361,39 @@ function popup1() {
             </div>
             <div class="col-12 col-md-9">
                 <input type="text" name="username" placeholder="User Name..." class="form-control" value="{{ $eun }}" disabled autocomplete="username">
+            </div>
+        </div>
+      </div>
+      <div class="card-footer">
+          <button type="submit" class="btn btn-primary btn-sm">
+              <i class="fa fa-dot-circle-o"></i> Submit
+          </button>
+          <button type="reset" class="btn btn-danger btn-sm">
+              <i class="fa fa-ban"></i> Reset
+          </button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+@endif
+@if(strpos(url()->current(), '/admin/dashboard/change_password'))
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card" id="changepw">
+      <form action="{{ route('savechangepw') }}" method="post" enctype="multipart/form-data">
+        @csrf
+        <input type="hidden" name="id" value="{{ $eid }}">
+      <div class="card-header">
+          <strong>Sửa tài khoản</strong>
+      </div>
+      <div class="card-body card-block">
+        <div class="row form-group">
+            <div class="col col-md-3">
+                <label for="name" class=" form-control-label">Full Name</label>
+            </div>
+            <div class="col-12 col-md-9">
+                <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ $ename }}" disabled autocomplete="name">
             </div>
         </div>
         <div class="row form-group">
@@ -334,7 +431,6 @@ function popup1() {
   </div>
 </div>
 @endif
-<!-- </div> -->
 @endif
 <div class="row">
     <div class="col-md-12">

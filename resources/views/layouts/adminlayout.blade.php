@@ -55,6 +55,8 @@
 <!-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> -->
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 
+  <script src="{{ asset('admin/js/sweetalert2.all.min.js') }}"></script>
+  <link rel="stylesheet" type="text/css" href="{{ asset('admin/css/sweetalert2.min.css') }}"/>
 </head>
 <body class="animsition">
 <div class="page-wrapper">
@@ -64,7 +66,7 @@
             <div class="container-fluid">
                 <div class="header-mobile-inner">
                     <a class="logo" href="{{route('dashboard')}}">
-                        <img src="{{ asset('admin/images/icon/logo.png') }}" alt="CoolAdmin"/>
+                        <img src="{{ asset('shop/images/logo.png') }}" alt="CoolAdmin" style="margin: 0 auto" width="100px"/>
                     </a>
                     <button class="hamburger hamburger--slider" type="button">
                             <span class="hamburger-box">
@@ -124,8 +126,8 @@
     <!-- MENU SIDEBAR-->
     <aside class="menu-sidebar d-none d-lg-block">
         <div class="logo">
-            <a href="{{route('dashboard')}}">
-                <img src="{{ asset('admin/images/icon/logo.png') }}" alt="Cool Admin"/>
+            <a href="{{route('dashboard')}}" style="margin: 0 auto">
+                <img src="{{ asset('shop/images/logo.png') }}" alt="Cool Admin" width="100px"/>
             </a>
         </div>
         <div class="menu-sidebar__content js-scrollbar1">

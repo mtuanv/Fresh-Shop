@@ -30,6 +30,12 @@ class OrderController extends Controller
         if($ma == null && $name == null && $from == null && $to == null && $status == null){
           $lsOrder = Order::orderBy('id', 'DESC')->paginate(20);
         } elseif($ma != null && $name != null && $from != null && $to != null && $status != null){
+          $from = str_replace('/', '-', $from);
+          $from = strtotime($from);
+          $from = date('Y-m-d 00:00:00', $from);
+          $to = str_replace('/', '-', $to);
+          $to = strtotime($to);
+          $to = date('Y-m-d 23:59:59', $to);
           $lsOrder = Order::orderBy('id', 'DESC')
                           ->where('id', '=', $ma)
                           ->where('name', 'like', '%'.$name.'%')
@@ -37,6 +43,8 @@ class OrderController extends Controller
                           ->where('status', '=', $status)
                           ->paginate(20);
           $ma = 'DH0000'.$ma;
+          $from = date('d/m/Y',strtotime($from));
+          $to = date('d/m/Y',strtotime($to));
         } elseif ($ma != null && $name == null && $from == null && $to == null && $status == null) {
           $lsOrder = Order::orderBy('id', 'DESC')
                           ->where('id', '=', $ma)
@@ -47,13 +55,29 @@ class OrderController extends Controller
                           ->where('name', 'like', '%'.$name.'%')
                           ->paginate(20);
         } elseif ($ma == null && $name == null && $from != null && $to == null && $status == null) {
+          $from = str_replace('/', '-', $from);
+          $from = strtotime($from);
+          $from = date('Y-m-d 00:00:00', $from);
+          $to = date('Y-m-d 23:59:59');
           $lsOrder = Order::orderBy('id', 'DESC')
-                          ->where('created_at', '>', $from)
+                          ->where('created_at', '>=', $from)
                           ->paginate(20);
+          $from = date('d/m/Y',strtotime($from));
+          $to = date('d/m/Y',strtotime($to));
         } elseif ($ma == null && $name == null && $from == null && $to != null && $status == null) {
+          $to = str_replace('/', '-', $to);
+          $to = strtotime($to);
+          $to = date('Y-m-d 23:59:59', $to);
+          $from = Order::select(Order::raw('orders.created_at'))
+                        ->orderBy('created_at','ASC')
+                        ->first();
+          $from = substr($from,15,27);
+          $from = date('Y-m-d 00:00:00', strtotime($from));
           $lsOrder = Order::orderBy('id', 'DESC')
                           ->where('created_at', '<', $to)
                           ->paginate(20);
+          $from = date('d/m/Y',strtotime($from));
+          $to = date('d/m/Y',strtotime($to));
         } elseif ($ma == null && $name == null && $from == null && $to == null && $status != null) {
           $lsOrder = Order::orderBy('id', 'DESC')
                           ->where('status', '=', $status)
@@ -65,17 +89,33 @@ class OrderController extends Controller
                           ->paginate(20);
           $ma = 'DH0000'.$ma;
         } elseif ($ma != null && $name == null && $from != null && $to == null && $status == null) {
+          $from = str_replace('/', '-', $from);
+          $from = strtotime($from);
+          $from = date('Y-m-d 00:00:00', $from);
+          $to = date('Y-m-d 23:59:59');
           $lsOrder = Order::orderBy('id', 'DESC')
                           ->where('id', '=', $ma)
                           ->where('created_at', '>', $from)
                           ->paginate(20);
           $ma = 'DH0000'.$ma;
+          $from = date('d/m/Y',strtotime($from));
+	        $to = date('d/m/Y',strtotime($to));
         } elseif ($ma != null && $name == null && $from == null && $to != null && $status == null) {
+          $to = str_replace('/', '-', $to);
+          $to = strtotime($to);
+          $to = date('Y-m-d 23:59:59', $to);
+          $from = Order::select(Order::raw('orders.created_at'))
+                       ->orderBy('created_at','ASC')
+                       ->first();
+          $from = substr($from,15,27);
+          $from = date('Y-m-d 00:00:00', strtotime($from));
           $lsOrder = Order::orderBy('id', 'DESC')
                           ->where('id', '=', $ma)
                           ->where('created_at', '<', $to)
                           ->paginate(20);
           $ma = 'DH0000'.$ma;
+          $from = date('d/m/Y',strtotime($from));
+          $to = date('d/m/Y',strtotime($to));
         } elseif ($ma != null && $name == null && $from == null && $to == null && $status != null) {
           $lsOrder = Order::orderBy('id', 'DESC')
                           ->where('id', '=', $ma)
@@ -83,61 +123,135 @@ class OrderController extends Controller
                           ->paginate(20);
           $ma = 'DH0000'.$ma;
         } elseif ($ma == null && $name != null && $from != null && $to == null && $status == null) {
+          $from = str_replace('/', '-', $from);
+          $from = strtotime($from);
+          $from = date('Y-m-d 00:00:00', $from);
+          $to = date('Y-m-d 23:59:59');
           $lsOrder = Order::orderBy('id', 'DESC')
                           ->where('name', 'like', '%'.$name.'%')
                           ->where('created_at', '>', $from)
                           ->paginate(20);
+          $from = date('d/m/Y',strtotime($from));
+          $to = date('d/m/Y',strtotime($to));
         } elseif ($ma == null && $name != null && $from == null && $to != null && $status == null) {
+          $to = str_replace('/', '-', $to);
+          $to = strtotime($to);
+          $to = date('Y-m-d 23:59:59', $to);
+          $from = Order::select(Order::raw('orders.created_at'))
+                       ->orderBy('created_at','ASC')
+                       ->first();
+          $from = substr($from,15,27);
+          $from = date('Y-m-d 00:00:00', strtotime($from));
           $lsOrder = Order::orderBy('id', 'DESC')
                           ->where('name', 'like', '%'.$name.'%')
                           ->where('created_at', '<', $to)
                           ->paginate(20);
+          $from = date('d/m/Y',strtotime($from));
+          $to = date('d/m/Y',strtotime($to));
         } elseif ($ma == null && $name != null && $from == null && $to == null && $status != null) {
           $lsOrder = Order::orderBy('id', 'DESC')
                           ->where('name', 'like', '%'.$name.'%')
                           ->where('status', '=', $status)
                           ->paginate(20);
         } elseif ($ma == null && $name == null && $from != null && $to != null && $status == null) {
+          $from = str_replace('/', '-', $from);
+          $from = strtotime($from);
+          $from = date('Y-m-d 00:00:00', $from);
+          $to = str_replace('/', '-', $to);
+          $to = strtotime($to);
+          $to = date('Y-m-d 23:59:59', $to);
           $lsOrder = Order::orderBy('id', 'DESC')
                           ->whereBetween('created_at', [$from, $to])
                           ->paginate(20);
+          $from = date('d/m/Y',strtotime($from));
+          $to = date('d/m/Y',strtotime($to));
         } elseif ($ma == null && $name == null && $from != null && $to == null && $status != null) {
+          $from = str_replace('/', '-', $from);
+          $from = strtotime($from);
+          $from = date('Y-m-d 00:00:00', $from);
+          $to = date('Y-m-d 23:59:59');
           $lsOrder = Order::orderBy('id', 'DESC')
                           ->where('created_at', '>', $from)
                           ->where('status', '=', $status)
                           ->paginate(20);
+          $from = date('d/m/Y',strtotime($from));
+          $to = date('d/m/Y',strtotime($to));
         } elseif ($ma == null && $name == null && $from == null && $to != null && $status != null) {
+          $to = str_replace('/', '-', $to);
+          $to = strtotime($to);
+          $to = date('Y-m-d 23:59:59', $to);
+          $from = Order::select(Order::raw('orders.created_at'))
+                       ->orderBy('created_at','ASC')
+                       ->first();
+          $from = substr($from,15,27);
+          $from = date('Y-m-d 00:00:00', strtotime($from));
           $lsOrder = Order::orderBy('id', 'DESC')
                           ->where('created_at', '<', $to)
                           ->where('status', '=', $status)
                           ->paginate(20);
+          $from = date('d/m/Y',strtotime($from));
+          $to = date('d/m/Y',strtotime($to));
         } elseif ($ma != null && $name != null && $from != null && $to == null && $status == null) {
+          $from = str_replace('/', '-', $from);
+          $from = strtotime($from);
+          $from = date('Y-m-d 00:00:00', $from);
+          $to = date('Y-m-d 23:59:59');
           $lsOrder = Order::orderBy('id', 'DESC')
                           ->where('id', '=', $ma)
                           ->where('name', 'like', '%'.$name.'%')
                           ->where('created_at', '>', $from)
                           ->paginate(20);
           $ma = 'DH0000'.$ma;
+          $from = date('d/m/Y',strtotime($from));
+          $to = date('d/m/Y',strtotime($to));
         } elseif ($ma != null && $name == null && $from != null && $to != null && $status == null) {
+          $from = str_replace('/', '-', $from);
+          $from = strtotime($from);
+          $from = date('Y-m-d 00:00:00', $from);
+          $to = str_replace('/', '-', $to);
+          $to = strtotime($to);
+          $to = date('Y-m-d 23:59:59', $to);
           $lsOrder = Order::orderBy('id', 'DESC')
                           ->where('id', '=', $ma)
                           ->whereBetween('created_at', [$from, $to])
                           ->paginate(20);
           $ma = 'DH0000'.$ma;
+          $from = date('d/m/Y',strtotime($from));
+          $to = date('d/m/Y',strtotime($to));
         } elseif ($ma != null && $name == null && $from == null && $to != null && $status != null) {
+          $to = str_replace('/', '-', $to);
+          $to = strtotime($to);
+          $to = date('Y-m-d 23:59:59', $to);
+          $from = Order::select(Order::raw('orders.created_at'))
+                       ->orderBy('created_at','ASC')
+                       ->first();
+          $from = substr($from,15,27);
+          $from = date('Y-m-d 00:00:00', strtotime($from));
           $lsOrder = Order::orderBy('id', 'DESC')
                           ->where('id', '=', $ma)
                           ->where('created_at', '<', $to)
                           ->where('status', '=', $status)
                           ->paginate(20);
           $ma = 'DH0000'.$ma;
+          $from = date('d/m/Y',strtotime($from));
+          $to = date('d/m/Y',strtotime($to));
         } elseif ($ma != null && $name != null && $from == null && $to != null && $status == null) {
+          $to = str_replace('/', '-', $to);
+          $to = strtotime($to);
+          $to = date('Y-m-d 23:59:59', $to);
+          $from = Order::select(Order::raw('orders.created_at'))
+                       ->orderBy('created_at','ASC')
+                       ->first();
+          $from = substr($from,15,27);
+          $from = date('Y-m-d 00:00:00', strtotime($from));
           $lsOrder = Order::orderBy('id', 'DESC')
                           ->where('id', '=', $ma)
                           ->where('name', 'like', '%'.$name.'%')
                           ->where('created_at', '<', $to)
                           ->paginate(20);
           $ma = 'DH0000'.$ma;
+          $from = date('d/m/Y',strtotime($from));
+          $to = date('d/m/Y',strtotime($to));
         } elseif ($ma != null && $name != null && $from == null && $to == null && $status != null) {
           $lsOrder = Order::orderBy('id', 'DESC')
                           ->where('id', '=', $ma)
@@ -146,58 +260,150 @@ class OrderController extends Controller
                           ->paginate(20);
           $ma = 'DH0000'.$ma;
         } elseif ($ma != null && $name == null && $from != null && $to == null && $status != null) {
+          $from = str_replace('/', '-', $from);
+          $from = strtotime($from);
+          $from = date('Y-m-d 00:00:00', $from);
+          $to = date('Y-m-d 23:59:59');
           $lsOrder = Order::orderBy('id', 'DESC')
                           ->where('id', '=', $ma)
                           ->where('created_at', '>', $from)
                           ->where('status', '=', $status)
                           ->paginate(20);
           $ma = 'DH0000'.$ma;
+          $from = date('d/m/Y',strtotime($from));
+          $to = date('d/m/Y',strtotime($to));
         } elseif ($ma == null && $name != null && $from != null && $to != null && $status == null) {
+          $from = str_replace('/', '-', $from);
+          $from = strtotime($from);
+          $from = date('Y-m-d 00:00:00', $from);
+          $to = str_replace('/', '-', $to);
+          $to = strtotime($to);
+          $to = date('Y-m-d 23:59:59', $to);
           $lsOrder = Order::orderBy('id', 'DESC')
                           ->where('name', 'like', '%'.$name.'%')
                           ->whereBetween('created_at', [$from, $to])
                           ->paginate(20);
+          $from = date('d/m/Y',strtotime($from));
+          $to = date('d/m/Y',strtotime($to));
         } elseif ($ma == null && $name != null && $from == null && $to != null && $status != null) {
+          $to = str_replace('/', '-', $to);
+          $to = strtotime($to);
+          $to = date('Y-m-d 23:59:59', $to);
+          $from = Order::select(Order::raw('orders.created_at'))
+                       ->orderBy('created_at','ASC')
+                       ->first();
+          $from = substr($from,15,27);
+          $from = date('Y-m-d 00:00:00', strtotime($from));
           $lsOrder = Order::orderBy('id', 'DESC')
                           ->where('name', 'like', '%'.$name.'%')
                           ->where('created_at', '<', $to)
                           ->where('status', '=', $status)
                           ->paginate(20);
+          $from = date('d/m/Y',strtotime($from));
+          $to = date('d/m/Y',strtotime($to));
         } elseif ($ma == null && $name != null && $from != null && $to == null && $status != null) {
+          $from = str_replace('/', '-', $from);
+          $from = strtotime($from);
+          $from = date('Y-m-d 00:00:00', $from);
+          $to = date('Y-m-d 23:59:59');
           $lsOrder = Order::orderBy('id', 'DESC')
                           ->where('name', 'like', '%'.$name.'%')
                           ->where('created_at', '>', $from)
                           ->where('status', '=', $status)
                           ->paginate(20);
+          $from = date('d/m/Y',strtotime($from));
+          $to = date('d/m/Y',strtotime($to));
         } elseif ($ma == null && $name == null && $from != null && $to != null && $status != null) {
+          $from = str_replace('/', '-', $from);
+          $from = strtotime($from);
+          $from = date('Y-m-d 00:00:00', $from);
+          $to = str_replace('/', '-', $to);
+          $to = strtotime($to);
+          $to = date('Y-m-d 23:59:59', $to);
           $lsOrder = Order::orderBy('id', 'DESC')
                           ->whereBetween('created_at', [$from, $to])
                           ->where('status', '=', $status)
                           ->paginate(20);
-        } elseif ($ma == null && $name == null && $from == null && $to == null && $status != null) {
-          $lsOrder = Order::orderBy('id', 'DESC')
-                          ->where('status', '=', $status)
-                          ->paginate(20);
-        } elseif ($ma == null && $name == null && $from == null && $to != null && $status == null) {
-          $lsOrder = Order::orderBy('id', 'DESC')
-                          ->where('created_at', '<', $to)
-                          ->paginate(20);
-        } elseif ($ma == null && $name == null && $from != null && $to == null && $status == null) {
-          $lsOrder = Order::orderBy('id', 'DESC')
-                          ->where('created_at', '>', $from)
-                          ->paginate(20);
-        } elseif ($ma == null && $name != null && $from == null && $to == null && $status == null) {
-          $lsOrder = Order::orderBy('id', 'DESC')
-                          ->where('name', 'like', '%'.$name.'%')
-                          ->paginate(20);
-        } elseif ($ma != null && $name == null && $from == null && $to == null && $status == null) {
+          $from = date('d/m/Y',strtotime($from));
+          $to = date('d/m/Y',strtotime($to));
+        } elseif ($ma != null && $name != null && $from != null && $to != null && $status == null) {///fuck
+          $from = str_replace('/', '-', $from);
+          $from = strtotime($from);
+          $from = date('Y-m-d 00:00:00', $from);
+          $to = str_replace('/', '-', $to);
+          $to = strtotime($to);
+          $to = date('Y-m-d 23:59:59', $to);
           $lsOrder = Order::orderBy('id', 'DESC')
                           ->where('id', '=', $ma)
+                          ->where('name', 'like', '%'.$name.'%')
+                          ->whereBetween('created_at', [$from, $to])
+                          ->paginate(20);
+          $from = date('d/m/Y',strtotime($from));
+          $to = date('d/m/Y',strtotime($to));
+          $ma = 'DH0000'.$ma;
+        } elseif ($ma != null && $name != null && $from != null && $to == null && $status != null) {
+          $from = str_replace('/', '-', $from);
+          $from = strtotime($from);
+          $from = date('Y-m-d 00:00:00', $from);
+          $to = date('Y-m-d 23:59:59');
+          $lsOrder = Order::orderBy('id', 'DESC')
+                          ->where('id', '=', $ma)
+                          ->where('name', 'like', '%'.$name.'%')
+                          ->where('created_at', '>', $from)
+                          ->where('status', '=', $status)
+                          ->paginate(20);
+          $from = date('d/m/Y',strtotime($from));
+          $to = date('d/m/Y',strtotime($to));
+          $ma = 'DH0000'.$ma;
+        } elseif ($ma != null && $name != null && $from == null && $to != null && $status != null) {
+          $to = str_replace('/', '-', $to);
+          $to = strtotime($to);
+          $to = date('Y-m-d 23:59:59', $to);
+          $from = Order::select(Order::raw('orders.created_at'))
+                       ->orderBy('created_at','ASC')
+                       ->first();
+          $from = substr($from,15,27);
+          $from = date('Y-m-d 00:00:00', strtotime($from));
+          $lsOrder = Order::orderBy('id', 'DESC')
+                          ->where('id', '=', $ma)
+                          ->where('name', 'like', '%'.$name.'%')
+                          ->where('created_at', '<', $to)
+                          ->where('status', '=', $status)
                           ->paginate(20);
           $ma = 'DH0000'.$ma;
+          $from = date('d/m/Y',strtotime($from));
+          $to = date('d/m/Y',strtotime($to));
+        } elseif ($ma != null && $name == null && $from != null && $to != null && $status != null) {
+          $from = str_replace('/', '-', $from);
+          $from = strtotime($from);
+          $from = date('Y-m-d 00:00:00', $from);
+          $to = str_replace('/', '-', $to);
+          $to = strtotime($to);
+          $to = date('Y-m-d 23:59:59', $to);
+          $lsOrder = Order::orderBy('id', 'DESC')
+                          ->where('id', '=', $ma)
+                          ->whereBetween('created_at', [$from, $to])
+                          ->where('status', '=', $status)
+                          ->paginate(20);
+          $ma = 'DH0000'.$ma;
+          $from = date('d/m/Y',strtotime($from));
+          $to = date('d/m/Y',strtotime($to));
+        } elseif ($ma == null && $name != null && $from != null && $to != null && $status != null) {
+          $from = str_replace('/', '-', $from);
+          $from = strtotime($from);
+          $from = date('Y-m-d 00:00:00', $from);
+          $to = str_replace('/', '-', $to);
+          $to = strtotime($to);
+          $to = date('Y-m-d 23:59:59', $to);
+          $lsOrder = Order::orderBy('id', 'DESC')
+                          ->where('name', 'like', '%'.$name.'%')
+                          ->whereBetween('created_at', [$from, $to])
+                          ->where('status', '=', $status)
+                          ->paginate(20);
+          $from = date('d/m/Y',strtotime($from));
+          $to = date('d/m/Y',strtotime($to));
         } else{
           $lsOrder = Order::orderBy('id', 'DESC')->paginate(20);
-          $ma = 'DH0000'.$ma;
         }
 
         return view('admin.order.list')->with(['lsOrder' => $lsOrder, 'ma' => $ma, 'name' => $name, 'from' => $from, 'to' => $to, 'status' => $status]);

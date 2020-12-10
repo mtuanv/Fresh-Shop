@@ -115,8 +115,7 @@ class UserController extends Controller
     public function update(Request $request)
     {
       $request->validate([
-          'name' => 'required|string|max:255',
-          'password' => 'required|string|min:8|confirmed',
+          'name' => 'required|string|max:255'
       ]);
       $user = User::find($request->id);
       $user->name = $request->name;
@@ -132,12 +131,45 @@ class UserController extends Controller
       if($path != null){
         $user->avatar = $path;
       }
-      $user->password = Hash::make($request->password);
       $user->save();
-      $request->session()->flash('success', 'Cập nhật thành công');
+      $request->session()->flash('success', 'Cập nhật thông tin thành công');
       return redirect('admin/dashboard');
     }
-
+    public function changePassword(Request $request)
+    {
+      $eid = $request->id;
+      $ename = $request->name;
+      $date = getdate();
+      $order = Order::whereMonth('created_at', $date['mon'])
+                    ->select('id')
+                    ->count('id');
+      $sumsale = ProductOrder::whereMonth('orders.created_at', $date['mon'])
+                             ->join('orders', 'orders.id', '=', 'product_orders.order_id')
+                             ->where('status', '=', 10)
+                             ->select('quantity')
+                             ->sum('quantity');
+      $corder = Order::whereMonth('created_at', $date['mon'])
+                    ->where('status', '=', 10)
+                    ->select('id')
+                    ->count('id');
+      $money = Order::whereMonth('created_at', $date['mon'])
+                    ->where('status', '=', 10)
+                    ->select('total')
+                    ->sum('total');
+      $lsUser = User::all();
+      return view('admin.dashboard')->with(['lsUser' => $lsUser, 'eid' => $eid, 'ename' => $ename, 'money' => $money, 'corder' => $corder, 'sumsale' => $sumsale, 'order' => $order]);
+    }
+    public function savechangePassword(Request $request)
+    {
+      $request->validate([
+          'password' => 'required|string|min:8|confirmed',
+      ]);
+      $user = User::find($request->id);
+      $user->password = Hash::make($request->password);
+      $user->save();
+      $request->session()->flash('success', 'Cập nhật mật khẩu thành công');
+      return redirect('admin/dashboard');
+    }
     /**
      * Remove the specified resource from storage.
      *

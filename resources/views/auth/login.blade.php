@@ -33,14 +33,14 @@
 </head>
 
 <body class="animsition">
-    <div class="page-wrapper">
-        <div class="page-content--bge5">
+    <div class="page-wrapper" style="background: url({{ asset('admin/images/bglg.png') }}); background-size: 100% 100%">
+        <div class="page-content--bge5" style="background: transparent">
             <div class="container">
                 <div class="login-wrap">
                     <div class="login-content">
                         <div class="login-logo">
                             <a href="#">
-                                <img src="{{ asset('admin/images/icon/logo.png') }}" alt="CoolAdmin">
+                                <img src="{{ asset('shop/images/logo.png') }}" alt="CoolAdmin">
                             </a>
                         </div>
                         <div class="login-form">

@@ -16,10 +16,10 @@ class TagController extends Controller
     {
         $name = $request->name;
         if($name == null){
-          $lsTag = Tag::paginate(5);
+          $lsTag = Tag::paginate(8);
         }elseif ($name != null) {
           $lsTag = Tag::where('name', 'like', '%'.$name.'%')
-                      ->paginate(5);
+                      ->paginate(8);
         }
 
         return view('admin.tag.list')->with(['lsTag' => $lsTag, 'name' => $name]);

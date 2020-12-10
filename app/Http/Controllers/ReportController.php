@@ -90,6 +90,22 @@ class ReportController extends Controller
               }
             }
           }
+        } elseif ($sort == '7') {
+          $lsReport = Order::join('product_orders', 'orders.id', '=', 'product_orders.order_id')
+                            ->select(Order::raw('sum(distinct orders.total) as stotal'),Order::raw('DATE(orders.created_at) as date'),ProductOrder::raw('sum(product_orders.price * product_orders.quantity) as sprice'))
+                             ->whereRaw('orders.created_at >= ? AND orders.created_at <= ?',[$stime,$etime])
+                             ->where('orders.status','=',10)
+                             ->groupBy('date')
+                             ->orderBy('date')
+                             ->get();
+        } elseif ($sort == '8') {
+          $lsReport = Order::join('product_orders', 'orders.id', '=', 'product_orders.order_id')
+                            ->select(Order::raw('sum(distinct orders.total) as stotal'),Order::raw('DATE(orders.created_at) as date'),ProductOrder::raw('sum(product_orders.price * product_orders.quantity) as sprice'))
+                             ->whereRaw('orders.created_at >= ? AND orders.created_at <= ?',[$stime,$etime])
+                             ->where('orders.status','=',10)
+                             ->groupBy('date')
+                             ->orderBy('date','DESC')
+                             ->get();
         }
 
       } elseif ($stime != null && $etime == null) {
@@ -165,6 +181,22 @@ class ReportController extends Controller
               }
             }
           }
+        } elseif ($sort == '7') {
+          $lsReport = Order::join('product_orders', 'orders.id', '=', 'product_orders.order_id')
+                            ->select(Order::raw('sum(distinct orders.total) as stotal'),Order::raw('DATE(orders.created_at) as date'),ProductOrder::raw('sum(product_orders.price * product_orders.quantity) as sprice'))
+                             ->whereRaw('orders.created_at >= ? AND orders.created_at <= ?',[$stime,$etime])
+                             ->where('orders.status','=',10)
+                             ->groupBy('date')
+                             ->orderBy('date')
+                             ->get();
+        } elseif ($sort == '8') {
+          $lsReport = Order::join('product_orders', 'orders.id', '=', 'product_orders.order_id')
+                            ->select(Order::raw('sum(distinct orders.total) as stotal'),Order::raw('DATE(orders.created_at) as date'),ProductOrder::raw('sum(product_orders.price * product_orders.quantity) as sprice'))
+                             ->whereRaw('orders.created_at >= ? AND orders.created_at <= ?',[$stime,$etime])
+                             ->where('orders.status','=',10)
+                             ->groupBy('date')
+                             ->orderBy('date','DESC')
+                             ->get();
         }
 
       } elseif ($stime == null && $etime != null) {
@@ -244,6 +276,22 @@ class ReportController extends Controller
               }
             }
           }
+        } elseif ($sort == '7') {
+          $lsReport = Order::join('product_orders', 'orders.id', '=', 'product_orders.order_id')
+                            ->select(Order::raw('sum(distinct orders.total) as stotal'),Order::raw('DATE(orders.created_at) as date'),ProductOrder::raw('sum(product_orders.price * product_orders.quantity) as sprice'))
+                             ->whereRaw('orders.created_at >= ? AND orders.created_at <= ?',[$stime,$etime])
+                             ->where('orders.status','=',10)
+                             ->groupBy('date')
+                             ->orderBy('date')
+                             ->get();
+        } elseif ($sort == '8') {
+          $lsReport = Order::join('product_orders', 'orders.id', '=', 'product_orders.order_id')
+                            ->select(Order::raw('sum(distinct orders.total) as stotal'),Order::raw('DATE(orders.created_at) as date'),ProductOrder::raw('sum(product_orders.price * product_orders.quantity) as sprice'))
+                             ->whereRaw('orders.created_at >= ? AND orders.created_at <= ?',[$stime,$etime])
+                             ->where('orders.status','=',10)
+                             ->groupBy('date')
+                             ->orderBy('date','DESC')
+                             ->get();
         }
 
       } elseif ($stime != null && $etime != null) {
@@ -321,6 +369,26 @@ class ReportController extends Controller
               }
             }
           }
+        } elseif ($sort == '7') {
+          for($i = 0; $i < count($lsReport) - 1; $i++){
+            for($j = $i + 1; $j < count($lsReport); $j++){
+              if(($lsReport[$i]->date > $lsReport[$j]->date)){
+                $tg = $lsReport[$i];
+                $lsReport[$i] = $lsReport[$j];
+                $lsReport[$j] = $tg;
+              }
+            }
+          }
+        } elseif ($sort == '8') {
+          for($i = 0; $i < count($lsReport) - 1; $i++){
+            for($j = $i + 1; $j < count($lsReport); $j++){
+              if(($lsReport[$i]->date < $lsReport[$j]->date)){
+                $tg = $lsReport[$i];
+                $lsReport[$i] = $lsReport[$j];
+                $lsReport[$j] = $tg;
+              }
+            }
+          }
         }
       } else{
         $stime = date('Y-m-01 00:00:00');
@@ -387,6 +455,26 @@ class ReportController extends Controller
           for($i = 0; $i < count($lsReport) - 1; $i++){
             for($j = $i + 1; $j < count($lsReport); $j++){
               if(($lsReport[$i]->sprice - $lsReport[$i]->stotal) < ($lsReport[$j]->sprice - $lsReport[$j]->stotal)){
+                $tg = $lsReport[$i];
+                $lsReport[$i] = $lsReport[$j];
+                $lsReport[$j] = $tg;
+              }
+            }
+          }
+        } elseif ($sort == '7') {
+          for($i = 0; $i < count($lsReport) - 1; $i++){
+            for($j = $i + 1; $j < count($lsReport); $j++){
+              if(($lsReport[$i]->date > $lsReport[$j]->date)){
+                $tg = $lsReport[$i];
+                $lsReport[$i] = $lsReport[$j];
+                $lsReport[$j] = $tg;
+              }
+            }
+          }
+        } elseif ($sort == '8') {
+          for($i = 0; $i < count($lsReport) - 1; $i++){
+            for($j = $i + 1; $j < count($lsReport); $j++){
+              if(($lsReport[$i]->date < $lsReport[$j]->date)){
                 $tg = $lsReport[$i];
                 $lsReport[$i] = $lsReport[$j];
                 $lsReport[$j] = $tg;
@@ -473,6 +561,26 @@ class ReportController extends Controller
               }
             }
           }
+        } elseif ($sort == '7') {
+          for($i = 0; $i < count($lsReport) - 1; $i++){
+            for($j = $i + 1; $j < count($lsReport); $j++){
+              if(($lsReport[$i]->month > $lsReport[$j]->month && $lsReport[$i]->year >= $lsReport[$j]->year)){
+                $tg = $lsReport[$i];
+                $lsReport[$i] = $lsReport[$j];
+                $lsReport[$j] = $tg;
+              }
+            }
+          }
+        } elseif ($sort == '8') {
+          for($i = 0; $i < count($lsReport) - 1; $i++){
+            for($j = $i + 1; $j < count($lsReport); $j++){
+              if(($lsReport[$i]->month < $lsReport[$j]->month && $lsReport[$i]->year <= $lsReport[$j]->year)){
+                $tg = $lsReport[$i];
+                $lsReport[$i] = $lsReport[$j];
+                $lsReport[$j] = $tg;
+              }
+            }
+          }
         }
       } elseif ($stime != null && $etime == null) {
         $stime = '01/'.$stime;
@@ -542,6 +650,26 @@ class ReportController extends Controller
           for($i = 0; $i < count($lsReport) - 1; $i++){
             for($j = $i + 1; $j < count($lsReport); $j++){
               if(($lsReport[$i]->sprice - $lsReport[$i]->stotal) < ($lsReport[$j]->sprice - $lsReport[$j]->stotal)){
+                $tg = $lsReport[$i];
+                $lsReport[$i] = $lsReport[$j];
+                $lsReport[$j] = $tg;
+              }
+            }
+          }
+        } elseif ($sort == '7') {
+          for($i = 0; $i < count($lsReport) - 1; $i++){
+            for($j = $i + 1; $j < count($lsReport); $j++){
+              if(($lsReport[$i]->month > $lsReport[$j]->month && $lsReport[$i]->year >= $lsReport[$j]->year)){
+                $tg = $lsReport[$i];
+                $lsReport[$i] = $lsReport[$j];
+                $lsReport[$j] = $tg;
+              }
+            }
+          }
+        } elseif ($sort == '8') {
+          for($i = 0; $i < count($lsReport) - 1; $i++){
+            for($j = $i + 1; $j < count($lsReport); $j++){
+              if(($lsReport[$i]->month < $lsReport[$j]->month && $lsReport[$i]->year <= $lsReport[$j]->year)){
                 $tg = $lsReport[$i];
                 $lsReport[$i] = $lsReport[$j];
                 $lsReport[$j] = $tg;
@@ -625,6 +753,26 @@ class ReportController extends Controller
               }
             }
           }
+        } elseif ($sort == '7') {
+          for($i = 0; $i < count($lsReport) - 1; $i++){
+            for($j = $i + 1; $j < count($lsReport); $j++){
+              if(($lsReport[$i]->month > $lsReport[$j]->month && $lsReport[$i]->year >= $lsReport[$j]->year)){
+                $tg = $lsReport[$i];
+                $lsReport[$i] = $lsReport[$j];
+                $lsReport[$j] = $tg;
+              }
+            }
+          }
+        } elseif ($sort == '8') {
+          for($i = 0; $i < count($lsReport) - 1; $i++){
+            for($j = $i + 1; $j < count($lsReport); $j++){
+              if(($lsReport[$i]->month < $lsReport[$j]->month && $lsReport[$i]->year <= $lsReport[$j]->year)){
+                $tg = $lsReport[$i];
+                $lsReport[$i] = $lsReport[$j];
+                $lsReport[$j] = $tg;
+              }
+            }
+          }
         }
       } elseif ($stime != null && $etime != null) {
         $stime = '01/'.$stime;
@@ -701,6 +849,26 @@ class ReportController extends Controller
               }
             }
           }
+        } elseif ($sort == '7') {
+          for($i = 0; $i < count($lsReport) - 1; $i++){
+            for($j = $i + 1; $j < count($lsReport); $j++){
+              if(($lsReport[$i]->month > $lsReport[$j]->month && $lsReport[$i]->year >= $lsReport[$j]->year)){
+                $tg = $lsReport[$i];
+                $lsReport[$i] = $lsReport[$j];
+                $lsReport[$j] = $tg;
+              }
+            }
+          }
+        } elseif ($sort == '8') {
+          for($i = 0; $i < count($lsReport) - 1; $i++){
+            for($j = $i + 1; $j < count($lsReport); $j++){
+              if(($lsReport[$i]->month < $lsReport[$j]->month && $lsReport[$i]->year <= $lsReport[$j]->year)){
+                $tg = $lsReport[$i];
+                $lsReport[$i] = $lsReport[$j];
+                $lsReport[$j] = $tg;
+              }
+            }
+          }
         }
       } else {
         $stime = date('Y-01-01 00:00:00');
@@ -767,6 +935,26 @@ class ReportController extends Controller
           for($i = 0; $i < count($lsReport) - 1; $i++){
             for($j = $i + 1; $j < count($lsReport); $j++){
               if(($lsReport[$i]->sprice - $lsReport[$i]->stotal) < ($lsReport[$j]->sprice - $lsReport[$j]->stotal)){
+                $tg = $lsReport[$i];
+                $lsReport[$i] = $lsReport[$j];
+                $lsReport[$j] = $tg;
+              }
+            }
+          }
+        } elseif ($sort == '7') {
+          for($i = 0; $i < count($lsReport) - 1; $i++){
+            for($j = $i + 1; $j < count($lsReport); $j++){
+              if(($lsReport[$i]->month > $lsReport[$j]->month && $lsReport[$i]->year >= $lsReport[$j]->year)){
+                $tg = $lsReport[$i];
+                $lsReport[$i] = $lsReport[$j];
+                $lsReport[$j] = $tg;
+              }
+            }
+          }
+        } elseif ($sort == '8') {
+          for($i = 0; $i < count($lsReport) - 1; $i++){
+            for($j = $i + 1; $j < count($lsReport); $j++){
+              if(($lsReport[$i]->month < $lsReport[$j]->month && $lsReport[$i]->year <= $lsReport[$j]->year)){
                 $tg = $lsReport[$i];
                 $lsReport[$i] = $lsReport[$j];
                 $lsReport[$j] = $tg;
