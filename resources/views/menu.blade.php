@@ -31,80 +31,82 @@
                             <div class="col-12 col-sm-8 text-center text-sm-left">
                                 <div class="toolbar-sorter-right">
                                     <span>Sắp xếp</span>
-                                    @if($sort !=1 && $sort != 2)
-                                        <form action="{{route('sortPrice')}}" method="get">
+                                    @if($sort == 0)
+                                        <form action="{{route('menu')}}" method="get">
                                             @csrf
                                             <input type="hidden" name="sort" value="1">
                                             <button class="btn menu-sort-btn" type="submit"
-                                                    title="Từ thấp đến cao"><b>Mặc định</b>
+                                                    title="Danh mục sản phẩm"><b>Mặc định</b>
                                             </button>
                                         </form>
                                     @endif
                                     @if($sort == 1)
-                                        <form action="{{route('sortPrice')}}" method="get">
+                                        <form action="{{route('menu')}}" method="get">
                                             @csrf
                                             <input type="hidden" name="sort" value="2">
                                             <button class="btn menu-sort-btn" type="submit"
-                                                    title="Từ thấp đến cao"><b>Giá cao → Giá
+                                                    title="Giá từ cao đến thấp"><b>Giá cao → Giá
                                                     thấp</b></button>
                                         </form>
                                     @endif
                                     @if($sort == 2)
-                                        <form action="{{route('sortPrice')}}" method="get">
+                                        <form action="{{route('menu')}}" method="get">
                                             @csrf
-                                            <input type="hidden" name="sort" value="3">
+                                            <input type="hidden" name="sort" value="0">
                                             <button class="btn menu-sort-btn" type="submit"
-                                                    title="Từ cao đến thấp"><b>Giá thấp → Giá
+                                                    title="Giá từ thấp đến cao"><b>Giá thấp → Giá
                                                     cao</b></button>
                                         </form>
                                     @endif
                                 </div>
                             </div>
                         </div>
-
                         <div class="product-categorie-box">
                             <div class="row category-list">
                                 @if($lsProduct!=null)
-                                    @foreach($lsProduct as $product)@php
-                                        $tagname = "";
-                                        foreach($product->tags as $t) {
-                                            $tagname .= $t->id." ";
-                                        }
-                                    @endphp
-                                    <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4 category-grid {{$tagname}}">
-                                        <div class="products-single fix">
-                                            <div class="box-img-hover">
-                                                @foreach($product->images as $image)
-                                                    <img src="{{asset($image->link)}}" class="img-fluid"
-                                                         alt="Image">
-                                                @endforeach
-                                                <div class="mask-icon">
-                                                    <ul>
-                                                        <li><a href="{{route('detail', $product->id)}}"
-                                                               data-toggle="tooltip"
-                                                               data-placement="right"
-                                                               title="Xem"><i class="fas fa-eye"></i></a>
-                                                        </li>
-                                                    </ul>
-                                                    <a class="cart" onclick="AddCart({{$product->id}})"
-                                                       href="javascript:">Thêm vào giỏ</a>
+                                    @foreach($lsProduct as $product)
+                                        @php
+                                            $tagname = "";
+                                            foreach($product->tags as $t) {
+                                                $tagname .= $t->id." ";
+                                            }
+                                        @endphp
+                                        <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4 category-grid {{$tagname}}">
+                                            <div class="products-single fix">
+                                                <div class="box-img-hover">
+                                                    @foreach($product->images as $image)
+                                                        <img src="{{asset($image->link)}}" class="img-fluid"
+                                                             alt="Image">
+                                                    @endforeach
+                                                    <div class="mask-icon">
+                                                        <ul>
+                                                            <li><a href="{{route('detail', $product->id)}}"
+                                                                   data-toggle="tooltip"
+                                                                   data-placement="right"
+                                                                   title="Xem"><i class="fas fa-eye"></i></a>
+                                                            </li>
+                                                        </ul>
+                                                        <a class="cart" onclick="AddCart({{$product->id}})"
+                                                           href="javascript:">Thêm vào giỏ</a>
+                                                    </div>
+                                                </div>
+                                                <div class="why-text">
+                                                    <h4><a href="{{route('detail', $product->id)}}"
+                                                           style="color: black; line-height: 1.8rem; height: 1.8rem; overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 1"
+                                                           title="{{$product->name}}">{{$product->name}}</a></h4>
+                                                    <h5> {{number_format($product->price)}} VNĐ</h5>
                                                 </div>
                                             </div>
-                                            <div class="why-text">
-                                                <h4><a href="{{route('detail', $product->id)}}"
-                                                       style="color: black; line-height: 1.8rem; height: 1.8rem; overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 1"
-                                                       title="{{$product->name}}">{{$product->name}}</a></h4>
-                                                <h5> {{number_format($product->price)}} VNĐ</h5>
-                                            </div>
                                         </div>
-                                    </div>
                                     @endforeach
                                 @elseif($lsProduct==null)
                                     <p>Không có sản phẩm nào trong danh mục này. Vui lòng nhập từ khóa khác.
                                 @endif
                             </div>
                             <div class="row">
-                                {{--                                <div style="margin: auto">{{$lsProduct->links("pagination::bootstrap-4")}}</div>--}}
+                                <div style="margin: auto">
+                                    {{$lsProduct->appends(['search' => $search,'sort' => $sort, 'category' => $cate, 'minPrice'=> $min, 'maxPrice'=> $max])->links("pagination::bootstrap-4")}}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -112,11 +114,11 @@
                 <div class="col-xl-3 col-lg-3 col-sm-12 col-xs-12 sidebar-shop-left">
                     <div class="product-categori">
                         <div class="search-product">
-                            <form action="{{route('menu')}}" method="get" name="search">
+                            <form action="{{route('menu')}}" method="get">
                                 @csrf
                                 <input class="form-control" placeholder="Tìm kiếm..." type="text"
-                                       name="name"
-                                       value="{{$name}}">
+                                       name="search"
+                                       value="{{$search}}">
                                 <button type="submit"><i class="fa fa-search"></i></button>
                             </form>
                         </div>
@@ -125,19 +127,20 @@
                                 <h3>Danh Mục</h3>
                             </div>
                             <div class="category-menu">
-                                {{--                                <button href="" class="active"--}}
-                                {{--                                        data-filter="*">Tất cả <small--}}
-                                {{--                                        class="text-muted"> ({{$product->count()}})</small></button>--}}
-                                {{--                                @foreach($lsTag as $tag)--}}
-                                {{--                                    <button class=""--}}
-                                {{--                                            data-tag_id=".{{$tag->id}}"> {{$tag->name}} <small--}}
-                                {{--                                            class="text-muted"> ({{$tag->products()->count()}})</small></button>--}}
-                                {{--                                @endforeach--}}
                                 <form action="{{route('menu')}}" method="get">
+                                    <div class="cate-name" style="width: 100%">
+                                        <input type="submit" name="category" value="0" id="0">
+                                        <label for="0">Tất cả sản phẩm</label>
+                                        {{--<small class="text-muted"> ({{$product->count()}})</small></button>--}}
+                                    </div>
                                     @foreach($lsTag as $tag)
-                                        <input type="radio" class="tagname" name="tag-category" value="{{$tag->id}}"
-                                               id="{{$tag->id}}"><label
-                                            for="{{$tag->id}}">{{$tag->name}}</label>
+                                        <div class="cate-name" style="width: 100%">
+                                            <input type="submit" name="category"
+                                                   value="{{$tag->id}}"
+                                                   id="{{$tag->id}}"><label
+                                                for="{{$tag->id}}">{{$tag->name}}</label>
+                                            <small class="text-muted"> ({{$tag->products()->count()}})</small></button>
+                                        </div>
                                     @endforeach
                                 </form>
                             </div>
@@ -148,7 +151,7 @@
                             </div>
                             <div class="price-box-slider">
                                 <div id="slider-range"></div>
-                                <form action="{{route('slideFilter')}}" method="get" name="search">
+                                <form action="{{route('menu')}}" method="get">
                                     @csrf
                                     <input type="text" id="amount" readonly
                                            style="border:0; color:#fbb714; font-weight:bold; margin-top: 25px; width: 70%">
@@ -178,7 +181,7 @@
                 range: true,
                 min: 0,
                 max: 300000,
-                values: [50000, 250000],
+                values: [0, 300000],
                 slide: function (event, ui) {
                     $("#amount").val(ui.values[0] + " VND" + " - " + ui.values[1] + " VND");
                 }

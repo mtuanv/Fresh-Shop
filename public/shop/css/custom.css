@@ -49,3 +49,22 @@
     border-radius: none;
 }
 
+.cate-name > input {
+    display: none;
+}
+
+.cate-name > label {
+    position: relative;
+    cursor: pointer
+}
+
+.cate-name > label:hover {
+    color: #00ad5f;
+}
+
+.cate-name > label:active {
+    color: #00ad5f;
+}
+
+
+

@@ -74,53 +74,103 @@ class ShopController extends Controller
 
     public function menu(Request $request)
     {
-        $name = $request->name;
         $sort = $request->sort;
-        $lsBlog = Promotion::all();
-        $count = 0;
-        $lsTag = Tag::all();
-        if ($name != null) {
-            $lsProduct = Product::where('products.name', 'like', '%' . $name . '%');
-            $count = $lsProduct->count();
-            if ($count == 0) {
-                $lsProduct = null;
-            } else {
-                $lsProduct = Product::where('products.name', 'like', '%' . $name . '%')->get();
-            }
-        } else {
-            $lsProduct = Product::all();
-        }
-        return view('menu')->with(['lsProduct' => $lsProduct, 'sort' => $sort, 'lsTag' => $lsTag, 'name' => $name, 'lsBlog' => $lsBlog]);
-    }
-
-    public function sortPrice(Request $request)
-    {
-        $sort = $request->sort;
-        $name = $request->name;
-        $lsTag = Tag::all();
-        $lsBlog = Promotion::all();
-        if ($sort != 1 && $sort != 2) {
-            $lsProduct = Product::all();
-        } elseif ($sort == 1) {
-            $lsProduct = Product::orderBy('price', 'DESC')->get();
-        } elseif ($sort == 2) {
-            $lsProduct = Product::orderBy('price')->get();
-        }
-        return view('menu')->with(['lsProduct' => $lsProduct, 'lsTag' => $lsTag, 'lsBlog' => $lsBlog, 'name' => $name, 'sort' => $sort]);
-    }
-
-    public function slideFilter(Request $request)
-    {
-        $name = $request->name;
-        $sort = $request->sort;
+        $search = $request->search;
+        $cate = $request->category;
         $min = $request->minPrice;
         $max = $request->maxPrice;
-        $lsBlog = Promotion::all();
-
-        $lsProduct = Product::whereBetween('products.price', [$min, $max])->get();
+        $count = 0;
         $lsTag = Tag::all();
-
-        return view('menu')->with(['lsProduct' => $lsProduct, 'lsBlog' => $lsBlog, 'sort' => $sort, 'name' => $name, 'lsTag' => $lsTag]);
+        $lsBlog = Promotion::all();
+        if ($min == null) {
+            if ($sort == 0) {
+                if ($search == null && $cate == null) {
+                    $lsProduct = Product::paginate(9);
+                } elseif ($search == null && $cate != 0) {
+                    $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
+                        ->join('tags', 'product_tags.tag_id', '=', 'tags.id')->select('products.*')
+                        ->where('tags.id', '=', $cate)
+                        ->distinct()
+                        ->paginate(9);
+                } elseif ($search != null && $cate == null || $cate == 0) {
+                    $lsProduct = Product::where('products.name', 'like', '%' . $search . '%');
+                    $count = $lsProduct->count();
+                    if ($count == 0) {
+                        $lsProduct = null;
+                    } else {
+                        $lsProduct = Product::where('products.name', 'like', '%' . $search . '%')->paginate(9);
+                    }
+                } elseif ($search != null && $cate != 0) {
+                    $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
+                        ->join('tags', 'product_tags.tag_id', '=', 'tags.id')->select('products.*')
+                        ->where('products.name', 'like', '%' . $search . '%')
+                        ->where('tags.id', '=', $cate)
+                        ->distinct()
+                        ->paginate(9);
+                }
+            } elseif ($sort == 1) {
+                if ($search == null && $cate == 0) {
+                    $lsProduct = Product::orderBy('price', 'DESC')->paginate(9);
+                } elseif ($search == null && $cate != 0) {
+                    $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
+                        ->join('tags', 'product_tags.tag_id', '=', 'tags.id')->select('products.*')
+                        ->where('tags.id', '=', $cate)
+                        ->distinct()
+                        ->orderBy('price', 'DESC')
+                        ->paginate(9);
+                } elseif ($search != null && $cate == null || $cate == 0) {
+                    $lsProduct = Product::where('products.name', 'like', '%' . $search . '%');
+                    $count = $lsProduct->count();
+                    if ($count == 0) {
+                        $lsProduct = null;
+                    } else {
+                        $lsProduct = Product::where('products.name', 'like', '%' . $search . '%')
+                            ->orderBy('price', 'DESC')
+                            ->paginate(9);
+                    }
+                } elseif ($search != null && $cate != 0) {
+                    $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
+                        ->join('tags', 'product_tags.tag_id', '=', 'tags.id')->select('products.*')
+                        ->where('products.name', 'like', '%' . $search . '%')
+                        ->where('tags.id', '=', $cate)
+                        ->distinct()
+                        ->orderBy('price', 'DESC')
+                        ->paginate(9);
+                }
+            } elseif ($sort == 2) {
+                if ($search == null && $cate == 0) {
+                    $lsProduct = Product::orderBy('price')->paginate(9);
+                } elseif ($search == null && $cate != 0) {
+                    $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
+                        ->join('tags', 'product_tags.tag_id', '=', 'tags.id')->select('products.*')
+                        ->where('tags.id', '=', $cate)
+                        ->distinct()
+                        ->orderBy('price')
+                        ->paginate(9);
+                } elseif ($search != null && $cate == null || $cate == 0) {
+                    $lsProduct = Product::where('products.name', 'like', '%' . $search . '%');
+                    $count = $lsProduct->count();
+                    if ($count == 0) {
+                        $lsProduct = null;
+                    } else {
+                        $lsProduct = Product::where('products.name', 'like', '%' . $search . '%')
+                            ->orderBy('price')
+                            ->paginate(9);
+                    }
+                } elseif ($search != null && $cate != 0) {
+                    $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
+                        ->join('tags', 'product_tags.tag_id', '=', 'tags.id')->select('products.*')
+                        ->where('products.name', 'like', '%' . $search . '%')
+                        ->where('tags.id', '=', $cate)
+                        ->distinct()
+                        ->orderBy('price')
+                        ->paginate(9);
+                }
+            }
+        } else {
+            $lsProduct = Product::whereBetween('products.price', [$min, $max])->paginate(9);
+        }
+        return view('menu')->with(['lsProduct' => $lsProduct, 'lsBlog' => $lsBlog, 'lsTag' => $lsTag, 'sort' => $sort, 'search' => $search, 'cate' => $cate, 'min' => $min, 'max' => $max]);
     }
 
     public function detail($id)
@@ -149,7 +199,6 @@ class ShopController extends Controller
         $feedback->save();
 
         return response()->json(['msg' => 'Success']);
-
     }
 
     public function searchHeader(Request $request)
