@@ -104,7 +104,7 @@
                         @endif
                         <th class="text-center">Chức danh</th>
                         @if(Auth::user()->role_name == 'ADMIN')
-                        <th class="text-center">Xoá</th>
+                        <th class="text-center">Quản lý</th>
                         @endif
                     </tr>
                 </thead>
