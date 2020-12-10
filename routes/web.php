@@ -40,6 +40,7 @@ Route::post('/order_save', [\App\Http\Controllers\OrderController::class, 'store
 
 
 //back-end
+Auth::routes();
 Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::middleware(['auth', 'checkAdmin'])->group(function () {
@@ -47,6 +48,8 @@ Route::middleware(['auth', 'checkAdmin'])->group(function () {
         Route::get('/dashboard', [\App\Http\Controllers\UserController::class, 'index'])->name('dashboard');
         Route::post('/update', [\App\Http\Controllers\UserController::class, 'update'])->name('updateuser');
         Route::post('/dashboard/user_edit', [App\Http\Controllers\UserController::class, 'edit'])->name('edituser');
+        Route::post('/dashboard/change_password', [App\Http\Controllers\UserController::class, 'changePassword'])->name('editpw');
+        Route::post('/savechangepw', [App\Http\Controllers\UserController::class, 'savechangePassword'])->name('savechangepw');
         Route::get('/user_delete/{id}', [\App\Http\Controllers\UserController::class, 'destroy'])->name('deleteuser');
         Route::resource('/tags', \App\Http\Controllers\TagController::class);
         Route::resource('/products', \App\Http\Controllers\ProductController::class);
