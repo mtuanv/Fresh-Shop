@@ -29,36 +29,35 @@
                     <div class="single-product-details">
                         <h2>{{$product->name}}</h2>
                         <h5>
-                            {{$product->price}} VND
+                            {{number_format($product->price)}}VND
                         </h5>
-                        <p class="available-stock"><span> Có sẵn hơn {{$product->quantity}} sản phẩm</span>
-                        <p>
+                        <p class="available-stock"><span> Có sẵn hơn {{$product->quantity}} sản phẩm</span></p>
                         <h4>Mô tả:</h4>
                         <p>{!! $product->description !!}</p>
-                        <ul>
-                            <li>
-                                <div class="form-group quantity-box">
-                                    <label class="control-label">Số lượng</label>
-                                    <input class="form-control" value="1" min="1" max="{{$product->quantity}}"
-                                           type="number">
-                                </div>
-                            </li>
-                        </ul>
+                        {{--                        <ul>--}}
+                        {{--                            <li>--}}
+                        {{--                                <div class="form-group quantity-box">--}}
+                        {{--                                    <label class="control-label">Số lượng</label>--}}
+                        {{--                                    <input class="form-control" value="1" min="1" max="{{$product->quantity}}"--}}
+                        {{--                                           type="number">--}}
+                        {{--                                </div>--}}
+                        {{--                            </li>--}}
+                        {{--                        </ul>--}}
 
-                        <div class="price-box-bar">
-                            <div class="cart-and-bay-btn">
-                                <a class="btn hvr-hover" data-fancybox-close="" onclick="AddCart({{$product->id}})"
-                                   href="javascript:">Thêm vào giỏ</a>
-                            </div>
+                    </div>
+                    <div class="price-box-bar">
+                        <div class="cart-and-bay-btn">
+                            <a class="btn hvr-hover" data-fancybox-close="" onclick="AddCart({{$product->id}})"
+                               href="javascript:">Thêm vào giỏ</a>
                         </div>
+                    </div>
 
-                        <div class="add-to-btn">
-                            <div class="share-bar">
-                                <a class="btn hvr-hover" href="#"><i class="fab fa-facebook" aria-hidden="true"></i></a>
-                                <a class="btn hvr-hover" href="#"><i class="fab fa-instagram"
-                                                                     aria-hidden="true"></i></a>
-                                <a class="btn hvr-hover" href="#"><i class="fab fa-google-plus" aria-hidden="true"></i></a>
-                            </div>
+                    <div class="add-to-btn" style="position: absolute; bottom: 30px; right:15px">
+                        <div class="share-bar">
+                            <a class="btn hvr-hover" href="#"><i class="fab fa-facebook" aria-hidden="true"></i></a>
+                            <a class="btn hvr-hover" href="#"><i class="fab fa-instagram"
+                                                                 aria-hidden="true"></i></a>
+                            <a class="btn hvr-hover" href="#"><i class="fab fa-google-plus" aria-hidden="true"></i></a>
                         </div>
                     </div>
                 </div>

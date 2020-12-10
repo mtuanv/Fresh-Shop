@@ -783,7 +783,7 @@ ul.cart-list p .price {
     transition-duration: 0.3s;
     border-radius: 0;
     box-shadow: none;
-    color:white;
+    color: white;
 }
 
 .hvr-hover::after {
@@ -2930,7 +2930,7 @@ ul.cart-list > li.total > .btn:hover {
 }
 
 .single-product-details p {
-    font-size: 16px;
+    font-size: 20px;
     margin-bottom: 20px;
 }
 
@@ -2960,6 +2960,8 @@ ul.cart-list > li.total > .btn:hover {
 
 .price-box-bar {
     margin-bottom: 30px;
+    position: absolute;
+    bottom: 0;
 }
 
 .price-box-bar a {

@@ -267,7 +267,6 @@
 <script src="{{asset('shop/js/jquery.nicescroll.min.js')}}"></script>
 <script src="{{asset('shop/js/jquery-ui.js')}}"></script>
 
-
 </body>
 
 </html>

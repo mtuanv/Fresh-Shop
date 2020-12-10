@@ -10,7 +10,6 @@ use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Http\Request;
 use function GuzzleHttp\Promise\all;
-use Illuminate\Support\Facades\DB;
 
 class ShopController extends Controller
 {

@@ -46,25 +46,20 @@
 
 .menu-sort-btn:hover {
     background-color: #b0b435;
-    border-radius: none;
+    border-radius: 0;
 }
 
 .cate-name > input {
     display: none;
 }
 
-.cate-name > label {
-    position: relative;
-    cursor: pointer
-}
-
 .cate-name > label:hover {
-    color: #00ad5f;
+    color: #b0b435;
+    background-color: #fff;
+    font-weight: 700;
+    cursor: pointer;
 }
 
-.cate-name > label:active {
-    color: #00ad5f;
-}
 
 
 

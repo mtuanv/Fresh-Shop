@@ -131,14 +131,11 @@
                                     <div class="cate-name" style="width: 100%">
                                         <input type="submit" name="category" value="0" id="0">
                                         <label for="0">Tất cả sản phẩm</label>
-                                        {{--<small class="text-muted"> ({{$product->count()}})</small></button>--}}
                                     </div>
                                     @foreach($lsTag as $tag)
                                         <div class="cate-name" style="width: 100%">
-                                            <input type="submit" name="category"
-                                                   value="{{$tag->id}}"
-                                                   id="{{$tag->id}}"><label
-                                                for="{{$tag->id}}">{{$tag->name}}</label>
+                                            <input type="submit" name="category" value="{{$tag->id}}" id="{{$tag->id}}">
+                                            <label for="{{$tag->id}}">{{$tag->name}}</label>
                                             <small class="text-muted"> ({{$tag->products()->count()}})</small></button>
                                         </div>
                                     @endforeach
@@ -171,6 +168,9 @@
         </div>
     </div>
     <!-- End Menu Page -->
+    <script>
+        var active
+    </script>
 
     <script type="text/javascript">
         /* ..............................................
