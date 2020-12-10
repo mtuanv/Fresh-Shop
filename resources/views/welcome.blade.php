@@ -115,8 +115,8 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="title-all text-center">
-                        <h1>Tin tức mới nhất</h1>
-                        <p>Combo sự kiện mở liên tục, chúng tôi tự tin là có thể làm bạn thỏa mãn mọi lúc</p>
+                        <h1 style="text-transform: uppercase">Tin tức mới nhất</h1>
+                        <p>Combo sự kiện mở liên tục, chúng tôi tự tin có thể làm bạn thỏa mãn mọi lúc</p>
                     </div>
                 </div>
             </div>

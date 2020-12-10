@@ -234,7 +234,8 @@
                         <p>Theo dõi chúng tôi trên các nền tảng mạng xã hội <br> để nhận được thông tin ưu đãi sớm nhất.
                         </p>
                         <ul>
-                            <li><a href="#"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
+                            <li><a href="https://www.facebook.com/Fresh-Shop-T19011e-105462151432872" target="_blank">
+                                    <i class="fab fa-facebook" aria-hidden="true"></i></a></li>
                             <li><a href="#"><i class="fab fa-instagram" aria-hidden="true"></i></a></li>
                             <li><a href="#"><i class="fab fa-facebook-messenger" aria-hidden="true"></i></a></li>
                         </ul>
@@ -242,9 +243,6 @@
                 </div>
             </div>
             <hr>
-            <div class="row">
-
-            </div>
         </div>
     </div>
 </footer>
@@ -271,9 +269,33 @@
 <script src="{{asset('shop/js/jquery.nicescroll.min.js')}}"></script>
 <script src="{{asset('shop/js/jquery-ui.js')}}"></script>
 
-<script src="{{asset('owl-carousel/owl.carousel.min.js')}}"></script>
+<!-- Load Facebook SDK for JavaScript -->
+<div id="fb-root"></div>
+<script>
+    window.fbAsyncInit = function () {
+        FB.init({
+            xfbml: true,
+            version: 'v9.0'
+        });
+    };
 
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
 
+<!-- Your Chat Plugin code -->
+<div class="fb-customerchat"
+     attribution=setup_tool
+     page_id="105462151432872"
+     theme_color="#0A7CFF"
+     logged_in_greeting="Fresh Shop xin kính chào quý khách ! "
+     logged_out_greeting="Fresh Shop xin kính chào quý khách ! ">
+</div>
 </body>
 
 </html>

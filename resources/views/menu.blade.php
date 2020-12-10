@@ -60,18 +60,12 @@
                                     @endif
                                 </div>
                             </div>
-                            <p style="float:right;">Hiển thị {{$lsProduct->count()}} kết quả</p>
+                            <p style="float:right">Hiển thị {{$lsProduct->count()}} kết quả</p>
                         </div>
                         <div class="product-categorie-box">
                             <div class="row">
                                 @if($lsProduct!=null)
                                     @foreach($lsProduct as $product)
-                                        @php
-                                            $tagname = "";
-                                            foreach($product->tags as $t) {
-                                                $tagname .= $t->id." ";
-                                            }
-                                        @endphp
                                         <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
                                             <div class="products-single fix">
                                                 <div class="box-img-hover">
@@ -140,8 +134,7 @@
                                             <input type="submit" name="category" value="{{$tag->id}}"
                                                    id="{{$tag->id}}">
                                             <label for="{{$tag->id}}">{{$tag->name}}</label>
-                                            <small class="text-muted"> ({{$tag->products()->count()}}
-                                                )</small></button>
+                                            <small class="text-muted"> ({{$tag->products()->count()}})</small></button>
                                         </div>
                                     @endforeach
                                 </form>

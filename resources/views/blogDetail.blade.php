@@ -27,7 +27,7 @@
                             <h1 class="mt-4">{{$blog->title}}</h1>
                             <hr>
                             <!-- Date/Time -->
-                            <p>Posted on {{date('d/m/Y H:i:s', strtotime($blog->created_at))}}</p>
+                            <p>Posted on {{date('d/m/Y', strtotime($blog->created_at))}}</p>
                             <hr>
                             <!-- Preview Image -->
                             <img class="img-fluid" src="{{asset($blog->cover)}}" alt="">

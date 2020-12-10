@@ -29,21 +29,11 @@
                     <div class="single-product-details">
                         <h2>{{$product->name}}</h2>
                         <h5>
-                            {{number_format($product->price)}}VND
+                            {{number_format($product->price)}} VND
                         </h5>
                         <p class="available-stock"><span> Có sẵn hơn {{$product->quantity}} sản phẩm</span></p>
                         <h4>Mô tả:</h4>
                         <p>{!! $product->description !!}</p>
-                        {{--                        <ul>--}}
-                        {{--                            <li>--}}
-                        {{--                                <div class="form-group quantity-box">--}}
-                        {{--                                    <label class="control-label">Số lượng</label>--}}
-                        {{--                                    <input class="form-control" value="1" min="1" max="{{$product->quantity}}"--}}
-                        {{--                                           type="number">--}}
-                        {{--                                </div>--}}
-                        {{--                            </li>--}}
-                        {{--                        </ul>--}}
-
                     </div>
                     <div class="price-box-bar">
                         <div class="cart-and-bay-btn">
@@ -192,8 +182,9 @@
                                             </div>
                                         </div>
                                         <div class="why-text">
-                                            <h4>{{$product->name}}</h4>
-                                            <h5> {{$product->price}} VND</h5>
+                                            <h4 style="color: black; line-height: 1.8rem; height: 1.8rem; overflow: hidden;
+                                            display: -webkit-box; -webkit-box-orient: vertical">{{$product->name}}</h4>
+                                            <h5>{{number_format($product->price)}} VND</h5>
                                         </div>
                                     </div>
                                 </div>

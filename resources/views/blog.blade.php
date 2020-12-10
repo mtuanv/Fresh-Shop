@@ -34,7 +34,7 @@
                                                style="background-color: #b0b435; color: white">Xem thêm
                                                 &rarr;</a>
                                             <div class="card-footer text-muted">
-                                                Posted on {{date('d/m/Y H:i:s', strtotime($promotion->created_at))}}
+                                                Posted on {{date('d/m/Y', strtotime($promotion->created_at))}}
                                             </div>
                                         </div>
                                     </div>
