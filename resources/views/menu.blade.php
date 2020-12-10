@@ -62,7 +62,7 @@
                             </div>
                         </div>
                         <div class="product-categorie-box">
-                            <div class="row category-list">
+                            <div class="row">
                                 @if($lsProduct!=null)
                                     @foreach($lsProduct as $product)
                                         @php
@@ -71,7 +71,7 @@
                                                 $tagname .= $t->id." ";
                                             }
                                         @endphp
-                                        <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4 category-grid {{$tagname}}">
+                                        <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
                                             <div class="products-single fix">
                                                 <div class="box-img-hover">
                                                     @foreach($product->images as $image)
@@ -99,14 +99,12 @@
                                             </div>
                                         </div>
                                     @endforeach
+                                    <div style="margin: auto">
+                                        {{$lsProduct->appends(['search' => $search,'sort' => $sort, 'category' => $cate, 'minPrice'=> $min, 'maxPrice'=> $max])->links("pagination::bootstrap-4")}}
+                                    </div>
                                 @elseif($lsProduct==null)
-                                    <p>Không có sản phẩm nào trong danh mục này. Vui lòng nhập từ khóa khác.
+                                    <p>Không có sản phẩm nào trong danh mục này. Vui lòng nhập từ khóa khác.</p>
                                 @endif
-                            </div>
-                            <div class="row">
-                                <div style="margin: auto">
-                                    {{$lsProduct->appends(['search' => $search,'sort' => $sort, 'category' => $cate, 'minPrice'=> $min, 'maxPrice'=> $max])->links("pagination::bootstrap-4")}}
-                                </div>
                             </div>
                         </div>
                     </div>

@@ -5,10 +5,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <h2>TIN TỨC</h2>
+                    <h2>{{$blog->title}}</h2>
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{route('blog')}}">Tin tức</a></li>
-                        <li class="breadcrumb-item active">Tin tức</li>
+                        <li class="breadcrumb-item active">Bài viết</li>
                     </ul>
                 </div>
             </div>
@@ -25,28 +25,15 @@
                         <div class="col-xl-9 col-lg-9 col-sm-12 col-xs-12">
                             <!-- Title -->
                             <h1 class="mt-4">{{$blog->title}}</h1>
-
-                            <!-- Author -->
-                            <p class="lead">
-                                by
-                                <a href="#">...</a>
-                            </p>
-
                             <hr>
-
                             <!-- Date/Time -->
                             <p>Posted on {{date('d/m/Y H:i:s', strtotime($blog->created_at))}}</p>
-
                             <hr>
-
                             <!-- Preview Image -->
                             <img class="img-fluid" src="{{asset($blog->cover)}}" alt="">
-
                             <hr>
-
                             <!-- Post Content -->
                             <p class="lead"> {!!$blog->content!!}</p>
-                            s
                         </div>
                         <div class="col-xl-3 col-lg-3 col-sm-12 col-xs-12">
                             <!-- Search Widget -->
@@ -54,8 +41,8 @@
                                 <form action="{{route('blog')}}" method="get" name="search">
                                     @csrf
                                     <input class="form-control" placeholder="Tìm kiếm..." type="text"
-                                           name="name"
-                                           value="{{$name}}">
+                                           name="search"
+                                           value="{{$search}}">
                                     <button type="submit"><i class="fa fa-search"></i></button>
                                 </form>
                             </div>
@@ -65,22 +52,29 @@
                                 <div class="title-left">
                                     <h3>Danh Mục</h3>
                                 </div>
-                                {{--                                <div class="blog-menu list-group list-group-collapse list-group-sm list-group-tree"--}}
-                                {{--                                     id="list-group-men" data-children=".sub-men">--}}
-                                {{--                                    <a href="" class="active list-group-item list-group-item-action"--}}
-                                {{--                                       data-filter="*">Tất cả <small--}}
-                                {{--                                            class="text-muted"> ({{$promotion->count()}})</small></a>--}}
-                                {{--                                    @foreach($lsTag as $tag)--}}
-                                {{--                                        <a href="" class="list-group-item list-group-item-action"--}}
-                                {{--                                           data-tag_id=".{{$tag->id}}"> {{$tag->name}} <small--}}
-                                {{--                                                class="text-muted"> ({{$tag->promotions()->count()}})</small></a>--}}
-                                {{--                                    @endforeach--}}
-                                {{--                                </div>--}}
+                                <div class="category-menu">
+                                    <form action="{{route('blog')}}" method="get">
+                                        <div class="cate-name" style="width: 100%">
+                                            <input type="submit" name="category" value="0" id="0">
+                                            <label for="0">Tất cả bài viết</label>
+                                        </div>
+                                        @foreach($lsTag as $tag)
+                                            <div class="cate-name" style="width: 100%">
+                                                <input type="submit" name="category" value="{{$tag->id}}"
+                                                       id="{{$tag->id}}">
+                                                <label for="{{$tag->id}}">{{$tag->name}}</label>
+                                                <small class="text-muted"> ({{$tag->promotions()->count()}})
+                                                </small></button>
+                                            </div>
+                                        @endforeach
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- End Blog  -->
+    </div>
+    <!-- End Blog  -->
 @endsection

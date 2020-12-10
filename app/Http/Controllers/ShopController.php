@@ -31,32 +31,56 @@ class ShopController extends Controller
 
     public function blog(Request $request)
     {
-        $name = $request->name;
+        $search = $request->search;
+        $cate = $request->category;
         $lsBlog = Promotion::all();
         $count = 0;
-        if ($name != null) {
-            $lsPromotion = Promotion::where('promotions.title', 'like', '%' . $name . '%');
+        $lsTag = Tag::whereIn('tags.id', [8, 9])->get();
+        if ($search == null && $cate == null) {
+            $lsPromotion = Promotion::paginate(3);
+        } elseif ($search == null && $cate != 0) {
+            $lsPromotion = Promotion::join('promotion_tags', 'promotions.id', '=', 'promotion_tags.promotion_id')
+                ->join('tags', 'promotion_tags.tag_id', '=', 'tags.id')->select('promotions.*')
+                ->where('tags.id', '=', $cate)
+                ->distinct()
+                ->paginate(3);
+        } elseif ($search != null && $cate == null || $cate == 0) {
+            $lsPromotion = Promotion::where('promotions.title', 'like', '%' . $search . '%');
             $count = $lsPromotion->count();
             if ($count == 0) {
                 $lsPromotion = null;
             } else {
-                $lsPromotion = Promotion::where('promotions.title', 'like', '%' . $name . '%')->get();
-                $lsTag = Tag::whereIn('tags.id', [8, 9])->get();
+                $lsPromotion = Promotion::where('promotions.title', 'like', '%' . $search . '%')->paginate(3);
             }
-        } else {
-            $lsPromotion = Promotion::all();
-            $lsTag = Tag::whereIn('tags.id', [8, 9])->get();
+        } elseif ($search != null && $cate != 0) {
+            $lsPromotion = Promotion::join('promotion_tags', 'promotions.id', '=', 'promotion_tags.promotion_id')
+                ->join('tags', 'promotion_tags.tag_id', '=', 'tags.id')->select('promotions.*')
+                ->where('promotions.title', 'like', '%' . $search . '%')
+                ->where('tags.id', '=', $cate)
+                ->distinct();
+            $count = $lsPromotion->count();
+            if ($count == 0) {
+                $lsProduct = null;
+            } else {
+                $$lsPromotion = Promotion::join('promotion_tags', 'promotions.id', '=', 'promotion_tags.promotion_id')
+                    ->join('tags', 'promotion_tags.tag_id', '=', 'tags.id')->select('promotions.*')
+                    ->where('promotions.title', 'like', '%' . $search . '%')
+                    ->where('tags.id', '=', $cate)
+                    ->distinct()
+                    ->paginate(3);
+            }
         }
-        return view('blog')->with(['lsPromotion' => $lsPromotion, 'lsTag' => $lsTag, 'name' => $name, 'lsBlog' => $lsBlog]);
+        return view('blog')->with(['lsPromotion' => $lsPromotion, 'lsTag' => $lsTag, 'lsBlog' => $lsBlog, 'search' => $search, 'cate' => $cate]);
     }
 
     public function blogDetail(Request $request, $id)
     {
-        $name = $request->name;
-        $blog = Promotion::find($id);
-        $lsTag = Tag::all();
+        $search = $request->search;
+        $cate = $request->category;
         $lsBlog = Promotion::all();
-        return view('blogDetail')->with(['blog' => $blog, 'lsTag' => $lsTag, 'lsBlog' => $lsBlog, 'name' => $name]);
+        $blog = Promotion::find($id);
+        $lsTag = Tag::whereIn('tags.id', [8, 9])->get();
+        return view('blogDetail')->with(['blog' => $blog, 'lsTag' => $lsTag, 'lsBlog' => $lsBlog, 'search' => $search, 'cate' => $cate]);
     }
 
     public function contact()
@@ -104,8 +128,18 @@ class ShopController extends Controller
                         ->join('tags', 'product_tags.tag_id', '=', 'tags.id')->select('products.*')
                         ->where('products.name', 'like', '%' . $search . '%')
                         ->where('tags.id', '=', $cate)
-                        ->distinct()
-                        ->paginate(9);
+                        ->distinct();
+                    $count = $lsProduct->count();
+                    if ($count == 0) {
+                        $lsProduct = null;
+                    } else {
+                        $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
+                            ->join('tags', 'product_tags.tag_id', '=', 'tags.id')->select('products.*')
+                            ->where('products.name', 'like', '%' . $search . '%')
+                            ->where('tags.id', '=', $cate)
+                            ->distinct()
+                            ->paginate(9);
+                    }
                 }
             } elseif ($sort == 1) {
                 if ($search == null && $cate == 0) {
@@ -132,9 +166,19 @@ class ShopController extends Controller
                         ->join('tags', 'product_tags.tag_id', '=', 'tags.id')->select('products.*')
                         ->where('products.name', 'like', '%' . $search . '%')
                         ->where('tags.id', '=', $cate)
-                        ->distinct()
-                        ->orderBy('price', 'DESC')
-                        ->paginate(9);
+                        ->distinct();
+                    $count = $lsProduct->count();
+                    if ($count == 0) {
+                        $lsProduct = null;
+                    } else {
+                        $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
+                            ->join('tags', 'product_tags.tag_id', '=', 'tags.id')->select('products.*')
+                            ->where('products.name', 'like', '%' . $search . '%')
+                            ->where('tags.id', '=', $cate)
+                            ->distinct()
+                            ->orderBy('price', 'DESC')
+                            ->paginate(9);
+                    }
                 }
             } elseif ($sort == 2) {
                 if ($search == null && $cate == 0) {
@@ -161,9 +205,19 @@ class ShopController extends Controller
                         ->join('tags', 'product_tags.tag_id', '=', 'tags.id')->select('products.*')
                         ->where('products.name', 'like', '%' . $search . '%')
                         ->where('tags.id', '=', $cate)
-                        ->distinct()
-                        ->orderBy('price')
-                        ->paginate(9);
+                        ->distinct();
+                    $count = $lsProduct->count();
+                    if ($count == 0) {
+                        $lsProduct = null;
+                    } else {
+                        $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
+                            ->join('tags', 'product_tags.tag_id', '=', 'tags.id')->select('products.*')
+                            ->where('products.name', 'like', '%' . $search . '%')
+                            ->where('tags.id', '=', $cate)
+                            ->distinct()
+                            ->orderBy('price')
+                            ->paginate(9);
+                    }
                 }
             }
         } else {
