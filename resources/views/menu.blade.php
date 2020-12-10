@@ -60,6 +60,7 @@
                                     @endif
                                 </div>
                             </div>
+                            <p style="float:right;">Hiển thị {{$lsProduct->count()}} kết quả</p>
                         </div>
                         <div class="product-categorie-box">
                             <div class="row">
@@ -99,8 +100,12 @@
                                             </div>
                                         </div>
                                     @endforeach
-                                    <div style="margin: auto">
-                                        {{$lsProduct->appends(['search' => $search,'sort' => $sort, 'category' => $cate, 'minPrice'=> $min, 'maxPrice'=> $max])->links("pagination::bootstrap-4")}}
+                                    <div style="width: 100%">
+                                        <div class="row">
+                                            <div style="margin: auto">
+                                                {{$lsProduct->appends(['search' => $search,'sort' => $sort, 'category' => $cate, 'minPrice'=> $min, 'maxPrice'=> $max])->links("pagination::bootstrap-4")}}
+                                            </div>
+                                        </div>
                                     </div>
                                 @elseif($lsProduct==null)
                                     <p>Không có sản phẩm nào trong danh mục này. Vui lòng nhập từ khóa khác.</p>
@@ -132,9 +137,11 @@
                                     </div>
                                     @foreach($lsTag as $tag)
                                         <div class="cate-name" style="width: 100%">
-                                            <input type="submit" name="category" value="{{$tag->id}}" id="{{$tag->id}}">
+                                            <input type="submit" name="category" value="{{$tag->id}}"
+                                                   id="{{$tag->id}}">
                                             <label for="{{$tag->id}}">{{$tag->name}}</label>
-                                            <small class="text-muted"> ({{$tag->products()->count()}})</small></button>
+                                            <small class="text-muted"> ({{$tag->products()->count()}}
+                                                )</small></button>
                                         </div>
                                     @endforeach
                                 </form>
@@ -152,7 +159,8 @@
                                            style="border:0; color:#fbb714; font-weight:bold; margin-top: 25px; width: 70%">
                                     <input type="hidden" id="minPrice" name="minPrice">
                                     <input type="hidden" id="maxPrice" name="maxPrice">
-                                    <button style="float: right; color: white;margin-top: 15px" class="btn hvr-hover"
+                                    <button style="float: right; color: white;margin-top: 15px"
+                                            class="btn hvr-hover"
                                             type="submit"
                                             onclick="filter()">
                                         Lọc

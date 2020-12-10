@@ -47,6 +47,10 @@
     <!-- Bootstrap theme -->
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css"/>
 
+    <link rel="stylesheet" href="{{asset('owl-carousel/assets/owl.carousel.min.css')}}"/>
+    <link rel="stylesheet" href="{{asset('owl-carousel/assets/owl.theme.default.min.css')}}"/>
+
+
 </head>
 
 <body>
@@ -266,6 +270,9 @@
 <script src="{{asset('shop/js/custom.js')}}"></script>
 <script src="{{asset('shop/js/jquery.nicescroll.min.js')}}"></script>
 <script src="{{asset('shop/js/jquery-ui.js')}}"></script>
+
+<script src="{{asset('owl-carousel/owl.carousel.min.js')}}"></script>
+
 
 </body>
 
