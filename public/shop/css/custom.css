@@ -60,7 +60,20 @@
     cursor: pointer;
 }
 
-.active-menu{
-  color: #b0b435!important;
-  cursor: pointer;
+.active-menu {
+    color: #b0b435 !important;
+    cursor: pointer;
+}
+
+.clear-filter {
+    color: white;
+    background-color: black;
+    border: none;
+    border-radius: 0;
+}
+
+.clear-filter:hover {
+    color: white;
+    background-color: #b0b435
+
 }

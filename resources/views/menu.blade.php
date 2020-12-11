@@ -202,6 +202,11 @@
                                 </form>
                             </div>
                         </div>
+                        <div style="width: 100%; height: 50px">
+                            <a class="clear-filter btn" href="{{route('menu')}}" style="float:right;">
+                                Xóa bộ lọc
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
