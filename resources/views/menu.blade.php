@@ -35,6 +35,8 @@
                                         <form action="{{route('menu')}}" method="get">
                                             @csrf
                                             <input type="hidden" name="sort" value="1">
+                                            <input type="hidden" name="category" value="{{$cate}}">
+                                            <input type="hidden" name="search" value="{{$search}}">
                                             <button class="btn menu-sort-btn" type="submit"
                                                     title="Danh mục sản phẩm"><b>Mặc định</b>
                                             </button>
@@ -44,6 +46,8 @@
                                         <form action="{{route('menu')}}" method="get">
                                             @csrf
                                             <input type="hidden" name="sort" value="2">
+                                            <input type="hidden" name="category" value="{{$cate}}">
+                                            <input type="hidden" name="search" value="{{$search}}">
                                             <button class="btn menu-sort-btn" type="submit"
                                                     title="Giá từ cao đến thấp"><b>Giá cao → Giá
                                                     thấp</b></button>
@@ -53,6 +57,8 @@
                                         <form action="{{route('menu')}}" method="get">
                                             @csrf
                                             <input type="hidden" name="sort" value="0">
+                                            <input type="hidden" name="category" value="{{$cate}}">
+                                            <input type="hidden" name="search" value="{{$search}}">
                                             <button class="btn menu-sort-btn" type="submit"
                                                     title="Giá từ thấp đến cao"><b>Giá thấp → Giá
                                                     cao</b></button>
@@ -116,6 +122,8 @@
                                 <input class="form-control" placeholder="Tìm kiếm..." type="text"
                                        name="search"
                                        value="{{$search}}">
+                                <input type="hidden" name="sort" value="{{$sort}}">
+                                <input type="hidden" name="category" value="{{$cate}}">
                                 <button type="submit"><i class="fa fa-search"></i></button>
                             </form>
                         </div>
@@ -125,6 +133,8 @@
                             </div>
                             <div class="category-menu">
                                 <form action="{{route('menu')}}" method="get">
+                                    <input type="hidden" name="sort" value="{{$sort}}">
+                                    <input type="hidden" name="search" value="{{$search}}">
                                     <div class="cate-name" style="width: 100%">
                                         <input type="submit" name="category" value="0" id="0">
                                         <label for="0">Tất cả sản phẩm</label>
@@ -133,7 +143,9 @@
                                         <div class="cate-name" style="width: 100%">
                                             <input type="submit" name="category" value="{{$tag->id}}"
                                                    id="{{$tag->id}}">
-                                            <label for="{{$tag->id}}">{{$tag->name}}</label>
+                                            <label
+                                                style="{{$cate== 'abc' ? 'color:#b0b435;background-color: #fff; font-weight: 700;cursor: pointer;' : ''}}"
+                                                for="{{$tag->id}}">{{$tag->name}}</label>
                                             <small class="text-muted"> ({{$tag->products()->count()}})</small></button>
                                         </div>
                                     @endforeach
@@ -152,6 +164,9 @@
                                            style="border:0; color:#fbb714; font-weight:bold; margin-top: 25px; width: 70%">
                                     <input type="hidden" id="minPrice" name="minPrice">
                                     <input type="hidden" id="maxPrice" name="maxPrice">
+                                    <input type="hidden" name="sort" value="{{$sort}}">
+                                    <input type="hidden" name="search" value="{{$search}}">
+                                    <input type="hidden" name="category" value="{{$cate}}">
                                     <button style="float: right; color: white;margin-top: 15px"
                                             class="btn hvr-hover"
                                             type="submit"
