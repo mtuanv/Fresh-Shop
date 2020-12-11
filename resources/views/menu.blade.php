@@ -149,7 +149,7 @@
                                     <input type="hidden" name="maxPrice" value="{{$max}}">
                                     <div class="cate-name" style="width: 100%">
                                         <input type="submit" name="category" value="0" id="0">
-                                        <label for="0">Tất cả sản phẩm</label>
+                                        <label for="0" style="{{$cate == 0 ? 'color:#b0b435;background-color: #fff; font-weight: 700;cursor: pointer;' : ''}}">Tất cả sản phẩm</label>
                                     </div>
                                     @foreach($lsTag as $tag)
                                         <div class="cate-name" style="width: 100%">

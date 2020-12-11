@@ -106,13 +106,14 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="navbar-menu">
                 <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
-                    <li class="nav-item active"><a class="nav-link" href="/">Trang chủ</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{route('aboutus')}}">Giới Thiệu</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{route('menu')}}">SHOP</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{route('blog')}}">Tin Tức</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{route('contactus')}}">Liên hệ</a></li>
+                    <li class="nav-item"><a class="nav-link" id="home" href="/">Trang chủ</a></li>
+                    <li class="nav-item"><a class="nav-link" id="about" href="{{route('aboutus')}}">Giới Thiệu</a></li>
+                    <li class="nav-item"><a class="nav-link" id="menu" href="{{route('menu')}}">SHOP</a></li>
+                    <li class="nav-item"><a class="nav-link" id="promotion" href="{{route('blog')}}">Tin Tức</a></li>
+                    <li class="nav-item"><a class="nav-link" id="contact" href="{{route('contactus')}}">Liên hệ</a></li>
                 </ul>
             </div>
+
             <!-- /.navbar-collapse -->
 
             <!-- Start Atribute Navigation -->
@@ -120,7 +121,7 @@
                 <ul>
                     <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>
                     <li class="side-menu">
-                        <a href="javascript:">
+                        <a href="javascript:" id="cart">
                             <i class="fa fa-shopping-bag"></i>
                             {{--dùng js lấy thông tin số lượng sản phẩm khách hàng đã thêm vào giỏ hàng--}}
 
@@ -137,6 +138,31 @@
             </div>
             <!-- End Atribute Navigation -->
         </div>
+        <script type="text/javascript">
+            if (window.location.href.includes('/aboutus')) {
+              var about = document.getElementById("about");
+              about.classList.add("active-menu");
+            } else if(window.location.href.includes('/menu')){
+                var menu = document.getElementById("menu");
+                menu.classList.add("active-menu");
+            } else if(window.location.href.includes('/blog')){
+                var blog = document.getElementById("promotion");
+                blog.classList.add("active-menu");
+            } else if(window.location.href.includes('/contactus')){
+                var contact = document.getElementById("contact");
+                contact.classList.add("active-menu");
+            } else if(window.location.href.includes('/detail')){
+                var home = document.getElementById("home");
+                home.classList.remove("active-menu");
+            } else if(window.location.href.includes('/cart')){
+                var cart = document.getElementById("cart");
+                cart.classList.add("active-menu");
+            } else if(window.location.href.includes('/')){
+                var home = document.getElementById("home");
+                home.classList.add("active-menu");
+            }
+
+        </script>
         <!-- Start Mini Cart Menu -->
         {{--Hash code giỏ hàng, lấy thông tin sản phẩm khách hàng chọn bằng ajax rồi thêm vào đây--}}
         <div class="side">
@@ -296,6 +322,8 @@
      logged_in_greeting="Fresh Shop xin kính chào quý khách ! "
      logged_out_greeting="Fresh Shop xin kính chào quý khách ! ">
 </div>
+<!-- Highlight Menu -->
+
 </body>
 
 </html>
