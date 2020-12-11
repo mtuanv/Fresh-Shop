@@ -37,7 +37,7 @@
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" id="email" name="email"
+                                        <input type="email" class="form-control" id="email" name="email"
                                                placeholder="Email*" required data-error="Vui lòng nhập email">
                                         <div class="help-block with-errors"></div>
                                     </div>
@@ -52,7 +52,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <textarea class="form-control" id="message" placeholder="Nội dung*" rows="4"
-                                                  data-error="Vui lòng nhập nội dung" required></textarea>
+                                                  data-error="Vui lòng nhập nội dung"></textarea>
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div>
@@ -113,10 +113,32 @@
                     url: "api/send-email",
                     data: data,
                     success: function (response) {
-                        alert("Gửi mail thành công ! Cảm ơn sự quan tâm của quý khách");
+                        const swalWithBootstrapButtons = Swal.mixin({
+                        customClass: {
+                          confirmButton: 'btn btn-success',
+                          cancelButton: 'btn btn-danger mr-3'
+                        },
+                        buttonsStyling: false
+                        })
+                        swalWithBootstrapButtons.fire(
+                          'Gửi thành công!',
+                          'Email đã được gửi đi',
+                          'success'
+                        )
                     },
                     error: function (response) {
-                        alert("Gửi mail thất bại . . . Mời điền lại");
+                      const swalWithBootstrapButtons = Swal.mixin({
+                      customClass: {
+                        confirmButton: 'btn btn-success',
+                        cancelButton: 'btn btn-danger mr-3'
+                      },
+                      buttonsStyling: false
+                      })
+                      swalWithBootstrapButtons.fire(
+                        'Gửi thất bại!',
+                        'Mời bạn nhập lại',
+                        'error'
+                      )
                     }
                 });
             });

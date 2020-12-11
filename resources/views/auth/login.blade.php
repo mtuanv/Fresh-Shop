@@ -43,26 +43,31 @@
                                 <img src="{{ asset('shop/images/logo.png') }}" alt="CoolAdmin">
                             </a>
                         </div>
+                        <style type="text/css">
+
+                        </style>
                         <div class="login-form">
                             <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
                                 @csrf
                                 <div class="form-group">
                                     <label>User Name</label>
-                                    <input class="au-input au-input--full @error('username') is-invalid @enderror" type="text" name="username" placeholder="Username">
-                                    @error('username')
+                                    <input class="au-input au-input--full" type="text" name="username" placeholder="Username" required="">
+                                    <!-- @error('username')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
-                                    @enderror
+                                    @enderror -->
+                                    <div class="help-block with-errors"></div>
                                 </div>
                                 <div class="form-group">
                                     <label>Password</label>
-                                    <input class="au-input au-input--full @error('password') is-invalid @enderror" type="password" name="password" placeholder="Password">
-                                    @error('password')
+                                    <input class="au-input au-input--full" type="password" name="password" placeholder="Password" required="">
+                                    <!-- @error('password')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
-                                    @enderror
+                                    @enderror -->
+                                    <div class="help-block with-errors"></div>
                                 </div>
                                 <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">sign in</button>
                             </form>

@@ -3,11 +3,38 @@
     Danh sách sự kiện
 @endsection
 @section("content")
-    @if(session('success'))
-        <div class="alert alert-success">
-            {{session('success')}}
-        </div>
-    @endif
+@if(session('success1'))
+    <script type="text/javascript">
+      const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger mr-3'
+      },
+      buttonsStyling: false
+      })
+      swalWithBootstrapButtons.fire(
+        'Thành công',
+        'Tin đã được thêm',
+        'success'
+      )
+    </script>
+@endif
+@if(session('success2'))
+    <script type="text/javascript">
+      const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger mr-3'
+      },
+      buttonsStyling: false
+      })
+      swalWithBootstrapButtons.fire(
+        'Thành công',
+        'Tin đã được sửa',
+        'success'
+      )
+    </script>
+@endif
     <div class="row">
         <div class="col-lg-12">
             <div class="overview-wrap">
@@ -104,9 +131,9 @@
                                 @endif
                                 ">
                                 @if($promotion->status == 0)
-                                <button type="submit" class="btn btn-danger">Draft</button>
+                                <button type="submit" class="btn btn-danger"  data-click="swal-submit">Draft</button>
                                 @else
-                                <button type="submit" class="btn btn-success">Public</button>
+                                <button type="submit" class="btn btn-success" data-click="swal-submit">Public</button>
                                 @endif
 
                             </form>
@@ -151,6 +178,47 @@
   }
 </style>
 <script type="text/javascript">
+$(document).ready(function() {
+    $('[data-click="swal-submit"]').click(function(e) {
+                e.preventDefault();
+                var form = $(this).parents('form');
+                const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                  confirmButton: 'btn btn-success',
+                  cancelButton: 'btn btn-danger mr-3'
+                },
+                buttonsStyling: false
+                })
+
+              swalWithBootstrapButtons.fire({
+                title: 'Đổi trạng thái',
+                text: "Bạn có chắc chắn muốn đổi?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Có',
+                cancelButtonText: 'Không',
+                reverseButtons: true
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  swal.fire(form.submit())
+                  swalWithBootstrapButtons.fire(
+                    'Đổi thành công!',
+                    'Tin tức đã thay đổi trang thái',
+                    'success'
+                  )
+                } else if (
+                  result.dismiss === Swal.DismissReason.cancel
+                ) {
+                  swalWithBootstrapButtons.fire(
+                    'Cancel thành công!',
+                    'Tin tức chưa đổi trạng thái',
+                    'error'
+                  )
+                }
+})
+
+      });
+});
 $(document).ready(function() {
     $('[data-click="swal-danger"]').click(function(e) {
                 e.preventDefault();

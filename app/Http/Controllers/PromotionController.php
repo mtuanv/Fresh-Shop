@@ -129,7 +129,7 @@ class PromotionController extends Controller
         }
 
 
-        $request->session()->flash('success', 'Thêm mới thành công');
+        $request->session()->flash('success1');
         return redirect('admin/promotions');
     }
 
@@ -193,7 +193,7 @@ class PromotionController extends Controller
             $promotionTag->save();
         }
         $promotion->save();
-        $request->session()->flash('success', 'Cập nhật thành công');
+        $request->session()->flash('success2');
 
         return redirect("admin/promotions");
     }

@@ -50,7 +50,8 @@
     <link rel="stylesheet" href="{{asset('owl-carousel/assets/owl.carousel.min.css')}}"/>
     <link rel="stylesheet" href="{{asset('owl-carousel/assets/owl.theme.default.min.css')}}"/>
 
-
+    <script src="{{ asset('admin/js/sweetalert2.all.min.js') }}"></script>
+      <link rel="stylesheet" type="text/css" href="{{ asset('admin/css/sweetalert2.min.css') }}"/>
 </head>
 
 <body>

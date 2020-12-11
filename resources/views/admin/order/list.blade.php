@@ -103,7 +103,7 @@
                       <td>
                         @if($order->status == 1)
                         <div style="display:inline-block">
-                          <form action="{{route('changesttorder', $order->id)}}" method="post">
+                          <form action="{{route('changesttorder', $order->id)}}" method="post"> 
                             @csrf
                             <input type="hidden" name="status" value="2">
                             <button type="submit" class="btn btn-danger" title="Huỷ đơn" data-click="swal-danger"><i class="fas fa-times-circle"></i></button>

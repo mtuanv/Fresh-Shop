@@ -27,8 +27,8 @@
           </div>
       </div>
       <div class="card-footer">
-          <button type="submit" class="btn btn-primary btn-sm">
-              <i class="fa fa-dot-circle-o"></i> Submit
+          <button type="submit" class="btn btn-primary btn-sm"  data-click="swal-submit">
+              <i class="fa fa-dot-circle-o" ></i> Submit
           </button>
           <button type="reset" class="btn btn-danger btn-sm">
               <i class="fa fa-ban"></i> Reset
@@ -38,4 +38,42 @@
     </div>
   </div>
 </div>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('[data-click="swal-submit"]').click(function(e) {
+                e.preventDefault();
+                var form = $(this).parents('form');
+                const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                  confirmButton: 'btn btn-success',
+                  cancelButton: 'btn btn-danger mr-3'
+                },
+                buttonsStyling: false
+                })
+
+              swalWithBootstrapButtons.fire({
+                title: 'Thêm tag',
+                text: "Bạn có chắc chắn muốn thêm?",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Có',
+                cancelButtonText: 'Không',
+                reverseButtons: true
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  form.submit()
+                } else if (
+                  result.dismiss === Swal.DismissReason.cancel
+                ) {
+                  swalWithBootstrapButtons.fire(
+                    'Cancel thành công!',
+                    'Tag chưa được thêm',
+                    'error'
+                  )
+                }
+})
+
+      });
+});
+</script>
 @endsection

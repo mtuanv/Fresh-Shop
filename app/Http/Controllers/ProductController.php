@@ -837,7 +837,7 @@ class ProductController extends Controller
         'tags' => 'required',
         'images' => 'required'
       ]);
-
+      
       $product = new Product();
       $product->name = $request->name;
       $product->price = $request->price;
@@ -872,7 +872,7 @@ class ProductController extends Controller
       }
 
 
-      $request->session()->flash('success', 'Thêm mới thành công');
+      $request->session()->flash('success1');
       return redirect('admin/products');
     }
 
@@ -960,7 +960,7 @@ class ProductController extends Controller
       }
 
 
-      $request->session()->flash('success', 'Cập nhật thành công');
+      $request->session()->flash('success2');
       return redirect('admin/products');
     }
 

@@ -43,6 +43,20 @@
                   {{$order->user->name}}
               </div>
               @endif
+              <div class="col col-md-3">
+                  <label for="status" class="font-weight-bold form-control-label">Trạng thái: </label>
+              </div>
+              <div class="col-12 col-md-9">
+                @if($order->status == 1)
+                Đã xác nhận
+                @elseif($order->status == 10)
+                Hoàn thành
+                @elseif($order->status == 2)
+                Đã huỷ
+                @else
+                Đang chờ
+                @endif
+              </div>
           </div>
           <div class="row">
               <div class="col-lg-12">
@@ -132,18 +146,23 @@
               </div>
           </div>
       </div>
-      <div class="card-footer">
+      <div class="card-footer text-right">
         @if($order->status == 1)
-        <form action="{{route('changesttorder', $order->id)}}" method="post"  style="float:right; margin-right: 5px">
-          @csrf
-          <input type="hidden" name="status" value="10">
-          <button type="submit" class="btn btn-success">Hoàn thành</button>
-        </form>
-        <form action="{{route('changesttorder', $order->id)}}" method="post" style="float:right; margin-right: 5px">
-          @csrf
-          <input type="hidden" name="status" value="2">
-          <button type="submit" class="btn btn-danger">Huỷ đơn</button>
-        </form>
+        <div  style="display:inline-block">
+          <form action="{{route('changesttorder', $order->id)}}" method="post">
+            @csrf
+            <input type="hidden" name="status" value="10">
+            <button type="submit" class="btn btn-success" data-click="swal-done">Hoàn thành</button>
+          </form>
+        </div>
+        <div  style="display:inline-block">
+          <form action="{{route('changesttorder', $order->id)}}" method="post">
+            @csrf
+            <input type="hidden" name="status" value="2">
+            <button type="submit" class="btn btn-danger" data-click="swal-danger">Huỷ đơn</button>
+          </form>
+        </div>
+
         @elseif($order->status == 2)
 
         @elseif($order->status == 10)
@@ -151,12 +170,12 @@
           <form action="{{route('changesttorder', $order->id)}}" method="post"  style="float:right; margin-right: 5px">
             @csrf
             <input type="hidden" name="status" value="2">
-            <button type="submit" class="btn btn-danger">Huỷ đơn</button>
+            <button type="submit" class="btn btn-danger" data-click="swal-danger">Huỷ đơn</button>
           </form>
           <form action="{{route('changesttorder', $order->id)}}" method="post" style="float:right; margin-right: 5px">
             @csrf
             <input type="hidden" name="status" value="1">
-            <button type="submit" class="btn btn-primary">Xác nhận</button>
+            <button type="submit" class="btn btn-primary" data-click="swal-check">Xác nhận</button>
           </form>
 
 
@@ -167,4 +186,131 @@
     </div>
   </div>
 </div>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('[data-click="swal-danger"]').click(function(e) {
+                e.preventDefault();
+                var form = $(this).parents('form');
+                const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                  confirmButton: 'btn btn-success',
+                  cancelButton: 'btn btn-danger mr-3'
+                },
+                buttonsStyling: false
+                })
+
+              swalWithBootstrapButtons.fire({
+                title: 'Huỷ đơn hàng',
+                text: "Bạn có chắc chắn muốn huỷ đơn hàng này?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Có',
+                cancelButtonText: 'Không',
+                reverseButtons: true
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  swal.fire(form.submit())
+                  swalWithBootstrapButtons.fire(
+                    'Huỷ thành công!',
+                    'Đơn hàng đã bị huỷ',
+                    'success'
+                  )
+                } else if (
+                  result.dismiss === Swal.DismissReason.cancel
+                ) {
+                  swalWithBootstrapButtons.fire(
+                    'Cancel thành công!',
+                    'Đơn hàng còn nguyên vẹn',
+                    'error'
+                  )
+                }
+})
+
+      });
+});
+
+$(document).ready(function() {
+    $('[data-click="swal-done"]').click(function(e) {
+                e.preventDefault();
+                var form = $(this).parents('form');
+                const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                  confirmButton: 'btn btn-success',
+                  cancelButton: 'btn btn-danger mr-3'
+                },
+                buttonsStyling: false
+                })
+
+              swalWithBootstrapButtons.fire({
+                title: 'Hoàn thành đơn hàng',
+                text: "Đơn hàng đã hoàn thành?",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Có',
+                cancelButtonText: 'Không',
+                reverseButtons: true
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  swal.fire(form.submit())
+                  swalWithBootstrapButtons.fire(
+                    'Hoàn thành!',
+                    'Đơn hàng thành công',
+                    'success'
+                  )
+                } else if (
+                  result.dismiss === Swal.DismissReason.cancel
+                ) {
+                  swalWithBootstrapButtons.fire(
+                    'Cancel thành công!',
+                    'Đơn hàng chưa hoàn thành',
+                    'error'
+                  )
+                }
+})
+
+      });
+});
+
+$(document).ready(function() {
+    $('[data-click="swal-check"]').click(function(e) {
+                e.preventDefault();
+                var form = $(this).parents('form');
+                const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                  confirmButton: 'btn btn-success',
+                  cancelButton: 'btn btn-danger mr-3'
+                },
+                buttonsStyling: false
+                })
+
+              swalWithBootstrapButtons.fire({
+                title: 'Xác nhận đơn hàng',
+                text: "Xác nhận đơn hàng này?",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Có',
+                cancelButtonText: 'Không',
+                reverseButtons: true
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  swal.fire(form.submit())
+                  swalWithBootstrapButtons.fire(
+                    'Xác nhận!',
+                    'Xác nhận đơn hàng thành công',
+                    'success'
+                  )
+                } else if (
+                  result.dismiss === Swal.DismissReason.cancel
+                ) {
+                  swalWithBootstrapButtons.fire(
+                    'Cancel thành công!',
+                    'Đơn hàng trong trạng thái chờ',
+                    'error'
+                  )
+                }
+})
+
+      });
+});
+</script>
 @endsection

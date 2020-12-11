@@ -20,9 +20,20 @@
     <div class="shop-box-inner">
         <div class="container">
             @if(session('success'))
-                <div class="alert alert-success">
-                    {{session('success')}}
-                </div>
+            <script type="text/javascript">
+                const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                  confirmButton: 'btn btn-success',
+                  cancelButton: 'btn btn-danger mr-3'
+                },
+                buttonsStyling: false
+                })
+                swalWithBootstrapButtons.fire(
+                  'Đặt hàng thành công',
+                  'Nhân viên sẽ sớm liên lạc với bạn!',
+                  'success'
+                )
+              </script>
             @endif
             <div class="row">
                 <div class="col-xl-9 col-lg-9 col-sm-12 col-xs-12 shop-content-right">

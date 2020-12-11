@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Tag;
+use Session;
 
 class TagController extends Controller
 {
@@ -46,12 +47,11 @@ class TagController extends Controller
       $request->validate([
         'name' => 'required|unique:tags|max:255',
       ]);
-
       $tag = new Tag();
       $tag->name = $request->name;
       $tag->save();
 
-      $request->session()->flash('success', 'Thêm mới thành công');
+      $request->session()->flash('success1');
       return redirect('admin/tags');
     }
 
@@ -95,7 +95,7 @@ class TagController extends Controller
       $tag->name = $request->name;
       $tag->save();
 
-      $request->session()->flash('success', 'Cập nhật thành công');
+      $request->session()->flash('success2');
       return redirect('admin/tags');
     }
 

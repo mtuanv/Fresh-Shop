@@ -3,10 +3,37 @@
   Danh sách tag
 @endsection
 @section("content")
-@if(session('success'))
-  <div class="alert alert-success">
-    {{session('success')}}
-  </div>
+@if(session('success1'))
+    <script type="text/javascript">
+      const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger mr-3'
+      },
+      buttonsStyling: false
+      })
+      swalWithBootstrapButtons.fire(
+        'Thành công',
+        'Tag đã được thêm',
+        'success'
+      )
+    </script>
+@endif
+@if(session('success2'))
+    <script type="text/javascript">
+      const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger mr-3'
+      },
+      buttonsStyling: false
+      })
+      swalWithBootstrapButtons.fire(
+        'Thành công',
+        'Tag đã được sửa',
+        'success'
+      )
+    </script>
 @endif
 <div class="row">
     <div class="col-lg-12">

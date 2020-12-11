@@ -215,10 +215,33 @@
                     url: "../api/feedback",
                     data: data,
                     success: function (response) {
-                        alert("Gửi đánh giá thành công ! Cảm ơn sự quan tâm của quý khách");
+                      const swalWithBootstrapButtons = Swal.mixin({
+                      customClass: {
+                        confirmButton: 'btn btn-success',
+                        cancelButton: 'btn btn-danger mr-3'
+                      },
+                      buttonsStyling: false
+                      })
+                      swalWithBootstrapButtons.fire(
+                        'Gửi đánh giá thành công!',
+                        'Cảm ơn sự quan tâm của quý khách',
+                        'success'
+                      )
+                        location.reload();
                     },
                     error: function (r) {
-                        alert("Gửi đánh giá thất bại . . . Mời điền lại mẫu đánh giá");
+                      const swalWithBootstrapButtons = Swal.mixin({
+                      customClass: {
+                        confirmButton: 'btn btn-success',
+                        cancelButton: 'btn btn-danger mr-3'
+                      },
+                      buttonsStyling: false
+                      })
+                      swalWithBootstrapButtons.fire(
+                        'Gửi thất bại!',
+                        'Mời điền lại mẫu đánh giá',
+                        'error'
+                      )
                     }
                 });
             });
