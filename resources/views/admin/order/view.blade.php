@@ -35,6 +35,14 @@
               <div class="col-12 col-md-9">
                   {{$order->note}}
               </div>
+              @if($order->status == 1 || $order->status == 2 || $order->status == 10)
+              <div class="col col-md-3">
+                  <label for="user" class="font-weight-bold form-control-label">Người xử lý đơn: </label>
+              </div>
+              <div class="col-12 col-md-9">
+                  {{$order->user->name}}
+              </div>
+              @endif
           </div>
           <div class="row">
               <div class="col-lg-12">
