@@ -115,8 +115,9 @@
                                             </div>
                                         </div>
                                     </div>
-                                @elseif($lsProduct==null)
-                                    <p>Không có kết quả nào phù hợp. Vui lòng nhập từ khóa hoặc chọn phương thức tìm kiếm khác.</p>
+                                @elseif($lsProduct==null || $lsProduct == 0)
+                                    <p>Không có kết quả nào phù hợp. Vui lòng nhập từ khóa hoặc chọn phương thức tìm
+                                        kiếm khác.</p>
                                 @endif
                             </div>
                         </div>
@@ -149,7 +150,9 @@
                                     <input type="hidden" name="maxPrice" value="{{$max}}">
                                     <div class="cate-name" style="width: 100%">
                                         <input type="submit" name="category" value="0" id="0">
-                                        <label for="0" style="{{$cate == 0 ? 'color:#b0b435;background-color: #fff; font-weight: 700;cursor: pointer;' : ''}}">Tất cả sản phẩm</label>
+                                        <label for="0"
+                                               style="{{$cate == 0 ? 'color:#b0b435;background-color: #fff; font-weight: 700;cursor: pointer;' : ''}}">Tất
+                                            cả sản phẩm</label>
                                     </div>
                                     @foreach($lsTag as $tag)
                                         <div class="cate-name" style="width: 100%">
@@ -174,8 +177,8 @@
                                     @csrf
                                     <input type="text" id="amount" readonly
                                            style="border:0; color:#fbb714; font-weight:bold; margin-top: 25px; width: 70%">
-                                    <input type="hidden" id="minPrice" name="minPrice">
-                                    <input type="hidden" id="maxPrice" name="maxPrice">
+                                    <input type="hidden" id="minPrice" name="minPrice" value="{{$min}}">
+                                    <input type="hidden" id="maxPrice" name="maxPrice" value="{{$max}}">
                                     <input type="hidden" name="sort" value="{{$sort}}">
                                     <input type="hidden" name="search" value="{{$search}}">
                                     <input type="hidden" name="category" value="{{$cate}}">
@@ -207,7 +210,7 @@
                 range: true,
                 min: 0,
                 max: 300000,
-                values: [0, 300000],
+                values: [$("#minPrice").val(), $("#maxPrice").val()],
                 slide: function (event, ui) {
                     $("#amount").val(ui.values[0] + " VND" + " - " + ui.values[1] + " VND");
                 }

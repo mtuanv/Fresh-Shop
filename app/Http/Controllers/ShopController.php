@@ -41,9 +41,7 @@ class ShopController extends Controller
         } elseif ($search == null && $cate != 0) {
             $lsPromotion = Promotion::join('promotion_tags', 'promotions.id', '=', 'promotion_tags.promotion_id')
                 ->join('tags', 'promotion_tags.tag_id', '=', 'tags.id')->select('promotions.*')
-                ->where('tags.id', '=', $cate)
-                ->distinct()
-                ->paginate(3);
+                ->where('tags.id', '=', $cate)->distinct()->paginate(3);
         } elseif ($search != null && $cate == null || $cate == 0) {
             $lsPromotion = Promotion::where('promotions.title', 'like', '%' . $search . '%');
             $count = $lsPromotion->count();
@@ -55,18 +53,14 @@ class ShopController extends Controller
         } elseif ($search != null && $cate != 0) {
             $lsPromotion = Promotion::join('promotion_tags', 'promotions.id', '=', 'promotion_tags.promotion_id')
                 ->join('tags', 'promotion_tags.tag_id', '=', 'tags.id')->select('promotions.*')
-                ->where('promotions.title', 'like', '%' . $search . '%')
-                ->where('tags.id', '=', $cate)
-                ->distinct();
+                ->where('promotions.title', 'like', '%' . $search . '%')->where('tags.id', '=', $cate)->distinct();
             $count = $lsPromotion->count();
             if ($count == 0) {
                 $lsProduct = null;
             } else {
                 $$lsPromotion = Promotion::join('promotion_tags', 'promotions.id', '=', 'promotion_tags.promotion_id')
                     ->join('tags', 'promotion_tags.tag_id', '=', 'tags.id')->select('promotions.*')
-                    ->where('promotions.title', 'like', '%' . $search . '%')
-                    ->where('tags.id', '=', $cate)
-                    ->distinct()
+                    ->where('promotions.title', 'like', '%' . $search . '%')->where('tags.id', '=', $cate)->distinct()
                     ->paginate(3);
             }
         }
@@ -112,9 +106,7 @@ class ShopController extends Controller
                 } elseif ($search == null && $cate != 0) {
                     $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
                         ->join('tags', 'product_tags.tag_id', '=', 'tags.id')->select('products.*')
-                        ->where('tags.id', '=', $cate)
-                        ->distinct()
-                        ->paginate(9);
+                        ->where('tags.id', '=', $cate)->distinct()->paginate(9);
                 } elseif ($search != null && $cate == null || $cate == 0) {
                     $lsProduct = Product::where('products.name', 'like', '%' . $search . '%');
                     $count = $lsProduct->count();
@@ -126,19 +118,15 @@ class ShopController extends Controller
                 } elseif ($search != null && $cate != 0) {
                     $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
                         ->join('tags', 'product_tags.tag_id', '=', 'tags.id')->select('products.*')
-                        ->where('products.name', 'like', '%' . $search . '%')
-                        ->where('tags.id', '=', $cate)
-                        ->distinct();
+                        ->where('products.name', 'like', '%' . $search . '%')->where('tags.id', '=', $cate)->distinct();
                     $count = $lsProduct->count();
                     if ($count == 0) {
                         $lsProduct = null;
                     } else {
                         $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
                             ->join('tags', 'product_tags.tag_id', '=', 'tags.id')->select('products.*')
-                            ->where('products.name', 'like', '%' . $search . '%')
-                            ->where('tags.id', '=', $cate)
-                            ->distinct()
-                            ->paginate(9);
+                            ->where('products.name', 'like', '%' . $search . '%')->where('tags.id', '=', $cate)
+                            ->distinct()->paginate(9);
                     }
                 }
             } elseif ($sort == 1) {
@@ -147,10 +135,7 @@ class ShopController extends Controller
                 } elseif ($search == null && $cate != 0) {
                     $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
                         ->join('tags', 'product_tags.tag_id', '=', 'tags.id')->select('products.*')
-                        ->where('tags.id', '=', $cate)
-                        ->distinct()
-                        ->orderBy('price', 'DESC')
-                        ->paginate(9);
+                        ->where('tags.id', '=', $cate)->distinct()->orderBy('price', 'DESC')->paginate(9);
                 } elseif ($search != null && $cate == null || $cate == 0) {
                     $lsProduct = Product::where('products.name', 'like', '%' . $search . '%');
                     $count = $lsProduct->count();
@@ -158,26 +143,20 @@ class ShopController extends Controller
                         $lsProduct = null;
                     } else {
                         $lsProduct = Product::where('products.name', 'like', '%' . $search . '%')
-                            ->orderBy('price', 'DESC')
-                            ->paginate(9);
+                            ->orderBy('price', 'DESC')->paginate(9);
                     }
                 } elseif ($search != null && $cate != 0) {
                     $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
                         ->join('tags', 'product_tags.tag_id', '=', 'tags.id')->select('products.*')
-                        ->where('products.name', 'like', '%' . $search . '%')
-                        ->where('tags.id', '=', $cate)
-                        ->distinct();
+                        ->where('products.name', 'like', '%' . $search . '%')->where('tags.id', '=', $cate)->distinct();
                     $count = $lsProduct->count();
                     if ($count == 0) {
                         $lsProduct = null;
                     } else {
                         $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
                             ->join('tags', 'product_tags.tag_id', '=', 'tags.id')->select('products.*')
-                            ->where('products.name', 'like', '%' . $search . '%')
-                            ->where('tags.id', '=', $cate)
-                            ->distinct()
-                            ->orderBy('price', 'DESC')
-                            ->paginate(9);
+                            ->where('products.name', 'like', '%' . $search . '%')->where('tags.id', '=', $cate)
+                            ->distinct()->orderBy('price', 'DESC')->paginate(9);
                     }
                 }
             } elseif ($sort == 2) {
@@ -186,51 +165,54 @@ class ShopController extends Controller
                 } elseif ($search == null && $cate != 0) {
                     $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
                         ->join('tags', 'product_tags.tag_id', '=', 'tags.id')->select('products.*')
-                        ->where('tags.id', '=', $cate)
-                        ->distinct()
-                        ->orderBy('price')
-                        ->paginate(9);
+                        ->where('tags.id', '=', $cate)->distinct()->orderBy('price')->paginate(9);
                 } elseif ($search != null && $cate == null || $cate == 0) {
                     $lsProduct = Product::where('products.name', 'like', '%' . $search . '%');
                     $count = $lsProduct->count();
                     if ($count == 0) {
                         $lsProduct = null;
                     } else {
-                        $lsProduct = Product::where('products.name', 'like', '%' . $search . '%')
-                            ->orderBy('price')
+                        $lsProduct = Product::where('products.name', 'like', '%' . $search . '%')->orderBy('price')
                             ->paginate(9);
                     }
                 } elseif ($search != null && $cate != 0) {
                     $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
                         ->join('tags', 'product_tags.tag_id', '=', 'tags.id')->select('products.*')
-                        ->where('products.name', 'like', '%' . $search . '%')
-                        ->where('tags.id', '=', $cate)
-                        ->distinct();
+                        ->where('products.name', 'like', '%' . $search . '%')->where('tags.id', '=', $cate)->distinct();
                     $count = $lsProduct->count();
                     if ($count == 0) {
                         $lsProduct = null;
                     } else {
                         $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
                             ->join('tags', 'product_tags.tag_id', '=', 'tags.id')->select('products.*')
-                            ->where('products.name', 'like', '%' . $search . '%')
-                            ->where('tags.id', '=', $cate)
-                            ->distinct()
-                            ->orderBy('price')
-                            ->paginate(9);
+                            ->where('products.name', 'like', '%' . $search . '%')->where('tags.id', '=', $cate)
+                            ->distinct()->orderBy('price')->paginate(9);
                     }
                 }
             }
         } else {
             if ($sort == 0) {
                 if ($search == null && $cate == null) {
-                    $lsProduct = Product::whereBetween('products.price', [$min, $max])->paginate(9);
+                    $lsProduct = Product::whereBetween('products.price', [$min, $max]);
+                    $count = $lsProduct->count();
+                    if ($count == 0) {
+                        $lsProduct = null;
+                    } else {
+                        $lsProduct = Product::whereBetween('products.price', [$min, $max])->paginate(9);
+                    }
                 } elseif ($search == null && $cate != 0) {
                     $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
                         ->join('tags', 'product_tags.tag_id', '=', 'tags.id')->select('products.*')
-                        ->where('tags.id', '=', $cate)
-                        ->whereBetween('products.price', [$min, $max])
-                        ->distinct()
-                        ->paginate(9);
+                        ->where('tags.id', '=', $cate)->whereBetween('products.price', [$min, $max])->distinct();
+                    $count = $lsProduct->count();
+                    if ($count == 0) {
+                        $lsProduct = null;
+                    } else {
+                        $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
+                            ->join('tags', 'product_tags.tag_id', '=', 'tags.id')->select('products.*')
+                            ->where('tags.id', '=', $cate)->whereBetween('products.price', [$min, $max])->distinct()
+                            ->paginate(9);
+                    }
                 } elseif ($search != null && $cate == null || $cate == 0) {
                     $lsProduct = Product::where('products.name', 'like', '%' . $search . '%')
                         ->whereBetween('products.price', [$min, $max]);
@@ -239,42 +221,48 @@ class ShopController extends Controller
                         $lsProduct = null;
                     } else {
                         $lsProduct = Product::where('products.name', 'like', '%' . $search . '%')
-                            ->whereBetween('products.price', [$min, $max])
-                            ->paginate(9);
+                            ->whereBetween('products.price', [$min, $max])->paginate(9);
                     }
                 } elseif ($search != null && $cate != 0) {
                     $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
                         ->join('tags', 'product_tags.tag_id', '=', 'tags.id')->select('products.*')
-                        ->where('products.name', 'like', '%' . $search . '%')
-                        ->where('tags.id', '=', $cate)
-                        ->whereBetween('products.price', [$min, $max])
-                        ->distinct();
+                        ->where('products.name', 'like', '%' . $search . '%')->where('tags.id', '=', $cate)
+                        ->whereBetween('products.price', [$min, $max])->distinct();
                     $count = $lsProduct->count();
                     if ($count == 0) {
                         $lsProduct = null;
                     } else {
                         $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
                             ->join('tags', 'product_tags.tag_id', '=', 'tags.id')->select('products.*')
-                            ->where('products.name', 'like', '%' . $search . '%')
-                            ->where('tags.id', '=', $cate)
-                            ->whereBetween('products.price', [$min, $max])
-                            ->distinct()
-                            ->paginate(9);
+                            ->where('products.name', 'like', '%' . $search . '%')->where('tags.id', '=', $cate)
+                            ->whereBetween('products.price', [$min, $max])->distinct()->paginate(9);
                     }
                 }
             } elseif ($sort == 1) {
                 if ($search == null && $cate == 0) {
                     $lsProduct = Product::orderBy('price', 'DESC')
-                        ->whereBetween('products.price', [$min, $max])
-                        ->paginate(9);
+                        ->whereBetween('products.price', [$min, $max]);
+                    $count = $lsProduct->count();
+                    if ($count == 0) {
+                        $lsProduct = null;
+                    } else {
+                        $lsProduct = Product::orderBy('price', 'DESC')
+                            ->whereBetween('products.price', [$min, $max])->paginate(9);
+                    }
                 } elseif ($search == null && $cate != 0) {
                     $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
                         ->join('tags', 'product_tags.tag_id', '=', 'tags.id')->select('products.*')
-                        ->where('tags.id', '=', $cate)
-                        ->whereBetween('products.price', [$min, $max])
-                        ->distinct()
-                        ->orderBy('price', 'DESC')
-                        ->paginate(9);
+                        ->where('tags.id', '=', $cate)->whereBetween('products.price', [$min, $max])
+                        ->distinct()->orderBy('price', 'DESC');
+                    $count = $lsProduct->count();
+                    if ($count == 0) {
+                        $lsProduct = null;
+                    } else {
+                        $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
+                            ->join('tags', 'product_tags.tag_id', '=', 'tags.id')->select('products.*')
+                            ->where('tags.id', '=', $cate)->whereBetween('products.price', [$min, $max])
+                            ->distinct()->orderBy('price', 'DESC')->paginate(9);
+                    }
                 } elseif ($search != null && $cate == null || $cate == 0) {
                     $lsProduct = Product::where('products.name', 'like', '%' . $search . '%')
                         ->whereBetween('products.price', [$min, $max]);
@@ -283,44 +271,50 @@ class ShopController extends Controller
                         $lsProduct = null;
                     } else {
                         $lsProduct = Product::where('products.name', 'like', '%' . $search . '%')
-                            ->whereBetween('products.price', [$min, $max])
-                            ->orderBy('price', 'DESC')
-                            ->paginate(9);
+                            ->whereBetween('products.price', [$min, $max])->orderBy('price', 'DESC')->paginate(9);
                     }
                 } elseif ($search != null && $cate != 0) {
                     $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
                         ->join('tags', 'product_tags.tag_id', '=', 'tags.id')->select('products.*')
-                        ->where('products.name', 'like', '%' . $search . '%')
-                        ->where('tags.id', '=', $cate)
-                        ->whereBetween('products.price', [$min, $max])
-                        ->distinct();
+                        ->where('products.name', 'like', '%' . $search . '%')->where('tags.id', '=', $cate)
+                        ->whereBetween('products.price', [$min, $max])->distinct();
                     $count = $lsProduct->count();
                     if ($count == 0) {
                         $lsProduct = null;
                     } else {
                         $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
                             ->join('tags', 'product_tags.tag_id', '=', 'tags.id')->select('products.*')
-                            ->where('products.name', 'like', '%' . $search . '%')
-                            ->where('tags.id', '=', $cate)
-                            ->whereBetween('products.price', [$min, $max])
-                            ->distinct()
-                            ->orderBy('price', 'DESC')
+                            ->where('products.name', 'like', '%' . $search . '%')->where('tags.id', '=', $cate)
+                            ->whereBetween('products.price', [$min, $max])->distinct()->orderBy('price', 'DESC')
                             ->paginate(9);
                     }
                 }
             } elseif ($sort == 2) {
                 if ($search == null && $cate == 0) {
-                    $lsProduct = Product::orderBy('price')
-                        ->whereBetween('products.price', [$min, $max])
-                        ->paginate(9);
+                    $lsProduct = Product::orderBy('price')->whereBetween('products.price', [$min, $max]);
+                    $count = $lsProduct->count();
+                    if ($count == 0) {
+                        $lsProduct = null;
+                    } else {
+                        $lsProduct = Product::orderBy('price')->whereBetween('products.price', [$min, $max])
+                            ->paginate(9);
+                    }
                 } elseif ($search == null && $cate != 0) {
                     $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
                         ->join('tags', 'product_tags.tag_id', '=', 'tags.id')->select('products.*')
                         ->where('tags.id', '=', $cate)
                         ->whereBetween('products.price', [$min, $max])
                         ->distinct()
-                        ->orderBy('price')
-                        ->paginate(9);
+                        ->orderBy('price');
+                    $count = $lsProduct->count();
+                    if ($count == 0) {
+                        $lsProduct = null;
+                    } else {
+                        $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
+                            ->join('tags', 'product_tags.tag_id', '=', 'tags.id')->select('products.*')
+                            ->where('tags.id', '=', $cate)->whereBetween('products.price', [$min, $max])
+                            ->distinct()->orderBy('price')->paginate(9);
+                    }
                 } elseif ($search != null && $cate == null || $cate == 0) {
                     $lsProduct = Product::where('products.name', 'like', '%' . $search . '%')
                         ->whereBetween('products.price', [$min, $max]);
@@ -329,29 +323,21 @@ class ShopController extends Controller
                         $lsProduct = null;
                     } else {
                         $lsProduct = Product::where('products.name', 'like', '%' . $search . '%')
-                            ->whereBetween('products.price', [$min, $max])
-                            ->orderBy('price')
-                            ->paginate(9);
+                            ->whereBetween('products.price', [$min, $max])->orderBy('price')->paginate(9);
                     }
                 } elseif ($search != null && $cate != 0) {
                     $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
                         ->join('tags', 'product_tags.tag_id', '=', 'tags.id')->select('products.*')
-                        ->where('products.name', 'like', '%' . $search . '%')
-                        ->where('tags.id', '=', $cate)
-                        ->whereBetween('products.price', [$min, $max])
-                        ->distinct();
+                        ->where('products.name', 'like', '%' . $search . '%')->where('tags.id', '=', $cate)
+                        ->whereBetween('products.price', [$min, $max])->distinct();
                     $count = $lsProduct->count();
                     if ($count == 0) {
                         $lsProduct = null;
                     } else {
                         $lsProduct = Product::join('product_tags', 'products.id', '=', 'product_tags.product_id')
                             ->join('tags', 'product_tags.tag_id', '=', 'tags.id')->select('products.*')
-                            ->where('products.name', 'like', '%' . $search . '%')
-                            ->where('tags.id', '=', $cate)
-                            ->whereBetween('products.price', [$min, $max])
-                            ->distinct()
-                            ->orderBy('price')
-                            ->paginate(9);
+                            ->where('products.name', 'like', '%' . $search . '%')->where('tags.id', '=', $cate)
+                            ->whereBetween('products.price', [$min, $max])->distinct()->orderBy('price')->paginate(9);
                     }
                 }
             }
@@ -394,7 +380,7 @@ class ShopController extends Controller
         $count = 0;
         if ($search == null) {
             $lsProduct = Product::all();
-        } elseif ($search != null) {
+        } else {
             $lsProduct = Product::where('products.name', 'like', '%' . $search . '%');
             $count = $lsProduct->count();
             if ($count == 0) {

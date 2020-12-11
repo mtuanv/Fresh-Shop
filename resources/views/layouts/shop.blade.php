@@ -119,12 +119,10 @@
             <!-- Start Atribute Navigation -->
             <div class="attr-nav">
                 <ul>
-                    <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>
+                    <li class="search"><a id="search" href="#"><i class="fa fa-search"></i></a></li>
                     <li class="side-menu">
                         <a href="javascript:" id="cart">
                             <i class="fa fa-shopping-bag"></i>
-                            {{--dùng js lấy thông tin số lượng sản phẩm khách hàng đã thêm vào giỏ hàng--}}
-
                             @if(Session::has("Cart") != null)
                                 <span id="total-quantity-show"
                                       class="badge">{{Session::get("Cart")->totalQuantity}}</span>
@@ -140,31 +138,32 @@
         </div>
         <script type="text/javascript">
             if (window.location.href.includes('/aboutus')) {
-              var about = document.getElementById("about");
-              about.classList.add("active-menu");
-            } else if(window.location.href.includes('/menu')){
+                var about = document.getElementById("about");
+                about.classList.add("active-menu");
+            } else if (window.location.href.includes('/menu')) {
                 var menu = document.getElementById("menu");
                 menu.classList.add("active-menu");
-            } else if(window.location.href.includes('/blog')){
+            } else if (window.location.href.includes('/blog')) {
                 var blog = document.getElementById("promotion");
                 blog.classList.add("active-menu");
-            } else if(window.location.href.includes('/contactus')){
+            } else if (window.location.href.includes('/contactus')) {
                 var contact = document.getElementById("contact");
                 contact.classList.add("active-menu");
-            } else if(window.location.href.includes('/detail')){
+            } else if (window.location.href.includes('/detail')) {
                 var home = document.getElementById("home");
                 home.classList.remove("active-menu");
-            } else if(window.location.href.includes('/cart')){
+            } else if (window.location.href.includes('/searchHeader')) {
+                var home = document.getElementById("search");
+                home.classList.add("active-menu");
+            } else if (window.location.href.includes('/cart')) {
                 var cart = document.getElementById("cart");
                 cart.classList.add("active-menu");
-            } else if(window.location.href.includes('/')){
+            } else if (window.location.href.includes('/')) {
                 var home = document.getElementById("home");
                 home.classList.add("active-menu");
             }
-
         </script>
         <!-- Start Mini Cart Menu -->
-        {{--Hash code giỏ hàng, lấy thông tin sản phẩm khách hàng chọn bằng ajax rồi thêm vào đây--}}
         <div class="side">
             <a href="#" class="close-side"><i class="fa fa-times"></i></a>
             <li class="cart-box" id="cart-item-change">

@@ -27,7 +27,7 @@
                                 <div class="search-product">
                                     <form action="{{route('searchHeader')}}" method="get" name="search">
                                         @csrf
-                                        <input class="form-control" placeholder="Search here..." type="text"
+                                        <input class="form-control" placeholder="Tìm kiếm..." type="text"
                                                name="search" style="margin-bottom: 0px" value="{{$search}}">
                                         <button type="submit"><i class="fa fa-search"></i></button>
                                     </form>
@@ -53,19 +53,26 @@
                                                     <li><a href="{{route('detail', $product->id)}}"
                                                            data-toggle="tooltip"
                                                            data-placement="right"
-                                                           title="View"><i class="fas fa-eye"></i></a></li>
+                                                           title="Xem"><i class="fas fa-eye"></i></a></li>
                                                 </ul>
-                                                <a class="cart" href="#">Thêm vào giỏ</a>
+                                                <a class="cart" onclick="AddCart({{$product->id}})"
+                                                   href="javascript:">Thêm vào giỏ</a>
                                             </div>
                                         </div>
                                         <div class="why-text">
                                             <h4>{{$product->name}}</h4>
-                                            <h5> {{$product->price}} VND</h5>
+                                            <h5> {{number_format($product->price)}} VNĐ</h5>
                                         </div>
                                     </div>
                                 </div>
                             @endforeach
-                            {{$lsProduct->links("pagination::bootstrap-4")}}
+                            <div style="width: 100%">
+                                <div class="row">
+                                    <div style="margin: 0 auto">
+                                        {{$lsProduct->appends(['search' => $search])->links("pagination::bootstrap-4")}}
+                                    </div>
+                                </div>
+                            </div>
                         @elseif($lsProduct==null)
                             <p>Không có sản phẩm nào trong danh mục này. Vui lòng nhập từ khóa khác hoặc quay lại <a
                                     href="{{route('menu')}}">SHOP</a> để xem tất cả sản phẩm</p>
@@ -78,4 +85,21 @@
     </div>
     <!-- End Search Results -->
 
+    <script type="text/javascript">
+        function AddCart(id) {
+            $.ajax({
+                url: 'Add-Cart/' + id,
+                type: 'GET',
+            }).done(function (response) {
+                RenderCart(response);
+                alertify.success('Thêm giỏ hàng thành công');
+            });
+        }
+
+        function RenderCart(response) {
+            $("#cart-item-change").empty();
+            $("#cart-item-change").html(response);
+            $("#total-quantity-show").text($("#total-quantity-cart").val());
+        }
+    </script>
 @endsection

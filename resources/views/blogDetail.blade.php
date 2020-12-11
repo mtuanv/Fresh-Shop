@@ -40,6 +40,7 @@
                             <div class="search-product">
                                 <form action="{{route('blog')}}" method="get" name="search">
                                     @csrf
+                                    <input type="hidden" name="category" value="{{$cate}}">
                                     <input class="form-control" placeholder="Tìm kiếm..." type="text"
                                            name="search"
                                            value="{{$search}}">
@@ -54,6 +55,7 @@
                                 </div>
                                 <div class="category-menu">
                                     <form action="{{route('blog')}}" method="get">
+                                        <input type="hidden" name="category" value="{{$search}}">
                                         <div class="cate-name" style="width: 100%">
                                             <input type="submit" name="category" value="0" id="0">
                                             <label for="0">Tất cả bài viết</label>
