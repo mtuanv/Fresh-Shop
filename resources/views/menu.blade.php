@@ -37,6 +37,8 @@
                                             <input type="hidden" name="sort" value="1">
                                             <input type="hidden" name="category" value="{{$cate}}">
                                             <input type="hidden" name="search" value="{{$search}}">
+                                            <input type="hidden" name="minPrice" value="{{$min}}">
+                                            <input type="hidden" name="maxPrice" value="{{$max}}">
                                             <button class="btn menu-sort-btn" type="submit"
                                                     title="Danh mục sản phẩm"><b>Mặc định</b>
                                             </button>
@@ -48,6 +50,8 @@
                                             <input type="hidden" name="sort" value="2">
                                             <input type="hidden" name="category" value="{{$cate}}">
                                             <input type="hidden" name="search" value="{{$search}}">
+                                            <input type="hidden" name="minPrice" value="{{$min}}">
+                                            <input type="hidden" name="maxPrice" value="{{$max}}">
                                             <button class="btn menu-sort-btn" type="submit"
                                                     title="Giá từ cao đến thấp"><b>Giá cao → Giá
                                                     thấp</b></button>
@@ -59,6 +63,8 @@
                                             <input type="hidden" name="sort" value="0">
                                             <input type="hidden" name="category" value="{{$cate}}">
                                             <input type="hidden" name="search" value="{{$search}}">
+                                            <input type="hidden" name="minPrice" value="{{$min}}">
+                                            <input type="hidden" name="maxPrice" value="{{$max}}">
                                             <button class="btn menu-sort-btn" type="submit"
                                                     title="Giá từ thấp đến cao"><b>Giá thấp → Giá
                                                     cao</b></button>
@@ -66,7 +72,9 @@
                                     @endif
                                 </div>
                             </div>
-                            <p style="float:right">Hiển thị {{$lsProduct->count()}} kết quả</p>
+                            @if($lsProduct!=null)
+                                <p style="float:right">Hiển thị {{$lsProduct->count()}} kết quả</p>
+                            @endif
                         </div>
                         <div class="product-categorie-box">
                             <div class="row">
@@ -108,7 +116,7 @@
                                         </div>
                                     </div>
                                 @elseif($lsProduct==null)
-                                    <p>Không có sản phẩm nào trong danh mục này. Vui lòng nhập từ khóa khác.</p>
+                                    <p>Không có kết quả nào phù hợp. Vui lòng nhập từ khóa hoặc chọn phương thức tìm kiếm khác.</p>
                                 @endif
                             </div>
                         </div>
@@ -124,6 +132,8 @@
                                        value="{{$search}}">
                                 <input type="hidden" name="sort" value="{{$sort}}">
                                 <input type="hidden" name="category" value="{{$cate}}">
+                                <input type="hidden" name="minPrice" value="{{$min}}">
+                                <input type="hidden" name="maxPrice" value="{{$max}}">
                                 <button type="submit"><i class="fa fa-search"></i></button>
                             </form>
                         </div>
@@ -135,6 +145,8 @@
                                 <form action="{{route('menu')}}" method="get">
                                     <input type="hidden" name="sort" value="{{$sort}}">
                                     <input type="hidden" name="search" value="{{$search}}">
+                                    <input type="hidden" name="minPrice" value="{{$min}}">
+                                    <input type="hidden" name="maxPrice" value="{{$max}}">
                                     <div class="cate-name" style="width: 100%">
                                         <input type="submit" name="category" value="0" id="0">
                                         <label for="0" style="{{$cate == 0 ? 'color:#b0b435;background-color: #fff; font-weight: 700;cursor: pointer;' : ''}}">Tất cả sản phẩm</label>
