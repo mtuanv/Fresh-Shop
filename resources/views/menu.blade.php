@@ -144,7 +144,7 @@
                                             <input type="submit" name="category" value="{{$tag->id}}"
                                                    id="{{$tag->id}}">
                                             <label
-                                                style="{{$cate== 'abc' ? 'color:#b0b435;background-color: #fff; font-weight: 700;cursor: pointer;' : ''}}"
+                                                style="{{$cate == $tag->id ? 'color:#b0b435;background-color: #fff; font-weight: 700;cursor: pointer;' : ''}}"
                                                 for="{{$tag->id}}">{{$tag->name}}</label>
                                             <small class="text-muted"> ({{$tag->products()->count()}})</small></button>
                                         </div>
