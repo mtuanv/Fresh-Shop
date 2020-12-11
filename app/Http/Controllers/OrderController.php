@@ -8,6 +8,7 @@ use App\Models\Order;
 use App\Models\Product;
 use App\Models\ProductOrder;
 use DateTime;
+use Auth;
 
 class OrderController extends Controller
 {
@@ -509,6 +510,7 @@ class OrderController extends Controller
     {
       $order = Order::find($id);
       $order->status = $request->status;
+      $order->user_id = Auth::user()->id;
       $order->save();
       $request->session()->flash('success', 'Cập nhật trạng thái thành công');
 

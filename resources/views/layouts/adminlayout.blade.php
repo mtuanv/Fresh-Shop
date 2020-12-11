@@ -137,6 +137,7 @@
                         <a class="js-arrow" href="{{ route('dashboard')}}">
                             <i class="fas fa-tachometer-alt"></i>Dashboard</a>
                     </li>
+                      @if(Auth::user()->role_name == 'ADMIN')
                     <li class="has-sub">
                         <a class="js-arrow" href="#" id="report">
                             <i class="fas fa-copy"></i>Báo cáo</a>
@@ -153,24 +154,28 @@
                             <a class="js-arrow" href="#" id="manager">
                                 <i class="fas fa-desktop"></i>Quản lý trang web</a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list" id="mng">
-                              @if(Auth::user()->role_name == 'ADMIN')
+
                                 <li id="qltag">
                                     <a href="{{ route('tags.index')}}">Tag</a>
                                 </li>
                                 <li id="qlsp">
                                     <a href="{{ route('products.index')}}">Sản phẩm</a>
                                 </li>
-                                @endif
+
                                 <li id="qldh">
                                     <a href="{{route('orders.index')}}">Đơn hàng</a>
                                 </li>
-                                @if(Auth::user()->role_name == 'ADMIN')
                                 <li id="qltt">
                                     <a href="{{route('promotions.index')}}">Tin tức</a>
                                 </li>
-                                @endif
                             </ul>
                         </li>
+                      @else
+                      <li class="has-sub" id="qldh">
+                          <a href="{{route('orders.index')}}"><i class="fas fa-money-bill"></i>Đơn hàng</a>
+                      </li>
+                      @endif
+
                 </ul>
             </nav>
         </div>
@@ -264,6 +269,7 @@
 
 <!-- Main JS-->
 <script src="{{ asset('admin/js/main.js') }}"></script>
+@if(Auth::user()->role_name == 'ADMIN')
 <script type="text/javascript">
   if(window.location.href.includes('/admin/dashboard')){
       var dashboard = document.getElementById("dashboard");
@@ -294,6 +300,17 @@
     qltt.classList.add("active");
   }
 </script>
+@else
+<script type="text/javascript">
+  if(window.location.href.includes('/admin/dashboard')){
+      var dashboard = document.getElementById("dashboard");
+      dashboard.classList.add("active");
+  } else if (window.location.href.includes('/admin/orders')) {
+    var qldh = document.getElementById("qldh");
+    qldh.classList.add("active");
+  }
+</script>
+@endif
 </body>
 
 </html>
