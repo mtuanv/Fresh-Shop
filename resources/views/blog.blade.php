@@ -69,13 +69,17 @@
                                     <form action="{{route('blog')}}" method="get">
                                         <div class="cate-name" style="width: 100%">
                                             <input type="submit" name="category" value="0" id="0">
-                                            <label for="0">Tất cả bài viết</label>
+                                            <label
+                                                style="{{$cate == 0 ? 'color:#b0b435;background-color: #fff; font-weight: 700;cursor: pointer;' : ''}}"
+                                                for="0">Tất cả bài viết</label>
                                         </div>
                                         @foreach($lsTag as $tag)
                                             <div class="cate-name" style="width: 100%">
                                                 <input type="submit" name="category" value="{{$tag->id}}"
                                                        id="{{$tag->id}}">
-                                                <label for="{{$tag->id}}">{{$tag->name}}</label>
+                                                <label
+                                                    style="{{$cate == $tag->id ? 'color:#b0b435;background-color: #fff; font-weight: 700;cursor: pointer;' : ''}}"
+                                                    for="{{$tag->id}}">{{$tag->name}}</label>
                                                 <small class="text-muted"> ({{$tag->promotions()->count()}})
                                                 </small></button>
                                             </div>
